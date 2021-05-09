@@ -56,20 +56,14 @@ $(document).ready(function () {
             $(".loader").css("display", "none");
             $("#submitLogIn").css("display", "inline");
           }
-          if (data.usernameError === "error1") {
-            $("#logIn-message-username").text("* Please complete this field!");
-          } else if (data.usernameError === "error2") {
+          if (data.usernameError === "error2") {
             $("#logIn-message-username").text("* No username was found!");
             $("#usernameLog").addClass("is-invalid");
           } else {
             $("#logIn-message-username").text("");
             $("#usernameLog").removeClass("is-invalid");
           }
-          if (data.passwordError === "error1") {
-            $("#logIn-message-password").text("* Please complete this field!");
-          } else if (data.passwordError === "error2") {
-            $("#logIn-message-password").text("* Password is to short!");
-          } else if (data.passwordError === "error3") {
+          if (data.passwordError === "error3") {
             $("#logIn-message-password").text("* Password is not correct!");
             $("#passwordLog").addClass("is-invalid");
           } else {
