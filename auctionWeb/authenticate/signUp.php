@@ -8,6 +8,7 @@ $json = array(
     'usernameError' => '',
     'emailError' => '',
     'passwordError' => '',
+    'confirmPasswordError' => '',
     'serverError' => false
 );
 $validated = true;
@@ -54,6 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $password = test_input($_POST['password']);
             if (strlen($password) < 8) {
                 $json['passwordError'] = 'error2'; // Password is to short
+                $validated = false;
+            }
+        }
+        if (empty($_POST['confirm_password'])) {
+            $json['confirmPasswordError'] = 'error1'; // Field is empty
+            $validated = false;
+        } else {
+            $confirm_password = test_input($_POST['confirm_password']);
+            if ($confirm_password != $password) {
+                $json['confirmPasswordError'] = 'error2'; // Passwords doesnt match
                 $validated = false;
             }
         }
