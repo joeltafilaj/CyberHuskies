@@ -302,7 +302,7 @@ session_start();
     </nav> <!-- End Navbar -->
 
 
-    <!--Home Page -->
+    <!--Home Page That will be updated later this week -->
     <div class="container">
 
     </div>
