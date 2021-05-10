@@ -1,6 +1,9 @@
+
+/* Sign up and Log in message span style */
 #signUpForm span, #logInForm span {
     display: block;
     height: 0;
+    font-size: 14px;
 }
 
 /* Loader spinner for log in */

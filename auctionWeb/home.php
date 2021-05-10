@@ -100,7 +100,7 @@ session_start();
 
                                     <!-- Log In Form -->
                                     <form id="logInForm" action="authenticate/logIn.php" method="post">
-
+                                        <br>
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center">
                                             <label class="col-sm-2 col-form-label" for="usernameLog">Username:</label>
@@ -109,7 +109,7 @@ session_start();
                                                     class="form-control">
 
                                                 <!-- Response for username -->
-                                                <span id="logIn-message-username" class="text-danger mt-1"></span>
+                                                <span id="logInMessageUsername" class="text-danger mt-1"></span>
                                             </div>
                                         </div><br><br>
 
@@ -128,7 +128,7 @@ session_start();
                                                 </div>
 
                                                 <!-- Response for password -->
-                                                <span id="logIn-message-password" class="text-danger mt-1"></span>
+                                                <span id="logInMessagePassword" class="text-danger mt-1"></span>
                                             </div>
 
                                         </div><br><br>
@@ -163,104 +163,117 @@ session_start();
                                     <!-- Sign Up Form -->
                                     <form id="signUpForm" action="authenticate/signUp.php" method="post">
 
-                                        <!-- First Name -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="first_name">First Name:</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" id="first_name" placeholder="First Name..."
-                                                    class="form-control">
+                                        <!-- First Name Last Name-->
+                                        <br>
+                                        <div class="form-grop row justify-content-center px-5">
 
-                                                <!-- Response for First Name -->
-                                                <span id="signUp-message-firstName" class="text-danger"> </span>
+                                            <!-- First name -->
+                                            <div class="col-sm-6 form-floating">
+                                                <input type="text" id="first_name" placeholder="First name"
+                                                    class="form-control" />
+                                                <label for="first_name" class="ms-2">First name</label>
+
+                                                <!-- Response for First Name and Last Name -->
+                                                <span id="signUpMessageName" class="text-danger mt-1"></span>
                                             </div>
-                                        </div> <br><br>
 
-                                        <!-- Last Name -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="last_name">Last Name:</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" id="last_name" placeholder="Last Name..."
-                                                    class="form-control">
-
-                                                <!-- Response for Last Name -->
-                                                <span id="signUp-message-lastName" class="text-danger"> </span>
+                                            <!-- Last name -->
+                                            <div class="col-sm-6 form-floating">
+                                                <input type="text" id="last_name" placeholder="Last name"
+                                                    class="form-control" />
+                                                <label for="last_name" class="ms-2">Last name</label>
                                             </div>
-                                        </div> <br><br>
+                                        </div>
+                                        <br /><br />
 
                                         <!-- Username -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label"
-                                                for="usernameSignUp">Username:</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" id="usernameSignUp" placeholder="Username..."
-                                                    class="form-control">
+                                        <div class="form-grop row justify-content-center px-5">
+                                            <div class="col-sm-12 form-floating">
+                                                <input type="text" id="usernameSignUp" placeholder="Username"
+                                                    class="form-control" />
+                                                <label for="usernameSignUp" class="ms-2">Username</label>
 
                                                 <!-- Response for username -->
-                                                <span id="signUp-message-username" class="text-danger"> </span>
+                                                <span id="signUpMessageUsername" class="text-danger mt-1"> <span
+                                                        class="text-secondary">You can use letters, numbers, periods &
+                                                        dash </span> </span>
                                             </div>
-                                        </div> <br><br>
+                                        </div>
+                                        <br /><br />
 
                                         <!-- Email -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="email">Email:</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" id="email" placeholder="Email..."
-                                                    class="form-control">
+                                        <div class="form-grop row justify-content-center px-5">
+                                            <div class="col-sm-12 form-floating">
+                                                <input type="text" id="email" placeholder="Email"
+                                                    class="form-control" />
+                                                <label for="email" class="ms-2">Email</label>
 
                                                 <!-- Response for email -->
-                                                <span id="signUp-message-email" class="text-danger"> </span>
+                                                <span id="signUpMessageEmail" class="text-danger mt-1"></span>
                                             </div>
-                                        </div> <br><br>
-
-                                        <!-- Password -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="passSignUp">Password:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" id="passSignUp" placeholder="Password..."
-                                                    class="form-control">
-
-                                                <!-- Response for password -->
-                                                <span id="signUp-message-password" class="text-danger"></span>
-                                            </div>
-                                        </div> <br><br>
-
-                                        <!-- Confirm password -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="confirmPassSignUp">Confirm
-                                                Pass:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" id="confirmPassSignUp"
-                                                    placeholder="Confirm password..." class="form-control">
-
-                                                <!-- Response for Confirm password -->
-                                                <span id="signUp-message-confirm" class="text-danger"></span>
-                                            </div>
-                                        </div> <br><br>
-
-                                        <!-- Phone Number -->
-                                        <div class="form-grop row justify-content-center">
-                                            <label class="col-sm-3 col-form-label" for="phone_number">Tel
-                                                number:</label>
-                                            <div class="col-sm-7">
-                                                <input type="number" id="phone_number" placeholder="(Optional)"
-                                                    class="form-control">
-                                            </div>
-                                        </div> <br>
-
-                                        <!-- Radio button to check if user is costumer or salessman -->
-                                        <div class="text-center">
-                                            <input class="form-check-input" type="radio" name="user_type" id="customer"
-                                                checked value="costumer">
-                                            <label class="form-check-label h5" for="customer">
-                                                Costumer
-                                            </label>
-                                            <br>
-                                            <input class="form-check-input ms-lg-1 ms-0" type="radio" name="user_type"
-                                                id="salessman" value="salessman">
-                                            <label class="form-check-label h5" for="salessman">
-                                                Salessman
-                                            </label>
                                         </div>
+                                        <br /><br />
+
+                                        <!-- Password and Confirm password  -->
+                                        <div class="form-grop row justify-content-center px-5">
+
+                                            <!-- Password -->
+                                            <div class="col-sm-6 form-floating">
+                                                <input type="password" id="passSignUp" placeholder="Password"
+                                                    class="form-control" />
+                                                <label for="passSignUp" class="ms-2">Password</label>
+                                            </div>
+
+                                            <!-- Confirm password -->
+                                            <div class="col-sm-6 form-floating">
+                                                <input type="password" id="confirmPassSignUp" placeholder="Confirm"
+                                                    class="form-control" />
+                                                <label for="confirmPassSignUp" class="ms-2">Confirm</label>
+                                            </div>
+
+                                            <!-- Response for password -->
+                                            <div class="col-sm-12">
+                                                <span id="signUpMessagePassword" class="text-danger mt-1"></span>
+                                            </div>
+                                            <br>
+
+                                            <!-- Checkbox for show password -->
+                                            <div class="form-check col-sm-11 ms-1">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="showPasswordCheck" style="font-size: 22px;">
+                                                <label class="form-check-label ms-2 mt-1" for="showPasswordCheck" style="font-size: 18px;">
+                                                    Show password
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <br /><br />
+
+                                        <!-- Phone Number and Radio buttons for user Type -->
+                                        <div class="form-grop row justify-content-center px-5">
+
+                                            <!-- Phone Number -->
+                                            <div class="col-sm-7 form-floating">
+                                                <input type="number" id="phone_number"
+                                                    placeholder="Phone number (Optional)" class="form-control" />
+                                                <label for="phone_number" class="ms-2">Phone number (Optional)</label>
+                                            </div>
+
+                                            <!-- Radio buttons for user Type -->
+                                            <div class="col-sm-5 text-center">
+                                                <input class="form-check-input" type="radio" name="user_type"
+                                                    id="customer" checked value="costumer" />
+                                                <label class="form-check-label h5" for="customer">
+                                                    Costumer
+                                                </label>
+                                                <br />
+                                                <input class="form-check-input ms-lg-1 ms-0" type="radio"
+                                                    name="user_type" id="salessman" value="salessman" />
+                                                <label class="form-check-label h5" for="salessman">
+                                                    Salessman
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <br />
                                     </form>
                                 </div>
 
