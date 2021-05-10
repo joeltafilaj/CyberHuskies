@@ -173,8 +173,8 @@ $(document).ready(function () {
     if (email === "") {
       validated = false;
       $("#email").addClass("is-invalid");
-      $("#signUp-message-email").removeClass("mb-3");
-      $("#signUp-message-email").text("* Choose a Email adress");
+      $("#signUpMessageEmail").removeClass("mb-3");
+      $("#signUpMessageEmail").text("* Choose a Email adress");
     } else if (!/^([\w\.]+@([\w-]+\.)+[\w-]{2,6})?$/.test(email)) {
       validated = false;
       $("#email").addClass("is-invalid");
