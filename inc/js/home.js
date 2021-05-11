@@ -31,9 +31,9 @@ $(document).ready(function () {
       $("#logInMessagePassword").text("");
     }
 
-    // Add loader
-    $(".loader").css("display", "inline-flex");
-    $("#submitLogIn").css("display", "none");
+    // Add Spinner
+    $("#submitLogIn").text("");
+    $("#submitLogIn").html('<i class="fad fa-circle-notch fa-spin"></i>');
 
     // Proceding with ajax after validation completed
     if (validated) {
@@ -48,14 +48,15 @@ $(document).ready(function () {
         dataType: "json",
         success: function (data) {
           if (data.success === true) {
-            // Add loader
-            $(".loader").css("display", "inline-flex");
-            $("#submitLogIn").css("display", "none");
+            // Add Spinner
+            $("#submitLogIn").text("");
+            $("#submitLogIn").html(
+              '<i class="fad fa-circle-notch fa-spin"></i>'
+            );
             location.href = location.href;
           } else {
-            // Remove loader
-            $(".loader").css("display", "none");
-            $("#submitLogIn").css("display", "inline");
+            // Remove Spinner
+            $("#submitLogIn").text("Log In");
           }
 
           // Server side username validation
@@ -68,8 +69,8 @@ $(document).ready(function () {
             $("#logInMessageUsername").text("");
             $("#usernameLog").removeClass("is-invalid");
           }
-          
-          // Server side password validation 
+
+          // Server side password validation
           if (data.passwordError === "error1") {
             $("#logInMessagePassword").text("* Enter a password");
           } else if (data.passwordError === "error2") {
@@ -84,26 +85,12 @@ $(document).ready(function () {
         },
       });
     } else {
-      // Remove loader
-      $(".loader").css("display", "none");
-      $("#submitLogIn").css("display", "inline");
+      // Remove Spinner
+      $("#submitLogIn").text("Log In");
     }
   });
 
-  // Hide/unhide password for Log in Form
-  $("#hidePass").click(function (e) {
-    if ($("#passwordLog").attr("type") === "password") {
-      $("#check").removeClass("fa-eye");
-      $("#check").addClass("fa-eye-slash");
-      $("#passwordLog").attr("type", "text");
-    } else if ($("#passwordLog").attr("type") === "text") {
-      $("#check").addClass("fa-eye");
-      $("#check").removeClass("fa-eye-slash");
-      $("#passwordLog").attr("type", "password");
-    }
-  });
-
-  // Hide/unhide password fro Sign up Form
+  // Hide/unhide password for Sign up Form
   $("#showPasswordCheck").click(function (e) {
     if ($("#showPasswordCheck").is(":checked")) {
       $("#passSignUp").attr("type", "text");
@@ -155,25 +142,22 @@ $(document).ready(function () {
       validated = false;
       $("#usernameSignUp").addClass("is-invalid");
       $("#signUpMessageUsername").text("* Choose a username");
-      $("#signUpMessageUsername").removeClass("mb-3");
     } else if (!/^[a-z0-9._]+$/i.test(username)) {
       validated = false;
       $("#usernameSignUp").addClass("is-invalid");
       $("#signUpMessageUsername").text(
         "* Sorry, only letters (a-z), numbers (0-9), periods (.), and underscore (_) are allowed."
       );
-      $("#signUpMessageUsername").addClass("mb-3");
     } else {
       $("#usernameSignUp").removeClass("is-invalid");
       $("#signUpMessageUsername").text("");
-      $("#signUpMessageUsername").removeClass("mb-3");
     }
 
     // Email validation
     if (email === "") {
       validated = false;
       $("#email").addClass("is-invalid");
-      $("#signUpMessageEmail").removeClass("mb-3");
+
       $("#signUpMessageEmail").text("* Choose a Email adress");
     } else if (!/^([\w\.]+@([\w-]+\.)+[\w-]{2,6})?$/.test(email)) {
       validated = false;
@@ -181,11 +165,9 @@ $(document).ready(function () {
       $("#signUpMessageEmail").text(
         "* Sorry, only letters (a-z), numbers (0-9), periods (.), and underscore (_) are allowed."
       );
-      $("#signUpMessageEmail").addClass("mb-3");
     } else {
       $("#email").removeClass("is-invalid");
       $("#signUpMessageEmail").text("");
-      $("#signUpMessageEmail").removeClass("mb-3");
     }
 
     // Password nad Confirm password validation
@@ -194,7 +176,6 @@ $(document).ready(function () {
       $("#passSignUp").addClass("is-invalid");
       $("#confirmPassSignUp").removeClass("is-invalid");
       $("#signUpMessagePassword").text("* Enter a password");
-      $("#signUpMessagePassword").addClass("mb-4");
     } else if (password.length < 8) {
       validated = false;
       $("#passSignUp").addClass("is-invalid");
@@ -202,7 +183,6 @@ $(document).ready(function () {
       $("#signUpMessagePassword").text(
         "* Use 8 characters or more for your password"
       );
-      $("#signUpMessagePassword").addClass("mb-4");
     } else if (password != "" && confirm_password != password) {
       validated = false;
       $("#confirmPassSignUp").addClass("is-invalid");
@@ -210,14 +190,16 @@ $(document).ready(function () {
       $("#signUpMessagePassword").text(
         "* Those passwords didn’t match. Try again."
       );
-      $("#signUpMessagePassword").addClass("mb-4");
+
       $("#confirmPassSignUp").val("");
     } else {
       $("#passSignUp").removeClass("is-invalid");
       $("#confirmPassSignUp").removeClass("is-invalid");
-      $("#signUpMessagePassword").removeClass("mb-4");
       $("#signUpMessagePassword").text("");
     }
+    // Add Spinner
+    $("#submitSignUp").text("");
+    $("#submitSignUp").html('<i class="fad fa-circle-notch fa-spin"></i>');
 
     // Proceding with ajax after validation completed
     if (validated) {
@@ -238,6 +220,11 @@ $(document).ready(function () {
         dataType: "json",
         success: function (data) {
           if (data.success === true) {
+            // Add Spinner
+            $("#submitSignUp").text("");
+            $("#submitSignUp").html(
+              '<i class="fad fa-circle-notch fa-spin"></i>'
+            );
             window.location.assign("../inc/completed.html");
           }
 
@@ -273,36 +260,31 @@ $(document).ready(function () {
           if (data.usernameError === "error1") {
             $("#usernameSignUp").addClass("is-invalid");
             $("#signUpMessageUsername").text("* Choose a username");
-            $("#signUpMessageUsername").removeClass("mb-3");
           } else if (data.usernameError === "error2") {
             $("#usernameSignUp").addClass("is-invalid");
             $("#signUpMessageUsername").text(
               "* Sorry, only letters (a-z), numbers (0-9), periods (.), and underscore (_) are allowed."
             );
-            $("#signUpMessageUsername").addClass("mb-3");
           } else if (data.usernameError === "error3") {
             $("#usernameSignUp").addClass("is-invalid");
             $("#signUpMessageUsername").text(
               "* That username is taken. Try another."
             );
-            $("#signUpMessageUsername").removeClass("mb-3");
           } else {
             $("#usernameSignUp").removeClass("is-invalid");
             $("#signUpMessageUsername").text("");
-            $("#signUpMessageUsername").removeClass("mb-3");
           }
 
           // Server side email validation
           if (data.emailError === "error1") {
             $("#email").addClass("is-invalid");
-            $("#signUp-message-email").removeClass("mb-3");
+
             $("#signUp-message-email").text("* Choose a Email adress");
           } else if (data.emailError === "error2") {
             $("#email").addClass("is-invalid");
             $("#signUpMessageEmail").text(
               "* Sorry, only letters (a-z), numbers (0-9), periods (.), and underscore (_) are allowed."
             );
-            $("#signUpMessageEmail").addClass("mb-3");
           } else if (data.emailError === "error3") {
             $("#email").addClass("is-invalid");
             $("#signUpMessageEmail").text(
@@ -311,7 +293,6 @@ $(document).ready(function () {
           } else {
             $("#email").removeClass("is-invalid");
             $("#signUpMessageEmail").text("");
-            $("#signUpMessageEmail").removeClass("mb-3");
           }
 
           // Server side password validation
@@ -319,14 +300,12 @@ $(document).ready(function () {
             $("#passSignUp").addClass("is-invalid");
             $("#confirmPassSignUp").removeClass("is-invalid");
             $("#signUpMessagePassword").text("* Enter a password");
-            $("#signUpMessagePassword").addClass("mb-4");
           } else if (data.passwordError === "error2") {
             $("#passSignUp").addClass("is-invalid");
             $("#confirmPassSignUp").removeClass("is-invalid");
             $("#signUpMessagePassword").text(
               "* Use 8 characters or more for your password"
             );
-            $("#signUpMessagePassword").addClass("mb-4");
           } else if (
             data.passwordError === "" &&
             data.confirmPasswordError === "error2"
@@ -336,19 +315,27 @@ $(document).ready(function () {
             $("#signUpMessagePassword").text(
               "* Those passwords didn’t match. Try again."
             );
-            $("#signUpMessagePassword").addClass("mb-4");
+
             $("#confirmPassSignUp").val("");
           } else {
             $("#password").removeClass("is-invalid");
             $("#signUp-message-password").text("");
           }
 
-          // If some server error ecurs redirect to error page 
+          // If some server error ecurs redirect to error page
           if (data.serverError === true) {
+            // Add Spinner
+            $("#submitSignUp").text("");
+            $("#submitSignUp").html(
+              '<i class="fad fa-circle-notch fa-spin"></i>'
+            );
             window.location = "../inc/error.hmtl";
           }
         },
       });
+    } else {
+      // Remove Spinner
+      $("#submitSignUp").text("Register");
     }
   });
 });

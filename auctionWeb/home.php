@@ -103,45 +103,44 @@ session_start();
                                         <br>
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center">
-                                            <label class="col-sm-2 col-form-label" for="usernameLog">Username:</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" id="usernameLog" placeholder="Username..."
+
+                                            <div class="col-sm-8 form-floating">
+                                                <input type="text" id="usernameLog" placeholder="Username"
                                                     class="form-control">
+                                                <label class="ms-2" for="usernameLog">Username</label>
 
                                                 <!-- Response for username -->
                                                 <span id="logInMessageUsername" class="text-danger mt-1"></span>
                                             </div>
-                                        </div><br><br>
+                                        </div><br>
 
-                                        <!-- Password with 'show password' button-->
+                                        <!-- Password -->
                                         <div class="form-group row justify-content-center">
-                                            <label class="col-sm-2 col-form-label" for="passwordLog">Password:</label>
-                                            <div class="col-sm-6">
-                                                <div class="input-group ">
-                                                    <input type="password" id="passwordLog" placeholder="Password..."
-                                                        class="form-control" aria-label="Password..."
-                                                        aria-describedby="but">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary" id="hidePass"
-                                                            type="button"><i id="check" class="fad fa-eye"></i></button>
-                                                    </div>
-                                                </div>
+                                            <div class="col-sm-8 form-floating">
+                                                <input type="password" id="passwordLog" placeholder="Password"
+                                                    class="form-control" aria-label="Password..."
+                                                    aria-describedby="but">
+                                                <label class="ms-2" for="passwordLog">Password</label>
 
                                                 <!-- Response for password -->
                                                 <span id="logInMessagePassword" class="text-danger mt-1"></span>
                                             </div>
+                                        </div><br>
 
-                                        </div><br><br>
+                                        <!-- Log in Button -->
+                                        <div class="form-group row justify-content-center">
+                                            <div class="col-sm-8">
+                                                <button type="submit" id="submitLogIn" class="btn btn-success w-100 "
+                                                    form="logInForm" style="height: 50px;">Log
+                                                    In</button>
+                                            </div>
+                                        </div><br>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="submitLogIn" class="btn btn-success" form="logInForm">Log
-                                        In</button>
-                                    <div class="loader">
-
-                                    </div>
+                                <div class="modal-footer justify-content-center">
+                                    <p class="text-secondary">Don't have an account? <a href="#" class="text-success h6"
+                                            data-bs-toggle="modal" data-bs-dismiss="modal"
+                                            data-bs-target="#signUpModal">Create one</a> </p>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +164,7 @@ session_start();
 
                                         <!-- First Name Last Name-->
                                         <br>
-                                        <div class="form-grop row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-5">
 
                                             <!-- First name -->
                                             <div class="col-sm-6 form-floating">
@@ -184,10 +183,10 @@ session_start();
                                                 <label for="last_name" class="ms-2">Last name</label>
                                             </div>
                                         </div>
-                                        <br /><br />
+                                        <br />
 
                                         <!-- Username -->
-                                        <div class="form-grop row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-5">
                                             <div class="col-sm-12 form-floating">
                                                 <input type="text" id="usernameSignUp" placeholder="Username"
                                                     class="form-control" />
@@ -199,10 +198,10 @@ session_start();
                                                         dash </span> </span>
                                             </div>
                                         </div>
-                                        <br /><br />
+                                        <br />
 
                                         <!-- Email -->
-                                        <div class="form-grop row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-5">
                                             <div class="col-sm-12 form-floating">
                                                 <input type="text" id="email" placeholder="Email"
                                                     class="form-control" />
@@ -212,10 +211,10 @@ session_start();
                                                 <span id="signUpMessageEmail" class="text-danger mt-1"></span>
                                             </div>
                                         </div>
-                                        <br /><br />
+                                        <br />
 
                                         <!-- Password and Confirm password  -->
-                                        <div class="form-grop row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-5">
 
                                             <!-- Password -->
                                             <div class="col-sm-6 form-floating">
@@ -238,15 +237,16 @@ session_start();
                                             <br>
 
                                             <!-- Checkbox for show password -->
-                                            <div class="form-check col-sm-11 ms-1">
+                                            <div class="form-check col-sm-11 ms-1 mt-1">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="showPasswordCheck" style="font-size: 22px;">
-                                                <label class="form-check-label ms-2 mt-1" for="showPasswordCheck" style="font-size: 18px;">
+                                                <label class="form-check-label ms-2 mt-1" for="showPasswordCheck"
+                                                    style="font-size: 18px;">
                                                     Show password
                                                 </label>
                                             </div>
                                         </div>
-                                        <br /><br />
+                                        <br />
 
                                         <!-- Phone Number and Radio buttons for user Type -->
                                         <div class="form-grop row justify-content-center px-5">
@@ -272,17 +272,28 @@ session_start();
                                                     Salessman
                                                 </label>
                                             </div>
+                                            <div class="col-sm-12 my-2">
+                                                <span class="text-dark">By signing up, I agree to the Privacy Policy and the Terms of Services.</span>
+                                            </div>
+                                        </div> <br>
+
+                                        <!-- Register button -->
+                                        <div class="row justify-content-center px-5">
+                                            <div class="col-sm-12 form-floating">
+                                                <button type="submit" form="signUpForm" id="submitSignUp"
+                                                    class="btn btn-primary w-100"
+                                                    style="height: 50px;">Register</button>
+                                            </div>
                                         </div>
                                         <br />
                                     </form>
                                 </div>
 
                                 <!-- Modal buttons -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" form="signUpForm" id="submitSignUp"
-                                        class="btn btn-primary">Complete <i class="fad fa-gavel"></i></button>
+                                <div class="modal-footer justify-content-center">
+                                    <p class="text-secondary">Already have an account? <a href="#"
+                                            class="text-primary h6" data-bs-toggle="modal" data-bs-dismiss="modal"
+                                            data-bs-target="#logInModal">Log In</a> </p>
                                 </div>
                             </div>
                         </div>
