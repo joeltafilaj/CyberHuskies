@@ -88,7 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     //Inserting all info to the User DB
                     $password = hash('sha512', $password);
-                    $sqlInsert = "INSERT INTO User(username, email, password, user_type, is_active) VALUES('$username', '$email', '$password', '$user_type', 0)";
+
+                    //Generating verification key
+                    $vkey = md5(time() . $username);
+
+                    $sqlInsert = "INSERT INTO User(username, email, vkey, verified, password, user_type, is_active) VALUES('$username', '$email', '$vkey', 0, '$password', '$user_type', 0)";
                     if (mysqli_query($connection, $sqlInsert)) {
                         $sqlGetUserId = "SELECT user_id FROM User WHERE username = '$username'";
                         $resultGetUserId = mysqli_query($connection, $sqlGetUserId);
@@ -100,10 +104,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
                                     VALUES(" . $rowGetUserId['user_id'] . ", '$first_name', '$last_name', '$phone_number')";
                                     if (mysqli_query($connection, $sqlInsertCosutmer)) {
+
+                                        ///Sending verification link to the Person email
+                                        $to = $email;
+                                        $subject = "Email Verification";
+                                        $message = "<a href='/CyberHuskies/auctionWeb/authenticate/verify.php?vkey=$vkey'>Click here To verify your email adress.</a>";
+                                        $headers = "From: tafilaj82@gmail.com \r\n";
+                                        $headers = "MIME-Version: 1.0" . "\r\n";
+                                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                                        mail($to, $subject, $message, $headers);
+
                                         $json['success'] = true;
                                     } else {
                                         $json['serverError'] = true;
-                                    } 
+                                    }
                                 } elseif ($user_type == 'salessman') {
                                     $sqlInsertSalessman = "INSERT INTO Salessman(user_id, first_name, last_name, phone_number, totalN_products) 
                                     VALUES(" . $rowGetUserId['user_id'] . ", '$first_name', '$last_name', '$phone_number', 0)";

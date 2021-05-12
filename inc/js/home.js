@@ -227,7 +227,10 @@ $(document).ready(function () {
             $("#submitSignUp").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            window.location.assign("../inc/completed.html");
+            window.location.assign("/CyberHuskies/auctionWeb/authenticate/thankYou.php");
+          } else {
+            // Remove Spinner
+            $("#submitSignUp").text("Register");
           }
 
           // Server side First name and Last name validation

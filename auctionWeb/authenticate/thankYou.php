@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Success</title>
+    <title>Auction</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -23,16 +24,17 @@
       crossorigin="anonymous"
     ></script>
 
-     <!--Font Awesome -->
-     <link rel="stylesheet" type="text/css" href="../fontawesome-5-pro-master/css/all.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="/CyberHuskies/fontawesome-5-pro-master/css/all.css">
     
   </head>
-  <body class="bg-success">
-    <div class="container-fluid">
+  <body style="background-color: darkcyan;">
+    <div class="container-fluid"><br><br><br><br><br><br><br>
       <div class="row text-center mt-5">
         <div class="col-lg-12">
-          <h1>Registration Completed! </h1>
-          <a href="../auctionWeb/home.php" class="btn btn-dark btn-lg"><i class="fad fa-undo-alt"></i> Back</a>
+          <h2>Thank you for registering.</h2> 
+          <h2>We have sent a verification email to the address provided.</h2><br>
+          <h1><i class="fad fa-envelope" style="font-size: 240px;"></i></h1>
         </div>
       </div>
     </div>
