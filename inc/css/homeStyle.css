@@ -3,7 +3,7 @@
   font-size: 14px;
 }
 
-.modal-footer a {
+.modal-footer a, .modal-body a {
   text-decoration: none;
 }
 /* Loader spinner for log in */

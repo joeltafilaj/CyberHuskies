@@ -30,19 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $validated = false;
             }
         }
+        $rememberMe = $_POST['rememberMe'];
+        $password = hash('sha512', $password);
         //Connect to DB after input Validated successfully
         if ($validated) {
             $json['usernameError'] = '';
             $json['passwordError'] = '';
-
             require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+            
             //Check on database if username entered exist
             $sqlCredentials = "SELECT * FROM user WHERE username = '$username'";
             $resultCredentials = mysqli_query($connection, $sqlCredentials);
             if (mysqli_num_rows($resultCredentials) == 1) {
                 while ($rowCredentials = mysqli_fetch_assoc($resultCredentials)) {
+                    
                     //check on database if password match for the user
-                    if ($rowCredentials['password'] === hash('sha512', $password)) {
+                    if ($rowCredentials['password'] === $password) {
+                        
                         //Assisging sessions
                         session_start();
                         $_SESSION['username'] = $rowCredentials['username'];
@@ -74,8 +78,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
                         }
                         //Making user active
-                        $sqlActiveStatus = "UPDATE User SET is_active = 1 WHERE user_id = ".$rowCredentials['user_id']."";
+                        $sqlActiveStatus = "UPDATE User SET is_active = 1 WHERE user_id = " . $rowCredentials['user_id'] . "";
                         if (mysqli_query($connection, $sqlActiveStatus)) {
+
+                            //Remember me Cookie
+                            if ($rememberMe == 'true') {
+                                setcookie("username", $username, time() + (86400 * 14), "/");
+                            }
                             $json['success'] = true;
                         }
                     } else {

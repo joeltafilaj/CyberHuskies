@@ -5,6 +5,7 @@ $(document).ready(function () {
     var validated = true;
     var username = $("#usernameLog").val();
     var password = $("#passwordLog").val();
+    var rememberMe = $("#rememberMeCheck").is(":checked");
     var submit = $("#submitLogIn").val();
 
     // Username validation
@@ -43,6 +44,7 @@ $(document).ready(function () {
         data: {
           username: username,
           password: password,
+          rememberMe: rememberMe,
           submit: submit,
         },
         dataType: "json",

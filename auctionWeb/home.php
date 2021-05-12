@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
+    $_SESSION['username'] = $_COOKIE['username'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +78,7 @@ session_start();
 
                     <!-- Check if any user is logged in -->
                     <?php
-                    if (empty($_SESSION['first_name'])) {
+                    if (empty($_SESSION['username'])) {
                     ?>
 
                     <!-- Modal Buttons -->
@@ -102,9 +105,9 @@ session_start();
                                     <form id="logInForm" action="authenticate/logIn.php" method="post">
                                         <br>
                                         <!-- Username -->
-                                        <div class="form-group row justify-content-center">
+                                        <div class="form-group row justify-content-center px-5">
 
-                                            <div class="col-sm-8 form-floating">
+                                            <div class="col-sm-12 form-floating">
                                                 <input type="text" id="usernameLog" placeholder="Username"
                                                     class="form-control">
                                                 <label class="ms-2" for="usernameLog">Username</label>
@@ -115,8 +118,8 @@ session_start();
                                         </div><br>
 
                                         <!-- Password -->
-                                        <div class="form-group row justify-content-center">
-                                            <div class="col-sm-8 form-floating">
+                                        <div class="form-group row justify-content-center px-5">
+                                            <div class="col-sm-12 form-floating">
                                                 <input type="password" id="passwordLog" placeholder="Password"
                                                     class="form-control" aria-label="Password..."
                                                     aria-describedby="but">
@@ -127,9 +130,23 @@ session_start();
                                             </div>
                                         </div><br>
 
+                                        <!-- Remember me -->
+                                        <div class="form-group row justify-content-center my-1 px-5">
+                                            <div class="col-sm-7">
+                                                <input class="form-check-input" type="checkbox" id="rememberMeCheck">
+                                                <label class="form-check-label" for="rememberMeCheck"
+                                                    style="user-select: none;">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-5 text-end">
+                                                <a href="#" class="text-secondary">Forgot password?</a>
+                                            </div>
+                                        </div><br>
+
                                         <!-- Log in Button -->
-                                        <div class="form-group row justify-content-center">
-                                            <div class="col-sm-8">
+                                        <div class="form-group row justify-content-center px-5">
+                                            <div class="col-sm-12">
                                                 <button type="submit" id="submitLogIn" class="btn btn-success w-100 "
                                                     form="logInForm" style="height: 50px;">Log
                                                     In</button>
@@ -194,7 +211,8 @@ session_start();
 
                                                 <!-- Response for username -->
                                                 <span id="signUpMessageUsername" class="text-danger mt-1"> <span
-                                                        class="text-secondary">You can use letters, numbers, periods &
+                                                        class="text-secondary ms-2">You can use letters, numbers,
+                                                        periods &
                                                         dash </span> </span>
                                             </div>
                                         </div>
@@ -236,44 +254,52 @@ session_start();
                                             </div>
                                             <br>
 
+
                                             <!-- Checkbox for show password -->
-                                            <div class="form-check col-sm-11 ms-1 mt-1">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="showPasswordCheck" style="font-size: 22px;">
-                                                <label class="form-check-label ms-2 mt-1" for="showPasswordCheck"
-                                                    style="font-size: 18px;">
+                                            <div class="form-group col-sm-5 mt-4">
+                                                <input class="form-check-input" type="checkbox" id="showPasswordCheck">
+                                                <label class="form-check-label ms-2" for="showPasswordCheck"
+                                                    style="user-select: none;">
                                                     Show password
                                                 </label>
                                             </div>
-                                        </div>
-                                        <br />
-
-                                        <!-- Phone Number and Radio buttons for user Type -->
-                                        <div class="form-grop row justify-content-center px-5">
 
                                             <!-- Phone Number -->
-                                            <div class="col-sm-7 form-floating">
+                                            <div class="col-sm-7 form-floating mt-1">
                                                 <input type="number" id="phone_number"
                                                     placeholder="Phone number (Optional)" class="form-control" />
                                                 <label for="phone_number" class="ms-2">Phone number (Optional)</label>
                                             </div>
+                                        </div>
+                                        <br />
+
+                                        <!-- Radio buttons for user Type -->
+                                        <div class="form-grop row justify-content-center px-5">
 
                                             <!-- Radio buttons for user Type -->
-                                            <div class="col-sm-5 text-center">
-                                                <input class="form-check-input" type="radio" name="user_type"
-                                                    id="customer" checked value="costumer" />
-                                                <label class="form-check-label h5" for="customer">
-                                                    Costumer
-                                                </label>
-                                                <br />
-                                                <input class="form-check-input ms-lg-1 ms-0" type="radio"
-                                                    name="user_type" id="salessman" value="salessman" />
-                                                <label class="form-check-label h5" for="salessman">
-                                                    Salessman
-                                                </label>
+                                            <div class="col-sm-12 text-center mb-4"
+                                                style="display: inline-block; height: 0;">
+                                                <p class="h6 text-primary">Register as</p>
                                             </div>
-                                            <div class="col-sm-12 my-2">
-                                                <span class="text-dark">By signing up, I agree to the Privacy Policy and the Terms of Services.</span>
+                                            <div class="col-sm-12 text-center">
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="user_type"
+                                                        id="customer" checked value="costumer" />
+                                                    <label class="form-check-label me-4" for="customer" style="user-select: none;">
+                                                       Costumer <i class="fad fa-shopping-cart"></i> 
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="user_type"
+                                                        id="salessman" value="salessman" />
+                                                    <label class="form-check-label" for="salessman" style="user-select: none;">
+                                                        Salessman <i class="fad fa-money-bill-wave"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 mb-1 mt-3">
+                                                <span class="text-dark">By signing up, I agree to the Privacy Policy and
+                                                    the Terms of Services.</span>
                                             </div>
                                         </div> <br>
 
