@@ -277,22 +277,22 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <div class="form-grop row justify-content-center px-5">
 
                                             <!-- Radio buttons for user Type -->
-                                            <div class="col-sm-12 text-center mb-4"
+                                            <div class="col-sm-12 text-center mb-5"
                                                 style="display: inline-block; height: 0;">
-                                                <p class="h6 text-primary">Register as</p>
+                                                <p class="h5 text-primary">Register as</p>
                                             </div>
                                             <div class="col-sm-12 text-center">
                                                 <div class="form-check form-check-inline mx-4">
                                                     <input class="form-check-input" type="radio" name="user_type"
-                                                        id="customer" checked value="costumer" />
-                                                    <label class="form-check-label me-4" for="customer" style="user-select: none;">
+                                                        id="customer" checked value="costumer" style="height: 21px; width: 21px;">
+                                                    <label class="form-check-label me-3 ms-1" for="customer" style="user-select: none; font-size: 19px;">
                                                        Costumer <i class="fad fa-shopping-cart"></i> 
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="user_type"
-                                                        id="salessman" value="salessman" />
-                                                    <label class="form-check-label" for="salessman" style="user-select: none;">
+                                                        id="salessman" value="salessman" style="height: 21px; width: 21px;">
+                                                    <label class="form-check-label ms-1" for="salessman" style="user-select: none; font-size: 19px;">
                                                         Salessman <i class="fad fa-money-bill-wave"></i>
                                                     </label>
                                                 </div>

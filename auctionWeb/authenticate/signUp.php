@@ -108,10 +108,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         ///Sending verification link to the Person email
                                         $to = $email;
                                         $subject = "Email Verification";
-                                        $message = "<a href='/CyberHuskies/auctionWeb/authenticate/verify.php?vkey=$vkey'>Click here To verify your email adress.</a>";
-                                        $headers = "From: tafilaj82@gmail.com \r\n";
-                                        $headers = "MIME-Version: 1.0" . "\r\n";
-                                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                                        $message = "<h2 style='font-family: verdana;text-align: center;
+                                          color: black;font-size: 40px;'>Email Verification</h2> <br>
+                                        <div style='text-align: center;'>
+                                        <button type='button' style='background-color: brown; border-radius: 5px;
+                                            border: 1px solid black; height: 40px;'>
+                                          <a
+                                            href='http://localhost/CyberHuskies/auctionWeb/authenticate/verified.php?vkey=$vkey'
+                                            style='text-decoration: none; color: white'
+                                            >Click here To verify your email adress.</a
+                                          >
+                                        </button>
+                                      </div>";
+                                        $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
+                                        $headers .= "MIME-Version: 1.0" . "\r\n";
+                                        $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
 
                                         mail($to, $subject, $message, $headers);
 
