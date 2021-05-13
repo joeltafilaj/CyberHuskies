@@ -1,5 +1,33 @@
 <?php
-//Continue HEREE-----------------------------------------------------------------------------------------------------
+$response = "";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
+
+//Check if email verification key is valid
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  if (isset($_GET['vkey'])) {
+    $vkey = test_input($_GET['vkey']);
+
+    //DB connection to check if the verification key corresponds to a certain account
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+    $sqlEmailVerification = "SELECT vkey FROM User WHERE vkey = '$vkey' AND verified = 0";
+    $resultEmailVerification = mysqli_query($connection, $sqlEmailVerification);
+    if (mysqli_num_rows($resultEmailVerification) == 1) {
+      $sqlVerified = "UPDATE User SET verified = 1 WHERE vkey = '$vkey'";
+      if (mysqli_query($connection, $sqlVerified)) {
+        $response = 'Your account has been verified successfully !';
+      } else {
+        $response = 'Something went wrong ! :(';
+      }
+    } else {
+      $response = 'Something went wrong ! :(';
+    }
+    mysqli_close($connection);
+  } else {
+    $response = 'Something went wrong ! :(';
+  }
+} else {
+  $response = 'Something went wrong ! :(';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +60,9 @@
   </head>
   <body class="bg-success">
     <div class="container-fluid">
-      <div class="row text-center mt-5">
+      <div class="row text-center mt-5 text-dark">
         <div class="col-lg-12">
-          <h1></h1>
+          <h1> <?php echo $response; ?></h1><br><br>
           <a href="../home.php" class="btn btn-dark btn-lg"><i class="fad fa-undo-alt"></i> Return Home</a>
         </div>
       </div>

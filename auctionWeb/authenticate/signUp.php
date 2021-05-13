@@ -111,15 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         $message = "<h2 style='font-family: verdana;text-align: center;
                                           color: black;font-size: 40px;'>Email Verification</h2> <br>
                                         <div style='text-align: center;'>
-                                        <button type='button' style='background-color: brown; border-radius: 5px;
-                                            border: 1px solid black; height: 40px;'>
-                                          <a
-                                            href='http://localhost/CyberHuskies/auctionWeb/authenticate/verified.php?vkey=$vkey'
-                                            style='text-decoration: none; color: white'
-                                            >Click here To verify your email adress.</a
-                                          >
-                                        </button>
-                                      </div>";
+                                            <a href='http://localhost/CyberHuskies/auctionWeb/authenticate/verified.php?vkey=$vkey' 
+                                            style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
+                                            Click here To verify your email adress.</a><br><br>
+                                        </div>";
                                         $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
                                         $headers .= "MIME-Version: 1.0" . "\r\n";
                                         $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";

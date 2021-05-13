@@ -252,29 +252,30 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             <div class="col-sm-12">
                                                 <span id="signUpMessagePassword" class="text-danger mt-1"></span>
                                             </div>
-                                            <br>
+                                        </div>
 
-
-                                            <!-- Checkbox for show password -->
-                                            <div class="form-group col-sm-5 mt-4">
+                                        <!-- Checkbox for show password -->
+                                        <div class="form-group row px-5 mt-1">
+                                            <div class="form-group col-sm-5">
                                                 <input class="form-check-input" type="checkbox" id="showPasswordCheck">
                                                 <label class="form-check-label ms-2" for="showPasswordCheck"
                                                     style="user-select: none;">
                                                     Show password
                                                 </label>
                                             </div>
+                                        </div><br>
 
-                                            <!-- Phone Number -->
-                                            <div class="col-sm-7 form-floating mt-1">
+                                        <!-- Phone Number -->
+                                        <div class="form-group row justify-content-center px-5 ">
+                                            <div class="col-sm-12 form-floating">
                                                 <input type="number" id="phone_number"
                                                     placeholder="Phone number (Optional)" class="form-control" />
                                                 <label for="phone_number" class="ms-2">Phone number (Optional)</label>
                                             </div>
                                         </div>
-                                        <br />
-
+                                        <br>
                                         <!-- Radio buttons for user Type -->
-                                        <div class="form-grop row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-5">
 
                                             <!-- Radio buttons for user Type -->
                                             <div class="col-sm-12 text-center mb-5"
@@ -284,15 +285,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             <div class="col-sm-12 text-center">
                                                 <div class="form-check form-check-inline mx-4">
                                                     <input class="form-check-input" type="radio" name="user_type"
-                                                        id="customer" checked value="costumer" style="height: 21px; width: 21px;">
-                                                    <label class="form-check-label me-3 ms-1" for="customer" style="user-select: none; font-size: 19px;">
-                                                       Costumer <i class="fad fa-shopping-cart"></i> 
+                                                        id="customer" checked value="costumer"
+                                                        style="height: 21px; width: 21px;">
+                                                    <label class="form-check-label me-3 ms-1" for="customer"
+                                                        style="user-select: none; font-size: 19px;">
+                                                        Costumer <i class="fad fa-shopping-cart"></i>
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="user_type"
-                                                        id="salessman" value="salessman" style="height: 21px; width: 21px;">
-                                                    <label class="form-check-label ms-1" for="salessman" style="user-select: none; font-size: 19px;">
+                                                        id="salessman" value="salessman"
+                                                        style="height: 21px; width: 21px;">
+                                                    <label class="form-check-label ms-1" for="salessman"
+                                                        style="user-select: none; font-size: 19px;">
                                                         Salessman <i class="fad fa-money-bill-wave"></i>
                                                     </label>
                                                 </div>
