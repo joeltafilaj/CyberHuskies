@@ -94,8 +94,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         aria-hidden="true">
                         <div class="modal-dialog ">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title text-success">Log In</h1>
+                                <div class="modal-header text-center">
+                                    <h1 class="modal-title w-100 text-success">Log In</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -140,7 +140,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-5 text-end">
-                                                <a href="#" class="text-secondary">Forgot password?</a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#ressetPasswordModal"
+                                                    data-bs-dismiss="modal" class="text-secondary">Forgot password?</a>
                                             </div>
                                         </div><br>
 
@@ -162,14 +163,90 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Forget Password Modal -->
+                    <div class="modal fade" id="ressetPasswordModal" tabindex="-1" aria-labelledby="ressetPasswordModal"
+                        aria-hidden="true">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h1 class="modal-title w-100 text-dark" style="font-size: 70px;"><i
+                                            class="fad fa-lock-alt"></i></h1>
+                                </div>
+                                <div class="modal-body text-dark">
+
+                                    <!-- Password Resset Form -->
+                                    <form id="ressetPasswordForm" action="authenticate/passwordResset.php" method="post">
+
+                                        <!-- Username -->
+                                        <div class="form-group row justify-content-center px-5">
+                                            <div class="col-sm-12 text-center mb-1">
+                                                <span class="h5">Trouble Logging In?</span><br>
+                                            </div>
+                                            <div class="col-sm-12 text-center mb-3">
+                                                <span>Enter your username and we'll send you a link to
+                                                    get back into your account.</span>
+                                            </div> <br><br>
+                                            <div class="col-sm-12 form-floating">
+                                                <input type="text" id="usernameResset" placeholder="Username"
+                                                    class="form-control">
+                                                <label class="ms-2" for="usernameResset">Username</label>
+
+                                                <!-- Response for username -->
+                                                <span id="ressetMessageUsername" class="text-danger mt-1"></span>
+                                            </div>
+                                        </div><br>
+
+                                        <!-- Resset Password Button -->
+                                        <div class="form-group row justify-content-center px-5">
+                                            <div class="col-sm-12">
+                                                <button type="submit" id="submitRessetPassword"
+                                                    class="btn btn-primary w-100 " form="ressetPasswordForm"
+                                                    style="height: 50px;">Send Password Resset Link</button>
+                                            </div>
+                                        </div><br>
+
+                                        <!-- OR create new account-->
+                                        <div class="form-group row justify-content-center px-5">
+                                            <div class="col-sm-5">
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <span class="text-secondary"> OR</span>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 text-center">
+                                                <a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
+                                                    data-bs-target="#signUpModal" class="text-dark h6">Create New Account</a>
+                                            </div>
+                                            <div class="col-sm-12 text-center mt-2">
+                                                <!-- Response for link -->
+                                                <span id="ressetMessageLink" class="h5"></span>
+                                            </div>
+                                            
+                                            
+                                        </div><br>
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer justify-content-center " style="background-color: whitesmoke;">
+                                    <a href="#" class="text-dark h6 w-100 text-center" data-bs-toggle="modal" data-bs-dismiss="modal"
+                                            data-bs-target="#logInModal">Back to Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Modal Sign up -->
                     <div class="modal fade" id="signUpModal" role="dialog">
                         <div class="modal-dialog">
 
                             <!-- Modal content -->
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-tittle text-primary text-center">Sign Up
+                                <div class="modal-header text-center">
+                                    <h1 class="modal-tittle w-100 text-primary">Sign Up
                                     </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>

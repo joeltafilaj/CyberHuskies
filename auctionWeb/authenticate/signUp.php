@@ -15,9 +15,10 @@ $validated = true;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit'])) {
-        //Server side form validation
+
+        // Server side form validation
         if (empty($_POST['first_name'])) {
-            $json['firstNameError'] = 'error1'; //Field is empty
+            $json['firstNameError'] = 'error1'; // Field is empty
             $validated = false;
         } else {
             $first_name = test_input($_POST['first_name']);
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $email = test_input($_POST['email']);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $json['emailError'] = 'error2'; //Email entered is not valid
+                $json['emailError'] = 'error2'; // Email entered is not valid
                 $validated = false;
             }
         }
@@ -71,26 +72,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $phone_number = test_input($_POST['phone_number']);
         $user_type = test_input($_POST['user_type']);
 
-        //After validation completed connect with database
+        // After validation completed connect with database
         if ($validated) {
             $json['firstNameError'] = $json['lastNameError'] = $json['usernameError'] = $json['emailError'] = $json['passwordError'] = '';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
 
-            //Checking on the DB if an username already exist
+            // Checking on the DB if an username already exist
             $sqlCheckUsername = "SELECT username FROM User WHERE username = '$username'";
             $resultCheckUsername = mysqli_query($connection, $sqlCheckUsername);
             if (mysqli_num_rows($resultCheckUsername) == 0) {
 
-                //Checking on DB if an email already exist
+                // Checking on DB if an email already exist
                 $sqlCheckEmail = "SELECT email FROM User WHERE email = '$email'";
                 $resultCheckEmail = mysqli_query($connection, $sqlCheckEmail);
                 if (mysqli_num_rows($resultCheckEmail) == 0) {
 
-                    //Inserting all info to the User DB
+                    // Inserting all info to the User DB
                     $password = hash('sha512', $password);
 
-                    //Generating verification key
-                    $vkey = md5(time() . $username);
+                    // Generating verification key
+                    $vkey = sha1(mt_rand(1, 90000) . '$username');
+                    $vkey = bin2hex($vkey);
 
                     $sqlInsert = "INSERT INTO User(username, email, vkey, verified, password, user_type, is_active) VALUES('$username', '$email', '$vkey', 0, '$password', '$user_type', 0)";
                     if (mysqli_query($connection, $sqlInsert)) {
@@ -99,13 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (mysqli_num_rows($resultGetUserId) == 1) {
                             while ($rowGetUserId = mysqli_fetch_assoc($resultGetUserId)) {
 
-                                //Inserting all info to the Costumer/Salessman DB
+                                // Inserting all info to the Costumer/Salessman DB
                                 if ($user_type == 'costumer') {
                                     $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
                                     VALUES(" . $rowGetUserId['user_id'] . ", '$first_name', '$last_name', '$phone_number')";
                                     if (mysqli_query($connection, $sqlInsertCosutmer)) {
 
-                                        ///Sending verification link to the Person email
+                                        // Sending verification link to the Person email
                                         $to = $email;
                                         $subject = "Email Verification";
                                         $message = "<h2 style='font-family: verdana;text-align: center;

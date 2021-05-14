@@ -92,6 +92,64 @@ $(document).ready(function () {
     }
   });
 
+  //Client side validation for Password Resset form
+  $("#ressetPasswordForm").submit(function (e) {
+    e.preventDefault();
+    var username = $("#usernameResset").val();
+    var submit = $("#submitRessetPassword").val();
+    var validated = true;
+
+    // Username validation
+    if (username === "") {
+      validated = false;
+      $("#usernameResset").addClass("is-invalid");
+      $("#ressetMessageUsername").text("* Enter a username");
+    } else {
+      $("#usernameResset").removeClass("is-invalid");
+      $("#ressetMessageUsername").text("");
+    }
+
+    //Proceeding with ajax after validation completed
+    if (validated) {
+      $.ajax({
+        type: "POST",
+        url: "/CyberHuskies/auctionWeb/authenticate/passwordResset.php",
+        data: {
+          username: username,
+          submit: submit,
+        },
+        dataType: "json",
+        success: function (data) {
+          if (data.usernameError === "error1") {
+            $("#usernameResset").addClass("is-invalid");
+            $("#ressetMessageUsername").text("* Enter a username");
+          } else if (data.usernameError === "error2") {
+            $("#usernameResset").addClass("is-invalid");
+            $("#ressetMessageUsername").text("* Couldn't find your Account");
+          } else {
+            $("#ressetMessageUsername").text("");
+            $("#usernameResset").removeClass("is-invalid");
+          }
+          if (data.response === "message1") {
+            $('#ressetMessageLink').addClass('text-danger');
+            $('#ressetMessageLink').removeClass('text-success');
+            $('#ressetMessageLink').text('In order to resset your password you need to verify your email first. A confirmation email was sent to your mailbox.'); // Continue here ------------
+          } else if (data.response === "message2") {
+            $('#ressetMessageLink').addClass('text-danger');
+            $('#ressetMessageLink').removeClass('text-success');
+            $('#ressetMessageLink').text('Server Error');
+          } else if (data.response === "message3") {
+            $('#ressetMessageLink').addClass('text-success');
+            $('#ressetMessageLink').removeClass('text-danger');
+            $('#ressetMessageLink').text('Password Resset Link sent');
+          } else {
+            $('#ressetMessageLink').text('');
+          }
+        },
+      });
+    }
+  });
+
   // Hide/unhide password for Sign up Form
   $("#showPasswordCheck").click(function (e) {
     if ($("#showPasswordCheck").is(":checked")) {
@@ -227,7 +285,9 @@ $(document).ready(function () {
             $("#submitSignUp").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            window.location.assign("/CyberHuskies/auctionWeb/authenticate/thankYou.php");
+            window.location.assign(
+              "/CyberHuskies/auctionWeb/authenticate/thankYou.php"
+            );
           } else {
             // Remove Spinner
             $("#submitSignUp").text("Register");
