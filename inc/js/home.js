@@ -87,8 +87,6 @@ $(document).ready(function () {
         },
       });
     } else {
-      // Remove Spinner
-      $("#submitLogIn").text("Log In");
     }
   });
 
@@ -109,6 +107,12 @@ $(document).ready(function () {
       $("#ressetMessageUsername").text("");
     }
 
+    // Add Spinner
+    $("#submitRessetPassword").text("");
+    $("#submitRessetPassword").html(
+      '<i class="fad fa-circle-notch fa-spin"></i>'
+    );
+
     //Proceeding with ajax after validation completed
     if (validated) {
       $.ajax({
@@ -124,6 +128,8 @@ $(document).ready(function () {
             $("#usernameResset").addClass("is-invalid");
             $("#ressetMessageUsername").text("* Enter a username");
           } else if (data.usernameError === "error2") {
+            // Remove Spinner
+            $("#submitRessetPassword").text("Send Password Resset Link");
             $("#usernameResset").addClass("is-invalid");
             $("#ressetMessageUsername").text("* Couldn't find your Account");
           } else {
@@ -131,22 +137,32 @@ $(document).ready(function () {
             $("#usernameResset").removeClass("is-invalid");
           }
           if (data.response === "message1") {
-            $('#ressetMessageLink').addClass('text-danger');
-            $('#ressetMessageLink').removeClass('text-success');
-            $('#ressetMessageLink').text('In order to resset your password you need to verify your email first. A confirmation email was sent to your mailbox.'); // Continue here ------------
+            $("#ressetMessageLink").addClass("text-danger");
+            $("#ressetMessageLink").removeClass("text-success");
+            $("#ressetMessageLink").text(
+              "You need to verify your email first. A confirmation email was sent to your mailbox."
+            );
+            // Remove Spinner
+            $("#submitRessetPassword").text("Send Password Resset Link");
           } else if (data.response === "message2") {
-            $('#ressetMessageLink').addClass('text-danger');
-            $('#ressetMessageLink').removeClass('text-success');
-            $('#ressetMessageLink').text('Server Error');
+            $("#ressetMessageLink").addClass("text-danger");
+            $("#ressetMessageLink").removeClass("text-success");
+            $("#ressetMessageLink").text("Server Error");
           } else if (data.response === "message3") {
-            $('#ressetMessageLink').addClass('text-success');
-            $('#ressetMessageLink').removeClass('text-danger');
-            $('#ressetMessageLink').text('Password Resset Link sent');
+            $("#ressetMessageLink").addClass("text-success");
+            $("#ressetMessageLink").removeClass("text-danger");
+            $("#ressetMessageLink").text("Password Resset Link sent");
+            // Remove Spinner
+            $("#submitRessetPassword").text("Send Password Resset Link");
           } else {
-            $('#ressetMessageLink').text('');
+            $("#ressetMessageLink").text("");
+            
           }
         },
       });
+    } else {
+      // Remove Spinner
+      $("#submitRessetPassword").text("Send Password Resset Link");
     }
   });
 
