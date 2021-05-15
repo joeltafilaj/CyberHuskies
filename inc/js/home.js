@@ -101,10 +101,12 @@ $(document).ready(function () {
     if (username === "") {
       validated = false;
       $("#usernameResset").addClass("is-invalid");
-      $("#ressetMessageUsername").text("* Enter a username");
+      $('#ressetMessageLink').removeClass('d-none');
+      $("#ressetMessageLink").text("Enter a username");
+      $('#ressetMessageLink').addClass('alert-danger');
     } else {
       $("#usernameResset").removeClass("is-invalid");
-      $("#ressetMessageUsername").text("");
+      $("#ressetMessageLink").addClass("d-none");
     }
 
     // Add Spinner
@@ -126,37 +128,41 @@ $(document).ready(function () {
         success: function (data) {
           if (data.usernameError === "error1") {
             $("#usernameResset").addClass("is-invalid");
-            $("#ressetMessageUsername").text("* Enter a username");
+            $('#ressetMessageLink').removeClass('d-none');
+            $("#ressetMessageLink").text("Enter a username");
           } else if (data.usernameError === "error2") {
             // Remove Spinner
             $("#submitRessetPassword").text("Send Password Resset Link");
+
             $("#usernameResset").addClass("is-invalid");
-            $("#ressetMessageUsername").text("* Couldn't find your Account");
-          } else {
-            $("#ressetMessageUsername").text("");
-            $("#usernameResset").removeClass("is-invalid");
+            $('#ressetMessageLink').removeClass('d-none');
+            $("#ressetMessageLink").addClass("alert-danger");
+            $('#ressetMessageLink').removeClass('alert-success');
+            $("#ressetMessageLink").text("Couldn't find your Account");
           }
           if (data.response === "message1") {
-            $("#ressetMessageLink").addClass("text-danger");
-            $("#ressetMessageLink").removeClass("text-success");
+            $("#ressetMessageLink").removeClass("d-none");
+            $("#ressetMessageLink").addClass("alert-danger");
+            $('#ressetMessageLink').removeClass('alert-success');
             $("#ressetMessageLink").text(
               "You need to verify your email first. A confirmation email was sent to your mailbox."
             );
             // Remove Spinner
             $("#submitRessetPassword").text("Send Password Resset Link");
           } else if (data.response === "message2") {
-            $("#ressetMessageLink").addClass("text-danger");
-            $("#ressetMessageLink").removeClass("text-success");
-            $("#ressetMessageLink").text("Server Error");
+            $("#ressetMessageLink").removeClass("d-none");
+            $("#ressetMessageLink").addClass("alert-danger");
+            $('#ressetMessageLink').removeClass('alert-success');
+            $("#ressetMessageLink").text("Server Error. Try again later.");
+            // Remove Spinner
+            $("#submitRessetPassword").text("Send Password Resset Link");
           } else if (data.response === "message3") {
-            $("#ressetMessageLink").addClass("text-success");
-            $("#ressetMessageLink").removeClass("text-danger");
+            $("#ressetMessageLink").removeClass("d-none");
+            $("#ressetMessageLink").removeClass("alert-danger");
+            $('#ressetMessageLink').addClass('alert-success');
             $("#ressetMessageLink").text("Password Resset Link sent");
             // Remove Spinner
             $("#submitRessetPassword").text("Send Password Resset Link");
-          } else {
-            $("#ressetMessageLink").text("");
-            
           }
         },
       });

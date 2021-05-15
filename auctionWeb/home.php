@@ -184,7 +184,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                 <span class="h5">Trouble Logging In?</span><br>
                                             </div>
                                             <div class="col-sm-12 text-center mb-3">
-                                                <span>Enter your username and we'll send you a link to
+                                                <span class="">Enter your username and we'll send you a link to
                                                     get back into your account.</span>
                                             </div> <br><br>
                                             <div class="col-sm-12 form-floating">
@@ -192,8 +192,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                     class="form-control">
                                                 <label class="ms-2" for="usernameResset">Username</label>
 
-                                                <!-- Response for username -->
-                                                <span id="ressetMessageUsername" class="text-danger mt-1"></span>
                                             </div>
                                         </div><br>
 
@@ -221,13 +219,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                 <a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
                                                     data-bs-target="#signUpModal" class="text-dark h6">Create New Account</a>
                                             </div>
-                                            <div class="col-sm-12 text-center mt-2">
-                                                <!-- Response for link -->
-                                                <span id="ressetMessageLink" class="h5"></span>
-                                            </div>
-                                            
-                                            
-                                        </div><br>
+
+                                            <!-- Message -->
+                                            <span id="ressetMessageLink" class="col-sm-12 mt-4 text-center alert d-none"></span>
+                                        
+                                        </div> <br>
 
                                     </form>
                                 </div>

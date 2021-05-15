@@ -4,8 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 
 //Check if email verification key is valid
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  if (isset($_GET['vkey'])) {
-    $vkey = test_input($_GET['vkey']);
+  if (isset($_GET['token'])) {
+    $vkey = test_input($_GET['token']);
 
     //DB connection to check if the verification key corresponds to a certain account
     require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
