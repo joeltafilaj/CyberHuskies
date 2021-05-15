@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   // Client side validation for log in form
   $("#logInForm").on("submit", function (e) {
     e.preventDefault();
@@ -87,6 +88,8 @@ $(document).ready(function () {
         },
       });
     } else {
+      // Remove Spinner
+      $("#submitLogIn").text("Log In");
     }
   });
 

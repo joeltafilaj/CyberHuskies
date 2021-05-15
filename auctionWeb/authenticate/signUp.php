@@ -131,6 +131,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $sqlInsertSalessman = "INSERT INTO Salessman(user_id, first_name, last_name, phone_number, totalN_products) 
                                     VALUES(" . $rowGetUserId['user_id'] . ", '$first_name', '$last_name', '$phone_number', 0)";
                                     if (mysqli_query($connection, $sqlInsertSalessman)) {
+
+                                        // Sending verification link to the Person email
+                                        $to = $email;
+                                        $subject = "Email Verification";
+                                        $message = "<h2 style='font-family: verdana;text-align: center;
+                                          color: black;font-size: 40px;'>Email Verification</h2> <br>
+                                        <div style='text-align: center;'>
+                                            <a href='http://localhost/CyberHuskies/auctionWeb/authenticate/verified.php?token=$vkey' 
+                                            style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
+                                            Click here To verify your email adress.</a><br><br>
+                                        </div>";
+                                        $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
+                                        $headers .= "MIME-Version: 1.0" . "\r\n";
+                                        $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+
+                                        mail($to, $subject, $message, $headers);
+
                                         $json['success'] = true;
                                     } else {
                                         $json['serverError'] = true;

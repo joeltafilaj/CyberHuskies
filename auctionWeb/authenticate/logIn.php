@@ -84,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             //Remember me Cookie
                             if ($rememberMe == 'true') {
                                 setcookie("username", $username, time() + (86400 * 14), "/");
+                                setcookie("verified", $rowCredentials['verified'], time() + (86400 * 14), "/");
+
                             }
                             $json['success'] = true;
                         }

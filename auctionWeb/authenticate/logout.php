@@ -10,6 +10,7 @@ if (mysqli_query($connection, $sql)) {
     Session_destroy();
     if (isset($_COOKIE['username'])) {
         setcookie('username', '', time() - 7000000, '/');
+        setcookie('verified', '', time() - 7000000, '/');
     }
     header('Location:../home.php');
 } else {
