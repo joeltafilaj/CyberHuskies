@@ -65,10 +65,10 @@ if (isset($_GET['token'])) {
     </script>
 
     <!--Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="/CyberHuskies/fontawesome-5-pro-master/css/all.css">
+    <link rel="stylesheet" type="text/css" href="../inc/fontawesome-5-pro-master/css/all.css">
 
     <!--Javascript -->
-    <script src="/CyberHuskies/inc/js/resset.js"></script>
+    <script src="../inc/js/resset.js"></script>
 
     <title>Auction</title>
 </head>

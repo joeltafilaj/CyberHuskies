@@ -25,16 +25,16 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </script>
 
     <!--Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="/CyberHuskies/fontawesome-5-pro-master/css/all.css">
+    <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="/CyberHuskies/inc/css/homeStyle.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
 
     <!--Javascript -->
-    <script src="/CyberHuskies/inc/js/home.js"></script>
+    <script src="inc/js/home.js"></script>
 
     <title>Auction</title>
-    <link rel="shortcut icon" href="/CyberHuskies/inc/pictures/cyberhuskies.ico">
+    <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
 <body class="bg-dark text-light">
@@ -102,7 +102,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Log In Form -->
-                                    <form id="logInForm" action="authenticate/logIn.php" method="post">
+                                    <form id="logInForm" action="php/logIn.php" method="post">
                                         <br>
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center px-5">
@@ -176,7 +176,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Password Resset Form -->
-                                    <form id="ressetPasswordForm" action="authenticate/passwordResset.php"
+                                    <form id="ressetPasswordForm" action="php/passwordResset.php"
                                         method="post">
 
                                         <!-- Username -->
@@ -253,7 +253,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Sign Up Form -->
-                                    <form id="signUpForm" action="authenticate/signUp.php" method="post">
+                                    <form id="signUpForm" action="php/signUp.php" method="post">
 
                                         <!-- First Name Last Name-->
                                         <br>
@@ -419,7 +419,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a id="logout" class="nav-link" href="authenticate/logout.php">log out <i
+                        <a id="logout" class="nav-link" href="php/logout.php">log out <i
                                 class="fad fa-sign-out"></i></a>
                     </li>
                     <?php

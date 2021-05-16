@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $message = "<h2 style='font-family: verdana;text-align: center;
                                 color: black;font-size: 40px;'>Email Verification</h2> <br>
                             <div style='text-align: center;'>
-                                <a href='http://localhost/CyberHuskies/auctionWeb/authenticate/verified.php?token=$vkey' 
+                                <a href='http://localhost/CyberHuskies/accounts/verified.php?token=$vkey' 
                                 style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
                                 Click here To verify your email adress.</a><br><br>
                             </div>";
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $message = "<h2 style='font-family: verdana;text-align: center;
                                 color: black;font-size: 40px;'>Password Resset</h2> <br>
                             <div style='text-align: center;'>
-                                <a href='http://localhost/CyberHuskies/auctionWeb/authenticate/resset.php?token=$vkey' 
+                                <a href='http://localhost/CyberHuskies/accounts/resset.php?token=$vkey' 
                                 style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
                                 Click here to resset your password.</a><br><br>
                             </div>";

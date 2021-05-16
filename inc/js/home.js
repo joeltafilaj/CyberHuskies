@@ -41,7 +41,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "/CyberHuskies/auctionWeb/authenticate/logIn.php",
+        url: "../php/logIn.php",
         data: {
           username: username,
           password: password,
@@ -122,7 +122,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "/CyberHuskies/auctionWeb/authenticate/passwordResset.php",
+        url: "../php/passwordResset.php",
         data: {
           username: username,
           submit: submit,
@@ -290,7 +290,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "post",
-        url: "/CyberHuskies/auctionWeb/authenticate/signUp.php",
+        url: "../php/signUp.php",
         data: {
           first_name: first_name,
           last_name: last_name,
@@ -311,7 +311,7 @@ $(document).ready(function () {
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
             window.location.assign(
-              "/CyberHuskies/auctionWeb/authenticate/thankYou.php"
+              "/CyberHuskies/accounts/thankYou.php"
             );
           } else {
             // Remove Spinner
@@ -419,7 +419,7 @@ $(document).ready(function () {
             $("#submitSignUp").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            window.location = "../inc/error.hmtl";
+            window.location = "../error.hmtl";
           }
         },
       });

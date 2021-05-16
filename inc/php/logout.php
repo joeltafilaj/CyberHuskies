@@ -12,7 +12,7 @@ if (mysqli_query($connection, $sql)) {
         setcookie('username', '', time() - 7000000, '/');
         setcookie('verified', '', time() - 7000000, '/');
     }
-    header('Location:../home.php');
+    header('Location:/CyberHuskies/home.php');
 } else {
-    header('Location:/CyberHuskies/inc/error.html');
+    header('Location:../error.html');
 }
