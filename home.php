@@ -419,7 +419,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a id="logout" class="nav-link" href="php/logout.php">log out <i
+                        <a id="logout" class="nav-link" href="inc/php/logout.php">log out <i
                                 class="fad fa-sign-out"></i></a>
                     </li>
                     <?php

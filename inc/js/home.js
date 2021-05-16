@@ -41,7 +41,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "../php/logIn.php",
+        url: "/CyberHuskies/inc/php/logIn.php",
         data: {
           username: username,
           password: password,
@@ -122,7 +122,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "../php/passwordResset.php",
+        url: "/CyberHuskies/inc/php/passwordResset.php",
         data: {
           username: username,
           submit: submit,
@@ -290,7 +290,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "post",
-        url: "../php/signUp.php",
+        url: "/CyberHuskies/inc/php/signUp.php",
         data: {
           first_name: first_name,
           last_name: last_name,
@@ -419,7 +419,7 @@ $(document).ready(function () {
             $("#submitSignUp").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            window.location = "../error.hmtl";
+            window.location = "/CyberHuskies/inc/error.hmtl";
           }
         },
       });
