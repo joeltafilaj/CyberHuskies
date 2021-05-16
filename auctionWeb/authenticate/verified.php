@@ -1,6 +1,7 @@
 <?php
 $response = "";
 require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
+$valid = 'danger';
 
 //Check if email verification key is valid
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -15,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $sqlVerified = "UPDATE User SET verified = 1 WHERE vkey = '$vkey'";
       if (mysqli_query($connection, $sqlVerified)) {
         $response = 'Your account has been verified successfully !';
+        $valid = 'success';
       } else {
         $response = 'Something went wrong ! :(';
       }
@@ -58,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
      <link rel="stylesheet" type="text/css" href="/CyberHuskies/fontawesome-5-pro-master/css/all.css">
     
   </head>
-  <body class="bg-success">
+  <body class="bg-<?php echo $valid;?>">
     <div class="container-fluid">
       <div class="row text-center mt-5 text-dark">
         <div class="col-lg-12">

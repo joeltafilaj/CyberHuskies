@@ -72,14 +72,13 @@ if (isset($_GET['token'])) {
 
     <title>Auction</title>
 </head>
-
-<body style="background-color: whitesmoke;">
-    <br><br><br><br><br><br>
     <?php
-    
+
     // Checking if token is valid then show the resset password form
     if ($validToken) {
     ?>
+    <body style="background-color: whitesmoke;">
+    <br><br><br><br><br><br>
         <form id="ressetPasswordForm" action="resset.php<?php echo "?token=".$vkey;?>" method="post" class="row justify-content-center"><br>
             <div class="col-sm-3  bg-light" style="border: 2px solid lightgrey;">
 
@@ -121,13 +120,17 @@ if (isset($_GET['token'])) {
                 </div><br>
             </div>
         </form>
+    </body>
     <?php
     } else {
     ?>
-        <h2 class="text-center">Something went wrong! :(</h2>
+    <body class="bg-danger">
+        <br><br><br><br><br><br>
+            <h2 class="text-center">Something went wrong! :(</h2>
+    </body>
     <?php
     }
     ?>
-</body>
+
 
 </html>

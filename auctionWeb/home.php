@@ -176,7 +176,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Password Resset Form -->
-                                    <form id="ressetPasswordForm" action="authenticate/passwordResset.php" method="post">
+                                    <form id="ressetPasswordForm" action="authenticate/passwordResset.php"
+                                        method="post">
 
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center px-5">
@@ -217,20 +218,22 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             </div>
                                             <div class="col-sm-12 text-center">
                                                 <a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
-                                                    data-bs-target="#signUpModal" class="text-dark h6">Create New Account</a>
+                                                    data-bs-target="#signUpModal" class="text-dark h6">Create New
+                                                    Account</a>
                                             </div>
 
                                             <!-- Message -->
-                                            <span id="ressetMessageLink" class="col-sm-12 mt-4 text-center alert d-none"></span>
-                                        
-                                        </div> <br>
+                                            <span id="ressetMessageLink"
+                                                class="col-sm-12 mt-4 text-center alert d-none"></span>
 
+                                        </div> <br>
                                     </form>
                                 </div>
-                                <div class="modal-footer justify-content-center " style="background-color: whitesmoke;">
-                                    <a href="#" class="text-dark h6 w-100 text-center" data-bs-toggle="modal" data-bs-dismiss="modal"
-                                            data-bs-target="#logInModal">Back to Login</a>
-                                </div>
+
+                                <!-- Back to log in Button -->
+                                <a href="#" class="modal-footer justify-content-center text-dark h6 w-100 mb-0 py-3"
+                                    data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#logInModal"
+                                    style="background-color: whitesmoke; text-decoration: none;">Back to Login</a>
                             </div>
                         </div>
                     </div>
@@ -353,7 +356,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             <!-- Radio buttons for user Type -->
                                             <div class="col-sm-12 text-center mb-5"
                                                 style="display: inline-block; height: 0;">
-                                                <p class="h5 text-primary">Register as</p>
+                                                <p class="h5 text-primary">Select how you want to register as:</p>
                                             </div>
                                             <div class="col-sm-12 text-center">
                                                 <div class="form-check form-check-inline mx-4">
@@ -362,7 +365,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                         style="height: 21px; width: 21px;">
                                                     <label class="form-check-label me-3 ms-1" for="customer"
                                                         style="user-select: none; font-size: 19px;">
-                                                        Costumer <i class="fad fa-shopping-cart"></i>
+                                                        Costumer
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
@@ -371,7 +374,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                         style="height: 21px; width: 21px;">
                                                     <label class="form-check-label ms-1" for="salessman"
                                                         style="user-select: none; font-size: 19px;">
-                                                        Salessman <i class="fad fa-money-bill-wave"></i>
+                                                        Salessman
                                                     </label>
                                                 </div>
                                             </div>
