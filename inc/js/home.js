@@ -310,9 +310,13 @@ $(document).ready(function () {
             $("#submitSignUp").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            window.location.assign(
-              "/CyberHuskies/accounts/thankYou.php"
+            window.open(
+              "/CyberHuskies/accounts/thankYou.php","_blanc"
             );
+            //resseting form
+            $('#signUpForm')[0].reset();
+            // Remove Spinner
+            $("#submitSignUp").text("Register");
           } else {
             // Remove Spinner
             $("#submitSignUp").text("Register");
