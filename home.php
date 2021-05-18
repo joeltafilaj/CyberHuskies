@@ -349,6 +349,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             </div>
                                         </div>
                                         <br>
+                                        
                                         <!-- Select for user Type -->
                                         <div class="form-group row justify-content-center px-5">
                                             <div class="col-sm-12 form-floating">
