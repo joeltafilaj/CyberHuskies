@@ -176,8 +176,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Password Resset Form -->
-                                    <form id="ressetPasswordForm" action="php/passwordResset.php"
-                                        method="post">
+                                    <form id="ressetPasswordForm" action="php/passwordResset.php" method="post">
 
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center px-5">
@@ -350,33 +349,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             </div>
                                         </div>
                                         <br>
-                                        <!-- Radio buttons for user Type -->
+                                        <!-- Select for user Type -->
                                         <div class="form-group row justify-content-center px-5">
-
-                                            <!-- Radio buttons for user Type -->
-                                            <div class="col-sm-12 text-center mb-5"
-                                                style="display: inline-block; height: 0;">
-                                                <p class="h5 text-primary">Select how you want to register as:</p>
-                                            </div>
-                                            <div class="col-sm-12 text-center">
-                                                <div class="form-check form-check-inline mx-4">
-                                                    <input class="form-check-input" type="radio" name="user_type"
-                                                        id="customer" checked value="costumer"
-                                                        style="height: 21px; width: 21px;">
-                                                    <label class="form-check-label me-3 ms-1" for="customer"
-                                                        style="user-select: none; font-size: 19px;">
-                                                        Costumer
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="user_type"
-                                                        id="salessman" value="salessman"
-                                                        style="height: 21px; width: 21px;">
-                                                    <label class="form-check-label ms-1" for="salessman"
-                                                        style="user-select: none; font-size: 19px;">
-                                                        Salessman
-                                                    </label>
-                                                </div>
+                                            <div class="col-sm-12 form-floating">
+                                                <select class="form-select" id="user_type">
+                                                    <option value="customer" selected>Customer</option>
+                                                    <option value="salessman">Salessman</option>
+                                                </select>
+                                                <label for="user_type" class="ms-2">Select how you want to register
+                                                    as</label>
                                             </div>
                                             <div class="col-sm-12 mb-1 mt-3">
                                                 <span class="text-dark">By signing up, I agree to the Privacy Policy and

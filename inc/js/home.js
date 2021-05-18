@@ -196,7 +196,7 @@ $(document).ready(function () {
     var password = $("#passSignUp").val();
     var confirm_password = $("#confirmPassSignUp").val();
     var phone_number = $("#phone_number").val();
-    var user_type = $("input[name=user_type]:checked", "#signUpForm").val();
+    var user_type = $('#user_type option:selected').val();
     var submit = $("#submitSignUp").val();
     var validated = true;
 

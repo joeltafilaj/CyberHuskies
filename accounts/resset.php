@@ -55,13 +55,15 @@ if (isset($_GET['token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <!--Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
 
     <!--Font Awesome -->
@@ -72,15 +74,18 @@ if (isset($_GET['token'])) {
 
     <title>Auction</title>
 </head>
-    <?php
+<?php
 
-    // Checking if token is valid then show the resset password form
-    if ($validToken) {
-    ?>
-    <body style="background-color: whitesmoke;">
+// Checking if token is valid then show the resset password form
+if ($validToken) {
+?>
+
+<body style="background-color: whitesmoke;">
     <br><br><br><br><br><br>
-        <form id="ressetPasswordForm" action="resset.php<?php echo "?token=".$vkey;?>" method="post" class="row justify-content-center"><br>
-            <div class="col-sm-3  bg-light" style="border: 2px solid lightgrey;">
+    <div class="container-fluid">
+        <form id="ressetPasswordForm" action="resset.php<?php echo "?token=" . $vkey; ?>" method="post"
+            class="row justify-content-center"><br>
+            <div class="col-sm-3 bg-light" style="border: 2px solid lightgrey;">
 
                 <!-- New Password -->
                 <div class="form-group row justify-content-center px-5 mt-5">
@@ -97,7 +102,8 @@ if (isset($_GET['token'])) {
                     } ?> mt-1"><?php echo $message ?></span>
 
                     <div class="col-sm-12 form-floating">
-                        <input type="password" id="newPassword" name="newPassword" placeholder="New password" class="form-control">
+                        <input type="password" id="newPassword" name="newPassword" placeholder="New password"
+                            class="form-control">
                         <label class="ms-2" for="newPassword">New password</label>
                     </div>
                 </div><br>
@@ -105,7 +111,9 @@ if (isset($_GET['token'])) {
                 <!-- New Password Confirmation -->
                 <div class="form-group row justify-content-center px-5">
                     <div class="col-sm-12 form-floating">
-                        <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" placeholder="New password confirmation" class="form-control" aria-label="Password..." aria-describedby="but">
+                        <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation"
+                            placeholder="New password confirmation" class="form-control" aria-label="Password..."
+                            aria-describedby="but">
                         <label class="ms-2" for="newPasswordConfirmation">New password confirmation</label>
                     </div>
                 </div><br>
@@ -113,24 +121,28 @@ if (isset($_GET['token'])) {
                 <!-- Resset Password Button -->
                 <div class="form-group row justify-content-center px-5 mb-5">
                     <div class="col-sm-12">
-                        <button type="submit" id="submitRessetPasswordForm" name="submitRessetPasswordForm" class="btn btn-primary w-100" form="ressetPasswordForm" style="height: 50px;"> Resset Password
+                        <button type="submit" id="submitRessetPasswordForm" name="submitRessetPasswordForm"
+                            class="btn btn-primary w-100" form="ressetPasswordForm" style="height: 50px;"> Resset
+                            Password
                         </button>
                     </div>
-
                 </div><br>
             </div>
         </form>
-    </body>
-    <?php
-    } else {
-    ?>
-    <body class="bg-danger">
-        <br><br><br><br><br><br>
-            <h2 class="text-center">Something went wrong! :(</h2>
-    </body>
-    <?php
-    }
-    ?>
+    </div>
+
+</body>
+<?php
+} else {
+?>
+
+<body class="bg-danger">
+    <br><br><br><br><br><br>
+    <h2 class="text-center">Something went wrong! :(</h2>
+</body>
+<?php
+}
+?>
 
 
 </html>
