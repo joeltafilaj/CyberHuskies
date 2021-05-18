@@ -89,7 +89,7 @@ if (isset($_GET['token'])) {
                     </div>
 
                     <!-- Response for password -->
-                    <span id="ressetPasswordMessage" class="col-sm-10 mt-4 text-center mb-5 alert 
+                    <span id="ressetPasswordMessage" class="col-sm-11 mt-4 text-center mb-5 alert 
                     <?php if ($validatedForm === true) {
                         echo 'alert-success';
                     } else {

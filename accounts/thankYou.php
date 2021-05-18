@@ -24,7 +24,7 @@
 </head>
 
 <body style="background-color: darkcyan;">
-    <div class="container-fluid"><br><br><br><br><br><br><br>
+    <div class="container-fluid"><br><br><br><br><br><br>
         <div class="row text-center mt-5">
             <div class="col-lg-12">
                 <h2>Thank you for registering.</h2>

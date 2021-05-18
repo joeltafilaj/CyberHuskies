@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <div class="row text-center mt-5 text-dark">
             <div class="col-lg-12">
                 <h1> <?php echo $response; ?></h1><br><br>
-                <a href="../home.php" class="btn btn-dark btn-lg"><i class="fad fa-undo-alt"></i> Return Home</a>
             </div>
         </div>
     </div>
