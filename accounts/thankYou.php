@@ -23,11 +23,11 @@
 
 </head>
 
-<body style="background-color: darkcyan;">
+<body style="background-color: lightgray;">
     <div class="container-fluid"><br><br><br><br><br><br>
         <div class="row text-center mt-5">
             <div class="col-lg-12">
-                <h2>Thank you for registering.</h2>
+                <h2>Thank you for registering ! <i class="fad fa-smile-beam"></i></h2>
                 <h2>We have sent a verification email to the address provided.</h2><br>
                 <h1><i class="fad fa-envelope" style="font-size: 240px;"></i></h1>
             </div>
