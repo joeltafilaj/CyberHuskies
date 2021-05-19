@@ -1,5 +1,5 @@
 <?php
-$response = "";
+$response = $response2 = "";
 require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 $valid = 'danger';
 
@@ -15,20 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (mysqli_num_rows($resultEmailVerification) == 1) {
       $sqlVerified = "UPDATE User SET verified = 1 WHERE vkey = '$vkey'";
       if (mysqli_query($connection, $sqlVerified)) {
-        $response = 'Your account has been verified successfully !';
+        $response = 'Your account has been verified successfully ! <i class="fad fa-smile-beam"></i>';
         $valid = 'success';
       } else {
-        $response = 'Something went wrong ! :(';
+        $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
+        $response2 = 'Either the link had already expired or you did not copy the URL properly.';
       }
     } else {
-      $response = 'Something went wrong ! :(';
+      $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
+      $response2 = 'Either the link had already expired or you did not copy the URL properly.';
     }
     mysqli_close($connection);
   } else {
-    $response = 'Something went wrong ! :(';
+    $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
+    $response2 = 'Either the link had already expired or you did not copy the URL properly.';
   }
 } else {
-  $response = 'Something went wrong ! :(';
+  $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
+  $response2 = 'Either the link had already expired or you did not copy the URL properly.';
 }
 ?>
 <!DOCTYPE html>
@@ -56,11 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 </head>
 
-<body class="bg-<?php echo $valid;?>">
+<body style="background-color: lightgrey;"><br><br><br><br><br>
     <div class="container-fluid">
         <div class="row text-center mt-5 text-dark">
             <div class="col-lg-12">
-                <h1> <?php echo $response; ?></h1><br><br>
+                <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"> <?php echo $response; ?></h1><br>
+            </div>
+            <div class="col-lg-12 text-center">
+              <span class="h7"><?php echo $response2; ?></span>
             </div>
         </div>
     </div>

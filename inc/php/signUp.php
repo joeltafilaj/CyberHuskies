@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             while ($rowGetUserId = mysqli_fetch_assoc($resultGetUserId)) {
 
                                 // Inserting all info to the Costumer/Salessman DB
-                                if ($user_type == 'costumer') {
+                                if ($user_type == 'customer') {
                                     $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
                                     VALUES(" . $rowGetUserId['user_id'] . ", '$first_name', '$last_name', '$phone_number')";
                                     if (mysqli_query($connection, $sqlInsertCosutmer)) {

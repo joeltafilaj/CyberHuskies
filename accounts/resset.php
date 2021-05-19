@@ -9,12 +9,14 @@ if (isset($_GET['token'])) {
     // Verify token on database
     $vkey = test_input($_GET['token']);
     require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
-    $sqlSearchToken = "SELECT vkey FROM User WHERE vkey = '$vkey' LIMIT 1";
+    $sqlSearchToken = "SELECT vkey FROM User WHERE vkey = '$vkey' AND verified = 1 LIMIT 1";
     $resultSearchToken = mysqli_query($connection, $sqlSearchToken);
     if (mysqli_num_rows($resultSearchToken) != 0) {
         $validToken = true;
+
         // Resset Password Form
         if (isset($_POST['newPassword']) && isset($_POST['newPasswordConfirmation'])) {
+            
             // Server Side validation of fields
             if (empty($_POST['newPassword'])) {
                 $message = "Enter a password";
@@ -74,14 +76,14 @@ if (isset($_GET['token'])) {
 
     <title>Auction</title>
 </head>
+<body style="background-color: whitesmoke;">
+    <br><br><br><br><br>
 <?php
 
 // Checking if token is valid then show the resset password form
 if ($validToken) {
 ?>
-
-<body style="background-color: whitesmoke;">
-    <br><br><br><br><br><br>
+    <br>
     <div class="container-fluid">
         <form id="ressetPasswordForm" action="resset.php<?php echo "?token=" . $vkey; ?>" method="post"
             class="row justify-content-center"><br>
@@ -135,14 +137,14 @@ if ($validToken) {
 <?php
 } else {
 ?>
-
-<body class="bg-danger">
-    <br><br><br><br><br><br>
-    <h2 class="text-center">Something went wrong! :(</h2>
-</body>
+    <div class="container-fluid text-center">
+        <h1 class="mt-5" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Password Resset failed ! <i class="fad fa-frown"></i></h1> <br>
+        <span class="h7">Either the link had already expired or you did not copy the URL properly.</span>
+    </div>
+    
 <?php
 }
 ?>
 
-
+</body>
 </html>
