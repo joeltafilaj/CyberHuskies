@@ -27,8 +27,8 @@
     <div class="container-fluid"><br><br><br><br><br><br>
         <div class="row text-center mt-5">
             <div class="col-lg-12">
-                <h2>Thank you for registering ! <i class="fad fa-smile-beam"></i></h2>
-                <h2>We have sent a verification email to the address provided.</h2><br>
+                <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Thank you for registering ! <i class="fad fa-smile-beam"></i></h1>
+                <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">We have sent a verification email to the address provided.</h2><br>
                 <h1><i class="fad fa-envelope" style="font-size: 240px;"></i></h1>
             </div>
         </div>

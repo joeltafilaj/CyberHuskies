@@ -76,14 +76,14 @@ if (isset($_GET['token'])) {
 
     <title>Auction</title>
 </head>
-<body style="background-color: whitesmoke;">
-    <br><br><br><br><br>
 <?php
 
 // Checking if token is valid then show the resset password form
 if ($validToken) {
 ?>
-    <br>
+
+<body style="background-color: whitesmoke;">
+    <br><br><br><br><br><br>
     <div class="container-fluid">
         <form id="ressetPasswordForm" action="resset.php<?php echo "?token=" . $vkey; ?>" method="post"
             class="row justify-content-center"><br>
@@ -132,19 +132,22 @@ if ($validToken) {
             </div>
         </form>
     </div>
-
 </body>
 <?php
 } else {
 ?>
+
+<body style="background-color: lightgrey;">
+    <br><br><br><br><br>
     <div class="container-fluid text-center">
-        <h1 class="mt-5" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Password Resset failed ! <i class="fad fa-frown"></i></h1> <br>
+        <h1 class="mt-5"
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            Password Resset failed ! <i class="fad fa-frown"></i></h1> <br>
         <span class="h7">Either the link had already expired or you did not copy the URL properly.</span>
     </div>
-    
+</body>
 <?php
 }
 ?>
 
-</body>
 </html>
