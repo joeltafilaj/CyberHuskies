@@ -1,0 +1,268 @@
+<html>
+<head>
+<title>Homepage</title>
+    <!-- fonts -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- bootstrap 4.1 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- internal  -->
+    <link rel="stylesheet" href="internal.css">
+<style>
+
+</style>
+</head>
+<body>
+
+<!--logo+navbar-->
+<div class="navbar-container">
+    <div class="logo"></div>
+    <div class="navbar">
+        <a class="buy nav-item">BUY</a>
+        <a class="sell nav-item">SELL</a>
+        
+        <div class="departments nav-item" onmouseover="showDepartments()" onmouseout="hideDepartments()">
+            <a class="departments-btn">CATEGORIES <i class="fa fa-caret-down"></i></a>
+            <div class="dep-links">
+              <a>Paintings</a>
+              <a>Jewelry</a>
+              <a>Watches</a>
+              <a>Clothes</a>
+            </div>
+        </div>
+
+        <div class="cal-container nav-item" onmouseover="showCalContent()" onmouseout="hideCalContent()">
+          <a class="cal-btn">AUCTION CALENDAR<i class="fa fa-caret-down"></i></a>
+          <div class="cal-links">
+            <a>Paintings coming soon...</a>
+            <a>Jewelry coming soon...</a>
+            <a>Watches coming soon...</a>
+            <a>Clothes coming soon...</a>
+          </div>
+        </div>
+        <a class="au-house nav-item">AUCTION HOUSE</a>
+        <input class="search-input nav-item" placeholder="search products to bid...">
+        <a class="signin nav-item">SIGN IN</a>
+    </div>
+</div>
+
+<!--carousel 1-->
+<div id="first_carousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#first_carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#first_carousel" data-slide-to="1"></li>
+    <li data-target="#first_carousel" data-slide-to="2"></li>
+  </ul>
+
+  <!-- slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/auction1.jpg" alt="Image is not displaying..." style="width: 100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="images/auction2.jpg" alt="Image is not displaying..." style="width: 100%;">
+    </div>
+    <div class="carousel-item">
+      <img src="images/auction3.jpg" alt="Image is not displaying..." style="width: 100%;">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#first_carousel" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#first_carousel" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+
+<!--products coming soon-->
+<div class="products-container">
+  <div class="title">Products coming soon...</div>
+  <div class="products">
+    <div class="prod">
+      <div class="prod-image prod-img1"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+      <div class="prod-image prod-img2"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+      <div class="prod-image prod-img3"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+     <div class="prod-image prod-img4"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+     <div class="prod-image prod-img5"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+     <div class="prod-image prod-img6"></div>
+     <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+      <div class="prod-image prod-img7"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+
+    <div class="prod">
+      <div class="prod-image prod-img8"></div>
+      <p>Product description, product description, product description, product description,</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- second carousel -->
+<div id="sec_carousel" class="carousel slide carousel-fade" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#sec_carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#sec_carousel" data-slide-to="1"></li>
+    <li data-target="#sec_carousel" data-slide-to="2"></li>
+  </ul>
+
+  <!-- slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/auction1.jpg" class="d-block w-100" alt="Image is not displaying..." >
+    </div>
+    <div class="carousel-item">
+      <img src="images/auction2.jpg" class="d-block w-100" alt="Image is not displaying..." >
+    </div>
+    <div class="carousel-item">
+      <img src="images/auction3.jpg" class="d-block w-100" alt="Image is not displaying...">
+    </div>
+  </div>
+</div>
+
+
+<!-- departments -->
+<div class="departments-container">
+  <div class="title">Explore departments</div>
+  <div class="departments-sub-container">
+    <div class="department">
+      <div class="department-image department-img1"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img2"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img3"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img4"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img5"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img6"></div>
+      <p>Department</p>
+    </div>
+
+    <div class="department">
+      <div class="department-image department-img7"></div>
+      <p>Department</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer">
+    <div class="footer-departments">
+       <ul>
+         <li class="header">Departments</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+       </ul>
+    </div>
+
+    <div class="footer-help">
+      <ul>
+        <li class="header">Help</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+      </ul>
+   </div>
+
+   <div class="footer-aboutus">
+    <ul>
+      <li class="header">About us</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+    </ul>
+ </div>
+
+ <div class="footer-contacts">
+  <ul>
+    <li class="header">Contacts</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+  </ul>
+</div>
+  </div>
+</footer>
+
+<script>
+
+function showDepartments() {
+    var dep_links=document.getElementsByClassName("dep-links")[0];
+    dep_links.classList.add("dep-links-show");
+}
+
+function hideDepartments() {
+    var dep_links=document.getElementsByClassName("dep-links")[0];
+    dep_links.classList.remove("dep-links-show");
+}
+
+function showCalContent() {
+    var dep_links=document.getElementsByClassName("cal-links")[0];
+    dep_links.classList.add("cal-links-show");
+}
+
+function hideCalContent() {
+    var dep_links=document.getElementsByClassName("cal-links")[0];
+    dep_links.classList.remove("cal-links-show");
+}
+
+$('.carousel').carousel({
+  interval: 2000
+})
+
+</script>
+
+</body>
+</html>
