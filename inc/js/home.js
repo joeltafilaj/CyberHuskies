@@ -56,7 +56,7 @@ $(document).ready(function () {
             $("#submitLogIn").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            location.href = location.href;
+            location.href = "home.php";
           } else {
             // Remove Spinner
             $("#submitLogIn").text("Log In");

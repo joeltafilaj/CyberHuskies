@@ -1,3 +1,6 @@
+body{
+  font-family: 'Mulish',sans-serif;
+}
 /* Sign up and Log in message span style */
 #signUpForm span, #logInForm span {
   font-size: 14px;
@@ -6,17 +9,6 @@
 .modal-footer a, .modal-body a {
   text-decoration: none;
 }
-/* Loader spinner for log in */
-.loader {
-  border: 7px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 7px solid green;
-  width: 40px;
-  height: 40px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  display: none;
-}
 
 @keyframes spin {
   0% {
@@ -24,5 +16,67 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+/* caousel height on larger screens */
+@media screen and (min-width: 1200px) {
+  #mainCarousel img {
+    height: 890px;
+  }
+}
+/* Coming soon section */
+.sections-header {
+  color: rgb(146, 114, 43);
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 55px;
+  font-style: italic;
+  margin-bottom: 3rem;
+}
+.sections-header:after{
+  content: "";
+  width: 72px;
+  height: 2px;
+  background-color: #663300;
+  display: block;
+  margin: 14px auto 8px;
+}
+@media only screen and (max-width:768px){
+  .sections-header{
+      font-size: 40px;
+  }
+}
+.products-img{
+  width: 320px;
+  height: 250px;
+  transition: .4s;
+}
+@media only screen and (max-width:768px){
+  .products-img{
+    width: 220px;
+    height: 150px;
+  }
+}
+.products-img:hover {
+  border-radius: 50px;
+}
+.soon-row { 
+  display: flex;
+  overflow: auto;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Other Carousel */
+@media only screen and (min-width:1200px){
+  #otherCarousel img{
+    width: 1100px;
+    height: 600px;
+  }
+}
+@media only screen and (max-width:768px){
+  #otherCarousel img{
+    width: 700px;
+    height: 400px;
   }
 }

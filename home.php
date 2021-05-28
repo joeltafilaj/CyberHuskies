@@ -55,7 +55,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active border-top border-light border-2 me-2" aria-current="page" href="home.php">Home</a>
+                        <a class="nav-link active border-top border-light border-2 me-2" aria-current="page"
+                            href="home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
                         <a class="nav-link border-top border-light border-2 me-2" href="home.php">Buy</a>
@@ -63,7 +64,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2" href="home.php">Sell</a>
                     </li>
-
                     <li class="nav-item dropdown border-top border-light border-2 me-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,8 +75,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <form class="d-lg-flex d-grid gap-1 col-lg-8">
-                        <input class="form-control me-2" type="search" placeholder="Search products"
+                    <li class="nav-item">
+                        <a class="nav-link border-top border-light border-2 me-2"
+                            href="home.php#footer-section">Contanct Us</a>
+                    </li>
+                    <form class="d-lg-flex d-grid gap-1 col-lg-5">
+                        <input class="form-control me-2" type="search" placeholder="Search products..."
                             aria-label="Search">
                         <button id="searchProduct" class="btn btn-danger d-grid" type="submit">Search</button>
                     </form>
@@ -356,7 +360,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             </div>
                                         </div>
                                         <br>
-                                        
+
                                         <!-- Select for user Type -->
                                         <div class="form-group row justify-content-center px-5">
                                             <div class="col-sm-12 form-floating">
@@ -405,11 +409,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
                             <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
                             <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
-                                class="fad fa-sign-out"></i></a></li>
+                                        class="fad fa-sign-out"></i></a></li>
                         </ul>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="#" > <i class="shopping-icon fad fa-shopping-cart"></i></a>
+                        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
                     </li>
                     <?php
                     }
@@ -422,12 +426,99 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
 
 
-    <!-- Home MAIN SECTION -->
+    <!-- Home MAIN Carousel section -->
     <section id="main-section">
-        <div class="container-fluid">
+        <!-- Main Carousel  -->
+        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="inc/pictures/auction1.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/auction2.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/auction3.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section><br><br><br>
+
+    <!-- Categories coming soon section -->
+    <section>
+        <div class="container">
+            <h1 class="sections-header text-center py-2">Categories coming soon...</h1>
+            <div class=" soon-row">
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products.jpg">
+                    <i>Product description, product description, product description, product description,</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products4.jpg">
+                    <i>Product description, product description, product description, product description,</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products3.jpg">
+                    <i>Product description, product description, product description, product description,</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products2.jpg">
+                    <p>Product description, product description, product description, product description,</p>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products.jpg">
+                    <p>Product description, product description, product description, product description,</p>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products3.jpg">
+                    <p>Product description, product description, product description, product description,</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section><br><br>
+
+    <!-- Other carousel with some of the products picture-->
+    <section class="mt-5">
+        <h1 class="sections-header text-center py-2">Gallery</h1>
+        <!-- Other Carousel  -->
+        <div id="otherCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="inc/pictures/products2.jpg" class="d-block mx-auto " alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto " alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto " alt="Picture">
+                </div>
+            </div>
             
         </div>
-    </section>
+    </section><br><br><br>
 </body>
 
 </html>

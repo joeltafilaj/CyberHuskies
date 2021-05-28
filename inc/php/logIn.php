@@ -51,32 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         session_start();
                         $_SESSION['username'] = $rowCredentials['username'];
                         $_SESSION['user_type'] = $rowCredentials['user_type'];
-                        $_SESSION['email'] = $rowCredentials['email'];
-                        $_SESSION['user_id'] = $rowCredentials['user_id'];
 
-                        //Checking what type of user is logged in
-                        if ($rowCredentials['user_type'] === 'costumer') {
-                            $sqlCustomerInfo = "SELECT * FROM costumer JOIN User ON User.user_id = costumer.user_id WHERE costumer.user_id = " . $rowCredentials['user_id'] . "";
-                            $resultCostumerInfo = mysqli_query($connection, $sqlCustomerInfo);
-                            if (mysqli_num_rows($resultCostumerInfo) == 1) {
-                                while ($rowCostumerInfo = mysqli_fetch_assoc($resultCostumerInfo)) {
-                                    $_SESSION['first_name'] = $rowCostumerInfo['first_name'];
-                                    $_SESSION['last_name'] = $rowCostumerInfo['last_name'];
-                                    $_SESSION['phone_number'] = $rowCostumerInfo['phone_number'];
-                                }
-                            }
-                        } else if ($rowCredentials['user_type'] === 'salessman') {
-                            $sqlSalessmanInfo = "SELECT * FROM Salessman JOIN User ON User.user_id = Salessman.user_id WHERE Salessman.user_id = " . $rowCredentials['user_id'] . "";
-                            $resultSalessmanInfo = mysqli_query($connection, $sqlSalessmanInfo);
-                            if (mysqli_num_rows($resultSalessmanInfo) == 1) {
-                                while ($rowSalessmanInfo = mysqli_fetch_assoc($resultSalessmanInfo)) {
-                                    $_SESSION['first_name'] = $rowSalessmanInfo['first_name'];
-                                    $_SESSION['last_name'] = $rowSalessmanInfo['last_name'];
-                                    $_SESSION['phone_number'] = $rowSalessmanInfo['phone_number'];
-                                    $_SESSION['number_products'] = $rowSalessmanInfo['totalN_products'];
-                                }
-                            }
-                        }
                         //Making user active
                         $sqlActiveStatus = "UPDATE User SET is_active = 1 WHERE user_id = " . $rowCredentials['user_id'] . "";
                         if (mysqli_query($connection, $sqlActiveStatus)) {
