@@ -24,11 +24,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
 
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+
     <!--Font Awesome -->
     <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
 
     <!--Javascript -->
     <script src="inc/js/home.js"></script>
@@ -37,24 +41,30 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="bg-dark text-light">
+<body class="text-dark">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand">Cyber Huskies <i class="fad fa-gavel"></i></a>
+            <a class="navbar-brand">CYBER HUSKIES</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                        <a class="nav-link active border-top border-light border-2 me-2" aria-current="page" href="home.php">Home</a>
+                    </li>
+                    <li class="nav-item add-border">
+                        <a class="nav-link border-top border-light border-2 me-2" href="home.php">Buy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link border-top border-light border-2 me-2" href="home.php">Sell</a>
                     </li>
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown border-top border-light border-2 me-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Categories
@@ -62,16 +72,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <form class="d-lg-flex d-grid gap-2">
+                    <form class="d-lg-flex d-grid gap-1 col-lg-8">
                         <input class="form-control me-2" type="search" placeholder="Search products"
                             aria-label="Search">
-                        <button class="btn btn-danger d-grid" type="submit">Search</button>
+                        <button id="searchProduct" class="btn btn-danger d-grid" type="submit">Search</button>
                     </form>
                 </ul>
                 <ul class="navbar-nav me-right mb-2 mb-lg-0">
@@ -83,10 +90,10 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
                     <!-- Modal Buttons -->
                     <form class="d-lg-flex d-grid gap-2">
-                        <button type="button" class="btn btn-success btn-lg me-lg-2 me-0" data-bs-toggle="modal"
-                            data-bs-target="#logInModal">Log In</button>
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal">Sign Up</button>
+                        <button type="button" class="btn btn-register" data-bs-toggle="modal"
+                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> Log In</button>
+                        <button type="button" class="btn btn-register" data-bs-toggle="modal"
+                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> Sign Up</button>
                     </form>
 
                     <!-- Log in Modal -->
@@ -391,18 +398,18 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <?php
                     } else {
                     ?>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown me-3 border-top border-light border-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"><?php echo $_SESSION['username'] ?> <i
                                 class="fad fa-user-circle"></i></a>
-                        <ul class="dropdown-menu mr-3" aria-labelledby="navbarAccount">
-                            <li><a class="dropdown-item" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
-                            <li><a class="dropdown-item" href="#">Shoping Cart</a></li>
+                        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
+                            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+                            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
+                                class="fad fa-sign-out"></i></a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a id="logout" class="nav-link" href="inc/php/logout.php">log out <i
-                                class="fad fa-sign-out"></i></a>
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="#" > <i class="shopping-icon fad fa-shopping-cart"></i></a>
                     </li>
                     <?php
                     }
@@ -415,10 +422,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
 
 
-    <!--Home Page That will be updated later this week -->
-    <div class="container">
-
-    </div>
+    <!-- Home MAIN SECTION -->
+    <section id="main-section">
+        <div class="container-fluid">
+            
+        </div>
+    </section>
 </body>
 
 </html>

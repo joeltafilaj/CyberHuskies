@@ -1,0 +1,73 @@
+/* Override bootstrap class */
+.navbar-brand {
+    color: rgb(146, 114, 43) !important;
+    font-size: 35px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 700;
+}
+#searchProduct {
+    background-color: rgb(201, 99, 99);
+    border-radius: 0;
+    font-size: 18px;
+    transition: border-radius 0.5s;
+    color: rgb(0, 0, 0);
+}
+#searchProduct:hover {
+    background-color: rgb(170, 99, 99);
+}
+/* Transition on shoping bag only on larger screens */
+@media screen and (min-width: 1200px) {
+    #searchProduct {
+        width: 130px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    #searchProduct:hover {
+        border-radius: 15px;
+    }
+}
+.nav-link {
+    font-size: 18px; 
+}
+.border-top:hover {
+    border-top: 2px solid rgb(112, 99, 24) !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(248, 244, 220);
+}
+.dropdown-item {
+    padding: 10px;
+}
+.shopping-icon {
+    font-size: 25px;
+    transition: transform .2s; /* Animation */
+}
+
+/* Transition on shoping bag only on larger screens */
+@media screen and (min-width: 1200px) {
+    .shopping-icon:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+}
+.btn-register {
+    border-radius: 0;
+   }
+   
+/* button width only on larger screens */
+@media screen and (min-width: 1200px) {
+    .btn-register {
+        height: 55px;
+        width: 110px;
+    }
+}
+.btn-register:hover {
+ background-color: rgb(243, 233, 174);
+}
+
+/* Dropdown only on bigger screens */
+@media only screen and (min-width: 768px) {
+    .dropdown:hover > .dropdown-menu {
+      display: block;
+    }
+  }
