@@ -223,13 +223,19 @@
 </footer>
 
 <script>
+
+var previous_y=pageYOffset;
+var nav=document.getElementsByTagName("nav")[0];
 window.onscroll=function () {
-    if(document.body.scrollTop>50 || document.documentElement.scrollTop>50) {
-      document.getElementsByTagName("nav")[0].style="box-shadow: 0 0 20px 0 rgb(200, 200, 200);";
+  current_y=pageYOffset;  
+  if(current_y>previous_y) {
+      nav.style="top:-170px";
     } else {
-      document.getElementsByTagName("nav")[0].style="box-shadow: 0 0 20px 0 rgb(255, 255, 255);";
+      nav.style="top: 0";
     }
+    previous_y=current_y;
 }
+
 
 $('.carousel').carousel({
   interval: 2000

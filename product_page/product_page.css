@@ -4,6 +4,10 @@ body {
     padding-top: 150px;
 }
 
+.navbar.navbar-expand-lg {
+    transition: 0.3s;;
+}
+
 .nav-item {
     padding: 20px;
 }

@@ -6,6 +6,7 @@ body {
 
 .navbar.navbar-expand-lg {
     background-color: white;
+    transition: 0.3s;
 }
 
 
