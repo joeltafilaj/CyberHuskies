@@ -1,8 +1,12 @@
 
 body {
     margin: 0;
+    padding-top: 150px;
 }
 
+.navbar.navbar-expand-lg {
+    background-color: white;
+}
 
 .navbar-container {
     display: flex;
