@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  AOS.init();
   // Client side validation for log in form
   $("#logInForm").on("submit", function (e) {
     e.preventDefault();

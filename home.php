@@ -34,6 +34,16 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
 
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!--Javascript -->
     <script src="inc/js/home.js"></script>
 
@@ -429,13 +439,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <!-- Home MAIN Carousel section -->
     <section id="main-section">
         <!-- Main Carousel  -->
-        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
+        <div id="mainCarousel" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel"
+            data-bs-touch="false">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="inc/pictures/auction1.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
@@ -494,9 +499,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- Other carousel with some of the products picture-->
     <section class="mt-5">
-        <h1 class="sections-header text-center py-2">Gallery</h1>
+        <div class="container">
+            <h1 class="sections-header text-center py-2">Gallery</h1>
+        </div>
         <!-- Other Carousel  -->
-        <div id="otherCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="otherCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-touch="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -507,18 +514,144 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="inc/pictures/products2.jpg" class="d-block mx-auto " alt="Picture">
+                    <img src="inc/pictures/products2.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
                 </div>
                 <div class="carousel-item">
-                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto " alt="Picture">
+                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
                 </div>
                 <div class="carousel-item">
-                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto " alt="Picture">
+                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
                 </div>
             </div>
-            
+
         </div>
     </section><br><br><br>
+
+    <!-- Discover Categories -->
+    <section id="products-section" class="mt-5">
+        <div class="container">
+            <h1 class="sections-header text-center py-2">Discover Products</h1>
+        </div>
+        <!-- For Big Screens -->
+        <div id="products-grid" class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 right-prod" data-aos="fade-right" data-aos-delay="150">
+                    <div class="image-overlay_container">
+                        <img src="inc/pictures/products.jpg" height="300px" width="300px">
+                        <div class="overlay">
+                            <h4>Product Name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 left-prod" data-aos="fade-down" data-aos-delay="100">
+                    <div class="image-overlay_container">
+                        <img src="inc/pictures/products4.jpg" height="300px" width="300px">
+                        <div class="overlay">
+                            <h4>Product Name</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 right-prod" data-aos="fade-up" data-aos-delay="100">
+                    <div class="image-overlay_container">
+                        <img src="inc/pictures/products2.jpg" height="300px" width="300px">
+                        <div class="overlay">
+                            <h4>Product Name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 left-prod" data-aos="fade-left" data-aos-delay="150">
+                    <div class="image-overlay_container">
+                        <img src="inc/pictures/products3.jpg" height="300px" width="300px">
+                        <div class="overlay">
+                            <h4>Product Name</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- For small Screens -->
+        <!-- Slider main container -->
+        <div id="products-swiper" class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="mobile-overlay_container">
+                        <img src="inc/pictures/products4.jpg" height="300px" width="300px" data-aos="fade-left">
+                        <div class="mobile-overlay">Product Name</div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="mobile-overlay_container">
+                        <img src="inc/pictures/products3.jpg" height="300px" width="300px" data-aos="fade-left">
+                        <div class="mobile-overlay">Product Name</div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="mobile-overlay_container">
+                        <img src="inc/pictures/products2.jpg" height="300px" width="300px" data-aos="fade-left">
+                        <div class="mobile-overlay">Product Name</div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="mobile-overlay_container">
+                        <img src="inc/pictures/products.jpg" height="300px" width="300px" data-aos="fade-left">
+                        <div class="mobile-overlay">Product Name</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section><br><br><br>
+
+    <!-- Footer section -->
+    <section id="footer-section">
+        <br>
+        <div class="container">
+            <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
+            <div class="row">
+                <div class="col-lg-4 col-12 text-center">
+                    <h1 class="footer-header">Contact us</h1>
+                    <span class="h4"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                            class="text-secondary">huskiescyber@gmail.com</span> </span>
+                    <br><br>
+                    <span class="h4"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                            class="text-secondary">+35569678553</span> </span>
+                </div>
+                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                    <h1 class="footer-header">Location</h1>
+                    <span class="h4"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
+                    <br>
+                    <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
+                </div>
+                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                    <h1 class="footer-header">Social media</h1>
+                    <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div><br><br><br>
+    </section>
+
+    <script>
+    const swiper = new Swiper('#products-swiper', {
+        effect: 'cube',
+        grabCursor: true,
+
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 29,
+            shadowScale: 0.9,
+        },
+    });
+
+    // Now you can use all slider methods like
+    swiper.slideNext();
+    </script>
 </body>
 
 </html>
