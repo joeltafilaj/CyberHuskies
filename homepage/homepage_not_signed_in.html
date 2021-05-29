@@ -17,38 +17,54 @@
 <body>
 
 <!--logo+navbar-->
-<div class="navbar-container">
-    <div class="logo"></div>
-    <div class="navbar">
-        <a class="buy nav-item">BUY</a>
-        <a class="sell nav-item">SELL</a>
-        
-        <div class="departments nav-item" onmouseover="showDepartments()" onmouseout="hideDepartments()">
-            <a class="departments-btn">CATEGORIES <i class="fa fa-caret-down"></i></a>
-            <div class="dep-links">
-              <a>Paintings</a>
-              <a>Jewelry</a>
-              <a>Watches</a>
-              <a>Clothes</a>
-            </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <a class="navbar-brand" href="#"><img src="images/cyberhuskies_v7.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <div class="cal-container nav-item" onmouseover="showCalContent()" onmouseout="hideCalContent()">
-          <a class="cal-btn">AUCTION CALENDAR<i class="fa fa-caret-down"></i></a>
-          <div class="cal-links">
-            <a>Paintings coming soon...</a>
-            <a>Jewelry coming soon...</a>
-            <a>Watches coming soon...</a>
-            <a>Clothes coming soon...</a>
+  <div class="collapse navbar-collapse" id="navbar" style="margin-top: auto;">
+    <ul class="navbar-nav mr-auto" style="margin-left: auto; margin-right: auto;">
+      <li class="nav-item">
+        <a class="nav-link" href="#">BUY</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">SELL</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          CATEGORIES
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Paintings</a>
+          <a class="dropdown-item" href="#">Jewelry</a>
+          <a class="dropdown-item" href="#">Watches</a>
+          <a class="dropdown-item" href="#">Clothes</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            AUCTION CALENDAR
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Paintings coming soon...</a>
+            <a class="dropdown-item" href="#">Jewelry coming soon...</a>
+            <a class="dropdown-item" href="#">Watches coming soon...</a>
+            <a class="dropdown-item" href="#">Clothes coming soon...</a>
           </div>
-        </div>
-        <a class="au-house nav-item">AUCTION HOUSE</a>
-        <input class="search-input nav-item" placeholder="search products to bid...">
-        <a class="signin nav-item">SIGN IN</a>
-    </div>
-</div>
+      </li>
 
-
+      <li class="nav-item">
+          <a class="nav-link" href="#">AUCTION HOUSE</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"  type="search" placeholder="Search products to bid..." aria-label="Search">
+    </form>
+    <button class="btn btn-lg my-2 my-sm-0 signin" style="background-color: rgb(201, 99, 99); color: white; border-radius: 3px;">SIGN IN</button>
+  </div>
+</nav>
 
 <!--products coming soon-->
 <div class="products-container">
@@ -208,25 +224,18 @@
 
 <script>
 
-function showDepartments() {
-    var dep_links=document.getElementsByClassName("dep-links")[0];
-    dep_links.classList.add("dep-links-show");
+var previous_y=pageYOffset;
+var nav=document.getElementsByTagName("nav")[0];
+window.onscroll=function () {
+  current_y=pageYOffset;  
+  if(current_y>previous_y) {
+      nav.style="top:-170px";
+    } else {
+      nav.style="top: 0";
+    }
+    previous_y=current_y;
 }
 
-function hideDepartments() {
-    var dep_links=document.getElementsByClassName("dep-links")[0];
-    dep_links.classList.remove("dep-links-show");
-}
-
-function showCalContent() {
-    var dep_links=document.getElementsByClassName("cal-links")[0];
-    dep_links.classList.add("cal-links-show");
-}
-
-function hideCalContent() {
-    var dep_links=document.getElementsByClassName("cal-links")[0];
-    dep_links.classList.remove("cal-links-show");
-}
 
 $('.carousel').carousel({
   interval: 2000

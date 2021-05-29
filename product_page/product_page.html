@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>Product page</title>
+    <!-- fonts -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- bootstrap 4.1 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- internal  -->
+    <link rel="stylesheet" href="product_page.css">
+<style>
+
+</style>
+</head>
+<body>
+
+<!--logo+navbar-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <a class="navbar-brand" href="#"><img src="images/cyberhuskies_v7.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbar" style="margin-top: auto;">
+    <ul class="navbar-nav mr-auto" style="margin-left: auto; margin-right: auto;">
+      <li class="nav-item">
+        <a class="nav-link" href="#">BUY</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">SELL</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          CATEGORIES
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Paintings</a>
+          <a class="dropdown-item" href="#">Jewelry</a>
+          <a class="dropdown-item" href="#">Watches</a>
+          <a class="dropdown-item" href="#">Clothes</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            AUCTION CALENDAR
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Paintings coming soon...</a>
+            <a class="dropdown-item" href="#">Jewelry coming soon...</a>
+            <a class="dropdown-item" href="#">Watches coming soon...</a>
+            <a class="dropdown-item" href="#">Clothes coming soon...</a>
+          </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" href="#">AUCTION HOUSE</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"  type="search" placeholder="Search products to bid..." aria-label="Search">
+    </form>
+    <button class="btn btn-lg my-2 my-sm-0 signin" style="background-color: rgb(201, 99, 99); color: white;">SIGN IN</button>
+  </div>
+</nav>
+<!--carousel and product name and a short description-->
+<div class="carousel-name-container">
+  <div id="prod-carousel" class="carousel slide" data-interval="false">
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+     <li data-target="#prod-carousel" data-slide-to="0" class="active"></li>
+     <li data-target="#prod-carousel" data-slide-to="1"></li>
+     <li data-target="#prod-carousel" data-slide-to="2"></li>
+    </ul>
+
+    <!-- slideshow -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+       <img src="images/auction1.jpg" class="d-block w-100" alt="Image is not displaying..." >
+      </div>
+      <div class="carousel-item">
+       <img src="images/auction2.jpg" class="d-block w-100" alt="Image is not displaying..." >
+      </div>
+      <div class="carousel-item">
+        <img src="images/auction3.jpg" class="d-block w-100" alt="Image is not displaying...">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#prod-carousel" data-slide="prev">
+     <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#prod-carousel" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+  <div class="name-button-container">
+    <div class="product-name">AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</div>
+    <div class="short-descr">XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE PERIOD (1426-1435)</div>
+    <div class="buttons-container">
+      <button class="save-product button"><i class="fa fa-heart"></i> SAVE</button>
+      <button class="bid-now button"><i class="fa fa-bolt"></i> PLACE BID NOW</button>
+    </div>
+  </div>
+  
+</div>
+
+<div class="bookmark-content-container">
+  <div class="bookmarks">
+    <a class="bookmark" href="#description"><i class="fa fa-arrow-right"></i> Description</a>
+    <a class="bookmark" href="#details"><i class="fa fa-arrow-right"></i> Auction details</a>
+    <a class="bookmark" href="#related"><i class="fa fa-arrow-right"></i> See related</a>
+    <a class="bookmark">How auction works</a>
+  </div>
+  <div class="content-space">
+    <div class="content">
+      <h2 id="description">Description</h1>
+      <div class="content-item">This vibrantly-painted jar is an exceptionally rare example of Xuande porcelain decorated with kui dragons. The kui dragons (??kuilong) which dominate the decoration on the jar derive from the makara of Hindu origin. In Sanskrit makara means ‘sea dragon’ and in Hindu beliefs it is the vehicle for the river goddess Ganga, who is the personification of the River Ganges and is worshipped as the goddess of purification and forgiveness. Varuna, the god of the sea, who is associated with justice<br> and truth, is also depicted riding a makara. In both Hindu and Buddhist iconography makara protected gateways and thresholds to palaces and temples. The kui dragon which appears on Chinese works of art from the Yuan dynasty onwards is distinct from the kui dragon, of different origin, which appears on Chinese cast bronze vessels of the Shang and Zhou dynasties. The makara-derived kui dragons enter the Chinese artistic repertoire with the dissemination of Buddhism.</div>
+      <h2 id="details">Details</h1>
+      <div class="content-item">This vibrantly-painted jar is an exceptionally rare example of Xuande porcelain decorated with kui dragons. The kui dragons (??kuilong) which dominate the decoration on the jar derive from the makara of Hindu origin. In Sanskrit makara means ‘sea dragon’ and in Hindu beliefs it is the vehicle for the river goddess Ganga, who is the personification of the River Ganges and is worshipped as the goddess of purification and forgiveness. Varuna, the god of the sea, who is associated with justice<br> and truth, is also depicted riding a makara. In both Hindu and Buddhist iconography makara protected gateways and thresholds to palaces and temples. The kui dragon which appears on Chinese works of art from the Yuan dynasty onwards is distinct from the kui dragon, of different origin, which appears on Chinese cast bronze vessels of the Shang and Zhou dynasties. The makara-derived kui dragons enter the Chinese artistic repertoire with the dissemination of Buddhism.</div>
+    </div>
+  </div>
+</div>
+
+<div class="related-container">
+  <div class="title" id="related">Related</div>
+  <div class="related-sub-container">
+    <div class="product">
+      <div class="product-image product-img1"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img2"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img3"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img4"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img5"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img6"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img7"></div>
+      <p>product</p>
+    </div>
+
+    <div class="product">
+      <div class="product-image product-img8"></div>
+      <p>product</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- footer -->
+<footer>
+  <div class="footer">
+    <div class="footer-departments">
+       <ul>
+         <li class="header">Departments</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+         <li>txtxtxt</li>
+       </ul>
+    </div>
+
+    <div class="footer-help">
+      <ul>
+        <li class="header">Help</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+        <li>txtxtxt</li>
+      </ul>
+   </div>
+
+   <div class="footer-aboutus">
+    <ul>
+      <li class="header">About us</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+      <li>txtxtxt</li>
+    </ul>
+ </div>
+
+ <div class="footer-contacts">
+  <ul>
+    <li class="header">Contacts</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+    <li>txtxtxt</li>
+  </ul>
+</div>
+  </div>
+</footer>
+
+<script>
+var previous_y=pageYOffset;
+var nav=document.getElementsByTagName("nav")[0];
+window.onscroll=function () {
+  current_y=pageYOffset;  
+  if(current_y>previous_y) {
+      nav.style="top:-170px";
+    } else {
+      nav.style="top: 0";
+    }
+    previous_y=current_y;
+}
+
+
+</script>
+
+</body>
+</html>
