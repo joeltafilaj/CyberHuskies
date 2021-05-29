@@ -13,11 +13,6 @@ body {
 }
 
 
-.nav-item {
-    padding: 20px;
-}
-
-
 ::placeholder {
     font-style: italic;
     text-align: left;
