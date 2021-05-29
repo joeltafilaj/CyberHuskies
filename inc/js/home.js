@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  AOS.init();
   // Client side validation for log in form
   $("#logInForm").on("submit", function (e) {
     e.preventDefault();
@@ -56,7 +55,7 @@ $(document).ready(function () {
             $("#submitLogIn").html(
               '<i class="fad fa-circle-notch fa-spin"></i>'
             );
-            location.href = "home.php";
+            location.reload();          
           } else {
             // Remove Spinner
             $("#submitLogIn").text("Log In");

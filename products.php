@@ -23,22 +23,16 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/products.css">
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
-
-    <!-- AOS Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <title>Auction</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
 <body class="text-dark">
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -422,192 +416,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
 
 
-    <!-- Home MAIN Carousel section -->
-    <section id="main-section">
-        <!-- Main Carousel  -->
-        <div id="mainCarousel" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel"
-            data-bs-touch="false">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="inc/pictures/auction1.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/auction2.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/auction3.jpg" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section><br><br><br>
-
-    <!-- Categories coming soon section -->
-    <section>
-        <div class="container">
-            <h1 class="sections-header text-center py-2">Categories coming soon...</h1>
-            <div class=" soon-row">
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <i>Product description, product description, product description, product description,</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products4.jpg">
-                    <i>Product description, product description, product description, product description,</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <i>Product description, product description, product description, product description,</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products2.jpg">
-                    <p>Product description, product description, product description, product description,</p>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <p>Product description, product description, product description, product description,</p>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <p>Product description, product description, product description, product description,</p>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section><br><br>
-
-    <!-- Other carousel with some of the products picture-->
-    <section class="mt-5">
-        <div class="container">
-            <h1 class="sections-header text-center py-2">Gallery</h1>
-        </div>
-        <!-- Other Carousel  -->
-        <div id="otherCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-touch="true">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="inc/pictures/products2.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
-                </div>
-            </div>
-
-        </div>
-    </section><br><br><br>
-
-    <!-- Discover Categories -->
-    <section id="products-section" class="mt-5">
-        <div class="container">
-            <h1 class="sections-header text-center py-2">Discover Products</h1>
-        </div>
-        <!-- For Big Screens -->
-        <div id="products-grid" class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6 right-prod" data-aos="fade-right" data-aos-delay="150">
-                    <div class="image-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products.jpg" height="300px" width="300px">
-                            <div class="overlay">
-                                <h4>Product Name</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6 left-prod" data-aos="fade-down" data-aos-delay="100">
-                    <div class="image-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products3.jpg" height="300px" width="300px">
-                            <div class="overlay">
-                                <h4>Product Name</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6 right-prod" data-aos="fade-up" data-aos-delay="100">
-                    <div class="image-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products2.jpg" height="300px" width="300px">
-                            <div class="overlay">
-                                <h4>Product Name</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6 left-prod" data-aos="fade-left" data-aos-delay="150">
-                    <div class="image-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products4.jpg" height="300px" width="300px">
-                            <div class="overlay">
-                                <h4>Product Name</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- For small Screens -->
-        <!-- Slider main container -->
-        <div id="products-swiper" class="swiper-container">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="mobile-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products4.jpg" height="300px" width="300px" data-aos="fade-left">
-                            <div class="mobile-overlay">Product Name</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mobile-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products4.jpg" height="300px" width="300px" data-aos="fade-left">
-                            <div class="mobile-overlay">Product Name</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mobile-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products4.jpg" height="300px" width="300px" data-aos="fade-left">
-                            <div class="mobile-overlay">Product Name</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mobile-overlay_container">
-                        <a href="products.php">
-                            <img src="inc/pictures/products4.jpg" height="300px" width="300px" data-aos="fade-left">
-                            <div class="mobile-overlay">Product Name</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section><br><br><br>
 
     <!-- Footer section -->
     <section id="footer-section">
@@ -644,32 +452,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- JS link -->
-    <script src="inc/js/home.js"></script>
-
-    <!-- Swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <script>
-    AOS.init();
-    const swiper = new Swiper('#products-swiper', {
-        effect: 'cube',
-        grabCursor: true,
-
-        cubeEffect: {
-            shadow: true,
-            slideShadows: true,
-            shadowOffset: 29,
-            shadowScale: 0.9,
-        },
-    });
-
-    // Now you can use all slider methods like
-    swiper.slideNext();
-    </script>
+    <script type="text/javascript" src="inc/js/home.js"></script>
 </body>
 
 </html>

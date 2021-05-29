@@ -1,0 +1,7 @@
+body{
+    font-family: 'Mulish',sans-serif;
+}
+/* Sign up and Log in message span style */
+#signUpForm span, #logInForm span {
+    font-size: 14px;
+  }
