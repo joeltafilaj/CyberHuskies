@@ -340,8 +340,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div>
 
                                         <!-- Checkbox for show password -->
-                                        <div class="form-group row px-5 mt-1">
-                                            <div class="form-group col-sm-5">
+                                        <div class="form-group row px-lg-5 px-3 mt-1">
+                                            <div class="form-group col-lg-6 col-12">
                                                 <input class="form-check-input" type="checkbox" id="showPasswordCheck">
                                                 <label class="form-check-label ms-2" for="showPasswordCheck"
                                                     style="user-select: none;">

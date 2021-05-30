@@ -96,4 +96,14 @@
     .dropdown:hover > .dropdown-menu {
       display: block;
     }
-  }
+}
+
+body{
+    overflow-y: scroll !important;
+}
+.navbar {
+    padding-right: 0px !important; 
+}
+.modal-open[style] {
+    padding-right: 0px !important;
+ }
