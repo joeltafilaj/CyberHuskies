@@ -38,9 +38,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark">
+<body class="text-dark" style="padding-top: 78px">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
         <div class="container-fluid">
             <a class="navbar-brand">CYBER HUSKIES</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -693,6 +693,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     // Now you can use all slider methods like
     swiper.slideNext();
+
+
+    //hide scrollbar when croll down
+    var prev_pos = window.pageYOffset;
+        window.onscroll = function() {
+            var current_pos = window.pageYOffset;
+            if (prev_pos > current_pos) {
+                document.getElementsByClassName("navb")[0].style.top = "0";
+            } else {
+                document.getElementsByClassName("navb")[0].style.top = "-80px";
+            }
+            prev_pos = current_pos;
+        }
+
     </script>
 </body>
 
