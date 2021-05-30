@@ -91,11 +91,14 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <!-- Modal Buttons -->
                     <form class="d-lg-flex d-grid gap-2">
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> Log In</button>
+                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span class="button-text">Log In</span></button>
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> Sign Up</button>
+                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span class="button-text">Sign Up</span></button>
                     </form>
-
+                </ul>
+            </div>
+        </div>
+    </nav> <!-- End Navbar -->
                     <!-- Log in Modal -->
                     <div class="modal fade" id="logInModal" tabindex="-1" aria-labelledby="logInModal"
                         aria-hidden="true">
@@ -112,9 +115,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     <form id="logInForm" action="php/logIn.php" method="post">
                                         <br>
                                         <!-- Username -->
-                                        <div class="form-group row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
 
-                                            <div class="col-sm-12 form-floating">
+                                            <div class="col-12 form-floating">
                                                 <input type="text" id="usernameLog" placeholder="Username"
                                                     class="form-control">
                                                 <label class="ms-2" for="usernameLog">Username</label>
@@ -125,8 +128,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div><br>
 
                                         <!-- Password -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <input type="password" id="passwordLog" placeholder="Password"
                                                     class="form-control" aria-label="Password..."
                                                     aria-describedby="but">
@@ -138,23 +141,23 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div><br>
 
                                         <!-- Remember me -->
-                                        <div class="form-group row justify-content-center my-1 px-5">
-                                            <div class="col-sm-7">
+                                        <div class="form-group row justify-content-center my-1 px-lg-5 px-3">
+                                            <div class="col-lg-7 col-6">
                                                 <input class="form-check-input" type="checkbox" id="rememberMeCheck">
                                                 <label class="form-check-label" for="rememberMeCheck"
                                                     style="user-select: none;">
                                                     Remember me
                                                 </label>
                                             </div>
-                                            <div class="col-sm-5 text-end">
+                                            <div class="col-lg-5 col-6 text-end">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#ressetPasswordModal"
                                                     data-bs-dismiss="modal" class="text-secondary">Forgot password?</a>
                                             </div>
                                         </div><br>
 
                                         <!-- Log in Button -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12">
                                                 <button type="submit" id="submitLogIn" class="btn btn-success w-100 "
                                                     form="logInForm" style="height: 50px;">Log
                                                     In</button>
@@ -186,15 +189,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     <form id="ressetPasswordForm" action="php/passwordResset.php" method="post">
 
                                         <!-- Username -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12 text-center mb-1">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 text-center mb-1">
                                                 <span class="h5">Trouble Logging In?</span><br>
                                             </div>
-                                            <div class="col-sm-12 text-center mb-3">
+                                            <div class="col-12 text-center mb-3">
                                                 <span class="">Enter your username and we'll send you a link to
                                                     get back into your account.</span>
                                             </div> <br><br>
-                                            <div class="col-sm-12 form-floating">
+                                            <div class="col-12 form-floating">
                                                 <input type="text" id="usernameResset" placeholder="Username"
                                                     class="form-control">
                                                 <label class="ms-2" for="usernameResset">Username</label>
@@ -203,8 +206,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div><br>
 
                                         <!-- Resset Password Button -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12">
                                                 <button type="submit" id="submitRessetPassword"
                                                     class="btn btn-primary w-100 " form="ressetPasswordForm"
                                                     style="height: 50px;">Send Password Resset Link</button>
@@ -212,17 +215,17 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div><br>
 
                                         <!-- OR create new account-->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-5">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-5">
                                                 <hr>
                                             </div>
-                                            <div class="col-sm-2 text-center">
+                                            <div class="col-2 text-center">
                                                 <span class="text-secondary"> OR</span>
                                             </div>
-                                            <div class="col-sm-5">
+                                            <div class="col-5">
                                                 <hr>
                                             </div>
-                                            <div class="col-sm-12 text-center">
+                                            <div class="col-12 text-center">
                                                 <a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
                                                     data-bs-target="#signUpModal" class="text-dark h6">Create New
                                                     Account</a>
@@ -230,7 +233,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
                                             <!-- Message -->
                                             <span id="ressetMessageLink"
-                                                class="col-sm-12 mt-4 text-center alert d-none"></span>
+                                                class="col-12 mt-4 text-center alert d-none"></span>
 
                                         </div> <br>
                                     </form>
@@ -263,10 +266,10 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
                                         <!-- First Name Last Name-->
                                         <br>
-                                        <div class="form-group row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
 
                                             <!-- First name -->
-                                            <div class="col-sm-6 form-floating">
+                                            <div class="col-lg-6 form-floating">
                                                 <input type="text" id="first_name" placeholder="First name"
                                                     class="form-control" />
                                                 <label for="first_name" class="ms-2">First name</label>
@@ -276,7 +279,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                             </div>
 
                                             <!-- Last name -->
-                                            <div class="col-sm-6 form-floating">
+                                            <div class="col-lg-6 form-floating mt-lg-0 mt-4">
                                                 <input type="text" id="last_name" placeholder="Last name"
                                                     class="form-control" />
                                                 <label for="last_name" class="ms-2">Last name</label>
@@ -285,8 +288,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <br />
 
                                         <!-- Username -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <input type="text" id="usernameSignUp" placeholder="Username"
                                                     class="form-control" />
                                                 <label for="usernameSignUp" class="ms-2">Username</label>
@@ -301,8 +304,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <br />
 
                                         <!-- Email -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <input type="text" id="email" placeholder="Email"
                                                     class="form-control" />
                                                 <label for="email" class="ms-2">Email</label>
@@ -314,24 +317,24 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <br />
 
                                         <!-- Password and Confirm password  -->
-                                        <div class="form-group row justify-content-center px-5">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
 
                                             <!-- Password -->
-                                            <div class="col-sm-6 form-floating">
+                                            <div class="col-lg-6  form-floating">
                                                 <input type="password" id="passSignUp" placeholder="Password"
                                                     class="form-control" />
                                                 <label for="passSignUp" class="ms-2">Password</label>
                                             </div>
 
                                             <!-- Confirm password -->
-                                            <div class="col-sm-6 form-floating">
+                                            <div class="col-lg-6  form-floating mt-lg-0 mt-4">
                                                 <input type="password" id="confirmPassSignUp" placeholder="Confirm"
                                                     class="form-control" />
                                                 <label for="confirmPassSignUp" class="ms-2">Confirm</label>
                                             </div>
 
                                             <!-- Response for password -->
-                                            <div class="col-sm-12">
+                                            <div class="col-12">
                                                 <span id="signUpMessagePassword" class="text-danger mt-1"></span>
                                             </div>
                                         </div>
@@ -348,8 +351,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         </div><br>
 
                                         <!-- Phone Number -->
-                                        <div class="form-group row justify-content-center px-5 ">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <input type="number" id="phone_number"
                                                     placeholder="Phone number (Optional)" class="form-control" />
                                                 <label for="phone_number" class="ms-2">Phone number (Optional)</label>
@@ -358,8 +361,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <br>
 
                                         <!-- Select for user Type -->
-                                        <div class="form-group row justify-content-center px-5">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="form-group row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <select class="form-select" id="user_type">
                                                     <option value="customer" selected>Customer</option>
                                                     <option value="salessman">Salessman</option>
@@ -367,15 +370,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                 <label for="user_type" class="ms-2">Select how you want to register
                                                     as</label>
                                             </div>
-                                            <div class="col-sm-12 mb-1 mt-3">
+                                            <div class="col-12 mb-1 mt-3">
                                                 <span class="text-dark">By signing up, I agree to the Privacy Policy and
                                                     the Terms of Services.</span>
                                             </div>
                                         </div> <br>
 
                                         <!-- Register button -->
-                                        <div class="row justify-content-center px-5">
-                                            <div class="col-sm-12 form-floating">
+                                        <div class="row justify-content-center px-lg-5 px-3">
+                                            <div class="col-12 form-floating">
                                                 <button type="submit" form="signUpForm" id="submitSignUp"
                                                     class="btn btn-primary w-100"
                                                     style="height: 50px;">Register</button>
@@ -411,16 +414,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <li class="nav-item me-2">
                         <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
                     </li>
-                    <?php
-                    }
-                    ?>
-
                 </ul>
-
             </div>
         </div>
     </nav> <!-- End Navbar -->
-
+                    <?php
+                    }
+                    ?>
 
     <!-- Home MAIN Carousel section -->
     <section id="main-section">
@@ -452,7 +452,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <!-- Categories coming soon section -->
     <section>
         <div class="container">
-            <h1 class="sections-header text-center py-2">Categories coming soon...</h1>
+            <h1 class="sections-header text-center py-2">Products coming soon...</h1>
             <div class=" soon-row">
                 <div class="me-5 text-center">
                     <img class="products-img" src="inc/pictures/products.jpg">
@@ -540,7 +540,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <!-- Discover Categories -->
     <section id="products-section" class="mt-5">
         <div class="container">
-            <h1 class="sections-header text-center py-2">Discover Products</h1>
+            <h1 class="sections-header text-center py-2">Discover Categories</h1>
         </div>
         <!-- For Big Screens -->
         <div id="products-grid" class="container">

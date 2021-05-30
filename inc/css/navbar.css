@@ -22,6 +22,7 @@
         width: 130px;
     }
 }
+
 @media screen and (min-width: 1200px) {
     #searchProduct:hover {
         border-radius: 15px;
@@ -33,7 +34,7 @@
 }
 
 /* Border top hover  only on larger screens */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 990px) {
     .border-top:hover {
         border-top: 2px solid rgb(112, 99, 24) !important;
     }
@@ -51,7 +52,7 @@
 }
 
 /* Transition on shoping bag only on larger screens */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 990px) {
     .shopping-icon:hover {
     transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     }
@@ -63,10 +64,27 @@
    }
    
 /* button width only on larger screens */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1300px) {
     .btn-register {
         height: 55px;
         width: 110px;
+    }
+    .button-text {
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 1300px) and (min-width: 1200px) {
+    .button-text {
+        display: none;
+    }
+}
+@media screen and (max-width: 1200px) and (min-width: 991px) {
+    .nav-link {
+        font-size: 14px; 
+    }
+    
+    .button-text {
+        display: none;
     }
 }
 .btn-register:hover {
