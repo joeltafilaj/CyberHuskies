@@ -45,7 +45,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active border-top border-light border-2 me-2" aria-current="page"
+                        <a class="nav-link border-top border-light border-2 me-2" aria-current="page"
                             href="home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
@@ -66,8 +66,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2"
-                            href="home.php#footer-section">Contanct Us</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contanct Us</a>
                     </li>
                     <form class="d-lg-flex d-grid gap-1 col-lg-5">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
@@ -415,7 +414,196 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         </div>
     </nav> <!-- End Navbar -->
 
+    <!-- Main Section -->
+    <section class="mt-5">
+        <!--carousel and product name and a short description-->
+        <div class="container-fluid px-lg-5 px-4">
+            <div class="row justify-content-evenly px-lg-5 px-0">
+                <div id="caruselProduct" class="col-lg-7 col-12 carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="inc/pictures/products2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="inc/pictures/products3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="inc/pictures/products4.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#caruselProduct"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#caruselProduct"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="col-lg-5 col-12 align-self-center">
+                    <div class="sections-header mt-lg-0 mt-4 mb-lg-5 mb-0">AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI
+                        DRAGON' JAR</div><br>
+                    <div class="short-descr text-lg-start text-center">XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF
+                        THE
+                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
+                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
+                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
+                        PERIOD (1426-1435)</div><br>
+                    <div class="row mt-lg-5 justify-content-center">
+                        <div class="col-xl-3 col-lg-4 col-12 mt-4">
+                            <button class="btn save-product w-100"><i class="fas fa-heart"></i> SAVE</button>
+                        </div>
+                        <div class="col-xl-5 col-lg-8 col-12 mt-4">
+                            <button class="btn bid-now w-100"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <br><br><br>
 
+        <div class="container-fluid mt-0 mt-lg-5">
+            <div class="row">
+                <div class="bookmarks col-xl-2 col-lg-3">
+                    <div class="row justify-content-center px-lg-5 px-0">
+                        <div class="col-lg-12 col-6 text-lg-start text-center">
+                            <a class="bookmark" href="#description"><i class="fa fa-arrow-right"></i> Description</a>
+                        </div>
+                        <div class="col-lg-12 col-6 text-lg-start text-center">
+                            <a class="bookmark" href="#details"><i class="fa fa-arrow-right"></i> Auction details</a>
+                        </div>
+                        <div class="col-lg-12 col-6 text-lg-start text-center">
+                            <a class="bookmark" href="#similar"><i class="fa fa-arrow-right"></i> See similar produtcs</a>
+                        </div>
+                        <div class="col-lg-12 col-6 text-lg-start text-center">
+                            <a class="bookmark" href="#how"><i class="fa fa-arrow-right"></i> How auction works</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description and Details -->
+                <div class="col-xl-7 offset-xl-1 col-lg-9 col-12 px-lg-5 px-4 mt-lg-0 mt-5">
+                    <div class="row justify-content-center">
+                        <section id="tabDescription" class="col-xl-12 ml-xl-3">
+                            <!-- 2 nav-tabs -->
+                            <ul class="nav nav-tabs justify-content-lg-start justify-content-center" id="tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                        href="#description" role="tab" 
+                                        aria-selected="true">Description</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details" role="tab"
+                                         aria-selected="false">Details</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="latestTabContent">
+                                <br>
+                                <!-- Description Tab -->
+                                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
+                                            <p class="content-item">Lorem ipsum dolorvitae nam iusto. Eum distinctio, placeat recusandae
+                                                similique reprehenderit voluptas laborum facere
+                                                or sit amet coue reprerum facere
+                                                or sit 
+                                                quisquam delectus.</p>
+                                        </div>
+                                        <div class="col-lg-6 col-12 text-lg-start text-center">
+                                            <p class="content-item">Lorem ipsum dold vvitae nam iusto. Eum distinctio, placeat recusandae
+                                                similique reprerum facere
+                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
+                                                ipsam
+                                                culpa doloribus
+                                                id vitae na
+                                                quisquam delectus.</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- End Description tab -->
+                                <!-- Details Tab -->
+                                <div class="tab-pane fade" id="details" role="tabpanel">
+                                    <div class="row">
+                                    <div class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
+                                            <p class="content-item">Lorem ipsum dolorvitae nam iusto. Eum distinctio, placeat recusandae
+                                                similique reprehenderit voluptas laborum facere
+                                                or sit amet coue reprerum facere
+                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
+                                                ipsam
+                                                culpa doloribus
+                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
+                                                reprehenderit voluptas l placeat recusandae similique
+                                                reprehenderit voluptas laborum facere
+                                                quisquam delectus.</p>
+                                        </div>
+                                        <div class="col-lg-6 col-12 text-lg-start text-center">
+                                            <p class="content-item">Lorem ipsum dold vvitae nam iusto. Eum distinctio, placeat recusandae
+                                                similique reprerum facere
+                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
+                                                ipsam
+                                                culpa doloribus
+                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
+                                                reprehenderit voluptas lue reprerum facere
+                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
+                                                ipsam
+                                                culpa doloribus
+                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
+                                                reprehenderit voluptas laborum facere
+                                                quisquam delectus.</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- End Review tab -->
+                            </div> <!-- End tab content -->
+                        </section> <!-- End section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><br><br><br> <!-- End Main Section -->
+    <hr>
+
+    <!-- Similar Product Section -->
+    <section id="similar">
+        <div class="container">
+            <h1 class="otherProduct-header text-center">
+                Similar Products
+            </h1>
+            <div class="similar-products-row">
+                <div class="me-5 text-center mb-3">
+                    <img class="products-img" src="inc/pictures/products.jpg">
+                    <i>Product Tittle</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products4.jpg">
+                    <i>Product Tittle</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products3.jpg">
+                    <i>Product Tittle</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products2.jpg">
+                    <i>Product Tittle</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products.jpg">
+                    <i>Product Tittle</i>
+                </div>
+                <div class="me-5 text-center">
+                    <img class="products-img" src="inc/pictures/products3.jpg">
+                    <i>Product Tittle</i>
+                </div>
+            </div>
+        </div>
+    </section><br><br><br> <!-- End Similar Product Section -->
 
     <!-- Footer section -->
     <section id="footer-section">
@@ -424,27 +612,27 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
                 <div class="col-lg-4 col-12 text-center">
-                    <h2 class="footer-header">Contact us</h2>
-                    <span class="h4"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                    <h2 class="footer-header mb-3">Contact us</h2>
+                    <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
                             class="text-secondary">huskiescyber@gmail.com</span> </span>
-                    <br><br>
-                    <span class="h4"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                    <br>
+                    <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
                             class="text-secondary">+35569678553</span> </span>
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header">Location</h2>
-                    <span class="h4"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
+                    <h2 class="footer-header mb-3">Location</h2>
+                    <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
                     <br>
                     <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header">Social media</h2>
+                    <h2 class="footer-header mb-3">Social media</h2>
                     <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
                     <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div><br><br><br>
-    </section>
+    </section> <!-- End Footer Section -->
 
 
     <!-- Script -->

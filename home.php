@@ -480,7 +480,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 </div>
             </div>
         </div>
-        </div>
     </section><br><br>
 
     <!-- Other carousel with some of the products picture-->
@@ -497,10 +496,35 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="5"
+                    aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="6"
+                    aria-label="Slide 7"></button>
+                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="7"
+                    aria-label="Slide 8"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="inc/pictures/products2.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products2.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products4.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
+                </div>
+                <div class="carousel-item">
+                    <img src="inc/pictures/products3.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
                 </div>
                 <div class="carousel-item">
                     <img src="inc/pictures/products4.jpg" class="d-block mx-auto img-thumbnail" alt="Picture">
@@ -616,21 +640,21 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
                 <div class="col-lg-4 col-12 text-center">
-                    <h2 class="footer-header">Contact us</h2>
-                    <span class="h4"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                    <h2 class="footer-header mb-3">Contact us</h2>
+                    <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
                             class="text-secondary">huskiescyber@gmail.com</span> </span>
-                    <br><br>
-                    <span class="h4"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                    <br>
+                    <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
                             class="text-secondary">+35569678553</span> </span>
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header">Location</h2>
-                    <span class="h4"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
+                    <h2 class="footer-header mb-3">Location</h2>
+                    <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
                     <br>
                     <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header">Social media</h2>
+                    <h2 class="footer-header mb-3">Social media</h2>
                     <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
                     <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
                 </div>

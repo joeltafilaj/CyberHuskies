@@ -8,3 +8,11 @@
   .footer-header {
     font-weight: 900;
   }
+  .footer-inner {
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 768px) {
+    .footer-inner {
+      font-size: 19px;
+    }
+  }
