@@ -3,6 +3,7 @@ session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
 }
+require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -408,61 +409,76 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
     <?php
     }
-?>
-
-
-
-    <!-- Main Section -->
-    <section class="mt-5">
-        <!--carousel and product name and a short description-->
+    
+    //DB connection to get product on the database
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['pid'])) {
+            $product_id = test_input($_GET['pid']);
+            $sqlGetProduct = "SELECT * FROM product WHERE product_id = $product_id";
+            $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
+            if (mysqli_num_rows($resultGetProduct) == 1) {
+                while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
+    ?>
+        <!-- Main Section -->
+        <section class="mt-5">
+        <!-- Carousel and product name and a short description-->
         <div class="container-fluid px-lg-5 px-4">
             <div class="row justify-content-evenly px-lg-5 px-0">
-                <div id="caruselProduct" class="col-lg-7 col-12 carousel slide" data-bs-ride="carousel"
+                <div id="caruselProduct" class="col-lg-7 col-12 carousel carousel-dark slide" data-bs-ride="carousel"
                     data-bs-interval="false">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="inc/pictures/products2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="inc/pictures/products3.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="inc/pictures/products4.jpg" class="d-block w-100" alt="...">
-                        </div>
+                    <?php 
+                    //DB connection to get product images stored in another table
+                    $sqlGetImages = "SELECT * FROM picture WHERE product_id = $product_id";
+                    $resultGetImages = mysqli_query($connection, $sqlGetImages);
+                    $countImage = mysqli_num_rows($resultGetImages);
+                    $counter = 0;
+                    echo '<div class="carousel-indicators">';
+                    if (mysqli_num_rows($resultGetImages) > 0) {
+                        while ($rowGetImages = mysqli_fetch_assoc($resultGetImages)) {
+                            echo  $countImage;
+
+                            if ($counter == 0) {
+                                $active = 'active';
+                                $current = 'true';
+                            }
+                            else {
+                                $active = '';
+                                $current = '';
+                            }
+                            echo   '<button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="'.$counter.'" class="'.$active.'"
+                                        aria-current="'.$current.'" aria-label="Slide '.$counter.'"></button>';
+
+                            if ($counter == $countImage-1) {
+                                echo'</div>';
+                            }
+                            if ($counter == 0) {
+                                echo'<div class="carousel-inner">';
+                            }        
+                            echo    '<div class="carousel-item '.$active.'">
+                                        <img src="inc/pictures/product-picture/'.$rowGetImages['picture_url'].'" class="d-block w-100" alt="...">
+                                    </div>';
+                            $counter++;
+                        }
+                    }
+                    ?>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#caruselProduct"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#caruselProduct"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <span class="">Next</span>
                     </button>
                 </div>
                 <div class="col-lg-5 col-12 align-self-center">
-                    <div class="sections-header mt-lg-0 mt-4 mb-lg-5 mb-0">AN IMPORTANT AND EXTREMELY RARE BLUE AND
-                        WHITE 'KUI
-                        DRAGON' JAR</div><br>
-                    <div class="short-descr text-lg-start text-center">XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE
-                        WITHIN A DOUBLE CIRCLE AND OF
-                        THE
-                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
-                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
-                        PERIOD (1426-1435)XUANDE SIX-CHARACTER MARK IN UNDERGLAZE BLUE WITHIN A DOUBLE CIRCLE AND OF THE
-                        PERIOD (1426-1435)</div><br>
+                    <div class="sections-header mt-lg-0 mt-4 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div><br>
+                    <div class="short-descr text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div><br>
                     <div class="row mt-lg-5 justify-content-center">
                         <div class="col-xl-3 col-lg-4 col-12 mt-4">
-                            <button class="btn save-product w-100"><i class="fas fa-heart"></i> SAVE</button>
+                            <button class="btn save-product w-100" id="<?php echo $rowGetProduct['product_id']; ?>"><i class="fas fa-heart"></i> SAVE</button>
                         </div>
                         <div class="col-xl-5 col-lg-8 col-12 mt-4">
                             <button class="btn bid-now w-100"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
@@ -513,24 +529,18 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <!-- Description Tab -->
                                 <div class="tab-pane fade show active" id="description" role="tabpanel">
                                     <div class="row">
-                                        <div
-                                            class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
-                                            <p class="content-item">Lorem ipsum dolorvitae nam iusto. Eum distinctio,
-                                                placeat recusandae
-                                                similique reprehenderit voluptas laborum facere
-                                                or sit amet coue reprerum facere
-                                                or sit
-                                                quisquam delectus.</p>
+                                    <?php
+                                    //split text in half
+                                    $text = $rowGetProduct['description'];
+                                    $splitat = strpos($text, " ", strlen($text) / 2);
+                                    $col1 = substr($text, 0, $splitat);
+                                    $col2 = substr($text, $splitat);
+                                    ?>
+                                        <div class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
+                                            <p class="content-item"><?php echo $col1;?></p>
                                         </div>
                                         <div class="col-lg-6 col-12 text-lg-start text-center">
-                                            <p class="content-item">Lorem ipsum dold vvitae nam iusto. Eum distinctio,
-                                                placeat recusandae
-                                                similique reprerum facere
-                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
-                                                ipsam
-                                                culpa doloribus
-                                                id vitae na
-                                                quisquam delectus.</p>
+                                            <p class="content-item"><?php echo $col2;?></p>
                                         </div>
                                     </div>
                                 </div> <!-- End Description tab -->
@@ -551,7 +561,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                                 </p>
                                         </div>
                                         <div class="col-lg-6 col-12 text-lg-start text-center">
-                                            <p class="content-item"><strong>RETURN POLICY</strong>
+                                            <p class="content-item"><strong>RETURN POLICY</strong><br>
                                                 If you have received wrong or defective item(s), please ensure that
                                                 items are returned to us within 30 days in original packaging in brand
                                                 new and resalable condition. You will be required to contact us for a
@@ -607,36 +617,54 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
         </div>
     </section><br><br><br> <!-- End Similar Product Section -->
+    <?php     
+                }       
+            } else {
+                echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br><br><br><br><br><br><br><br><br><br>'; 
+            }        
+        } else {
+            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        }
+    }
+    ?>
 
     <!-- Footer section -->
-    <section id="footer-section">
+    <section id="footer-section" class="">
         <br>
         <div class="container">
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
-                <div class="col-lg-4 col-12 text-center">
-                    <h2 class="footer-header mb-3">Contact us</h2>
-                    <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
-                            class="text-secondary">huskiescyber@gmail.com</span> </span>
-                    <br>
-                    <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
-                            class="text-secondary">+35569678553</span> </span>
-                </div>
-                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header mb-3">Location</h2>
-                    <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
-                    <br>
-                    <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
-                </div>
-                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header mb-3">Social media</h2>
-                    <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
-                    <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
-                </div>
+            <?php 
+            $sqlGetFooter = "SELECT email, phone_number, location FROM homepage LIMIT 1";
+            $resultGetFooter = mysqli_query($connection, $sqlGetFooter);
+            if (mysqli_num_rows($resultGetFooter) == 1) {
+                while ($rowGetFooter = mysqli_fetch_assoc($resultGetFooter)) {
+                  echo '<div class="col-lg-4 col-12 text-center">
+                            <h2 class="footer-header mb-3">Contact us</h2>
+                            <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                                    class="text-secondary">'.$rowGetFooter['email'].'</span> </span>
+                            <br>
+                            <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                                    class="text-secondary">'.$rowGetFooter['phone_number'].'</span> </span>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                            <h2 class="footer-header mb-3">Location</h2>
+                            <span class="footer-inner"><i>" '.$rowGetFooter['location'].' "</i></span>
+                            <br>
+                            <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                            <h2 class="footer-header mb-3">Social media</h2>
+                            <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
+                            <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
+                        </div>';  
+                }
+            }
+            mysqli_close($connection);
+            ?>
             </div>
         </div><br><br><br>
     </section> <!-- End Footer Section -->
-
 
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -646,6 +674,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- JS link -->
     <script type="text/javascript" src="inc/js/home.js"></script>
+
     <script>
     //hide scrollbar when croll down
     var prev_pos = window.pageYOffset;
