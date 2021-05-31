@@ -60,9 +60,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <!-- DB Connection to get categories-->
+                            <?php 
+                            require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+                            $sqlGetCategories = "SELECT * FROM category";
+                            $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
+                            if (mysqli_num_rows($resultGetCategories) > 0) {
+                                while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
+                                    echo '<li><a class="dropdown-item text-center" href="list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
+                                }
+                            }
+                            ?>
+                            <li><hr class="divider"></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -84,9 +94,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <!-- Modal Buttons -->
                     <form class="d-lg-flex d-grid gap-2">
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span class="button-text">Log In</span></button>
+                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span
+                                class="button-text">Log In</span></button>
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span class="button-text">Sign Up</span></button>
+                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span
+                                class="button-text">Sign Up</span></button>
                     </form>
                 </ul>
             </div>
@@ -377,22 +389,23 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <?php
     } else {
     ?>
-                    <li class="nav-item dropdown me-3 border-top border-light border-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i class="fad fa-user-circle"></i></a>
-                        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
-                            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
-                            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
-                                        class="fad fa-sign-out"></i></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> <!-- End Navbar -->
+    <li class="nav-item dropdown me-3 border-top border-light border-2">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i
+                class="fad fa-user-circle"></i></a>
+        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
+            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
+                        class="fad fa-sign-out"></i></a></li>
+        </ul>
+    </li>
+    <li class="nav-item me-2">
+        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav> <!-- End Navbar -->
     <?php
     }
 ?>
@@ -526,33 +539,28 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     <div class="row">
                                         <div
                                             class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
-                                            <p class="content-item">Lorem ipsum dolorvitae nam iusto. Eum distinctio,
-                                                placeat recusandae
-                                                similique reprehenderit voluptas laborum facere
-                                                or sit amet coue reprerum facere
-                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
-                                                ipsam
-                                                culpa doloribus
-                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
-                                                reprehenderit voluptas l placeat recusandae similique
-                                                reprehenderit voluptas laborum facere
-                                                quisquam delectus.</p>
+                                            <p class="content-item">When clicking the Buy-It-Now button or placing a bid
+                                                you automatically enter into a legally binding contract to purchase the
+                                                item. Please commit to buy only after you decided to purchase & you are
+                                                ready to pay.
+                                                A minimum 5% cancellation fee will apply to all orders that are not paid
+                                                or returned for non-defective reasons.
+                                                There will be no price protection, if the price of an item changes after
+                                                purchasing.
+                                                We are required to collect state tax from AL state buyers.
+                                                </p>
                                         </div>
                                         <div class="col-lg-6 col-12 text-lg-start text-center">
-                                            <p class="content-item">Lorem ipsum dold vvitae nam iusto. Eum distinctio,
-                                                placeat recusandae
-                                                similique reprerum facere
-                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
-                                                ipsam
-                                                culpa doloribus
-                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
-                                                reprehenderit voluptas lue reprerum facere
-                                                or sit amet consectetur adipisicing elit. Suscipit, dolor illum rem
-                                                ipsam
-                                                culpa doloribus
-                                                id vitae nam iusto. Eum distinctio, placeat recusandae similique
-                                                reprehenderit voluptas laborum facere
-                                                quisquam delectus.</p>
+                                            <p class="content-item"><strong>RETURN POLICY</strong>
+                                                If you have received wrong or defective item(s), please ensure that
+                                                items are returned to us within 30 days in original packaging in brand
+                                                new and resalable condition. You will be required to contact us for a
+                                                return authorization form before sending anything back to us.
+                                                All returns must include original box, original factory packaging (foam
+                                                plastic wrappings, etc.) Do not deface original factory cartons or
+                                                packaging in any manner. We will not accept a return if the goods are
+                                                not in its original condition.
+                                                Do not discard box, until equipment has not been tested</p>
                                         </div>
                                     </div>
                                 </div> <!-- End Review tab -->
