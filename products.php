@@ -74,6 +74,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                             ?>
                             <li><hr class="divider"></li>
                             <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming Soon</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -401,7 +402,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
         </ul>
     </li>
     <li class="nav-item me-2">
-        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
     </li>
     </ul>
     </div>
