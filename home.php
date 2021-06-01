@@ -476,7 +476,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <section>
     <div class="container">
         <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['cooming_soon_header']; ?></h1>
-        <div class=" soon-row">
+        <div class="soon-row">
     <?php
         while ($rowCoomingSoon = mysqli_fetch_assoc($resultCoomingSoon)) {
             echo '<div class="me-5 text-center">

@@ -427,36 +427,49 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 <div id="caruselProduct" class="col-lg-7 col-12 carousel carousel-dark slide" data-bs-ride="carousel"
                     data-bs-interval="false">
                     <?php 
-                    //DB connection to get product images stored in another table
+                    //DB connection to get product images stored in another table and put it in carousel
                     $sqlGetImages = "SELECT * FROM picture WHERE product_id = $product_id";
                     $resultGetImages = mysqli_query($connection, $sqlGetImages);
                     $countImage = mysqli_num_rows($resultGetImages);
-                    $counter = 0;
                     echo '<div class="carousel-indicators">';
+                        for ($i=0; $i < $countImage; $i++) { 
+                            if ($i === 0) {
+                                echo '<button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="'.$i.'" class="active"
+                                        aria-current="true" aria-label="Slide '.($i+1).'"></button>';
+                            } else {
+                                echo'<button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="'.$i.'" 
+                                aria-label="Slide '.($i+1).'"></button>';
+                        }
+                    }
+                    echo '</div>';
                     if (mysqli_num_rows($resultGetImages) > 0) {
+                        $counter = 0;
                         while ($rowGetImages = mysqli_fetch_assoc($resultGetImages)) {
-                            echo  $countImage;
-
-                            if ($counter == 0) {
-                                $active = 'active';
-                                $current = 'true';
-                            }
-                            else {
-                                $active = '';
-                                $current = '';
-                            }
-                            echo   '<button type="button" data-bs-target="#caruselProduct" data-bs-slide-to="'.$counter.'" class="'.$active.'"
-                                        aria-current="'.$current.'" aria-label="Slide '.$counter.'"></button>';
-
-                            if ($counter == $countImage-1) {
-                                echo'</div>';
-                            }
-                            if ($counter == 0) {
-                                echo'<div class="carousel-inner">';
-                            }        
-                            echo    '<div class="carousel-item '.$active.'">
-                                        <img src="inc/pictures/product-picture/'.$rowGetImages['picture_url'].'" class="d-block w-100" alt="...">
-                                    </div>';
+                            if ($counter === 0) {
+                                echo '<div class="carousel-inner">';
+                                echo   '<div class="carousel-item active">
+                                            <img src="inc/pictures/product-picture/'.$rowGetImages['picture_url'].'" class="d-block mx-auto" alt="..." data-bs-toggle="modal" data-bs-target="#imageMax'.$counter.'">
+                                        </div>';
+                            }else {
+                                echo    '<div class="carousel-item">
+                                            <img src="inc/pictures/product-picture/'.$rowGetImages['picture_url'].'" class="d-block mx-auto " alt="..." data-bs-toggle="modal" data-bs-target="#imageMax'.$counter.'">
+                                        </div>';
+                            } 
+                    ?>
+                            <div class="modal fade" id="imageMax<?php echo $counter; ?>" role="dialoig">
+                                <div class="modal-dialog modal-fullscreen p-lg-5 p-3">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="h4 modal-tittle text-primary">Full image</span>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <image class="img-fluid w-100 h-100" src="inc/pictures/product-picture/<?php echo $rowGetImages['picture_url']; ?>" alt="Image"></image>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
                             $counter++;
                         }
                     }
@@ -465,16 +478,16 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <button class="carousel-control-prev" type="button" data-bs-target="#caruselProduct"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="">Previous</span>
+                        <span class=""></span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#caruselProduct"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="">Next</span>
+                        <span class=""></span>
                     </button>
                 </div>
                 <div class="col-lg-5 col-12 align-self-center">
-                    <div class="sections-header mt-lg-0 mt-4 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div><br>
+                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div><br>
                     <div class="short-descr text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div><br>
                     <div class="row mt-lg-5 justify-content-center">
                         <div class="col-xl-3 col-lg-4 col-12 mt-4">
@@ -586,44 +599,51 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <!-- Similar Product Section -->
     <section id="similar">
         <div class="container">
-            <h1 class="otherProduct-header text-center">
-                Similar Products
-            </h1>
-            <div class="similar-products-row">
+            <?php
+            $sqlGetSimilarProducts = "SELECT picture_cover_url, name, product_id FROM product WHERE category_id = ".$rowGetProduct['category_id']." AND product_id <> ".$rowGetProduct['product_id'].""; 
+            $resultGetSimilarProducts = mysqli_query($connection, $sqlGetSimilarProducts);
+            $countProduct = mysqli_num_rows($resultGetSimilarProducts);
+            if ( $countProduct > 0) {
+                if ($countProduct <= 3) {
+                    $justify = 'center';
+                } else {
+                    $justify = 'between';
+                }
+            echo '<h1 class="otherProduct-header text-center">
+                    Similar Products
+                </h1>
+                <div class="similar-products-row d-flex flex-row justify-content-'.$justify.'">';
+                while ($rowGetSimilarProdutcs = mysqli_fetch_assoc($resultGetSimilarProducts)) {
+            ?>
                 <div class="me-5 text-center mb-3">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <i>Product Tittle</i>
+                    <a href="products.php?pid=<?php echo $rowGetSimilarProdutcs['product_id'];?>"><img class="products-img border border-2" src="inc/pictures/product-picture/<?php echo $rowGetSimilarProdutcs['picture_cover_url']; ?>"></a>
+                    <br><br><i><?php echo $rowGetSimilarProdutcs['name']; ?></i>
                 </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products4.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products2.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <i>Product Tittle</i>
-                </div>
-            </div>
+            <?php
+                }
+            echo '</div>';
+            } else {
+            ?>
+            <h1 class="otherProduct-header text-center">
+                No Similar Product found
+            </h1>
+            <?php
+            }
+            ?>
+            
         </div>
     </section><br><br><br> <!-- End Similar Product Section -->
     <?php     
                 }       
             } else {
-                echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br><br><br><br><br><br><br><br><br><br>'; 
+                echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>
+                <br><br><br><br><br><br>
+                <br><br><br><br><br>'; 
             }        
         } else {
-            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
+            <br><br><br><br><br>
+            <br><br><br><br>';
         }
     }
     ?>

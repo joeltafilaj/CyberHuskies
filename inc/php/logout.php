@@ -12,7 +12,8 @@ if (mysqli_query($connection, $sql)) {
         setcookie('username', '', time() - 7000000, '/');
         setcookie('verified', '', time() - 7000000, '/');
     }
-    header('Location:/CyberHuskies/home.php');
+    $page = $_SERVER['HTTP_REFERER'];
+    header('Location:'.$page.'');
 } else {
     header('Location:../error.html');
 }
