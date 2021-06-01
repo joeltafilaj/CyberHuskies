@@ -23,11 +23,10 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="inc/css/products.css">
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/mycart.css">
 
-    <link rel="stylesheet" type="text/css" href="cart.css">
     <title>Auction</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
@@ -61,9 +60,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <!-- DB Connection to get categories-->
+                        <?php 
+                        require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+                        $sqlGetCategories = "SELECT * FROM category";
+                        $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
+                        if (mysqli_num_rows($resultGetCategories) > 0) {
+                            while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
+                                echo '<li><a class="dropdown-item text-center" href="list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
+                            }
+                        }
+                        ?>
+                            <li><hr class="divider"></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming Soon</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -85,14 +95,21 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <!-- Modal Buttons -->
                     <form class="d-lg-flex d-grid gap-2">
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span class="button-text">Log In</span></button>
+                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span
+                                class="button-text">Log In</span></button>
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span class="button-text">Sign Up</span></button>
+                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span
+                                class="button-text">Sign Up</span></button>
                     </form>
                 </ul>
             </div>
         </div>
     </nav> <!-- End Navbar -->
+    <br><br><br><br>
+    
+    <h1 class="otherProduct-header mt-2">You are not signed in. <i class="fad fa-frown"></i><br> <span class="h4">Log-in in order to access this site</span></h1>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
     <!-- Log in Modal -->
     <div class="modal fade" id="logInModal" tabindex="-1" aria-labelledby="logInModal" aria-hidden="true">
         <div class="modal-dialog ">
@@ -378,246 +395,115 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <?php
     } else {
     ?>
-                    <li class="nav-item dropdown me-3 border-top border-light border-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i class="fad fa-user-circle"></i></a>
-                        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
-                            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
-                            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
-                                        class="fad fa-sign-out"></i></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
-                    </li>
-                    </ul>
+    <li class="nav-item dropdown me-3 border-top border-light border-2">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i
+                class="fad fa-user-circle"></i></a>
+        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
+            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
+                        class="fad fa-sign-out"></i></a></li>
+        </ul>
+    </li>
+    <li class="nav-item me-2">
+        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav> <!-- End Navbar -->
+
+    <br><br><br>
+
+        <?php 
+        // DB connection to get all product added to the wishlist
+        $sqlWishlistProduct = 'SELECT starting_price, status, picture_cover_url, name, product_id FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
+        $resultWishlistProduct = mysqli_query($connection, $sqlWishlistProduct);
+        if (mysqli_num_rows($resultWishlistProduct) > 0) {
+        ?>
+        <!-- products of cart -->
+        <div class="container p-5 cart-products">
+            <form id="wishlistRemove" method="POST">
+        <?php 
+            while ($rowWishlistProduct = mysqli_fetch_assoc($resultWishlistProduct)) {
+        ?>
+                <div class="row" id="row<?php echo $rowWishlistProduct['product_id']; ?>">
+                    <div class="col-lg-4">
+                        <a href="products.php?pid=<?php echo $rowWishlistProduct['product_id']; ?>"><img src="inc/pictures/product-picture/<?php echo $rowWishlistProduct['picture_cover_url'] ?>" class="products-img w-100 img-fluid border border-2"></a>
+                    </div>
+                    <div class="col-lg-8 align-self-center">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="sections-header mt-lg-0 mt-3"><?php echo $rowWishlistProduct['name']; ?></h2> 
+                            </div>
+                            <div class="col-lg-12 mt-0 text-lg-start text-center">
+                                <span><b>Status: </b><?php echo $rowWishlistProduct['status']; ?></span>
+                            </div> 
+                            <div class="col-lg-12 mt-4 text-lg-start text-center">
+                                <span><b>Offers start at: </b><?php echo $rowWishlistProduct['starting_price']; ?>&euro;</span>
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <button id="<?php echo $rowWishlistProduct['product_id']; ?>" type="submit" class="remove-item w-100">Remove from cart <i class="fad fa-trash-alt"></i></button>
+                            </div>       
+                        </div>
+                    </div>      
+                </div><hr>
+            <?php
+                }
+            ?>
+            </form>
+            <br>
+            <div class="row justify-content-end">
+                <div class="col-lg-3 col-12">
+                    <a href="list.php?category=All%20Products"><button class=" btn btn-outline-secondary continue-btn w-100"><i class="fad fa-arrow-left"></i> Continue shopping</button></a> 
+                </div>
+                <div class="col-lg-3 col-12 mt-lg-0 mt-3">
+                    <button class="btn checkout-btn w-100">Proceed to checkout <i class="fad fa-check"></i></button>
                 </div>
             </div>
-        </nav> <!-- End Navbar -->
-    <?php
-    }
+        </div><!-- End products of cart -->
+        <br><br>
+            <?php 
+            } else {
+                echo '<br><h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+            }
+        }
 ?>
-
-<!-- products of cart -->
-<div class="cart-products-container">
-  <div class="cart-products">
-    <form method="POST">
-      <div class="cart-product">
-        <div class="product-checkbox">
-          <input type="checkbox" name="product-selected" class="product-selected">  
-        </div>
-        
-        <div class="img">
-          <img src="images/products.jpg" width="300px" height="300px">
-        </div>
-        
-        <div class="name-buttons-container">
-          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-          <div>
-            <div class="availability"><b>Status: </b>available for auction</div>  
-          </div>
-
-          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-
-          <div class="offer-input-container">
-              <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
-          </div>
-
-          <div class="gift">
-            <input type="checkbox" id="is_gift1">
-            <label for="is_gift">Send as a gift</label>
-          </div>
-        </div>
-        <div>
-            <button class="remove-item"><i class="fas fa-times"></i></button>
-        </div>
-        
-      </div>
-
-      <div class="cart-product">
-        <div class="product-checkbox">
-          <input type="checkbox" name="product-selected" class="product-selected">  
-        </div>
-        <div class="img">
-          <img src="images/products2.jpg" width="300px" height="300px">
-        </div>
-        <div class="name-buttons-container">
-            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-            <div>
-              <div class="availability"><b>Status: </b>available for auction</div>  
-            </div>
-  
-            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-  
-            <div class="offer-input-container">
-                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
-            </div>
-  
-            <div class="gift">
-              <input type="checkbox" id="is_gift2">
-              <label for="is_gift">Send as a gift</label>
-            </div>
-        </div>
-          <div>
-              <button class="remove-item"><i class="fas fa-times"></i></button>
-          </div>
-      </div>
-
-      <div class="cart-product">
-        <div class="product-checkbox">
-          <input type="checkbox" name="product-selected" class="product-selected">  
-        </div>
-        <div class="img">
-          <img src="images/products3.jpg" width="300px" height="300px">
-        </div>
-        <div class="name-buttons-container">
-            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-            <div>
-              <div class="availability"><b>Status: </b>available for auction</div>  
-            </div>
-  
-            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-  
-            <div class="offer-input-container">
-                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
-            </div>
-  
-            <div class="gift">
-              <input type="checkbox" id="is_gift3">
-              <label for="is_gift">Send as a gift</label>
-            </div>
-          </div>
-          <div>
-              <button class="remove-item"><i class="fas fa-times"></i></button>
-          </div>
-      </div>
-
-      <div class="cart-product">
-        <div class="product-checkbox">
-          <input type="checkbox" name="product-selected" class="product-selected">  
-        </div>
-        <div class="img">
-          <img src="images/products4.jpg" width="300px" height="300px">
-        </div>
-        <div class="name-buttons-container">
-            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-            <div>
-              <div class="availability"><b>Status: </b>available for auction</div>  
-            </div>
-  
-            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-  
-            <div class="offer-input-container">
-                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
-            </div>
-  
-            <div class="gift">
-              <input type="checkbox" id="is_gift4">
-              <label for="is_gift">Send as a gift</label>
-            </div>
-          </div>
-          <div>
-              <button class="remove-item"><i class="fas fa-times"></i></button>
-          </div>
-      </div>
-
-      <div class="cart-product">
-        <div class="product-checkbox">
-          <input type="checkbox" name="product-selected" class="product-selected">  
-        </div>
-        <div class="img">
-          <img src="images/products3.jpg" width="300px" height="300px">
-        </div>
-        <div class="name-buttons-container">
-            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-            <div>
-              <div class="availability"><b>Status: </b>available for auction</div>  
-            </div>
-  
-            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-  
-            <div class="offer-input-container">
-                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
-            </div>
-  
-            <div class="gift">
-              <input type="checkbox" id="is_gift5">
-              <label for="is_gift">Send as a gift</label>
-            </div>
-          </div>
-          <div>
-              <button class="remove-item"><i class="fas fa-times"></i></button>
-          </div>
-      </div>
-      <div class="btns">
-        <a class="continue-btn btn"><i class="fas fa-arrow-left"></i> Continue shopping</a>
-        <button type="submit" class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></button>
-      </div>
-    </form>  
-  </div>
-</div>
-<!-- end products of cart -->
-
-    <!-- Similar Product Section -->
-    <section id="similar">
-        <div class="container">
-            <h1 class="otherProduct-header text-center">
-                Similar Products
-            </h1>
-            <div class="similar-products-row">
-                <div class="me-5 text-center mb-3">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products4.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products2.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products.jpg">
-                    <i>Product Tittle</i>
-                </div>
-                <div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/products3.jpg">
-                    <i>Product Tittle</i>
-                </div>
-            </div>
-        </div>
-    </section><br><br><br> <!-- End Similar Product Section -->
-
     <!-- Footer section -->
-    <section id="footer-section">
+    <section id="footer-section" class="">
         <br>
         <div class="container">
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
-                <div class="col-lg-4 col-12 text-center">
-                    <h2 class="footer-header mb-3">Contact us</h2>
-                    <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
-                            class="text-secondary">huskiescyber@gmail.com</span> </span>
-                    <br>
-                    <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
-                            class="text-secondary">+35569678553</span> </span>
-                </div>
-                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header mb-3">Location</h2>
-                    <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
-                    <br>
-                    <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
-                </div>
-                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                    <h2 class="footer-header mb-3">Social media</h2>
-                    <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
-                    <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
-                </div>
+            <?php 
+            $sqlGetFooter = "SELECT email, phone_number, location FROM homepage LIMIT 1";
+            $resultGetFooter = mysqli_query($connection, $sqlGetFooter);
+            if (mysqli_num_rows($resultGetFooter) == 1) {
+                while ($rowGetFooter = mysqli_fetch_assoc($resultGetFooter)) {
+                  echo '<div class="col-lg-4 col-12 text-center">
+                            <h2 class="footer-header mb-3">Contact us</h2>
+                            <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                                    class="text-secondary">'.$rowGetFooter['email'].'</span> </span>
+                            <br>
+                            <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                                    class="text-secondary">'.$rowGetFooter['phone_number'].'</span> </span>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                            <h2 class="footer-header mb-3">Location</h2>
+                            <span class="footer-inner"><i>" '.$rowGetFooter['location'].' "</i></span>
+                            <br>
+                            <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                            <h2 class="footer-header mb-3">Social media</h2>
+                            <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
+                            <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
+                        </div>';  
+                }
+            }
+            mysqli_close($connection);
+            ?>
             </div>
         </div><br><br><br>
     </section> <!-- End Footer Section -->
