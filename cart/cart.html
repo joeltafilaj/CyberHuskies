@@ -551,7 +551,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
       </div>
       <div class="btns">
         <a class="continue-btn btn"><i class="fas fa-arrow-left"></i> Continue shopping</a>
-        <button class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></button>
+        <button type="submit" class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></button>
       </div>
     </form>  
   </div>
