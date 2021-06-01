@@ -549,11 +549,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
               <button class="remove-item"><i class="fas fa-times"></i></button>
           </div>
       </div>
+      <div class="btns">
+        <a class="continue-btn btn"><i class="fas fa-arrow-left"></i> Continue shopping</a>
+        <button class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></button>
+      </div>
     </form>  
-  </div>
-  <div class="btns">
-    <a class="continue-btn btn"><i class="fas fa-arrow-left"></i> Continue shopping</a>
-    <a class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></a>
   </div>
 </div>
 <!-- end products of cart -->
