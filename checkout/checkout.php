@@ -27,7 +27,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
 
-    <link rel="stylesheet" type="text/css" href="products_from_category.css">
+    <link rel="stylesheet" type="text/css" href="checkout.css">
     <title>Auction</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
@@ -398,113 +398,78 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     }
 ?>
 
-<!-- products from certain category -->
-<div class="products-from-category-container">
-    <div class="products-from-category">
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
+<!-- products in checkout -->
+<div class="checkout-products-container">
+  <div class="checkout-products">
+      <div class="checkout-product">
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        
+        <div class="name-details-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div class="min-price"><b>Your bid for this item: </b>12 500&euro;</div>
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      </div>
+     
+      <div class="checkout-product">
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products4.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        
+        <div class="name-details-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div class="min-price"><b>Your bid for this item: </b>12 500&euro;</div>
         </div>
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="checkout-product">
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        
+        <div class="name-details-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div class="min-price"><b>Your bid for this item: </b>12 500&euro;</div>
         </div>
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="checkout-product">
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        
+        <div class="name-details-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div class="min-price"><b>Your bid for this item: </b>12 500&euro;</div>
         </div>
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="checkout-product">
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
+        
+        <div class="name-details-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div class="min-price"><b>Your bid for this item: </b>12 500&euro;</div>
+        </div>
+      </div>
 
-    </div>
+       <div class="checkout-btns-container">
+           <div class="checkout-btns">
+               <a href="#" class="btn back-btn"><i class="fas fa-arrow-left"></i> Go back</a>
+               <form method="POST">
+                  <input type="submit" name="place-bid" class="btn place-bid-btn" value="Place bids">
+               </form>
+           </div>
+       </div>
+     
+   </div>
 </div>
-<!-- end products from certain category -->
-    
-<!-- Similar Product Section -->
+<!-- end products in checkout -->
+
+    <!-- Similar Product Section -->
     <section id="similar">
         <div class="container">
             <h1 class="otherProduct-header text-center">
