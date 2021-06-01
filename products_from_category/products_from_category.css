@@ -11,6 +11,10 @@
     background-color: rgb(240, 239, 231);
 }
 
+.products-from-category-container .category-name-container {
+    padding: 50px;
+}
+
 .products-from-category {
     width: 100%;
     display: flex;
