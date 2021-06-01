@@ -420,7 +420,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
           <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
 
           <div class="offer-input-container">
-              <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+              <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
           </div>
 
           <div class="gift">
@@ -450,7 +450,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
   
             <div class="offer-input-container">
-                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
             </div>
   
             <div class="gift">
@@ -479,7 +479,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
   
             <div class="offer-input-container">
-                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
             </div>
   
             <div class="gift">
@@ -508,7 +508,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
   
             <div class="offer-input-container">
-                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
             </div>
   
             <div class="gift">
@@ -537,7 +537,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
   
             <div class="offer-input-container">
-                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
             </div>
   
             <div class="gift">
