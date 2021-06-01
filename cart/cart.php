@@ -419,12 +419,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
           <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
 
+          <div class="offer-input-container">
+              <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+          </div>
+
           <div class="gift">
             <input type="checkbox" id="is_gift1">
             <label for="is_gift">Send as a gift</label>
           </div>
-          <button type="submit" class="remove-item">Remove from cart</button>
         </div>
+        <div>
+            <button class="remove-item"><i class="fas fa-times"></i></button>
+        </div>
+        
       </div>
 
       <div class="cart-product">
@@ -435,17 +442,25 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
           <img src="images/products2.jpg" width="300px" height="300px">
         </div>
         <div class="name-buttons-container">
-          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
-          <div>
-            <div class="availability"><b>Status: </b>available for auction</div>  
-          </div>
-          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-          <div class="gift">
-            <input type="checkbox" id="is_gift2">
-            <label for="is_gift">Send as a gift</label>
-          </div>
-          <button type="submit" class="remove-item">Remove from cart</button>
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift2">
+              <label for="is_gift">Send as a gift</label>
+            </div>
         </div>
+          <div>
+              <button class="remove-item"><i class="fas fa-times"></i></button>
+          </div>
       </div>
 
       <div class="cart-product">
@@ -456,17 +471,25 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
           <img src="images/products3.jpg" width="300px" height="300px">
         </div>
         <div class="name-buttons-container">
-          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift3">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
           <div>
-            <div class="availability"><b>Status: </b>available for auction</div>  
+              <button class="remove-item"><i class="fas fa-times"></i></button>
           </div>
-          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-          <div class="gift">
-            <input type="checkbox" id="is_gift3">
-            <label for="is_gift">Send as a gift</label>
-          </div>
-          <button type="submit" class="remove-item">Remove from cart</button>
-        </div>
       </div>
 
       <div class="cart-product">
@@ -477,17 +500,25 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
           <img src="images/products4.jpg" width="300px" height="300px">
         </div>
         <div class="name-buttons-container">
-          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift4">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
           <div>
-            <div class="availability"><b>Status: </b>available for auction</div>  
+              <button class="remove-item"><i class="fas fa-times"></i></button>
           </div>
-          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-          <div class="gift">
-            <input type="checkbox" id="is_gift4">
-            <label for="is_gift">Send as a gift</label>
-          </div>
-          <button type="submit" class="remove-item">Remove from cart</button>
-        </div>
       </div>
 
       <div class="cart-product">
@@ -498,17 +529,25 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
           <img src="images/products3.jpg" width="300px" height="300px">
         </div>
         <div class="name-buttons-container">
-          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" class="offer-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift5">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
           <div>
-            <div class="availability"><b>Status: </b>available for auction</div>  
+              <button class="remove-item"><i class="fas fa-times"></i></button>
           </div>
-          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
-          <div class="gift">
-            <input type="checkbox" id="is_gift5">
-            <label for="is_gift">Send as a gift</label>
-          </div>
-          <button type="submit"  class="remove-item">Remove from cart</button>
-        </div>
       </div>
     </form>  
   </div>

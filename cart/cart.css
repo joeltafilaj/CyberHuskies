@@ -43,7 +43,8 @@
 }
 
 .remove-item {
-    width: 100px;
+    width: 30px;
+    height: 30px;
     background-color: rgb(238, 238, 238);
     color: black;
     border: none;
