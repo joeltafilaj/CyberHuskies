@@ -414,7 +414,25 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
 
     <br><br><br>
-
+        <!-- Alert message for adding to wishlist -->
+        <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
+            <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
+                <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
+                    <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">505! Internal database error!</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
+            <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
+                <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
+                    <i class="fas fa-check-circle"></i> Product removed from the wishlist!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        </div><!-- End alert mesage -->
         <?php 
         // DB connection to get all product added to the wishlist
         $sqlWishlistProduct = 'SELECT starting_price, status, picture_cover_url, name, product_id FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
@@ -423,15 +441,14 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         ?>
         <!-- products of cart -->
         <div class="container p-5 cart-products">
-            <form id="wishlistRemove" method="POST">
         <?php 
             while ($rowWishlistProduct = mysqli_fetch_assoc($resultWishlistProduct)) {
         ?>
                 <div class="row" id="row<?php echo $rowWishlistProduct['product_id']; ?>">
-                    <div class="col-lg-4">
-                        <a href="products.php?pid=<?php echo $rowWishlistProduct['product_id']; ?>"><img src="inc/pictures/product-picture/<?php echo $rowWishlistProduct['picture_cover_url'] ?>" class="products-img w-100 img-fluid border border-2"></a>
+                    <div class="col-lg-4 col-12 text-center">
+                        <a href="products.php?pid=<?php echo $rowWishlistProduct['product_id']; ?>"><img src="inc/pictures/product-picture/<?php echo $rowWishlistProduct['picture_cover_url'] ?>" class="products-img img-fluid border border-2"></a>
                     </div>
-                    <div class="col-lg-8 align-self-center">
+                    <div class="col-lg-8 align-self-center remove">
                         <div class="row">
                             <div class="col-lg-12">
                                 <h2 class="sections-header mt-lg-0 mt-3"><?php echo $rowWishlistProduct['name']; ?></h2> 
@@ -446,12 +463,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <button id="<?php echo $rowWishlistProduct['product_id']; ?>" type="submit" class="remove-item w-100">Remove from cart <i class="fad fa-trash-alt"></i></button>
                             </div>       
                         </div>
-                    </div>      
-                </div><hr>
+                    </div> 
+                    <hr class="mt-3">     
+                </div>
             <?php
                 }
             ?>
-            </form>
             <br>
             <div class="row justify-content-end">
                 <div class="col-lg-3 col-12">
@@ -461,12 +478,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <button class="btn checkout-btn w-100">Proceed to checkout <i class="fad fa-check"></i></button>
                 </div>
             </div>
+            <br>
         </div><!-- End products of cart -->
-        <br><br>
+        <br>
+        <!-- Empty div shows when wishlist is empty -->
+        <div id="empty" style="display: none;">
+            <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
             <?php 
             } else {
-                echo '<br><h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                echo '<br>
+                    <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
             }
         }
 ?>
@@ -517,6 +541,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- JS link -->
     <script type="text/javascript" src="inc/js/home.js"></script>
+    <script type="text/javascript" src="inc/js/mycart.js"></script>
+
     <script>
     //hide scrollbar when croll down
     var prev_pos = window.pageYOffset;

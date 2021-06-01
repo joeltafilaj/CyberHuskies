@@ -424,6 +424,27 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
         <section class="mt-5">
         <!-- Carousel and product name and a short description-->
         <div class="container-fluid px-lg-5 px-4">
+            <!-- Alert message for adding to wishlist -->
+            <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
+                <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
+                    <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
+                        <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">This product is already in the
+                            wishlist!</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
+                <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
+                    <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
+                        <i class="fas fa-check-circle"></i> Product added successfully to wishlist!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            </div><!-- End alert mesage -->
             <div class="row justify-content-evenly px-lg-5 px-0">
                 <div id="caruselProduct" class="col-lg-7 col-12 carousel carousel-dark slide" data-bs-ride="carousel"
                     data-bs-interval="false">
@@ -491,11 +512,11 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div><br>
                     <div class="short-descr text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div><br>
                     <div class="row mt-lg-5 justify-content-center">
-                        <div class="col-xl-3 col-lg-4 col-12 mt-4">
-                            <button class="btn save-product w-100" id="<?php echo $rowGetProduct['product_id']; ?>"><i class="fas fa-heart"></i> SAVE</button>
+                        <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                            <button type="submit" class="btn save-product w-100" id="w<?php echo $rowGetProduct['product_id']; ?>"><i class="fas fa-heart"></i> SAVE</button>
                         </div>
-                        <div class="col-xl-5 col-lg-8 col-12 mt-4">
-                            <button class="btn bid-now w-100"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                        <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                            <button class="btn bid-now w-100" id="p<?php echo $rowGetProduct['product_id']; ?>"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
                         </div>
                     </div>
                 </div>
@@ -695,6 +716,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 
     <!-- JS link -->
     <script type="text/javascript" src="inc/js/home.js"></script>
+     <script type="text/javascript" src="inc/js/products.js"></script>
 
     <script>
     //hide scrollbar when croll down

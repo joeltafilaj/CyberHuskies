@@ -86,6 +86,8 @@ body {
 .products-img {
   cursor: pointer;
   transition: 0.2s;
+  width: 350px;
+  height: 300px;
 }
 .products-img:hover {
   border-radius: 50px;
