@@ -27,7 +27,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
 
-    <link rel="stylesheet" type="text/css" href="products_from_category.css">
+    <link rel="stylesheet" type="text/css" href="cart.css">
     <title>Auction</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
@@ -398,117 +398,167 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     }
 ?>
 
-<!-- products from certain category -->
-<div class="products-from-category-container">
-    <div class="category-name-container">
-        <h1 class="category-name">Paintings</h1>
-        <div class="category-descr">paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintingspaintings paintings</div>
-    </div>
-    <div class="products-from-category">
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
+<!-- products of cart -->
+<div class="cart-products-container">
+  <div class="cart-products">
+    <form method="POST">
+      <div class="cart-product">
+        <div class="product-checkbox">
+          <input type="checkbox" name="product-selected" class="product-selected">  
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        
+        <div class="img">
+          <img src="images/products.jpg" width="300px" height="300px">
         </div>
+        
+        <div class="name-buttons-container">
+          <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+          <div>
+            <div class="availability"><b>Status: </b>available for auction</div>  
+          </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+          <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+
+          <div class="offer-input-container">
+              <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
+          </div>
+
+          <div class="gift">
+            <input type="checkbox" id="is_gift1">
+            <label for="is_gift">Send as a gift</label>
+          </div>
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products4.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        <div>
+            <button class="remove-item"><i class="fas fa-times"></i></button>
         </div>
+        
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="cart-product">
+        <div class="product-checkbox">
+          <input type="checkbox" name="product-selected" class="product-selected">  
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
+        <div class="img">
+          <img src="images/products2.jpg" width="300px" height="300px">
+        </div>
+        <div class="name-buttons-container">
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
             </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift2">
+              <label for="is_gift">Send as a gift</label>
             </div>
         </div>
+          <div>
+              <button class="remove-item"><i class="fas fa-times"></i></button>
+          </div>
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="cart-product">
+        <div class="product-checkbox">
+          <input type="checkbox" name="product-selected" class="product-selected">  
         </div>
-
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products2.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+        <div class="img">
+          <img src="images/products3.jpg" width="300px" height="300px">
         </div>
+        <div class="name-buttons-container">
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift3">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
+          <div>
+              <button class="remove-item"><i class="fas fa-times"></i></button>
+          </div>
+      </div>
 
-        <div class="product">
-            <div class="prod-img">
-                <a href="#"><img src="images/products3.jpg"></a>
-            </div>
-            <div class="prod-details">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>
+      <div class="cart-product">
+        <div class="product-checkbox">
+          <input type="checkbox" name="product-selected" class="product-selected">  
         </div>
+        <div class="img">
+          <img src="images/products4.jpg" width="300px" height="300px">
+        </div>
+        <div class="name-buttons-container">
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift4">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
+          <div>
+              <button class="remove-item"><i class="fas fa-times"></i></button>
+          </div>
+      </div>
 
-    </div>
+      <div class="cart-product">
+        <div class="product-checkbox">
+          <input type="checkbox" name="product-selected" class="product-selected">  
+        </div>
+        <div class="img">
+          <img src="images/products3.jpg" width="300px" height="300px">
+        </div>
+        <div class="name-buttons-container">
+            <h2>AN IMPORTANT AND EXTREMELY RARE BLUE AND WHITE 'KUI DRAGON' JAR</h1>
+            <div>
+              <div class="availability"><b>Status: </b>available for auction</div>  
+            </div>
+  
+            <div class="min-price"><b>Offers start at: </b>12 000&euro;</div>
+  
+            <div class="offer-input-container">
+                <input type="number" name="bid-price" class="bid-input" min="12000" placeholder="your bid for this item">
+            </div>
+  
+            <div class="gift">
+              <input type="checkbox" id="is_gift5">
+              <label for="is_gift">Send as a gift</label>
+            </div>
+          </div>
+          <div>
+              <button class="remove-item"><i class="fas fa-times"></i></button>
+          </div>
+      </div>
+      <div class="btns">
+        <a class="continue-btn btn"><i class="fas fa-arrow-left"></i> Continue shopping</a>
+        <button type="submit" class="checkout-btn btn">Proceed to checkout <i class="fas fa-check"></i></button>
+      </div>
+    </form>  
+  </div>
 </div>
-<!-- end products from certain category -->
-    
-<!-- Similar Product Section -->
+<!-- end products of cart -->
+
+    <!-- Similar Product Section -->
     <section id="similar">
         <div class="container">
             <h1 class="otherProduct-header text-center">

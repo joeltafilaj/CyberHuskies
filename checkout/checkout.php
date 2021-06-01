@@ -400,10 +400,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
 <!-- products from certain category -->
 <div class="products-from-category-container">
-    <div class="category-name-container">
-        <h1 class="category-name">Paintings</h1>
-        <div class="category-descr">paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintings paintingspaintings paintings</div>
-    </div>
     <div class="products-from-category">
         <div class="product">
             <div class="prod-img">
