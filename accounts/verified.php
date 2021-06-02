@@ -57,17 +57,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <!--Font Awesome -->
     <link rel="stylesheet" type="text/css" href="../inc/fontawesome-5-pro-master/css/all.css">
-
+    <style>
+    body {
+      font-family: "Mulish", sans-serif;
+    }
+    .otherProduct-header {
+    color: rgb(146, 114, 43);
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 3rem;
+    text-align: center;
+    }
+    .otherProduct-header:after {
+      content: "";
+      width: 5%;
+      height: 2px;
+      background-color: #663300;
+      display: block;
+      margin: 14px auto 8px;
+      transition: 0.2s;
+    }
+    .otherProduct-header:hover:after {
+      width: 25%;
+    }
+    </style>
 </head>
 
-<body style="background-color: lightgrey;"><br><br><br><br><br>
+<body><br><br><br><br><br>
     <div class="container-fluid">
         <div class="row text-center mt-5 text-dark">
             <div class="col-lg-12">
-                <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"> <?php echo $response; ?></h1><br>
-            </div>
-            <div class="col-lg-12 text-center">
-              <span class="h7"><?php echo $response2; ?></span>
+                <h1 class="otherProduct-header"> <?php echo $response; ?>
+                <br>
+                <span class="h5"><?php echo $response2; ?></span></h1>
             </div>
         </div>
     </div>

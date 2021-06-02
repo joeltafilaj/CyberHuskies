@@ -20,15 +20,39 @@
 
     <!--Font Awesome -->
     <link rel="stylesheet" type="text/css" href="../inc/fontawesome-5-pro-master/css/all.css">
-
+    <style>
+    body {
+      font-family: "Mulish", sans-serif;
+    }
+    .otherProduct-header {
+    color: rgb(146, 114, 43);
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 3rem;
+    text-align: center;
+    }
+    .otherProduct-header:after {
+      content: "";
+      width: 5%;
+      height: 2px;
+      background-color: #663300;
+      display: block;
+      margin: 14px auto 8px;
+      transition: 0.2s;
+    }
+    .otherProduct-header:hover:after {
+      width: 25%;
+    }
+    </style>
 </head>
 
-<body style="background-color: lightgray;">
+<body>
     <div class="container-fluid"><br><br><br><br><br><br>
         <div class="row text-center mt-5">
             <div class="col-lg-12">
-                <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Thank you for registering ! <i class="fad fa-smile-beam"></i></h1>
-                <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">We have sent a verification email to the address provided.</h2><br>
+                <h1 class="otherProduct-header">Thank you for registering ! <i class="fad fa-smile-beam"></i>
+                <br>
+                <span class="h2" >We have sent a verification email to the address provided.</span></h1>
                 <h1><i class="fad fa-envelope" style="font-size: 240px;"></i></h1>
             </div>
         </div>

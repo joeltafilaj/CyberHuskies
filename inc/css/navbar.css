@@ -5,6 +5,9 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
 }
+.modal-footer a, .modal-body a {
+    text-decoration: none;
+  }
 /* Search button  */
 #searchProduct {
     background-color: rgb(201, 99, 99);

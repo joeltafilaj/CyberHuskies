@@ -6,10 +6,6 @@ body{
   font-size: 14px;
 }
 
-.modal-footer a, .modal-body a {
-  text-decoration: none;
-}
-
 /* caousel height on larger screens */
 @media screen and (min-width: 1200px) {
   #mainCarousel img {

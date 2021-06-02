@@ -400,7 +400,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="#"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+                        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
                     </li>
                     </ul>
                 </div>

@@ -414,6 +414,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </nav> <!-- End Navbar -->
 
     <br><br><br>
+
+    <?php 
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
+    ?>
+
         <!-- Alert message for adding to wishlist -->
         <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
             <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
@@ -492,7 +497,14 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
             }
+        } else {
+            echo '<br>
+                <h1 class="otherProduct-header mt-2">You are not a costumer. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as costumer in order to access this site</span></h1>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>';
         }
+        
+    }
+
 ?>
     <!-- Footer section -->
     <section id="footer-section" class="">
