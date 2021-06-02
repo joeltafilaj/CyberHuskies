@@ -53,7 +53,7 @@ body{
 .products-img{
   width: 320px;
   height: 250px;
-  transition: .4s;
+  transition: .2s;
 }
 @media only screen and (max-width:768px){
   .products-img{
@@ -61,11 +61,12 @@ body{
     height: 150px;
   }
 }
+.products-img:hover {
+  border-radius: 50px;
+  border-color: rgb(112, 99, 24)!important;
+}
 .soon-row { 
-  display: flex;
   overflow: auto;
-  justify-content: space-between;
-  width: 100%;
 }
 
 /* Other Carousel */

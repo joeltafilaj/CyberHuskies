@@ -52,7 +52,7 @@ $(document).ready(function () {
       },
     });
   });
-  //Variable used for interval clear
+
   var interval;
   // Initialize timer function
   var time = parseInt($("#time").text());
@@ -60,8 +60,6 @@ $(document).ready(function () {
 
   // countDown function
   function sale_time(time) {
-    //Clear previus timer set
-    clearInterval(interval);
     var number = time;
 
     //Set new timer
@@ -69,23 +67,16 @@ $(document).ready(function () {
     if (number > 0) {
       interval = setInterval(clockUpdate, 1000);
     }
-
     //Timer function
     function clockUpdate() {
       if (number === 0) {
         $("#time").text("");
-        $('.time').html('Item Sold <i class="fad fa-check-circle"></i>');
-        // var product_id = $('.save-product').attr('id').substring(1);
-        // $.ajax({
-        //     type: "post",
-        //     url: "inc/php/statusChange.php",
-        //     data: {
-        //         product_id: product_id
-        //     },
-        //     dataType: "json",
-        //     success: function (data) {
-        //     }
-        // });
+        $('.time').html('Time ended <i class="fad fa-hourglass-half"></i>');
+        $('.bid-now').addClass('disabled');
+        number--;
+      } else if (number === -1) {
+        // Break from the loop
+        clearInterval(interval);
       } else {
         var day = parseInt(number / 86400);
         var hours = parseInt((number - day * 86400) / 3600);
@@ -103,7 +94,7 @@ $(document).ready(function () {
             day + "d : " + hours + "h : " + minutes + "m : " + seconds + "s"
           );
         }
-        number -= 1;
+        number --;
       }
     }
   }

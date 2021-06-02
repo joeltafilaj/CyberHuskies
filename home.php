@@ -469,7 +469,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- DB Connection to get products which are not available yet but will be -->
     <?php 
-    $sqlCoomingSoon = "SELECT name, picture_cover_url FROM product WHERE sale_start > CURRENT_TIMESTAMP()";
+    $sqlCoomingSoon = "SELECT name, picture_cover_url, product_id FROM product WHERE sale_start > NOW()";
     $resultCoomingSoon = mysqli_query($connection, $sqlCoomingSoon);
     if (mysqli_num_rows($resultCoomingSoon) > 0) {
     ?>
@@ -477,12 +477,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <section>
     <div class="container">
         <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['cooming_soon_header']; ?></h1>
-        <div class="soon-row">
+        <div class="soon-row gap-4 d-flex flex-row justify-content-center">
     <?php
         while ($rowCoomingSoon = mysqli_fetch_assoc($resultCoomingSoon)) {
             echo '<div class="me-5 text-center">
-                    <img class="products-img" src="inc/pictures/product-picture/'.$rowCoomingSoon['picture_cover_url'].'">
-                    <i>'.$rowCoomingSoon['name'].'</i>
+            <a href="products.php?pid='.$rowCoomingSoon['product_id'].'"><img class="products-img border border-2" src="inc/pictures/product-picture/'.$rowCoomingSoon['picture_cover_url'].'"></a>
+                    <br><br><i>'.$rowCoomingSoon['name'].'</i>
                 </div>';
         }
     ?>

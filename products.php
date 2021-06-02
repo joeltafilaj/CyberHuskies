@@ -512,32 +512,52 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div>
                     <div class="text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div>
                     <?php 
-                    if ($rowGetProduct['status'] == 0) {
-                        echo '<div class="time text-center mt-3 h2">Item Sold <i class="fad fa-check-circle"></i></div>';
-                    } else {
-                        $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining FROM product WHERE product_id = '.$rowGetProduct['product_id'].'';
-                        $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
-                        echo mysqli_error($connection);
-                        if (mysqli_num_rows($resultDateDiff) == 1) {
-                            while ($rowDateDiff = mysqli_fetch_assoc($resultDateDiff)) {
-                                if ($rowDateDiff['time_remaining'] <= 0) {
-                                    echo '<div class="time text-center mt-3 h2">Item Sold <i class="fad fa-check-circle"></i></div>';
-                                } else {
-                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
-                                }
+                   
+                    // Checking if product is available on the market or if it is sold
+                    $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = '.$product_id.'';
+                    $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
+                    if (mysqli_num_rows($resultDateDiff) == 1) {
+                        while ($rowDateDiff = mysqli_fetch_assoc($resultDateDiff)) {
+
+                            // Product's time has ended
+                            if ($rowDateDiff['time_remaining'] <= 0) {
+                                echo '<div class="time text-center mt-3 h2">Time ended <i class="fad fa-hourglass-half"></i></div>';
+                                echo '<div class="row mt-lg-4 justify-content-center">
+                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                                <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                            </div>
+                                        </div>';
+
+                            // Product's time is counting down
+                            } else if ($rowDateDiff['time_remaining'] > 0 && $rowDateDiff['is_available'] > 0) {
+                                echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
+                                echo '<div class="row mt-lg-4 justify-content-center">
+                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                                <button class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                            </div>
+                                        </div>';
+                            
+                            // Product is not available yet on market
+                            } else if ($rowDateDiff['is_available'] <= 0) {
+                                echo '<div class="time text-center mt-3 h2">Item not available yet <i class="fad fa-calendar-alt"></i></div>';
+                                echo '<div class="row mt-lg-4 justify-content-center">
+                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                                <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                            </div>
+                                        </div>';
                             }
                         }
                     }
-
                     ?>
-                    <div class="row mt-lg-4 justify-content-center">
-                        <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                            <button type="submit" class="btn save-product w-100" id="w<?php echo $rowGetProduct['product_id']; ?>"><i class="fas fa-heart"></i> SAVE</button>
-                        </div>
-                        <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                            <button class="btn bid-now w-100" id="p<?php echo $rowGetProduct['product_id']; ?>"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div> <br><br><br>
