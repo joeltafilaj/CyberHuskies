@@ -80,9 +80,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contanct Us</a>
                     </li>
-                    <form class="d-lg-flex d-grid gap-1 col-lg-5">
+                    <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
-                            aria-label="Search">
+                            aria-label="Search" name="search">
                         <button id="searchProduct" class="btn btn-danger d-grid" type="submit">Search</button>
                     </form>
                 </ul>
@@ -634,10 +634,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             echo '<h1 class="otherProduct-header text-center">
                     Similar Products
                 </h1>
-                <div class="similar-products-row d-flex flex-row justify-content-'.$justify.'">';
+                <div class="similar-products-row gap-4 d-flex flex-row justify-content-'.$justify.'">';
                 while ($rowGetSimilarProdutcs = mysqli_fetch_assoc($resultGetSimilarProducts)) {
             ?>
-                <div class="me-5 text-center mb-3">
+                <div class="text-center mb-3">
                     <a href="products.php?pid=<?php echo $rowGetSimilarProdutcs['product_id'];?>"><img class="products-img border border-2" src="inc/pictures/product-picture/<?php echo $rowGetSimilarProdutcs['picture_cover_url']; ?>"></a>
                     <br><br><i><?php echo $rowGetSimilarProdutcs['name']; ?></i>
                 </div>

@@ -64,6 +64,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             <!-- DB Connection to get categories-->
                             <?php 
                             require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+                            require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                             $sqlGetCategories = "SELECT * FROM category";
                             $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
                             if (mysqli_num_rows($resultGetCategories) > 0) {
@@ -80,9 +81,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contanct Us</a>
                     </li>
-                    <form class="d-lg-flex d-grid gap-1 col-lg-5">
+                    <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
-                            aria-label="Search">
+                            aria-label="Search" name="search">
                         <button id="searchProduct" class="btn btn-danger d-grid" type="submit">Search</button>
                     </form>
                 </ul>
@@ -407,118 +408,150 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         </nav> <!-- End Navbar -->
     <?php
     }
+    // Geting category name from user 
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        // User searched with category
+        if (isset($_GET['category'])) {
+            $category_name = test_input($_GET['category']);
+            if ($category_name === 'All Products') {
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product";
+                $resultProducts = mysqli_query($connection, $sqlProducts);
+                if (mysqli_num_rows($resultProducts) > 0) {
+                    echo '<!-- products from certain category -->
+                        <div class="container-fluid products-from-category-container">
+                            <div class="row">
+                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">All Products</h1>
+                            </div><br><br>
+                            <div class="products-from-category row justify-content-xl-start justify-content-center"> ';
+
+                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                        echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                    <div class="prod-img col-12">
+                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                    </div>
+                                    <div class="prod-details col-12">
+                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
+                                        <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                    </div>    
+                                </a>
+                               </div> ';
+                    }
+                    echo '</div>
+                        </div><!-- End products from certain category -->';
+                }
+            } else if ($category_name === 'Cooming Soon') {
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE date_available > CURDATE()";
+                $resultProducts = mysqli_query($connection, $sqlProducts);
+                if (mysqli_num_rows($resultProducts) > 0) {
+                    echo '<!-- products from certain category -->
+                        <div class="container-fluid products-from-category-container">
+                            <div class="row">
+                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Cooming Soon</h1>
+                            </div><br><br>
+                            <div class="products-from-category row justify-content-xl-start justify-content-center"> ';
+
+                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                        echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                    <div class="prod-img col-12">
+                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                    </div>
+                                    <div class="prod-details col-12">
+                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
+                                        <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                    </div>    
+                                </a>
+                               </div> ';
+                    }
+                    echo '</div>
+                        </div><!-- End products from certain category -->';
+                }
+            } else {
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' )";
+                $resultProducts = mysqli_query($connection, $sqlProducts);
+                if (mysqli_num_rows($resultProducts) > 0) {
+                    echo '<!-- products from certain category -->
+                        <div class="container-fluid products-from-category-container">
+                            <div class="row">
+                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">'.$category_name.'</h1>
+                            </div><br><br>
+                            <div class="products-from-category row justify-content-xl-start justify-content-center"> ';
+
+                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                        echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                    <div class="prod-img col-12">
+                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                    </div>
+                                    <div class="prod-details col-12">
+                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
+                                        <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                    </div>    
+                                </a>
+                               </div> ';
+                    }
+                    echo '</div>
+                        </div><!-- End products from certain category -->';
+                }  else {
+                    echo '<br><br><br><br>
+                        <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                }
+            }
+        }
+        // User searched with product name
+        if (isset($_GET['search'])) {
+            if (!empty($_GET['search'])) {
+                $name = test_input($_GET['search']);
+                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE name LIKE '%$name%'";
+                $resultSearch = mysqli_query($connection, $sqlSearch);
+                if (mysqli_num_rows($resultSearch) > 0) {
+                    echo '<!-- products from certain category -->
+                        <div class="container-fluid products-from-category-container">
+                            <div class="row">
+                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Search : '.$name.'</h1>
+                            </div><br><br>
+                            <div class="products-from-category row justify-content-xl-start justify-content-center"> ';
+
+                    while ($rowSearch = mysqli_fetch_assoc($resultSearch)) {
+                        echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                <a href="products.php?pid='.$rowSearch['product_id'].'" class="href product row justify-content-center">
+                                    <div class="prod-img col-12">
+                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowSearch['picture_cover_url'].'">
+                                    </div>
+                                    <div class="prod-details col-12">
+                                        <div class="prod-name text-center mb-2">'.$rowSearch['name'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowSearch['date_available'].'</div>
+                                        <div class="min-price"><b>Reserve price: </b> &euro;'.$rowSearch['starting_price'].'</div>
+                                    </div>    
+                                </a>
+                               </div> ';
+                    }
+                    echo '</div>
+                        </div><!-- End products from certain category -->';
+                }  else {
+                    echo '<br><br><br><br>
+                        <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                }
+            } else {
+                echo '<br><br><br><br>
+                    <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+            }
+        }
+        
+    }
+
 ?>
-<!-- products from certain category -->
-<div class="container-fluid products-from-category-container">
-    <div class="row">
-        <h1 class="col-lg-12 text-center mt-lg-3 mt-0 mb-lg-5 mb-0">Paintings</h1>
-    </div><br><br>
-    <div class="products-from-category row justify-content-center">
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-        <a class="href col-xl-3 col-lg-5 col-12" href="products.php?pid=1">
-        <div class="product row justify-content-center">
-            <div class="prod-img col-12">
-                <img class="img-fluid" src="inc/pictures/product-picture/product-6-image-1.jpg">
-            </div>
-            <div class="prod-details col-12">
-                <div class="prod-name">Ancient painting from East</div>
-                <div><b>At auction starting from: </b>15/06/2021</div>
-                <div class="min-price"><b>Reserve price: </b> &euro;5000</div>
-            </div>    
-        </div>
-        </a>
-
-
-
-    </div>
-</div><!-- End products from certain category -->
 
 
 <!-- Footer section -->
-<section id="footer-section" class="">
+<section id="footer-section" class="mt-2">
     <br>
     <div class="container">
         <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
