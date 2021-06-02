@@ -415,7 +415,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['pid'])) {
             $product_id = test_input($_GET['pid']);
-            $sqlGetProduct = "SELECT * FROM product WHERE product_id = $product_id";
+            $sqlGetProduct = "SELECT * FROM product WHERE product_id = $product_id ";
             $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
             if (mysqli_num_rows($resultGetProduct) == 1) {
                 while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
@@ -509,9 +509,28 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     </button>
                 </div>
                 <div class="col-lg-5 col-12 align-self-center">
-                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div><br>
-                    <div class="short-descr text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div><br>
-                    <div class="row mt-lg-5 justify-content-center">
+                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div>
+                    <div class="text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div>
+                    <?php 
+                    if ($rowGetProduct['status'] == 0) {
+                        echo '<div class="time text-center mt-3 h2">Item Sold <i class="fad fa-check-circle"></i></div>';
+                    } else {
+                        $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining FROM product WHERE product_id = '.$rowGetProduct['product_id'].'';
+                        $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
+                        echo mysqli_error($connection);
+                        if (mysqli_num_rows($resultDateDiff) == 1) {
+                            while ($rowDateDiff = mysqli_fetch_assoc($resultDateDiff)) {
+                                if ($rowDateDiff['time_remaining'] <= 0) {
+                                    echo '<div class="time text-center mt-3 h2">Item Sold <i class="fad fa-check-circle"></i></div>';
+                                } else {
+                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
+                                }
+                            }
+                        }
+                    }
+
+                    ?>
+                    <div class="row mt-lg-4 justify-content-center">
                         <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
                             <button type="submit" class="btn save-product w-100" id="w<?php echo $rowGetProduct['product_id']; ?>"><i class="fas fa-heart"></i> SAVE</button>
                         </div>
@@ -716,7 +735,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 
     <!-- JS link -->
     <script type="text/javascript" src="inc/js/home.js"></script>
-     <script type="text/javascript" src="inc/js/products.js"></script>
+    <script type="text/javascript" src="inc/js/products.js"></script>
 
     <script>
     //hide scrollbar when croll down

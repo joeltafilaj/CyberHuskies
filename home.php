@@ -469,7 +469,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- DB Connection to get products which are not available yet but will be -->
     <?php 
-    $sqlCoomingSoon = "SELECT name, picture_cover_url FROM product where date_available > CURDATE()";
+    $sqlCoomingSoon = "SELECT name, picture_cover_url FROM product WHERE sale_start > CURRENT_TIMESTAMP()";
     $resultCoomingSoon = mysqli_query($connection, $sqlCoomingSoon);
     if (mysqli_num_rows($resultCoomingSoon) > 0) {
     ?>

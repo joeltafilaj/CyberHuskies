@@ -414,7 +414,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         if (isset($_GET['category'])) {
             $category_name = test_input($_GET['category']);
             if ($category_name === 'All Products') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product";
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < CURRENT_TIMESTAMP()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
                 if (mysqli_num_rows($resultProducts) > 0) {
                     echo '<!-- products from certain category -->
@@ -432,8 +432,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     </div>
                                     <div class="prod-details col-12">
                                         <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
-                                        <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
+                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
                                     </div>    
                                 </a>
                                </div> ';
@@ -442,7 +442,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </div><!-- End products from certain category -->';
                 }
             } else if ($category_name === 'Cooming Soon') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE date_available > CURDATE()";
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start > CURRENT_TIMESTAMP()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
                 if (mysqli_num_rows($resultProducts) > 0) {
                     echo '<!-- products from certain category -->
@@ -460,7 +460,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     </div>
                                     <div class="prod-details col-12">
                                         <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowProducts['sale_start'].'</div>
                                         <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
                                     </div>    
                                 </a>
@@ -470,7 +470,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </div><!-- End products from certain category -->';
                 }
             } else {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' )";
+                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < CURDATE()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
                 if (mysqli_num_rows($resultProducts) > 0) {
                     echo '<!-- products from certain category -->
@@ -488,7 +488,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     </div>
                                     <div class="prod-details col-12">
                                         <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div><b>At auction starting from: </b>'.$rowProducts['date_available'].'</div>
+                                        <div><b>At auction starting from: </b>'.$rowProducts['sale_start'].'</div>
                                         <div class="min-price"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
                                     </div>    
                                 </a>
@@ -507,7 +507,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         if (isset($_GET['search'])) {
             if (!empty($_GET['search'])) {
                 $name = test_input($_GET['search']);
-                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, date_available FROM product WHERE name LIKE '%$name%'";
+                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE name LIKE '%$name%'";
                 $resultSearch = mysqli_query($connection, $sqlSearch);
                 if (mysqli_num_rows($resultSearch) > 0) {
                     echo '<!-- products from certain category -->
