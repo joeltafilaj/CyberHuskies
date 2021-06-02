@@ -50,7 +50,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             href="home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
-                        <a class="nav-link border-top border-light border-2 me-2" href="home.php">Buy</a>
+                        <a class="nav-link active border-top border-light border-2 me-2" href="list.php?category=All%20Products">Buy</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2" href="home.php">Sell</a>
