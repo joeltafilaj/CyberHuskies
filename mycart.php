@@ -424,8 +424,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
                 <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
                     <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">505! Internal database error!</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
                 </div>
             </div>
         </div>
@@ -433,14 +431,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
                 <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
                     <i class="fas fa-check-circle"></i> Product removed from the wishlist!
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
                 </div>
             </div>
         </div><!-- End alert mesage -->
         <?php 
         // DB connection to get all product added to the wishlist
-        $sqlWishlistProduct = 'SELECT starting_price, status, picture_cover_url, name, product_id FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
+        $sqlWishlistProduct = 'SELECT starting_price, picture_cover_url, name, product_id, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
         $resultWishlistProduct = mysqli_query($connection, $sqlWishlistProduct);
         if (mysqli_num_rows($resultWishlistProduct) > 0) {
         ?>
@@ -448,6 +444,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         <div class="container p-5 cart-products">
         <?php 
             while ($rowWishlistProduct = mysqli_fetch_assoc($resultWishlistProduct)) {
+                if ($rowWishlistProduct['time_remaining'] <=  0) {
+                    $status = 'Sale Time Ended <i class="fad fa-hourglass-half"></i>';
+                } else if ($rowWishlistProduct['time_remaining'] > 0 && $rowWishlistProduct['is_available'] > 0) {
+                    $status = 'Available for Sale <i class="fad fa-check-circle"></i>';
+                } else if ($rowWishlistProduct['is_available'] <= 0) {
+                    $status = 'To be available soon <i class="fad fa-calendar-alt"></i>';
+                }
         ?>
                 <div class="row" id="row<?php echo $rowWishlistProduct['product_id']; ?>">
                     <div class="col-lg-4 col-12 text-center">
@@ -459,7 +462,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <h2 class="sections-header mt-lg-0 mt-3"><?php echo $rowWishlistProduct['name']; ?></h2> 
                             </div>
                             <div class="col-lg-12 mt-0 text-lg-start text-center">
-                                <span><b>Status: </b><?php echo $rowWishlistProduct['status']; ?></span>
+                                <span><b>Status: </b><?php echo $status; ?></span>
                             </div> 
                             <div class="col-lg-12 mt-4 text-lg-start text-center">
                                 <span><b>Offers start at: </b><?php echo $rowWishlistProduct['starting_price']; ?>&euro;</span>
@@ -482,8 +485,12 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 <div class="col-lg-3 col-12 mt-lg-0 mt-3">
                     <button class="btn checkout-btn w-100">Proceed to checkout <i class="fad fa-check"></i></button>
                 </div>
+            </div><br>
+            <div class="row">
+                <div class="col-12 mt-4 text-lg-end text-center">
+                    <span class="text-secondary">* Products which are not available for sale, will not be included to the checkout!</span>
+                </div>
             </div>
-            <br>
         </div><!-- End products of cart -->
         <br>
         <!-- Empty div shows when wishlist is empty -->
@@ -552,22 +559,10 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- JS link -->
-    <script type="text/javascript" src="inc/js/home.js"></script>
+    <script src="inc/js/registration.js"></script>
     <script type="text/javascript" src="inc/js/mycart.js"></script>
+    <script type="text/javascript" src="inc/js/navbar.js"></script>
 
-    <script>
-    //hide scrollbar when croll down
-    var prev_pos = window.pageYOffset;
-    window.onscroll = function() {
-        var current_pos = window.pageYOffset;
-        if (prev_pos > current_pos) {
-            document.getElementsByClassName("navb")[0].style.top = "0";
-        } else {
-            document.getElementsByClassName("navb")[0].style.top = "-80px";
-        }
-        prev_pos = current_pos;
-    }
-    </script>
 </body>
 
 </html>

@@ -623,7 +623,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
                     <h2 class="footer-header mb-3">Location</h2>
-                    <span class="footer-inner"><i>'<?php echo $rowGetHomePage['location']; ?>'</i></span>
+                    <span class="footer-inner"><i>" <?php echo $rowGetHomePage['location']; ?> "</i></span>
                     <br>
                     <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
                 </div>
@@ -651,7 +651,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- JS link -->
-    <script src="inc/js/home.js"></script>
+    <script src="inc/js/registration.js"></script>
+    <script type="text/javascript" src="inc/js/navbar.js"></script>
 
     <!-- Swiper -->
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
@@ -670,23 +671,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             shadowScale: 0.9,
         },
     });
-
     // Now you can use all slider methods like
     swiper.slideNext();
-
-
-    //hide scrollbar when croll down
-    var prev_pos = window.pageYOffset;
-        window.onscroll = function() {
-            var current_pos = window.pageYOffset;
-            if (prev_pos > current_pos) {
-                document.getElementsByClassName("navb")[0].style.top = "0";
-            } else {
-                document.getElementsByClassName("navb")[0].style.top = "-80px";
-            }
-            prev_pos = current_pos;
-        }
-
     </script>
 </body>
 

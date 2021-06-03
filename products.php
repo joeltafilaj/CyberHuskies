@@ -430,9 +430,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
                         <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">This product is already in the
                             wishlist!</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            
-                        </button>
                     </div>
                 </div>
             </div>
@@ -440,8 +437,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
                     <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
                         <i class="fas fa-check-circle"></i> Product added successfully to wishlist!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
                     </div>
                 </div>
             </div><!-- End alert mesage -->
@@ -533,16 +528,30 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 
                             // Product's time is counting down
                             } else if ($rowDateDiff['time_remaining'] > 0 && $rowDateDiff['is_available'] > 0) {
-                                echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
-                                echo '<div class="row mt-lg-4 justify-content-center">
-                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
-                                            </div>
-                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                <button class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                                            </div>
-                                        </div>';
-                            
+                                
+                                // Check if user logged in is salessman/costumer to check if bids can be made
+                                if ((isset($_SESSION['user_type']) && $_SESSION['user_type'] != 'costumer') || !isset($_SESSION['user_type'])) {
+                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
+                                    echo '<div class="row mt-lg-4 justify-content-center">
+                                                <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                                    <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                                </div>
+                                                <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                                    <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                                </div>
+                                            </div>';
+                                } else {
+                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
+                                    echo '<div class="row mt-lg-4 justify-content-center">
+                                                <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                                    <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                                </div>
+                                                <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                                    <button class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                                </div>
+                                            </div>';
+                                }
+    
                             // Product is not available yet on market
                             } else if ($rowDateDiff['is_available'] <= 0) {
                                 echo '<div class="time text-center mt-3 h2">Item not available yet <i class="fad fa-calendar-alt"></i></div>';
@@ -661,6 +670,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <section id="similar">
         <div class="container">
             <?php
+            // DB connection to get similar product from the database
             $sqlGetSimilarProducts = "SELECT picture_cover_url, name, product_id FROM product WHERE category_id = ".$rowGetProduct['category_id']." AND product_id <> ".$rowGetProduct['product_id'].""; 
             $resultGetSimilarProducts = mysqli_query($connection, $sqlGetSimilarProducts);
             $countProduct = mysqli_num_rows($resultGetSimilarProducts);
@@ -716,6 +726,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
             <?php 
+            // DB connection to get footer details from the database
             $sqlGetFooter = "SELECT email, phone_number, location FROM homepage LIMIT 1";
             $resultGetFooter = mysqli_query($connection, $sqlGetFooter);
             if (mysqli_num_rows($resultGetFooter) == 1) {
@@ -754,22 +765,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- JS link -->
-    <script type="text/javascript" src="inc/js/home.js"></script>
+    <script src="inc/js/registration.js"></script>
     <script type="text/javascript" src="inc/js/products.js"></script>
+    <script type="text/javascript" src="inc/js/navbar.js"></script>
 
-    <script>
-    //hide scrollbar when croll down
-    var prev_pos = window.pageYOffset;
-    window.onscroll = function() {
-        var current_pos = window.pageYOffset;
-        if (prev_pos > current_pos) {
-            document.getElementsByClassName("navb")[0].style.top = "0";
-        } else {
-            document.getElementsByClassName("navb")[0].style.top = "-80px";
-        }
-        prev_pos = current_pos;
-    }
-    </script>
 </body>
 
 </html>

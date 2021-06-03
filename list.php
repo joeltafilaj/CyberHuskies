@@ -596,20 +596,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- JS link -->
-    <script type="text/javascript" src="inc/js/home.js"></script>
-    <script>
-    //hide scrollbar when croll down
-    var prev_pos = window.pageYOffset;
-    window.onscroll = function() {
-        var current_pos = window.pageYOffset;
-        if (prev_pos > current_pos) {
-            document.getElementsByClassName("navb")[0].style.top = "0";
-        } else {
-            document.getElementsByClassName("navb")[0].style.top = "-80px";
-        }
-        prev_pos = current_pos;
-    }
-    </script>
+    <script src="inc/js/registration.js"></script>
+    <script type="text/javascript" src="inc/js/navbar.js"></script>
+
 </body>
 
 </html>

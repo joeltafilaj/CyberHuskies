@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+  // Add to wishlist
   $("#save button").click(function (e) {
     e.preventDefault();
     var product_id = this.id.substring(1);
@@ -47,6 +49,7 @@ $(document).ready(function () {
             .fadeTo(2000, 50)
             .slideUp(500, function () {
               $(".alert-danger").slideUp(800);
+              
             });
         }
       },
