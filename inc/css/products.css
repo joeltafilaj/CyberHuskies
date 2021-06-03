@@ -100,11 +100,13 @@ body {
   margin-right: 20px;
   background-color: rgb(181, 201, 224);
   color: rgb(255, 255, 255);
+  height: 50px;
 }
 
 .bid-now {
   color: grey;
   background-color: lightgrey;
+  height: 50px;
 }
 
 .save-product:hover {
@@ -119,7 +121,6 @@ body {
   transition: 0.2s;
   border-color: rgb(235, 194, 107);
 }
-
 .bookmarks a,
 .bookmarks a i {
   color: grey;

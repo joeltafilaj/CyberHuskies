@@ -76,6 +76,7 @@ $(document).ready(function () {
         $("#time").text("");
         $('.time').html('Time ended <i class="fad fa-hourglass-half"></i>');
         $('.bid-now').addClass('disabled');
+        $('.bid-input').addClass('d-none');
         number--;
       } else if (number === -1) {
         // Break from the loop
@@ -101,4 +102,26 @@ $(document).ready(function () {
       }
     }
   }
+
+  //Showing input on first click than submit on the second
+  $('.bid-now').click(function (e) { 
+    e.preventDefault();
+    if ($('.bid-input').hasClass('d-none')) {
+      $('.bid-input').removeClass('d-none').hide();
+      $('.bid-input').slideDown();
+
+      // Validation input 
+    } else {
+      var bid = $('#bidPrice').val();
+      var validated = true;
+
+      if (bid < $('#bidPrice').attr('min')) {
+        $('#bidResponse').text('* Bid value is below minimum.');
+        validated = false;
+      }
+      if (validated) {
+        alert('validated');
+      }
+    }
+  });
 });

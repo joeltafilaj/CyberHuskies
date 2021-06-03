@@ -541,15 +541,29 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                 </div>
                                             </div>';
                                 } else {
+                                    if ($rowGetProduct['bid_now'] == '') {
+                                        $bid = $rowGetProduct['starting_price'];
+                                    }else {
+                                        $bid = $rowGetProduct['bid_now'];
+                                    }
                                     echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
+
                                     echo '<div class="row mt-lg-4 justify-content-center">
                                                 <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
                                                     <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
                                                 </div>
                                                 <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                    <button class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                                    <button type="submit" class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
                                                 </div>
                                             </div>';
+                                    echo '<br><div class="row justify-content-center bid-input d-none">
+                                            <div class="col-lg-8 col-12 form-floating">
+                                                <input type="number" min="'.$bid.'" id="bidPrice" placeholder="Place bid value"
+                                                    class="form-control" value="'.$bid.'">
+                                                <label class="ms-3" for="bidPrice">Place bid value</label>
+                                                <span id="bidResponse" class="text-danger mt-2 ms-2"></span>
+                                            </div>
+                                        </div>';
                                 }
     
                             // Product is not available yet on market
@@ -560,7 +574,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                 <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
                                             </div>
                                             <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                                <button class="btn bid-now w-100 disabled" id="b'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
                                             </div>
                                         </div>';
                             }

@@ -436,7 +436,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         </div><!-- End alert mesage -->
         <?php 
         // DB connection to get all product added to the wishlist
-        $sqlWishlistProduct = 'SELECT starting_price, picture_cover_url, name, product_id, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
+        $sqlWishlistProduct = 'SELECT starting_price, bid_now, picture_cover_url, name, product_id, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id IN(SELECT product_id FROM wishlist WHERE user_id = '.$_SESSION['costumer_id'].')';
         $resultWishlistProduct = mysqli_query($connection, $sqlWishlistProduct);
         if (mysqli_num_rows($resultWishlistProduct) > 0) {
         ?>
@@ -446,10 +446,18 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             while ($rowWishlistProduct = mysqli_fetch_assoc($resultWishlistProduct)) {
                 if ($rowWishlistProduct['time_remaining'] <=  0) {
                     $status = 'Sale Time Ended <i class="fad fa-hourglass-half"></i>';
+                    $highiest_bid = '';
                 } else if ($rowWishlistProduct['time_remaining'] > 0 && $rowWishlistProduct['is_available'] > 0) {
+                    if ($rowWishlistProduct['bid_now'] == '') {
+                        $rowWishlistProduct['bid_now'] = 'No offers made yet';
+                    } else {
+                        $rowWishlistProduct['bid_now'] .= '&euro;';
+                    }
                     $status = 'Available for Sale <i class="fad fa-check-circle"></i>';
+                    $highiest_bid = '<span><b>Highiest offer: </b>'.$rowWishlistProduct['bid_now'].'</span>';
                 } else if ($rowWishlistProduct['is_available'] <= 0) {
                     $status = 'To be available soon <i class="fad fa-calendar-alt"></i>';
+                    $highiest_bid = '';
                 }
         ?>
                 <div class="row" id="row<?php echo $rowWishlistProduct['product_id']; ?>">
@@ -465,7 +473,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <span><b>Status: </b><?php echo $status; ?></span>
                             </div> 
                             <div class="col-lg-12 mt-4 text-lg-start text-center">
-                                <span><b>Offers start at: </b><?php echo $rowWishlistProduct['starting_price']; ?>&euro;</span>
+                                <span><b>Offers start at: </b><?php echo $rowWishlistProduct['starting_price']; ?>&euro;</span><br>
+                                <?php echo $highiest_bid; ?>
                             </div>
                             <div class="col-lg-12 mt-4">
                                 <button id="<?php echo $rowWishlistProduct['product_id']; ?>" type="submit" class="remove-item w-100">Remove from cart <i class="fad fa-trash-alt"></i></button>
@@ -485,7 +494,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 <div class="col-lg-3 col-12 mt-lg-0 mt-3">
                     <button class="btn checkout-btn w-100">Proceed to checkout <i class="fad fa-check"></i></button>
                 </div>
-            </div><br>
+            </div>
             <div class="row">
                 <div class="col-12 mt-4 text-lg-end text-center">
                     <span class="text-secondary">* Products which are not available for sale, will not be included to the checkout!</span>
