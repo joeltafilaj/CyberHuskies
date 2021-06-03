@@ -375,7 +375,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         <div class="form-group row justify-content-center px-lg-5 px-3">
                                             <div class="col-12 form-floating">
                                                 <select class="form-select" id="user_type">
-                                                    <option value="customer" selected>Customer</option>
+                                                    <option value="costumer" selected>Customer</option>
                                                     <option value="salessman">Salessman</option>
                                                 </select>
                                                 <label for="user_type" class="ms-2">Select how you want to register

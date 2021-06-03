@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   // Add to wishlist
   $("#save button").click(function (e) {
     e.preventDefault();
@@ -115,12 +114,73 @@ $(document).ready(function () {
       var bid = $('#bidPrice').val();
       var validated = true;
 
-      if (bid < $('#bidPrice').attr('min')) {
+      if (bid < parseInt($('#bidPrice').attr('min'))) {
         $('#bidResponse').text('* Bid value is below minimum.');
+        $('#bidPrice').addClass('is-invalid');
         validated = false;
+      } else {
+        $('#bidResponse').text('');
+        $('#bidPrice').removeClass('is-invalid');
       }
+
+      // After input validation show confirmation modal
       if (validated) {
-        alert('validated');
+        // Activate modal
+        $('#offer').text(bid);
+        $('#confirmModal').modal('show');
+
+        // If clicked confirm proceed with ajax to add bid to the database
+        $('#confirmBid').click(function (e) { 
+          e.preventDefault();
+          var product_id = $('.bid-now').attr('id').substring(1);
+
+          $.ajax({
+            type: "post",
+            url: "inc/php/addBid.php",
+            data: {
+              bid: bid,
+              product_id: product_id
+            },
+            dataType: "json",
+            success: function (data) {
+              if (data.success === true) {
+                // Hide modal after success and show success alert
+                $('#confirmModal').modal('hide');
+                $(".alert-success").css("display", "flex-box");
+                $('.alert-success').html('<i class="fas fa-check-circle"></i> Offer was made successfully!<br>You Will get notified if you won the item!');
+                $(".alert-success")
+                  .fadeTo(6000, 50)
+                  .slideUp(500, function () {
+                    $(".alert-success").slideUp(800);
+                  });
+              }
+              if (data.response === 'error1') {
+                // Hide modal after success and show success alert
+                $('#confirmModal').modal('hide');
+                $(".alert-danger").css("display", "flex-box");
+                $('#alert-danger').html('You already made an offer for this item!');
+                $(".alert-danger")
+                  .fadeTo(6000, 50)
+                  .slideUp(500, function () {
+                    $(".alert-danger").slideUp(800);
+                  });
+              } else {
+                // Hide modal after success and show success alert
+                $('#confirmModal').modal('hide');
+                $(".alert-danger").css("display", "flex-box");
+                $('#alert-danger').html(data.response);
+                $(".alert-danger")
+                  .fadeTo(6000, 50)
+                  .slideUp(500, function () {
+                    $(".alert-danger").slideUp(800);
+                  });
+              }
+            }
+          });
+
+
+         
+        });
       }
     }
   });

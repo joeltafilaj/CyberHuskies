@@ -356,7 +356,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                         <div class="form-group row justify-content-center px-lg-5 px-3">
                             <div class="col-12 form-floating">
                                 <select class="form-select" id="user_type">
-                                    <option value="customer" selected>Customer</option>
+                                    <option value="costumer" selected>Customer</option>
                                     <option value="salessman">Salessman</option>
                                 </select>
                                 <label for="user_type" class="ms-2">Select how you want to register
@@ -553,7 +553,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                     <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
                                                 </div>
                                                 <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                    <button type="submit" class="btn bid-now w-100" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                                    <button type="submit" class="btn bid-now w-100" id="b'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
                                                 </div>
                                             </div>';
                                     echo '<br><div class="row justify-content-center bid-input d-none">
@@ -562,6 +562,23 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                     class="form-control" value="'.$bid.'">
                                                 <label class="ms-3" for="bidPrice">Place bid value</label>
                                                 <span id="bidResponse" class="text-danger mt-2 ms-2"></span>
+                                            </div>
+                                        </div>';
+                                    echo '<!-- Confirm bid modal -->
+                                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                <div class="modal-header text-center">
+                                                    <h1 class="modal-title">Confirmation </h1>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="text-center">Are you sure to confirm the offer made of <span id="offer"></span>&euro;? </h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button id="confirmBid" type="button" class="btn btn-primary">Confirm offer</button>
+                                                </div>
+                                                </div>
                                             </div>
                                         </div>';
                                 }
