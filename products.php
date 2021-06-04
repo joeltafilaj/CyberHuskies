@@ -436,7 +436,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
                 <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
                     <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
-                        <i class="fas fa-check-circle"></i> Product added successfully to wishlist!
+                        <i class="fas fa-check-circle"></i> <span id="alert-success">Product added successfully to wishlist!</span>
                     </div>
                 </div>
             </div><!-- End alert mesage -->
@@ -509,14 +509,20 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <?php 
                    
                     // Checking if product is available on the market
-                    $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = '.$product_id.'';
+                    $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available, bid_now FROM product WHERE product_id = '.$product_id.'';
                     $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
                     if (mysqli_num_rows($resultDateDiff) == 1) {
                         while ($rowDateDiff = mysqli_fetch_assoc($resultDateDiff)) {
 
                             // Product's time has ended
                             if ($rowDateDiff['time_remaining'] <= 0) {
-                                echo '<div class="time text-center mt-3 h2">Time ended <i class="fad fa-hourglass-half"></i></div>';
+                                $response = '';
+                                if ($rowDateDiff['bid_now'] != '') {
+                                    $response = '<i class="fad fa-badge-check"></i> Sold for '.$rowDateDiff['bid_now'].'&euro;';
+                                } else {
+                                    $response = 'Time ended <i class="fad fa-hourglass-half"></i>';
+                                }
+                                echo "<div class='time text-center mt-3 h2'>$response</div>";
                                 echo '<div class="row mt-lg-4 justify-content-center">
                                             <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
                                                 <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
@@ -565,7 +571,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                             </div>
                                         </div>';
                                     echo '<!-- Confirm bid modal -->
-                                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal" aria-hidden="true">
+                                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal"  data-bs-backdrop="static" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                 <div class="modal-header text-center mb-1">
@@ -575,8 +581,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                     <h5 class="text-center">Are you sure to confirm the offer made of <span id="offer"></span>&euro;? </h5>
                                                 </div>
                                                 <div class="modal-footer mt-1">
-                                                    <button id="confirmBid" type="button" class="btn btn-primary d-block w-100" style="height:50px;">Confirm offer <i class="fad fa-badge-check"></i></button>
-                                                    <button type="button" class="btn btn-secondary d-block w-100" data-bs-dismiss="modal" style="height:50px;">Cancel <i class="fad fa-times-octagon"></i></button>
+                                                    <button id="confirmBid" type="button" class="btn btn-warning d-block w-100" style="height:50px;">Confirm offer <i class="fad fa-badge-check"></i></button>
+                                                    <button type="button" class="btn cancel btn-secondary d-block w-100" data-bs-dismiss="modal" style="height:50px;">Cancel <i class="fad fa-times-octagon"></i></button>
                                                 </div>
                                                 </div>
                                             </div>

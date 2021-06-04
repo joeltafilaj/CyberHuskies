@@ -12,66 +12,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Check if costumer already made a bid for this product
         require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
         $sqlCheckBid = "SELECT * FROM bid WHERE costumer_id = ".$_SESSION['costumer_id']." AND product_id = $product_id";
+        
         if (mysqli_num_rows(mysqli_query($connection, $sqlCheckBid)) == 0) {
             // Inserting this bid to the bid database
             $sqlInsertBid = "INSERT INTO bid VALUES(".$_SESSION['costumer_id'].", $product_id, $bid)";
+            
             if (mysqli_query($connection, $sqlInsertBid)) {
-                // Check if this bid is the current highiest bid
+                // New Bid inserted and we email the costumer for the bid
                 $sqlCheckHighiest = "SELECT bid_now, name FROM product WHERE product_id = $product_id";
                 $resultCheckHighiest = mysqli_query($connection, $sqlCheckHighiest);
                 if (mysqli_num_rows($resultCheckHighiest) == 1) {
                     while ($rowCheckHighiest = mysqli_fetch_assoc($resultCheckHighiest)) {
-                        // Bid is highier than the current bid
-                        if ($rowCheckHighiest['bid_now'] < $bid) {
-                            $sqlInsertNewBid = "UPDATE product SET bid_now = $bid, highies_bidder = ".$_SESSION['costumer_id']." WHERE product_id = $product_id";
-                            if (mysqli_query($connection, $sqlInsertNewBid)) {
-                                // New Bid inserted and we email the costumer for the bid
-                                // Sending verification link to the Person email
-                                $to = $_SESSION['email'];
-                                $subject = "Cyber Huskies product offer";
-                                $message = "<h2 style='font-family: verdana;text-align: center;
-                                            color: black;font-size: 40px;'>Thank you for the offer made on our website</h2> <br>
-                                    <div style='text-align: center;'>
-                                    <h3><b>Product Name:</b> ".$rowCheckHighiest['name']."</h3>
-                                    <h3><b>Offer value:</b> $bid&euro;</h3>
-                                    <br> <span>You will be notified after the product sale time has ended.</span>
-                                        <br><br>
-                                    </div>";
-                                $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
-                                $headers .= "MIME-Version: 1.0" . "\r\n";
-                                $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-
-                                mail($to, $subject, $message, $headers);
-                                $json['success'] = true;
-                            }
-
-                        } else {
-                            // This bid is not highier than the current bid so no changes are made
+                        $sqlInsertNewBid = "UPDATE product SET bid_now = $bid, highies_bidder = ".$_SESSION['costumer_id']." WHERE product_id = $product_id";
+                        
+                        if (mysqli_query($connection, $sqlInsertNewBid)) {
+                            // Sending verification link to the Person email
                             $to = $_SESSION['email'];
-                                $subject = "Cyber Huskies product offer";
-                                $message = "<h2 style='font-family: verdana;text-align: center;
-                                            color: black;font-size: 40px;'>Thank you for the offer made on our website</h2> <br>
-                                    <div style='text-align: center;'>
-                                    <h3><b>Product Name:</b> ".$rowCheckHighiest['name']."</h3>
-                                    <h3><b>Offer value:</b> $bid&euro;</h3>
-                                    <br> <span>You will be notified after the product sale time has ended.</span>
-                                        <br><br>
-                                    </div>";
-                                $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
-                                $headers .= "MIME-Version: 1.0" . "\r\n";
-                                $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+                            $subject = "Cyber Huskies product offer";
+                            $message = "<h2 style='font-family: verdana;text-align: center;
+                                        color: black;font-size: 40px;'>Thank you for the offer made on our website</h2> <br>
+                                <div style='text-align: center;'>
+                                <h3><b>Product Name:</b> ".$rowCheckHighiest['name']."</h3>
+                                <h3><b>Offer value:</b> $bid&euro;</h3>
+                                <br> <span>You will be notified after the product sale time has ended.</span>
+                                    <br><br>
+                                </div>";
+                            $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
+                            $headers .= "MIME-Version: 1.0" . "\r\n";
+                            $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
 
-                                mail($to, $subject, $message, $headers);
+                            mail($to, $subject, $message, $headers);
                             $json['success'] = true;
                         }
                     }
 
                 } else {
-                    $json['response'] = mysqli_error($connection); // Internal Server Error
+                    $json['response'] = 'error2'; // Internal Server Error
                 }
-                
+
             } else {
-                $json['response'] = mysqli_error($connection); // Internal Server Error
+                $json['response'] = 'error2'; // Internal Server Error
             }
             
         } else {

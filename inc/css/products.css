@@ -180,3 +180,21 @@ body {
     font-size: 15px;
   }
 }
+ #confirmModal #confirmBid {
+    background-color: rgba(252, 210, 23, 0.568);
+    color: black;
+    transition: 0.2s;
+    border-color: rgba(252, 210, 23, 0.568);
+ }
+ #confirmModal #confirmBid:hover {
+  background-color: rgba(212, 175, 9, 0.568);
+}
+#confirmModal .cancel {
+  background-color: lightgray;
+  color: black;
+  transition: 0.2s;
+  border-color: lightgrey;
+}
+#confirmModal .cancel:hover {
+background-color: rgb(182, 182, 182);
+}

@@ -18,6 +18,7 @@ $(document).ready(function () {
           $(".alert-danger").css("display", "none");
           $(".alert-success").css("display", "none");
           $(".alert-success").css("display", "flex-box");
+          $('#alert-success').text('Product added successfully to wishlist!');
           $(".alert-success")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
@@ -78,11 +79,13 @@ $(document).ready(function () {
     }
     //Timer function
     function clockUpdate() {
+      // After time ended
       if (number === 0) {
         $("#time").text("");
         $(".time").html('Time ended <i class="fad fa-hourglass-half"></i>');
         $(".bid-now").addClass("disabled");
         $(".bid-input").addClass("d-none");
+        $("#confirmModal").modal("hide");
         number--;
       } else if (number === -1) {
         // Break from the loop
@@ -158,8 +161,8 @@ $(document).ready(function () {
                 $(".alert-success").css("display", "none");
                 $(".alert-danger").css("display", "none");
                 $(".alert-success").css("display", "flex-box");
-                $(".alert-success").html(
-                  '<i class="fas fa-check-circle"></i> Offer was made successfully!<br>You Will get notified if you won the item!'
+                $("#alert-success").html(
+                  'Offer was made successfully!<br>You Will get notified if you won the item!'
                 );
                 $(".alert-success")
                   .fadeTo(6000, 50)
@@ -170,18 +173,17 @@ $(document).ready(function () {
                 $("#confirmBid").html(
                   "Confirm offer <i class='fad fa-badge-check'></i>"
                 );
-              }
-              if (data.response === "error1") {
+              } else if (data.response === "error1") {
                 // Hide modal after success and show success alert
                 $("#confirmModal").modal("hide");
                 $(".alert-success").css("display", "none");
                 $(".alert-danger").css("display", "none");
                 $(".alert-danger").css("display", "flex-box");
-                $("#alert-danger").html(
+                $("#alert-danger").text(
                   "You already made an offer for this item!"
                 );
                 $(".alert-danger")
-                  .fadeTo(6000, 50)
+                  .fadeTo(2000, 50)
                   .slideUp(500, function () {
                     $(".alert-danger").slideUp(800);
                   });
@@ -195,9 +197,9 @@ $(document).ready(function () {
                 $(".alert-success").css("display", "none");
                 $(".alert-danger").css("display", "none");
                 $(".alert-danger").css("display", "flex-box");
-                $("#alert-danger").html(data.response);
+                $("#alert-danger").text("505! Internal database error!");
                 $(".alert-danger")
-                  .fadeTo(6000, 50)
+                  .fadeTo(2000, 50)
                   .slideUp(500, function () {
                     $(".alert-danger").slideUp(800);
                   });

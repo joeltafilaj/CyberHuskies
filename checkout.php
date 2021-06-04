@@ -419,20 +419,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
     ?>
 
-        <!-- Alert message for adding to wishlist -->
-        <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
-            <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
-                <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
-                    <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">505! Internal database error!</span>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
-            <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
-                <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style="display: none;">
-                    <i class="fas fa-check-circle"></i> Product removed from the wishlist!
-                </div>
-            </div>
         </div><!-- End alert mesage -->
         <?php 
         // DB connection to get all product added to the wishlist
@@ -511,11 +497,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
         </div><!-- End products of cart -->
         <br>
-        <!-- Empty div shows when wishlist is empty -->
-        <div id="empty" style="display: none;">
-            <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        </div>
             <?php 
             } else {
                 echo '<br>
@@ -578,7 +559,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
     <!-- JS link -->
     <script src="inc/js/registration.js"></script>
-    <script type="text/javascript" src="inc/js/mycart.js"></script>
     <script type="text/javascript" src="inc/js/navbar.js"></script>
 
 </body>
