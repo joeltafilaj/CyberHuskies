@@ -415,7 +415,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['pid'])) {
             $product_id = test_input($_GET['pid']);
-            $sqlGetProduct = "SELECT * FROM product WHERE product_id = $product_id ";
+            $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
             $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
             if (mysqli_num_rows($resultGetProduct) == 1) {
                 while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
@@ -504,104 +504,100 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     </button>
                 </div>
                 <div class="col-lg-5 col-12 align-self-center">
-                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-0"><?php echo $rowGetProduct['name']; ?></div>
-                    <div class="text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div>
+                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-4"><?php echo $rowGetProduct['name']; ?></div>
+                    <span class="text-lg-start text-center h4"><b>Starting bid:</b> EU <?php echo $rowGetProduct['starting_price']; ?>&euro;</span>
+                    <div class="text-lg-start text-center mt-4"><?php echo $rowGetProduct['description']; ?></div>
                     <?php 
                    
-                    // Checking if product is available on the market
-                    $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available, bid_now FROM product WHERE product_id = '.$product_id.'';
-                    $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
-                    if (mysqli_num_rows($resultDateDiff) == 1) {
-                        while ($rowDateDiff = mysqli_fetch_assoc($resultDateDiff)) {
-
-                            // Product's time has ended
-                            if ($rowDateDiff['time_remaining'] <= 0) {
-                                $response = '';
-                                if ($rowDateDiff['bid_now'] != '') {
-                                    $response = '<i class="fad fa-badge-check"></i> Sold for '.$rowDateDiff['bid_now'].'&euro;';
-                                } else {
-                                    $response = 'Time ended <i class="fad fa-hourglass-half"></i>';
-                                }
-                                echo "<div class='time text-center mt-3 h2'>$response</div>";
-                                echo '<div class="row mt-lg-4 justify-content-center">
-                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
-                                            </div>
-                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                                            </div>
-                                        </div>';
-
-                            // Product's time is counting down
-                            } else if ($rowDateDiff['time_remaining'] > 0 && $rowDateDiff['is_available'] > 0) {
-                                
-                                // Check if user logged in is salessman/costumer to check if bids can be made
-                                if ((isset($_SESSION['user_type']) && $_SESSION['user_type'] != 'costumer') || !isset($_SESSION['user_type'])) {
-                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
-                                    echo '<div class="row mt-lg-4 justify-content-center">
-                                                <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                                                    <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
-                                                </div>
-                                                <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                    <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                                                </div>
-                                            </div>';
-                                } else {
-                                    if ($rowGetProduct['bid_now'] == '') {
-                                        $bid = $rowGetProduct['starting_price'];
-                                    }else {
-                                        $bid = $rowGetProduct['bid_now'] + 1;
-                                    }
-                                    echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
-
-                                    echo '<div class="row mt-lg-4 justify-content-center">
-                                                <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                                                    <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
-                                                </div>
-                                                <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                    <button type="submit" class="btn bid-now w-100" id="b'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                                                </div>
-                                            </div>';
-                                    echo '<br><div class="row justify-content-center bid-input d-none">
-                                            <div class="col-lg-8 col-12 form-floating">
-                                                <input type="number" min="'.$bid.'" id="bidPrice" placeholder="Place bid value"
-                                                    class="form-control" value="'.$bid.'">
-                                                <label class="ms-3" for="bidPrice">Place bid value</label>
-                                                <span id="bidResponse" class="text-danger mt-2 ms-2"></span>
-                                            </div>
-                                        </div>';
-                                    echo '<!-- Confirm bid modal -->
-                                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal"  data-bs-backdrop="static" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                <div class="modal-header text-center mb-1">
-                                                    <h1 class="modal-title w-100">Confirm your offer </h1>
-                                                </div>
-                                                <div class="modal-body my-5">
-                                                    <h5 class="text-center">Are you sure to confirm the offer made of <span id="offer"></span>&euro;? </h5>
-                                                </div>
-                                                <div class="modal-footer mt-1">
-                                                    <button id="confirmBid" type="button" class="btn btn-warning d-block w-100" style="height:50px;">Confirm offer <i class="fad fa-badge-check"></i></button>
-                                                    <button type="button" class="btn cancel btn-secondary d-block w-100" data-bs-dismiss="modal" style="height:50px;">Cancel <i class="fad fa-times-octagon"></i></button>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>';
-                                }
-    
-                            // Product is not available yet on market
-                            } else if ($rowDateDiff['is_available'] <= 0) {
-                                echo '<div class="time text-center mt-3 h2">Item not available yet <i class="fad fa-calendar-alt"></i></div>';
-                                echo '<div class="row mt-lg-4 justify-content-center">
-                                            <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
-                                                <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
-                                            </div>
-                                            <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
-                                                <button class="btn bid-now w-100 disabled" id="b'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
-                                            </div>
-                                        </div>';
-                            }
+                    // Product's time has ended
+                    if ($rowGetProduct['time_remaining'] <= 0) {
+                        $response = '';
+                        if ($rowGetProduct['bid_now'] != '') {
+                            $response = '<i class="fad fa-badge-check"></i> Sold for '.$rowGetProduct['bid_now'].'&euro;';
+                        } else {
+                            $response = 'Time ended <i class="fad fa-hourglass-half"></i>';
                         }
+                        echo "<div class='time text-center mt-3 h2'>$response</div>";
+                        echo '<div class="row mt-lg-4 justify-content-center">
+                                    <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                        <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                        <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                    </div>
+                                </div>';
+
+                    // Product's time is counting down
+                    } else if ($rowGetProduct['time_remaining'] > 0 && $rowGetProduct['is_available'] > 0) {
+                        
+                        // Check if user logged in is salessman/costumer to check if bids can be made
+                        if ((isset($_SESSION['user_type']) && $_SESSION['user_type'] != 'costumer') || !isset($_SESSION['user_type'])) {
+                            echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowGetProduct['time_remaining'].'</span></div>';
+                            echo '<div class="row mt-lg-4 justify-content-center">
+                                        <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                            <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                        </div>
+                                        <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                            <button class="btn bid-now w-100 disabled" id="p'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                        </div>
+                                    </div>';
+                        } else {
+                            // Get number of bids for the product
+                            $sqlGetNrBids = "SELECT product_id FROM bid WHERE product_id = $product_id";
+                            $nrBids = mysqli_num_rows(mysqli_query($connection, $sqlGetNrBids));
+                            echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowGetProduct['time_remaining'].'</span></div>';
+                            echo '<div class="row mt-lg-4 justify-content-center">
+                                        <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                            <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                        </div>
+                                        <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                            <button type="submit" class="btn bid-now w-100" id="b'.$rowGetProduct['product_id'].'" data-bs-target="#confirmModal" data-bs-toggle="modal"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                        </div>
+                                    </div>';
+                            echo '<br>';
+                            echo '<!-- Confirm bid modal -->
+                                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal"  data-bs-backdrop="static" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title"><b>EU '.$rowGetProduct['starting_price'].'&euro; </b><span class="h5 text-secondary ms-2">  '.$nrBids.' bids </span></h2> 
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="bidResponse" class="alert alert-danger text-center d-none" role="alert">
+                                                A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                                            </div>
+                                            <h5 class="mb-4">Place your bid</h5> 
+                                            <div class="row">
+                                                <div class="col-12 form-floating">
+                                                    <input type="number" min="'.$rowGetProduct['starting_price'].'" id="bidPrice" placeholder="Place bid value"
+                                                    class="form-control">
+                                                    <label class="ms-3" for="bidPrice">Place bid value</label>        
+                                                </div>
+                                                <div class="col-12 mt-3">
+                                                    <button id="confirmBid" type="button" class="btn btn-warning d-block w-100" style="height:50px;">Confirm offer <i class="fad fa-badge-check"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <span class="text-center w-100" style="font-size: 13px;">When you <b>bid</b>, it means you are committing to buy this item if you are the winning bidder.</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                        }
+
+                    // Product is not available yet on market
+                    } else if ($rowGetProduct['is_available'] <= 0) {
+                        echo '<div class="time text-center mt-3 h2">Item not available yet <i class="fad fa-calendar-alt"></i></div>';
+                        echo '<div class="row mt-lg-4 justify-content-center">
+                                    <div class="col-xl-3 col-lg-4 col-12 mt-4" id="save">
+                                        <button type="submit" class="btn save-product w-100" id="w'.$rowGetProduct['product_id'].'"><i class="fas fa-heart"></i> SAVE</button>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-8 col-12 mt-4" id="bid">
+                                        <button class="btn bid-now w-100 disabled" id="b'.$rowGetProduct['product_id'].'"><i class="fad fa-bolt"></i> PLACE BID NOW</button>
+                                    </div>
+                                </div>';
                     }
                     ?>
                 </div>

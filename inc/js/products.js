@@ -18,7 +18,7 @@ $(document).ready(function () {
           $(".alert-danger").css("display", "none");
           $(".alert-success").css("display", "none");
           $(".alert-success").css("display", "flex-box");
-          $('#alert-success').text('Product added successfully to wishlist!');
+          $("#alert-success").text("Product added successfully to wishlist!");
           $(".alert-success")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
@@ -113,105 +113,94 @@ $(document).ready(function () {
   }
 
   //Showing input on first click than submit on the second
-  $(".bid-now").click(function (e) {
+  $("#confirmBid").click(function (e) {
     e.preventDefault();
-    if ($(".bid-input").hasClass("d-none")) {
-      $(".bid-input").removeClass("d-none").hide();
-      $(".bid-input").slideDown();
 
-      // Validation input
+    var bid = $("#bidPrice").val();
+    var validated = true;
+
+    if (bid < parseInt($("#bidPrice").attr("min"))) {
+      $('#bidResponse').removeClass('d-none');
+      $("#bidResponse").html(
+        '<i class="fad fa-exclamation-circle"></i> You have to bid at least EU ' + $("#bidPrice").attr("min") + '&euro;.'
+      );
+      validated = false;
     } else {
-      var bid = $("#bidPrice").val();
-      var validated = true;
+      $('#bidResponse').addClass('d-none');    }
+    // Add Spinner
+    $("#confirmBid").html('<i class="fad fa-circle-notch fa-spin"></i>');
 
-      if (bid < parseInt($("#bidPrice").attr("min"))) {
-        $("#bidResponse").text("* Bid value is below minimum.");
-        $("#bidPrice").addClass("is-invalid");
-        validated = false;
-      } else {
-        $("#bidResponse").text("");
-        $("#bidPrice").removeClass("is-invalid");
-      }
-
-      // After input validation show confirmation modal
-      if (validated) {
-        // Activate modal
-        $("#offer").text(bid);
-        $("#confirmModal").modal("show");
-
-        // If clicked confirm proceed with ajax to add bid to the database
-        $("#confirmBid").click(function (e) {
-          e.preventDefault();
-          var product_id = $(".bid-now").attr("id").substring(1);
-          // Add Spinner
-          $("#confirmBid").html('<i class="fad fa-circle-notch fa-spin"></i>');
-
-          $.ajax({
-            type: "post",
-            url: "inc/php/addBid.php",
-            data: {
-              bid: bid,
-              product_id: product_id,
-            },
-            dataType: "json",
-            success: function (data) {
-              if (data.success === true) {
-                // Hide modal after success and show success alert
-                $("#confirmModal").modal("hide");
-                $(".alert-success").css("display", "none");
-                $(".alert-danger").css("display", "none");
-                $(".alert-success").css("display", "flex-box");
-                $("#alert-success").html(
-                  'Offer was made successfully!<br>You Will get notified if you won the item!'
-                );
-                $(".alert-success")
-                  .fadeTo(6000, 50)
-                  .slideUp(500, function () {
-                    $(".alert-success").slideUp(800);
-                  });
-                // Remove Spinner
-                $("#confirmBid").html(
-                  "Confirm offer <i class='fad fa-badge-check'></i>"
-                );
-              } else if (data.response === "error1") {
-                // Hide modal after success and show success alert
-                $("#confirmModal").modal("hide");
-                $(".alert-success").css("display", "none");
-                $(".alert-danger").css("display", "none");
-                $(".alert-danger").css("display", "flex-box");
-                $("#alert-danger").text(
-                  "You already made an offer for this item!"
-                );
-                $(".alert-danger")
-                  .fadeTo(2000, 50)
-                  .slideUp(500, function () {
-                    $(".alert-danger").slideUp(800);
-                  });
-                // Remove Spinner
-                $("#confirmBid").html(
-                  "Confirm offer <i class='fad fa-badge-check'></i>"
-                );
-              } else {
-                // Hide modal after success and show success alert
-                $("#confirmModal").modal("hide");
-                $(".alert-success").css("display", "none");
-                $(".alert-danger").css("display", "none");
-                $(".alert-danger").css("display", "flex-box");
-                $("#alert-danger").text("505! Internal database error!");
-                $(".alert-danger")
-                  .fadeTo(2000, 50)
-                  .slideUp(500, function () {
-                    $(".alert-danger").slideUp(800);
-                  });
-                // Remove Spinner
-                $("#confirmBid").html(
-                  "Confirm offer <i class='fad fa-badge-check'></i>"
-                );
-              }
-            },
-          });
-        });
-      }
+    // After input validation show confirmation modal
+    if (validated) {
+      var product_id = $(".bid-now").attr("id").substring(1);
+      
+      $.ajax({
+        type: "post",
+        url: "inc/php/addBid.php",
+        data: {
+          bid: bid,
+          product_id: product_id,
+        },
+        dataType: "json",
+        success: function (data) {
+          if (data.success === true) {
+            // Hide modal after success and show success alert
+            $("#confirmModal").modal("hide");
+            $(".alert-success").css("display", "none");
+            $(".alert-danger").css("display", "none");
+            $(".alert-success").css("display", "flex-box");
+            $("#alert-success").html(
+              "Offer was made successfully!<br>You Will get notified if you won the item!"
+            );
+            $(".alert-success")
+              .fadeTo(6000, 50)
+              .slideUp(500, function () {
+                $(".alert-success").slideUp(800);
+              });
+            // Remove Spinner
+            $("#confirmBid").html(
+              "Confirm offer <i class='fad fa-badge-check'></i>"
+            );
+          } else if (data.response === "error1") {
+            // Hide modal after success and show success alert
+            $("#confirmModal").modal("hide");
+            $(".alert-success").css("display", "none");
+            $(".alert-danger").css("display", "none");
+            $(".alert-danger").css("display", "flex-box");
+            $("#alert-danger").text("You already made an offer for this item!");
+            $(".alert-danger")
+              .fadeTo(2000, 50)
+              .slideUp(500, function () {
+                $(".alert-danger").slideUp(800);
+              });
+            // Remove Spinner
+            $("#confirmBid").html(
+              "Confirm offer <i class='fad fa-badge-check'></i>"
+            );
+          } else {
+            // Hide modal after success and show success alert
+            $("#confirmModal").modal("hide");
+            $(".alert-success").css("display", "none");
+            $(".alert-danger").css("display", "none");
+            $(".alert-danger").css("display", "flex-box");
+            $("#alert-danger").text("505! Internal database error!");
+            $(".alert-danger")
+              .fadeTo(2000, 50)
+              .slideUp(500, function () {
+                $(".alert-danger").slideUp(800);
+              });
+            // Remove Spinner
+            $("#confirmBid").html(
+              "Confirm offer <i class='fad fa-badge-check'></i>"
+            );
+          }
+        },
+      });
+    } else {
+      // Remove Spinner
+      $("#confirmBid").html(
+        "Confirm offer <i class='fad fa-badge-check'></i>"
+      );
     }
   });
 });

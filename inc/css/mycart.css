@@ -13,17 +13,16 @@ body {
   border-radius: 3px;
   height: 50px;
 }
-.continue-btn,
-.checkout-btn {
+.continue-btn {
   height: 50px;
 }
-.checkout-btn {
+.continue-btn {
   background-color: rgba(252, 210, 23, 0.568);
   color: black;
   transition: 0.2s;
   border-color: rgba(255, 209, 4, 0.568);
 }
-.checkout-btn:hover {
+.continue-btn:hover {
   background-color: rgba(189, 160, 31, 0.808);
 }
 .remove-item:hover {

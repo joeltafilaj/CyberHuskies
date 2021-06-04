@@ -498,15 +498,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <br>
             <div class="row justify-content-end">
                 <div class="col-lg-3 col-12">
-                    <a href="list.php?category=All%20Products"><button class=" btn btn-outline-secondary continue-btn w-100"><i class="fad fa-arrow-left"></i> Continue shopping</button></a> 
-                </div>
-                <div class="col-lg-3 col-12 mt-lg-0 mt-3">
-                    <a href="checkout.php"><button class="btn checkout-btn w-100">Proceed to checkout <i class="fad fa-check"></i></button></a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 mt-4 text-lg-end text-center">
-                    <span class="text-secondary">* Products which who you already made an offer, will not be included to the checkout!</span>
+                    <a href="list.php?category=All%20Products"><button class=" btn btn-outline-warning continue-btn w-100"><i class="fad fa-arrow-left"></i> Continue shopping</button></a> 
                 </div>
             </div>
         </div><!-- End products of cart -->
