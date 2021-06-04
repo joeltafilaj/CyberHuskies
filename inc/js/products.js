@@ -15,6 +15,8 @@ $(document).ready(function () {
       success: function (data) {
         if (data.success === true) {
           //showing alert
+          $(".alert-danger").css("display", "none");
+          $(".alert-success").css("display", "none");
           $(".alert-success").css("display", "flex-box");
           $(".alert-success")
             .fadeTo(2000, 50)
@@ -24,6 +26,8 @@ $(document).ready(function () {
         }
         if (data.response === "error1") {
           //printing response
+          $(".alert-danger").css("display", "none");
+          $(".alert-success").css("display", "none");
           $(".alert-danger").css("display", "flex-box");
           $("#alert-danger").text("You have to log in as costumer!");
           $(".alert-danger")
@@ -33,6 +37,8 @@ $(document).ready(function () {
             });
         } else if (data.response === "error2") {
           //printing response
+          $(".alert-danger").css("display", "none");
+          $(".alert-success").css("display", "none");
           $(".alert-danger").css("display", "flex-box");
           $("#alert-danger").text("505! Internal database error!");
           $(".alert-danger")
@@ -42,13 +48,14 @@ $(document).ready(function () {
             });
         } else if (data.response === "error3") {
           //printing response
+          $(".alert-success").css("display", "none");
+          $(".alert-danger").css("display", "none");
           $(".alert-danger").css("display", "flex-box");
           $("#alert-danger").text("This product is already in the wishlist!");
           $(".alert-danger")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
               $(".alert-danger").slideUp(800);
-              
             });
         }
       },
@@ -73,9 +80,9 @@ $(document).ready(function () {
     function clockUpdate() {
       if (number === 0) {
         $("#time").text("");
-        $('.time').html('Time ended <i class="fad fa-hourglass-half"></i>');
-        $('.bid-now').addClass('disabled');
-        $('.bid-input').addClass('d-none');
+        $(".time").html('Time ended <i class="fad fa-hourglass-half"></i>');
+        $(".bid-now").addClass("disabled");
+        $(".bid-input").addClass("d-none");
         number--;
       } else if (number === -1) {
         // Break from the loop
@@ -97,89 +104,110 @@ $(document).ready(function () {
             day + "d : " + hours + "h : " + minutes + "m : " + seconds + "s"
           );
         }
-        number --;
+        number--;
       }
     }
   }
 
   //Showing input on first click than submit on the second
-  $('.bid-now').click(function (e) { 
+  $(".bid-now").click(function (e) {
     e.preventDefault();
-    if ($('.bid-input').hasClass('d-none')) {
-      $('.bid-input').removeClass('d-none').hide();
-      $('.bid-input').slideDown();
+    if ($(".bid-input").hasClass("d-none")) {
+      $(".bid-input").removeClass("d-none").hide();
+      $(".bid-input").slideDown();
 
-      // Validation input 
+      // Validation input
     } else {
-      var bid = $('#bidPrice').val();
+      var bid = $("#bidPrice").val();
       var validated = true;
 
-      if (bid < parseInt($('#bidPrice').attr('min'))) {
-        $('#bidResponse').text('* Bid value is below minimum.');
-        $('#bidPrice').addClass('is-invalid');
+      if (bid < parseInt($("#bidPrice").attr("min"))) {
+        $("#bidResponse").text("* Bid value is below minimum.");
+        $("#bidPrice").addClass("is-invalid");
         validated = false;
       } else {
-        $('#bidResponse').text('');
-        $('#bidPrice').removeClass('is-invalid');
+        $("#bidResponse").text("");
+        $("#bidPrice").removeClass("is-invalid");
       }
 
       // After input validation show confirmation modal
       if (validated) {
         // Activate modal
-        $('#offer').text(bid);
-        $('#confirmModal').modal('show');
+        $("#offer").text(bid);
+        $("#confirmModal").modal("show");
 
         // If clicked confirm proceed with ajax to add bid to the database
-        $('#confirmBid').click(function (e) { 
+        $("#confirmBid").click(function (e) {
           e.preventDefault();
-          var product_id = $('.bid-now').attr('id').substring(1);
+          var product_id = $(".bid-now").attr("id").substring(1);
+          // Add Spinner
+          $("#confirmBid").html('<i class="fad fa-circle-notch fa-spin"></i>');
 
           $.ajax({
             type: "post",
             url: "inc/php/addBid.php",
             data: {
               bid: bid,
-              product_id: product_id
+              product_id: product_id,
             },
             dataType: "json",
             success: function (data) {
               if (data.success === true) {
                 // Hide modal after success and show success alert
-                $('#confirmModal').modal('hide');
+                $("#confirmModal").modal("hide");
+                $(".alert-success").css("display", "none");
+                $(".alert-danger").css("display", "none");
                 $(".alert-success").css("display", "flex-box");
-                $('.alert-success').html('<i class="fas fa-check-circle"></i> Offer was made successfully!<br>You Will get notified if you won the item!');
+                $(".alert-success").html(
+                  '<i class="fas fa-check-circle"></i> Offer was made successfully!<br>You Will get notified if you won the item!'
+                );
                 $(".alert-success")
                   .fadeTo(6000, 50)
                   .slideUp(500, function () {
                     $(".alert-success").slideUp(800);
                   });
+                // Remove Spinner
+                $("#confirmBid").html(
+                  "Confirm offer <i class='fad fa-badge-check'></i>"
+                );
               }
-              if (data.response === 'error1') {
+              if (data.response === "error1") {
                 // Hide modal after success and show success alert
-                $('#confirmModal').modal('hide');
+                $("#confirmModal").modal("hide");
+                $(".alert-success").css("display", "none");
+                $(".alert-danger").css("display", "none");
                 $(".alert-danger").css("display", "flex-box");
-                $('#alert-danger').html('You already made an offer for this item!');
+                $("#alert-danger").html(
+                  "You already made an offer for this item!"
+                );
                 $(".alert-danger")
                   .fadeTo(6000, 50)
                   .slideUp(500, function () {
                     $(".alert-danger").slideUp(800);
                   });
+                // Remove Spinner
+                $("#confirmBid").html(
+                  "Confirm offer <i class='fad fa-badge-check'></i>"
+                );
               } else {
                 // Hide modal after success and show success alert
-                $('#confirmModal').modal('hide');
+                $("#confirmModal").modal("hide");
+                $(".alert-success").css("display", "none");
+                $(".alert-danger").css("display", "none");
                 $(".alert-danger").css("display", "flex-box");
-                $('#alert-danger').html(data.response);
+                $("#alert-danger").html(data.response);
                 $(".alert-danger")
                   .fadeTo(6000, 50)
                   .slideUp(500, function () {
                     $(".alert-danger").slideUp(800);
                   });
+                // Remove Spinner
+                $("#confirmBid").html(
+                  "Confirm offer <i class='fad fa-badge-check'></i>"
+                );
               }
-            }
+            },
           });
-
-
-         
         });
       }
     }

@@ -508,7 +508,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     <div class="text-lg-start text-center"><?php echo $rowGetProduct['description']; ?></div>
                     <?php 
                    
-                    // Checking if product is available on the market or if it is sold
+                    // Checking if product is available on the market
                     $sqlDateDiff = 'SELECT TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = '.$product_id.'';
                     $resultDateDiff = mysqli_query($connection, $sqlDateDiff);
                     if (mysqli_num_rows($resultDateDiff) == 1) {
@@ -544,7 +544,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                     if ($rowGetProduct['bid_now'] == '') {
                                         $bid = $rowGetProduct['starting_price'];
                                     }else {
-                                        $bid = $rowGetProduct['bid_now'];
+                                        $bid = $rowGetProduct['bid_now'] + 1;
                                     }
                                     echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowDateDiff['time_remaining'].'</span></div>';
 
@@ -568,15 +568,15 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                <div class="modal-header text-center">
-                                                    <h1 class="modal-title">Confirmation </h1>
+                                                <div class="modal-header text-center mb-1">
+                                                    <h1 class="modal-title w-100">Confirm your offer </h1>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body my-5">
                                                     <h5 class="text-center">Are you sure to confirm the offer made of <span id="offer"></span>&euro;? </h5>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button id="confirmBid" type="button" class="btn btn-primary">Confirm offer</button>
+                                                <div class="modal-footer mt-1">
+                                                    <button id="confirmBid" type="button" class="btn btn-primary d-block w-100" style="height:50px;">Confirm offer <i class="fad fa-badge-check"></i></button>
+                                                    <button type="button" class="btn btn-secondary d-block w-100" data-bs-dismiss="modal" style="height:50px;">Cancel <i class="fad fa-times-octagon"></i></button>
                                                 </div>
                                                 </div>
                                             </div>

@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         session_start();
                         $_SESSION['username'] = $rowCredentials['username'];
                         $_SESSION['user_type'] = $rowCredentials['user_type'];
+                        $_SESSION['email'] = $rowCredentials['email'];
                         
                         // Session for salessman 
                         if ($rowCredentials['user_type'] == 'salessman') {

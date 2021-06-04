@@ -14,6 +14,8 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.success === true) {
                     //printing response
+                    $(".alert-success").css("display", "none");
+                    $(".alert-danger").css("display", "none");
                     $('.alert-success').css('display', 'flex-box');
                     $(".alert-success").fadeTo(2000, 50).slideUp(500, function() {
                         $(".alert-success").slideUp(800);
@@ -27,6 +29,8 @@ $(document).ready(function () {
                 }
                 if (data.response === 'error1') {
                     //printing response
+                    $(".alert-success").css("display", "none");
+                    $(".alert-danger").css("display", "none");
                     $('.alert-danger').css('display', 'flex-box');
                     $(".alert-danger").fadeTo(2000, 50).slideUp(500, function() {
                         $(".alert-danger").slideUp(800);

@@ -133,14 +133,13 @@ $(document).ready(function () {
             $('#ressetMessageLink').removeClass('d-none');
             $("#ressetMessageLink").text("Enter a username");
           } else if (data.usernameError === "error2") {
-            // Remove Spinner
-            $("#submitRessetPassword").text("Send Password Resset Link");
-
             $("#usernameResset").addClass("is-invalid");
             $('#ressetMessageLink').removeClass('d-none');
             $("#ressetMessageLink").addClass("alert-danger");
             $('#ressetMessageLink').removeClass('alert-success');
             $("#ressetMessageLink").text("Couldn't find your Account");
+            // Remove Spinner
+            $("#submitRessetPassword").text("Send Password Resset Link");
           }
           if (data.response === "message1") {
             $("#ressetMessageLink").removeClass("d-none");

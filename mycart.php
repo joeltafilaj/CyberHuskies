@@ -443,10 +443,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         <!-- products of cart -->
         <div class="container p-5 cart-products">
         <?php 
+
+            // Checking if product are available for sale or not
             while ($rowWishlistProduct = mysqli_fetch_assoc($resultWishlistProduct)) {
                 if ($rowWishlistProduct['time_remaining'] <=  0) {
-                    $status = 'Sale Time Ended <i class="fad fa-hourglass-half"></i>';
-                    $highiest_bid = '';
+                    // Checking if item is sold or not
+                    if ($rowWishlistProduct['bid_now'] != '') {
+                        $highiest_bid = '<span><b>Sold for: </b>'.$rowWishlistProduct['bid_now'].'&euro;</span>';
+                        $status = 'Item Sold <i class="fad fa-badge-check"></i>';
+                    } else {
+                        $highiest_bid = '';
+                        $status = 'Sale Time Ended <i class="fad fa-hourglass-half"></i>';
+                    }
+                      
                 } else if ($rowWishlistProduct['time_remaining'] > 0 && $rowWishlistProduct['is_available'] > 0) {
                     if ($rowWishlistProduct['bid_now'] == '') {
                         $rowWishlistProduct['bid_now'] = 'No offers made yet';
