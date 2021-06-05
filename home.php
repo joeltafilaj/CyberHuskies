@@ -471,13 +471,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <?php 
     $sqlCoomingSoon = "SELECT name, picture_cover_url, product_id FROM product WHERE sale_start > NOW()";
     $resultCoomingSoon = mysqli_query($connection, $sqlCoomingSoon);
-    if (mysqli_num_rows($resultCoomingSoon) > 0) {
+    $countProduct = mysqli_num_rows($resultCoomingSoon);
+    
+    if ($countProduct > 0) {
+        if ($countProduct <= 3) {
+            $justify = 'center';
+        } else {
+            $justify = 'between';
+        }
     ?>
     <!-- Categories coming soon section -->
     <section>
     <div class="container">
         <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['cooming_soon_header']; ?></h1>
-        <div class="soon-row gap-4 d-flex flex-row justify-content-between">
+        <div class="soon-row gap-4 d-flex flex-row justify-content-<?php echo $justify; ?>">
     <?php
         while ($rowCoomingSoon = mysqli_fetch_assoc($resultCoomingSoon)) {
             echo '<div class="me-5 text-center">

@@ -416,13 +416,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             if ($category_name === 'All Products') {
                 $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < NOW()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
-                if (mysqli_num_rows($resultProducts) > 0) {
+                $countRows = mysqli_num_rows($resultProducts);
+                if ($countRows  > 0) {
+                    if ($countRows >= 4 ) {
+                        $justify = 'start';
+                    } else {
+                        $justify = 'center';
+                    }
                     echo '<!-- products from certain category -->
                         <div class="container-fluid products-from-category-container">
                             <div class="row">
                                 <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">All Products</h1>
                             </div><br><br>
-                            <div class="products-from-category row justify-content-center"> ';
+                            <div class="products-from-category row justify-content-'.$justify.'"> ';
 
                     while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                         echo '<div class=" col-xl-3 col-lg-5 col-12">
@@ -444,13 +450,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             } else if ($category_name === 'Cooming Soon') {
                 $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start > NOW()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
-                if (mysqli_num_rows($resultProducts) > 0) {
+                $countRows = mysqli_num_rows($resultProducts);
+                if ($countRows  > 0) {
+                    if ($countRows >= 4 ) {
+                        $justify = 'start';
+                    } else {
+                        $justify = 'center';
+                    }
                     echo '<!-- products from cooming soon category -->
                         <div class="container-fluid products-from-category-container">
                             <div class="row">
                                 <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Cooming Soon</h1>
                             </div><br><br>
-                            <div class="products-from-category row justify-content-center"> ';
+                            <div class="products-from-category row justify-content-'.$justify.'"> ';
 
                     while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                         echo '<div class=" col-xl-3 col-lg-5 col-12">
@@ -472,13 +484,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             } else {
                 $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < NOW()";
                 $resultProducts = mysqli_query($connection, $sqlProducts);
-                if (mysqli_num_rows($resultProducts) > 0) {
+                $countRows = mysqli_num_rows($resultProducts);
+                if ($countRows  > 0) {
+                    if ($countRows >= 4 ) {
+                        $justify = 'start';
+                    } else {
+                        $justify = 'center';
+                    }
                     echo '<!-- products from certain category -->
                         <div class="container-fluid products-from-category-container">
                             <div class="row">
                                 <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">'.$category_name.'</h1>
                             </div><br><br>
-                            <div class="products-from-category row  justify-content-center"> ';
+                            <div class="products-from-category row  justify-content-'.$justify.'"> ';
 
                     while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                         echo '<div class=" col-xl-3 col-lg-5 col-12">

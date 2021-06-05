@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         
                         //Assisging sessions
                         session_start();
+                        $_SESSION['user_id'] = $rowCredentials['user_id']; 
                         $_SESSION['username'] = $rowCredentials['username'];
                         $_SESSION['user_type'] = $rowCredentials['user_type'];
                         $_SESSION['email'] = $rowCredentials['email'];

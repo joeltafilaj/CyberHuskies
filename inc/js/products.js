@@ -120,20 +120,22 @@ $(document).ready(function () {
     var validated = true;
 
     if (bid < parseInt($("#bidPrice").attr("min"))) {
-      $('#bidResponse').removeClass('d-none');
+      $("#bidResponse").removeClass("d-none");
       $("#bidResponse").html(
-        '<i class="fad fa-exclamation-circle"></i> You have to bid at least EU ' + $("#bidPrice").attr("min") + '&euro;.'
+        '<i class="fad fa-exclamation-circle"></i> You have to bid at least EU ' +
+          $("#bidPrice").attr("min") +
+          "&euro;."
       );
       validated = false;
     } else {
-      $('#bidResponse').addClass('d-none');    }
+      $("#bidResponse").addClass("d-none");
+    }
     // Add Spinner
     $("#confirmBid").html('<i class="fad fa-circle-notch fa-spin"></i>');
 
     // After input validation show confirmation modal
     if (validated) {
       var product_id = $(".bid-now").attr("id").substring(1);
-      
       $.ajax({
         type: "post",
         url: "inc/php/addBid.php",
@@ -144,8 +146,10 @@ $(document).ready(function () {
         dataType: "json",
         success: function (data) {
           if (data.success === true) {
+            
             // Hide modal after success and show success alert
             $("#confirmModal").modal("hide");
+            $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
             $(".alert-danger").css("display", "none");
             $(".alert-success").css("display", "flex-box");
@@ -164,6 +168,7 @@ $(document).ready(function () {
           } else if (data.response === "error1") {
             // Hide modal after success and show success alert
             $("#confirmModal").modal("hide");
+            $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
             $(".alert-danger").css("display", "none");
             $(".alert-danger").css("display", "flex-box");
@@ -177,9 +182,10 @@ $(document).ready(function () {
             $("#confirmBid").html(
               "Confirm offer <i class='fad fa-badge-check'></i>"
             );
-          } else {
+          } else if (data.response === "error2") {
             // Hide modal after success and show success alert
             $("#confirmModal").modal("hide");
+            $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
             $(".alert-danger").css("display", "none");
             $(".alert-danger").css("display", "flex-box");
@@ -193,14 +199,23 @@ $(document).ready(function () {
             $("#confirmBid").html(
               "Confirm offer <i class='fad fa-badge-check'></i>"
             );
+          } else if (data.response === "error3") {
+            // Message for email not verified
+            $("#alert-danger").text("505! Internal database error!");
+            $("#bidResponse").removeClass("d-none");
+            $("#bidResponse").html(
+              '<i class="fad fa-exclamation-circle"></i> You need to verify your email in order to make a bid.<br> A confirmation email was sent to your mailbox.'
+            );
+            // Remove Spinner
+            $("#confirmBid").html(
+              "Confirm offer <i class='fad fa-badge-check'></i>"
+            );
           }
         },
       });
     } else {
       // Remove Spinner
-      $("#confirmBid").html(
-        "Confirm offer <i class='fad fa-badge-check'></i>"
-      );
+      $("#confirmBid").html("Confirm offer <i class='fad fa-badge-check'></i>");
     }
   });
 });
