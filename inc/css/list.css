@@ -56,7 +56,7 @@ body {
     transition: 0.2s;
 }
 .products-from-category .product:hover {
-    box-shadow: rgb(114, 105, 87) 0px 0px 35px;
+    box-shadow: rgb(92, 206, 149) 0px 0px 35px;
 }
 .href {
     text-decoration: none;
