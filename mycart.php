@@ -77,7 +77,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contanct Us</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contact Us</a>
                     </li>
                     <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."

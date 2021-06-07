@@ -11,25 +11,27 @@
 /* Search button  */
 #searchProduct {
     background-color: rgb(201, 99, 99);
-    border-radius: 0;
+    border-radius: 3px;
     font-size: 18px;
-    transition: border-radius 0.2s;
+    transition: box-shadow 0.1s;
     color: rgb(252, 252, 252);
 }
-#searchProduct:hover {
-    background-color: rgb(170, 99, 99);
+
+@media screen and (max-width: 1200px) {
+    #searchProduct:hover {
+        background-color: rgb(170, 99, 99);
+    }
 }
 
-@media screen and (min-width: 1200px) {
+
+@media screen and (min-width: 1201px) {
     #searchProduct {
         width: 130px;
     }
-}
-
-@media screen and (min-width: 1200px) {
+    
     #searchProduct:hover {
-        border-radius: 17px;
-    }
+        box-shadow: grey 0px 1px 3px;
+    } 
 }
 .nav-link {
     font-size: 18px; 
