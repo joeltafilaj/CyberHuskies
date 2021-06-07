@@ -467,7 +467,7 @@ require_once "inc/php/upload-product-db.php";
                     <div class="row product-input justify-content-center">
                         <div class="col-lg-6">
                             <label for="str_price_input">Starting price:</label>
-                            <input type="number" name="str_price_input" id="str_price_input" class="form-control">
+                            <input type="number" name="str_price_input" id="str_price_input" class="form-control" min="0">
                         </div>
                     </div>
 
