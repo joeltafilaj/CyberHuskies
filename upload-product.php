@@ -23,17 +23,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="inc/css/products.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
-    <link rel="stylesheet" type="text/css" href="inc/css/list.css">
+    <link rel="stylesheet" type="text/css" href="inc/css/upload-product.css">
+
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 
     <title>Auction</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px;">
-
+<body class="text-dark" style="padding-top: 78px">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
         <div class="container-fluid">
@@ -50,10 +53,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             href="home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
-                        <a class="nav-link active border-top border-light border-2 me-2" href="list.php?category=All%20Products">Buy</a>
+                        <a class="nav-link border-top border-light border-2 me-2"
+                            href="list.php?category=All%20Products">Buy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="upload-product.php">Sell</a>
+                        <a class="nav-link active border-top border-light border-2 me-2" href="upload-product.php">Sell</a>
                     </li>
                     <li class="nav-item dropdown border-top border-light border-2 me-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -63,23 +67,27 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!-- DB Connection to get categories-->
                             <?php 
-                            require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
-                            require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
-                            $sqlGetCategories = "SELECT * FROM category";
-                            $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
-                            if (mysqli_num_rows($resultGetCategories) > 0) {
-                                while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
-                                    echo '<li><a class="dropdown-item text-center" href="list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
-                                }
+                        require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+                        $sqlGetCategories = "SELECT * FROM category";
+                        $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
+                        if (mysqli_num_rows($resultGetCategories) > 0) {
+                            while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
+                                echo '<li><a class="dropdown-item text-center" href="list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
                             }
-                            ?>
-                            <li><hr class="divider"></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming Soon</a></li>
+                        }
+                        ?>
+                            <li>
+                                <hr class="divider">
+                            </li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All
+                                    Products</a></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming
+                                    Soon</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contanct Us</a>
+                        <a class="nav-link border-top border-light border-2 me-2"
+                            href="home.php#footer-section">Contanct Us</a>
                     </li>
                     <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
@@ -97,9 +105,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <!-- Modal Buttons -->
                     <form class="d-lg-flex d-grid gap-2">
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span class="button-text">Log In</span></button>
+                            data-bs-target="#logInModal"> <i class="fad fa-sign-in-alt"></i> <span
+                                class="button-text">Log In</span></button>
                         <button type="button" class="btn btn-register" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span class="button-text">Sign Up</span></button>
+                            data-bs-target="#signUpModal"><i class="fas fa-user-plus"></i> <span
+                                class="button-text">Sign Up</span></button>
                     </form>
                 </ul>
             </div>
@@ -207,7 +217,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
                         <!-- Resset Password Button -->
                         <div class="form-group row justify-content-center px-lg-5 px-3">
-                            <div class="col-sm-12">
+                            <div class="col-12">
                                 <button type="submit" id="submitRessetPassword" class="btn btn-primary w-100 "
                                     form="ressetPasswordForm" style="height: 50px;">Send Password Resset Link</button>
                             </div>
@@ -231,7 +241,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             </div>
 
                             <!-- Message -->
-                            <span id="ressetMessageLink" class="col-sm-12 mt-4 text-center alert d-none"></span>
+                            <span id="ressetMessageLink" class="col-12 mt-4 text-center alert d-none"></span>
 
                         </div> <br>
                     </form>
@@ -313,13 +323,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <div class="form-group row justify-content-center px-lg-5 px-3">
 
                             <!-- Password -->
-                            <div class="col-lg-6 form-floating">
+                            <div class="col-lg-6  form-floating">
                                 <input type="password" id="passSignUp" placeholder="Password" class="form-control" />
                                 <label for="passSignUp" class="ms-2">Password</label>
                             </div>
 
                             <!-- Confirm password -->
-                            <div class="col-lg-6 form-floating mt-lg-0 mt-4">
+                            <div class="col-lg-6  form-floating mt-lg-0 mt-4">
                                 <input type="password" id="confirmPassSignUp" placeholder="Confirm"
                                     class="form-control" />
                                 <label for="confirmPassSignUp" class="ms-2">Confirm</label>
@@ -388,223 +398,182 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </div>
     <!-- If an user is logged in -->
     <?php
-    } else {
-    ?>
-                    <li class="nav-item dropdown me-3 border-top border-light border-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i class="fad fa-user-circle"></i></a>
-                        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
-                            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
-                            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
-                                        class="fad fa-sign-out"></i></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> <!-- End Navbar -->
+                    } else {
+                    ?>
+    <li class="nav-item dropdown me-3 border-top border-light border-2">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false"><?php echo $_SESSION['username'] ?> <i class="fad fa-user-circle"></i></a>
+        <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
+            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
+                        class="fad fa-sign-out"></i></a></li>
+        </ul>
+    </li>
+    <li class="nav-item me-2">
+        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav> <!-- End Navbar -->
     <?php
-    }
-    // Geting category name from user 
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        // User searched with category
-        if (isset($_GET['category'])) {
-            $category_name = test_input($_GET['category']);
-            if ($category_name === 'All Products') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
                     }
-                    echo '<!-- products from certain category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">All Products</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-'.$justify.'"> ';
+                    ?>
 
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
-                    }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }
-            } else if ($category_name === 'Cooming Soon') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start > NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
-                    }
-                    echo '<!-- products from cooming soon category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Cooming Soon</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-'.$justify.'"> ';
-
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
-                    }
-                    echo '</div>
-                        </div><!-- End products from cooming soon category -->';
-                }
-            } else {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
-                    }
-                    echo '<!-- products from certain category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">'.$category_name.'</h1>
-                            </div><br><br>
-                            <div class="products-from-category row  justify-content-'.$justify.'"> ';
-
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
-                    }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }  else {
-                    echo '<br><br><br><br>
-                        <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
-                }
-            }
-        }
-        // User searched with product name
-        if (isset($_GET['search'])) {
-            if (!empty($_GET['search'])) {
-                $name = test_input($_GET['search']);
-                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE name LIKE '%$name%'";
-                $resultSearch = mysqli_query($connection, $sqlSearch);
-                if (mysqli_num_rows($resultSearch) > 0) {
-                    echo '<!-- products from search -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Search : '.$name.'</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-center"> ';
-
-                    while ($rowSearch = mysqli_fetch_assoc($resultSearch)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowSearch['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowSearch['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowSearch['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowSearch['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowSearch['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
-                    }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }  else {
-                    echo '<br><br><br><br>
-                        <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
-                }
-            } else {
-                echo '<br><br><br><br>
-                    <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
-            }
-        }
-        
-    }
-
+<?php 
+if ( isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
+    # code...
+require_once "inc/php/upload-product-db.php";
 ?>
 
+    <!-- Form Section for uploading a product -->
+    <br><div class="container product-input-container mt-lg-5 mt-2">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 product-inputs">
+                <form id="uploadForm" method="POST" action="upload-product.php" enctype="multipart/form-data">
+                    <div class="row product-input justify-content-center">
+                        <span class="col-lg-12 text-center text-danger"></span>
+                        <!-- Alert message for adding to wishlist -->
+                        <?php 
+                            if ($response === 'Product Addedd Successfully') {
+                                $display_success = '';
+                                $display_danger = 'd-none';
+                            } else if($response === '') {
+                                $display_danger = 'd-none';
+                                $display_success = 'd-none';
+                            } else {
+                                $display_danger = '';
+                                $display_success = 'd-none';
+                            }
+                        ?>
+                            <div class="alert alert-danger alert-dismissible text-center col-lg-7 <?php echo $display_danger; ?>" role="alert">
+                                <i class="fad fa-exclamation-circle"></i> <span id="response"><?php echo $response; ?></span>
+                            </div>
+                            <div class="alert alert-success alert-dismissible text-center col-lg-7 <?php echo $display_success; ?>" role="alert">
+                                <i class="fas fa-check-circle"></i> <span id="response"><?php echo $response; ?></span>
+                            </div>
+                        
+                   
+                        <div class="col-lg-6">
+                            <label for="name_input">Product name:</label>
+                            <input type="text" name="name_input" id="name_input" class="form-control">
+                        </div>
+                    </div>
 
-<!-- Footer section -->
-<section id="footer-section" class="mt-2">
-    <br>
-    <div class="container">
-        <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
-        <div class="row">
-        <?php 
-        $sqlGetFooter = "SELECT email, phone_number, location FROM homepage LIMIT 1";
-        $resultGetFooter = mysqli_query($connection, $sqlGetFooter);
-        if (mysqli_num_rows($resultGetFooter) == 1) {
-            while ($rowGetFooter = mysqli_fetch_assoc($resultGetFooter)) {
-                echo '<div class="col-lg-4 col-12 text-center">
-                        <h2 class="footer-header mb-3">Contact us</h2>
-                        <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
-                                class="text-secondary">'.$rowGetFooter['email'].'</span> </span>
-                        <br>
-                        <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
-                                class="text-secondary">'.$rowGetFooter['phone_number'].'</span> </span>
+                    <div class="row product-input justify-content-center">
+                        <div class="col-lg-6">
+                            <label for="str_price_input">Starting price:</label>
+                            <input type="number" name="str_price_input" id="str_price_input" class="form-control">
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                        <h2 class="footer-header mb-3">Location</h2>
-                        <span class="footer-inner"><i>" '.$rowGetFooter['location'].' "</i></span>
-                        <br>
-                        <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
+
+                    <div class="row product-input justify-content-center">
+                        <div class="col-lg-6">
+                            <label for="avl_from_input">Avalilable for auction from:</label>
+                            <input type="datetime-local" name="avl_from_input" id="avl_from_input" class="form-control">
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                        <h2 class="footer-header mb-3">Social media</h2>
-                        <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
-                        <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
-                    </div>';  
-            }
-        }
-        mysqli_close($connection);
-        ?>
+
+                    <div class="row product-input justify-content-center">
+                        <div class="col-lg-6">
+                            <label for="avl_unt_input">Available at auction until:</label>
+                            <input type="datetime-local" name="avl_unt_input" id="avl_unt_input" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row product-input justify-content-center">
+                        <div class="col-lg-6">
+                            <label for="desc_input">Product description:</label>
+                            <textarea name="desc_input" id="desc_input" rows="10" style="resize: none;"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row product-input justify-content-center">
+                        <div class="col-lg-6">
+                            <label for="cat_input">Choose category:</label>
+                            <select name="cat_input" id="cat_input" class="form-select">
+                                <option value="0" disabled selected value>Select category</option>
+                                <?php 
+                                $sqlGetCategories = 'SELECT category_name FROM category';
+                                $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
+                                if (mysqli_num_rows($resultGetCategories) > 0) {
+                                    while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
+                                        echo '<option value="'.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 add-photo-input add-photo">
+                            <label for="photo_input_1" class="text-secondary mb-2"> Image 1 (Required)</label>
+                            <input type="file" name="photo_input_1" id="photo_input_1" class="form-control mb-2">
+                            <span class="ms-2 text-secondary"> This will be used as cover picture</span>
+                            <br>
+                            <label for="photo_input_2" class="text-secondary mb-2 mt-4"> Image 2 (optional)</label>
+                            <input type="file" name="photo_input_2" id="photo_input_2" class="form-control mb-2">
+                            <label for="photo_input_3" class="text-secondary mb-2"> Image 3 (optional)</label>
+                            <input type="file" name="photo_input_3" id="photo_input_3" class="form-control mb-2">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center product-upload">
+                        <div class="publish-btn-container col-lg-6">
+                            <button type="submit" class="w-100" name="publish-product">Publish product</button>
+                        </div>
+                    </div><br><br><br>
+                </form>
+            </div>
         </div>
-    </div><br><br><br>
-</section> <!-- End Footer Section -->
+    </div> <!-- End form upload -->
+
+    <?php
+    } else {
+        echo '<br><br><br><br><h1 class="otherProduct-header mt-3 text-center">You have to log in as salessman <i class="fad fa-frown"></i><br> Or you can create an free account</h1><br><br>
+                <br><br><br><br><br><br>
+                <br><br><br><br><br><br>'; 
+    }
+    $sqlGetHomePage = "SELECT * FROM homepage LIMIT 1";
+    $resultGetHomePage = mysqli_query($connection, $sqlGetHomePage);
+    if (mysqli_num_rows($resultGetHomePage) == 1) {
+        while ($rowGetHomePage = mysqli_fetch_assoc($resultGetHomePage)) {
+    ?>
+    <!-- Footer section -->
+    <section id="footer-section">
+        <br>
+        <div class="container">
+            <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
+            <div class="row">
+                <div class="col-lg-4 col-12 text-center">
+                    <h2 class="footer-header mb-3">Contact us</h2>
+                    <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
+                            class="text-secondary"><?php echo $rowGetHomePage['email']; ?></span> </span>
+                    <br>
+                    <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
+                            class="text-secondary"><?php echo $rowGetHomePage['phone_number']; ?></span> </span>
+                </div>
+                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                    <h2 class="footer-header mb-3">Location</h2>
+                    <span class="footer-inner"><i>" <?php echo $rowGetHomePage['location']; ?> "</i></span>
+                    <br>
+                    <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
+                </div>
+                <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
+                    <h2 class="footer-header mb-3">Social media</h2>
+                    <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div><br><br><br><br>
+    </section>
+    <?php        
+        }
+    }
+    mysqli_close($connection);
+    ?>
+
 
 
     <!-- Script -->
@@ -612,10 +581,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- JS link -->
     <script src="inc/js/registration.js"></script>
     <script type="text/javascript" src="inc/js/navbar.js"></script>
+    <script type="text/javascript" src="inc/js/upload-product.js"></script>
+
 
 </body>
 

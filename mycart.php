@@ -52,7 +52,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <a class="nav-link border-top border-light border-2 me-2" href="list.php?category=All%20Products">Buy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="home.php">Sell</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="upload-product.php">Sell</a>
                     </li>
                     <li class="nav-item dropdown border-top border-light border-2 me-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.price {
+  font-weight: 700;
+}
+/* Other Product header */
+.otherProduct-header {
+  color: rgb(146, 114, 43);
+  font-weight: 600;
+  font-size: 49px;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.otherProduct-header:after {
+  content: "";
+  width: 5%;
+  height: 2px;
+  background-color: #663300;
+  display: block;
+  margin: 14px auto 8px;
+  transition: 0.2s;
+}
+.otherProduct-header:hover:after {
+  width: 100%;
+}
+@media only screen and (max-width: 768px) {
+  .otherProduct-header {
+    font-size: 30px;
+  }
+  .otherProduct-header:hover:after {
+    width: 60%;
+  }
+}
+.validationResponse {
+  display: inline-block;
+  height: 0;
+}
