@@ -87,7 +87,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2"
-                            href="home.php#footer-section">Contanct Us</a>
+                            href="#footer-section">Contanct Us</a>
                     </li>
                     <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
@@ -404,7 +404,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
             aria-expanded="false"><?php echo $_SESSION['username'] ?> <i class="fad fa-user-circle"></i></a>
         <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
-            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+            <?php
+            if ($_SESSION['user_type'] === 'salessman') {
+                echo '<li><a class="dropdown-item ps-4" href="accounts/myproducts.php">My products <i class="fad fa-list"></i></a></li>';
+            }
+            ?>
             <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
                         class="fad fa-sign-out"></i></a></li>
         </ul>
@@ -521,7 +525,7 @@ require_once "inc/php/upload-product-db.php";
                     </div>
                     <div class="row justify-content-center product-upload">
                         <div class="publish-btn-container col-lg-6">
-                            <button type="submit" class="w-100" name="publish-product">Publish product</button>
+                            <button type="submit" class="btn btn-primary w-100" name="publish-product">Publish product</button>
                         </div>
                     </div><br><br><br>
                 </form>

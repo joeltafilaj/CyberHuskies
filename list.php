@@ -394,7 +394,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false"><span class="button-text"><?php echo $_SESSION['username'] ?></span> <i class="fad fa-user-circle"></i></a>
                         <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
-                            <li><a class="dropdown-item ps-4" href="#">Profile <i class="fad fa-user-edit"></i></a></li>
+                            <?php 
+                            if ($_SESSION['user_type'] === 'salessman') {
+                                echo '<li><a class="dropdown-item ps-4" href="accounts/myproducts.php">My products <i class="fad fa-user-edit"></i></a></li>';
+                            }
+                            ?>
                             <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
                                         class="fad fa-sign-out"></i></a></li>
                         </ul>

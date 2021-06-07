@@ -20,27 +20,21 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
 
     <!--Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="inc/fontawesome-5-pro-master/css/all.css">
+    <link rel="stylesheet" type="text/css" href="../inc/fontawesome-5-pro-master/css/all.css">
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="inc/css/homeStyle.css">
-    <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
-
-    <!-- AOS Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../inc/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../inc/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../inc/css/myproducts.css">
 
     <title>Auction</title>
-    <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
+    <link rel="shortcut icon" href="../inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
+<body class="text-dark" style="padding-top: 78px;">
+
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
         <div class="container-fluid">
             <a class="navbar-brand">CYBER HUSKIES</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -51,14 +45,14 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active border-top border-light border-2 me-2" aria-current="page"
-                            href="home.php">Home</a>
+                        <a class="nav-link border-top border-light border-2 me-2" aria-current="page"
+                            href="../home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
-                        <a class="nav-link border-top border-light border-2 me-2" href="list.php?category=All%20Products">Buy</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="../list.php?category=All%20Products">Buy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="upload-product.php">Sell</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="../upload-product.php">Sell</a>
                     </li>
                     <li class="nav-item dropdown border-top border-light border-2 me-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -73,20 +67,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
                         if (mysqli_num_rows($resultGetCategories) > 0) {
                             while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
-                                echo '<li><a class="dropdown-item text-center" href="list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
+                                echo '<li><a class="dropdown-item text-center" href="../list.php?category='.$rowGetCategories['category_name'].'">'.$rowGetCategories['category_name'].'</a></li>';
                             }
                         }
                         ?>
                             <li><hr class="divider"></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming Soon</a></li>
+                            <li><a class="dropdown-item text-center" href="../list.php?category=All%20Products">All Products</a></li>
+                            <li><a class="dropdown-item text-center" href="../list.php?category=Cooming%20Soon">Cooming Soon</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2"
                             href="home.php#footer-section">Contanct Us</a>
                     </li>
-                    <form class="d-lg-flex d-grid gap-1 col-lg-5" action='list.php' method="get">
+                    <form class="d-lg-flex d-grid gap-1 col-lg-5" action='../list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..."
                             aria-label="Search" name="search">
                         <button id="searchProduct" class="btn btn-danger d-grid" type="submit">Search</button>
@@ -123,7 +117,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Log In Form -->
-                                    <form id="logInForm" action="php/logIn.php" method="post">
+                                    <form id="logInForm" action="../inc/php/logIn.php" method="post">
                                         <br>
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center px-lg-5 px-3">
@@ -197,7 +191,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Password Resset Form -->
-                                    <form id="ressetPasswordForm" action="php/passwordResset.php" method="post">
+                                    <form id="ressetPasswordForm" action="../inc/php/passwordResset.php" method="post">
 
                                         <!-- Username -->
                                         <div class="form-group row justify-content-center px-lg-5 px-3">
@@ -273,7 +267,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <div class="modal-body text-dark">
 
                                     <!-- Sign Up Form -->
-                                    <form id="signUpForm" action="php/signUp.php" method="post">
+                                    <form id="signUpForm" action="../inc/php/signUp.php" method="post">
 
                                         <!-- First Name Last Name-->
                                         <br>
@@ -419,15 +413,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
                             <?php 
                             if ($_SESSION['user_type'] === 'salessman') {
-                                echo '<li><a class="dropdown-item ps-4" href="accounts/myproducts.php">My products <i class="fad fa-user-edit"></i></a></li>';
+                                echo '<li><a class="dropdown-item ps-4" href="myproducts.php">My products <i class="fad fa-user-edit"></i></a></li>';
                             }
                             ?>
-                            <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i
+                            <li><a id="logout" class="dropdown-item ps-4" href="../inc/php/logout.php">log out <i
                                         class="fad fa-sign-out"></i></a></li>
                         </ul>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
+                        <a class="nav-link" href="../mycart.php"> <i class="shopping-icon fad fa-shopping-cart"></i></a>
                     </li>
                 </ul>
             </div>
@@ -437,189 +431,79 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     }
                     ?>
 
-    <?php
-    $sqlGetHomePage = "SELECT * FROM homepage LIMIT 1";
-    $resultGetHomePage = mysqli_query($connection, $sqlGetHomePage);
-    if (mysqli_num_rows($resultGetHomePage) == 1) {
-        while ($rowGetHomePage = mysqli_fetch_assoc($resultGetHomePage)) {
-    ?>
-    <!-- Home MAIN Carousel section -->
-    <section id="main-section">
-        <!-- Main Carousel  -->
-        <div id="mainCarousel" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel"
-            data-bs-touch="false">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="inc/pictures/<?php echo $rowGetHomePage['carousel_image1']; ?>" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/<?php echo $rowGetHomePage['carousel_image2']; ?>" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-                <div class="carousel-item">
-                    <img src="inc/pictures/<?php echo $rowGetHomePage['carousel_image3']; ?>" class="d-block w-100 mx-auto img-fluid" alt="Image Carousel">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section><br><br><br>
+<!-- salesman products  -->
 
-
-    <!-- DB Connection to get products which are not available yet but will be -->
     <?php 
-    $sqlCoomingSoon = "SELECT name, picture_cover_url, product_id FROM product WHERE sale_start > NOW()";
-    $resultCoomingSoon = mysqli_query($connection, $sqlCoomingSoon);
-    $countProduct = mysqli_num_rows($resultCoomingSoon);
-    
-    if ($countProduct > 0) {
-        if ($countProduct <= 3) {
-            $justify = 'center';
-        } else {
-            $justify = 'between';
-        }
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
     ?>
-    <!-- Categories coming soon section -->
-    <section>
-    <div class="container">
-        <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['cooming_soon_header']; ?></h1>
-        <div class="soon-row gap-4 d-flex flex-row justify-content-<?php echo $justify; ?>">
-    <?php
-        while ($rowCoomingSoon = mysqli_fetch_assoc($resultCoomingSoon)) {
-            echo '<div class="me-5 text-center">
-            <a href="products.php?pid='.$rowCoomingSoon['product_id'].'"><img class="products-img border border-2" src="inc/pictures/product-picture/'.$rowCoomingSoon['picture_cover_url'].'"></a>
-                    <br><br><i>'.$rowCoomingSoon['name'].'</i>
+<section class="mb-0">
+<div class="container-fluid products-from-category-container pt-5">
+    <?php 
+    $sqlGetProducts = "SELECT * FROM product WHERE salessman_id = ".$_SESSION['salessman_id']."";
+    $resultGetProducts = mysqli_query($connection, $sqlGetProducts);
+    if (mysqli_num_rows($resultGetProducts) > 0) {
+        while ($rowGetProduct = mysqli_fetch_assoc($resultGetProducts)) {
+            $sqlGetCategories = "SELECT category_name FROM category WHERE category_id IN(SELECT category_id FROM product WHERE product_id = ".$rowGetProduct['product_id'].")";
+            $resultGetCategories = mysqli_query($connection, $sqlGetCategories);
+            if (mysqli_num_rows($resultGetCategories) == 1 ) {
+                while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
+                    echo ' <div class="products-from-category row justify-content-center">
+                    <div class="product col-lg-9 col-12">
+                        <div class="row justify-content-center">
+                            <div id="salesman_prod" class="big-img col-lg-5 col-12 text-lg-start text-center">
+                                <img src="../inc/pictures/product-picture/'.$rowGetProduct['picture_cover_url'].'">
+                            </div>
+                            <div class="col-lg-6 col-12 text-lg-start text-center">
+                                <div class="h5"><b>Product name: </b><span class="h5">'.$rowGetProduct['name'].'</span> </div>
+                                <div class="h5"><b>Available at auction starting from: </b><span class="h5">'.$rowGetProduct['sale_start'].'</span></div>
+                                <div class="h5"><b>Product is at auction until: </b><span class="h5">'.$rowGetProduct['sale_end'].'</span></div>
+                                <div class="h5"><b>Reserve price: </b><span class="h5"> &euro;'.$rowGetProduct['starting_price'].'</span></div>
+                                <div class="h5"><b>Category: </b><span class="h5">'.$rowGetCategories['category_name'].'</div></span>
+                                <div class="pictures-container">
+                                    <div class="row mt-4 justify-content-lg-start justify-content-center">';
+
+                                    // Taking all images
+                                    $sqlGetImages = "SELECT picture_url FROM picture WHERE product_id = ".$rowGetProduct['product_id']."";
+                                    $resultGetImages = mysqli_query($connection, $sqlGetImages);
+                                    if (mysqli_num_rows($resultGetImages) > 0) {
+                                        while ($rowGetImages = mysqli_fetch_assoc($resultGetImages)) {
+                                            echo '<div class="picture col-lg-2 col-4">
+                                                    <img src="../inc/pictures/product-picture/'.$rowGetImages['picture_url'].'">
+                                                </div>';
+                                        }
+                                    }
+                                    echo '<div class="col-lg-12 mt-3 px-lg-0 px-4 pb-lg-0 pb-5">
+                                            <a class="btn btn-primary w-100 pt-2 remove-item" href="../edit-product.php?pid='.$rowGetProduct['product_id'].'">Edit product</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>  
+                    </div>
                 </div>';
+                }
+            } else {
+                echo mysqli_error($connection);
+            }
         }
-    ?>
-        </div>
-    </div>
-</section><br><br>
-    <?php
+    } else {
+        echo '<div class="container-fluid"><br><br><br><br>
+        <h1 class="otherProduct-header mt-2">No products found.</h1>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br></div>';
     }
     ?>
-
-    <!-- Gallery carousel -->
-    <section class="mt-5">
-        <div class="container">
-            <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['gallery_header']; ?></h1>
-        </div>
-        <div id="otherCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-touch="true">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="1" 
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="5"
-                    aria-label="Slide 6"></button>
-                    <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="6"
-                    aria-label="Slide 7"></button>
-                <button type="button" data-bs-target="#otherCarousel" data-bs-slide-to="7"
-                    aria-label="Slide 8"></button>
-            </div>
-            <div class="carousel-inner">
-            <?php 
-            $sqlGet8Product = "SELECT picture_cover_url FROM product LIMIT 8";
-            $resultGet8Product = mysqli_query($connection, $sqlGet8Product);
-            if (mysqli_num_rows($resultGet8Product) == 8) {
-               $checkFirst = true;
-                while ($rowGet8Product = mysqli_fetch_assoc($resultGet8Product)) {
-                    if ($checkFirst) {
-                        $active = 'active';
-                    } else {
-                        $active = '';
-                    }
-                    echo '<div class="carousel-item '.$active.'">
-                        <img src="inc/pictures/product-picture/'.$rowGet8Product['picture_cover_url'].'" class="d-block mx-auto img-thumbnail" alt="Picture">
-                    </div>';
-                    $checkFirst = false;
-                }
-            }
-            ?>
-            </div>
-        </div>
-    </section><br><br><br>
-
-    <!-- Discover Categories -->
-    <section id="products-section" class="mt-5">
-        <div class="container">
-            <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['discover_header']; ?></h1>
-        </div>
-        <!-- For Big Screens -->
-        <div id="products-grid" class="container">
-            <!-- DB connection to get 4 categories -->
-            <?php
-            $sqlGetCategories = "SELECT * FROM category LIMIT 4";
-            $resultGetCategories = mysqli_query($connection, $sqlGetCategories); 
-            if (mysqli_num_rows($resultGetCategories) > 0) {
-                $count = 1;
-                $fade = array ('right', 'down', 'up', 'left');
-                while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
-                    if ($count %2 != 0) {
-                        echo '<div class="row">';
-                        $orientation = 'right';
-                    } else {
-                        $orientation = 'left';
-                    }
-                    echo '<div class="col-sm-6 col-md-6 col-lg-6 '.$orientation.'-prod" data-aos="fade-'.$fade[$count-1].'" data-aos-delay="150">
-                            <div class="image-overlay_container">
-                                <a href="list.php?category='.$rowGetCategories['category_name'].'">
-                                    <img src="inc/pictures/category-picture/'.$rowGetCategories['category_picture'].'" height="300px" width="300px">
-                                    <div class="overlay">
-                                        <h4>'.$rowGetCategories['category_name'].'</h4>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>';
-                        if ($count %2 == 0) {
-                            echo '</div>';
-                        }
-                    $count++;
-                }
-            }
-            ?>
-        </div>
-        <!-- For small Screens -->
-        <!-- Slider main container -->
-        <div id="products-swiper" class="swiper-container">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <!-- DB connection to get 4 categories -->
-                <?php
-                $sqlGetCategories = "SELECT * FROM category LIMIT 4";
-                $resultGetCategories = mysqli_query($connection, $sqlGetCategories); 
-                if (mysqli_num_rows($resultGetCategories) > 0) {
-                  while ($rowGetCategories = mysqli_fetch_assoc($resultGetCategories)) {
-                      echo '<div class="swiper-slide">
-                                <div class="mobile-overlay_container">
-                                    <a href="list.php?category='.$rowGetCategories['category_name'].'">
-                                        <img src="inc/pictures/category-picture/'.$rowGetCategories['category_picture'].'" height="300px" width="300px" data-aos="fade-left">
-                                        <div class="mobile-overlay">'.$rowGetCategories['category_name'].'</div>
-                                    </a>
-                                </div>
-                            </div>';
-                  }  
-                }
-                ?>
-            </div>
-        </div>
-
-    </section><br><br><br>
-
+    <br><br><br><br></section>
+    <?php
+    } else {
+        echo '<div class="container-fluid"><br><br><br><br>
+        <h1 class="otherProduct-header mt-2">You are not a salessman. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as salessman in order to access this site</span></h1>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>';
+    }
+    ?>
+<!-- end salesman products -->
+ 
     <!-- Footer section -->
-    <section id="footer-section">
+    <section id="footer-section" class="mt-0">
         <br>
         <div class="container">
             <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
@@ -627,14 +511,14 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 <div class="col-lg-4 col-12 text-center">
                     <h2 class="footer-header mb-3">Contact us</h2>
                     <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
-                            class="text-secondary"><?php echo $rowGetHomePage['email']; ?></span> </span>
+                            class="text-secondary">huskiescyber@gmail.com</span> </span>
                     <br>
                     <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
-                            class="text-secondary"><?php echo $rowGetHomePage['phone_number']; ?></span> </span>
+                            class="text-secondary">+35569678553</span> </span>
                 </div>
                 <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
                     <h2 class="footer-header mb-3">Location</h2>
-                    <span class="footer-inner"><i>" <?php echo $rowGetHomePage['location']; ?> "</i></span>
+                    <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
                     <br>
                     <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
                 </div>
@@ -645,13 +529,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 </div>
             </div>
         </div><br><br><br>
-    </section>
-    <?php        
-        }
-    }
-    mysqli_close($connection);
-    ?>
-    
+    </section> <!-- End Footer Section -->
 
 
     <!-- Script -->
@@ -659,31 +537,23 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- JS link -->
-    <script src="inc/js/registration.js"></script>
-    <script type="text/javascript" src="inc/js/navbar.js"></script>
-
-    <!-- Swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="../inc/js/registration.js"></script>
+    <script type="text/javascript" src="../inc/js/myproducts.js"></script>
 
     <script>
-    AOS.init();
-    const swiper = new Swiper('#products-swiper', {
-        effect: 'cube',
-        grabCursor: true,
-
-        cubeEffect: {
-            shadow: true,
-            slideShadows: true,
-            shadowOffset: 29,
-            shadowScale: 0.9,
-        },
-    });
-    // Now you can use all slider methods like
-    swiper.slideNext();
+    //hide scrollbar when croll down
+    var prev_pos = window.pageYOffset;
+    window.onscroll = function() {
+        var current_pos = window.pageYOffset;
+        if (prev_pos > current_pos) {
+            document.getElementsByClassName("navb")[0].style.top = "0";
+        } else {
+            document.getElementsByClassName("navb")[0].style.top = "-80px";
+        }
+        prev_pos = current_pos;
+    }
     </script>
 </body>
 
