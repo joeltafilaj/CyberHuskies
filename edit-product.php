@@ -477,7 +477,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                         <div class="col-lg-6">
                             <label for="desc_input">Product description:</label>
                             <textarea name="desc_input" id="desc_input" rows="10" style="resize: none;"
-                                class="form-control" placeholder="<?php echo $rowGetProduct['description']; ?>" value="<?php echo $rowGetProduct['description']; ?>"></textarea>
+                                class="form-control" placeholder="<?php echo $rowGetProduct['description']; ?>" value="<?php echo $rowGetProduct['description']; ?>"><?php echo $rowGetProduct['description']; ?></textarea>
                         </div>
                     </div>
 
@@ -516,8 +516,8 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                     </div>
                     <div class="row justify-content-center product-upload">
                         <div class="publish-btn-container col-lg-6">
-                            <button type="submit" class="btn btn-primary w-100" name="publish-product">Publish
-                                product</button>
+                            <button type="submit" class="btn btn-primary w-100" name="publish-product">Save
+                                Changes</button>
                         </div>
                     </div><br><br><br>
                 </form>

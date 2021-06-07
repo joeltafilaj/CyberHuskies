@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // Inserting this bid to the bid database
                         $sessionid = sha1(mt_rand(1, 90000) . ''.$rowVerified['username'].'');
                         $sessionid = bin2hex($sessionid);
-                        $sqlInsertBid = "INSERT INTO bid VALUES(".$_SESSION['costumer_id'].", $product_id, $bid, '$sessionid')";
+                        $sqlInsertBid = "INSERT INTO bid VALUES(".$_SESSION['costumer_id'].", $product_id, $bid, '$sessionid', 0)";
                         
                         if (mysqli_query($connection, $sqlInsertBid)) {
                             // Checking if new bid is the highiest bid or not

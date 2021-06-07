@@ -398,7 +398,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
         <ul class="dropdown-menu me-2" aria-labelledby="navbarAccount">
             <?php 
             if ($_SESSION['user_type'] === 'salessman') {
-                echo '<li><a class="dropdown-item ps-4" href="accounts/myproducts.php">My products <i class="fad fa-user-edit"></i></a></li>';
+                echo '<li><a class="dropdown-item ps-4" href="accounts/myproducts.php">My products <i class="fad fa-stream"></i></a></li>';
             }
             ?>
             <li><a id="logout" class="dropdown-item ps-4" href="inc/php/logout.php">log out <i

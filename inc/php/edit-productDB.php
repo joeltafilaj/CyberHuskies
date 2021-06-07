@@ -5,6 +5,7 @@ $validated = true;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    // Server side validation of each input
     if (empty($_POST['name_input'])) {
         $response = 'Complete name Field';
         $validated = false;
@@ -31,18 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($image1 != 'empty') {
         $file_type = $_FILES['photo_input_1']['type']; //returns the mimetype
         $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if(!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, and pdf files are allowed.';
+        if (!in_array($file_type, $allowed)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
             $validated = false;
         }
     }
-    
+
     $image2 = $_FILES["photo_input_2"]["name"];
     if ($image2 != 'empty') {
         $file_type = $_FILES['photo_input_2']['type']; //returns the mimetype
         $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if(!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, and pdf files are allowed.';
+        if (!in_array($file_type, $allowed)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
             $validated = false;
         }
     }
@@ -50,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($image3 != 'empty') {
         $file_type = $_FILES['photo_input_3']['type']; //returns the mimetype
         $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if(!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, and pdf files are allowed.';
+        if (!in_array($file_type, $allowed)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
             $validated = false;
         }
     }
@@ -66,17 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (mysqli_num_rows($resultGetCategory) == 1) {
             while ($rowGetCategory = mysqli_fetch_assoc($resultGetCategory)) {
 
-                //Checking first if any other product has the same picture_cover_url
-
-                //Inserting values to product database
+                //Inserting values to product database, after checking weather user wants to change cover picture or not
                 if ($image1 == '') {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = ".$rowGetCategory['category_id']." WHERE product_id = $product_id";
+                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . " WHERE product_id = $product_id";
                 } else {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = ".$rowGetCategory['category_id'].", picture_cover_url = '$image1' WHERE product_id = $product_id";
+                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . ", picture_cover_url = '$image1' WHERE product_id = $product_id";
                 }
-                
+
                 if (mysqli_query($connection, $sqlUpload)) {
-                 
+
                     // Inserting new images if found
                     if ($image2 != '') {
                         $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES($product_id, '$image2')";
@@ -91,14 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
                     }
                     $response = 'Product Addedd Successfully';
-  
                 } else {
                     $response = mysqli_error($connection);
                 }
             }
         }
-        
     } else {
-        
     }
 }

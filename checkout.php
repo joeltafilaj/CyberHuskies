@@ -31,7 +31,24 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 
 <body class="text-dark">
     <div class="row mx-lg-1 mx-0">
-
+        <?php
+        // Geting checkout sesion
+        if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['sessionid']) || !empty($_GET['sessionid'])) {
+                    $sessionid = $_GET['sessionid'];
+                    require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+                    // Checking if is a valid session id
+                    $sqlSearchSessionId = "SELECT * FROM bid WHERE costumer_id = " . $_SESSION['costumer_id'] . " AND sessionid = '$sessionid'";
+                    $resultSearchSessionId = mysqli_query($connection, $sqlSearchSessionId);
+                    if (mysqli_num_rows($resultSearchSessionId) == 1) {
+                        while ($rowSearchSessionId = mysqli_fetch_assoc($resultSearchSessionId)) {
+                            // Getting all product infor
+                            $sqlGetProduct = "SELECT * FROM product WHERE product_id = " . $rowSearchSessionId['product_id'] . "";
+                            $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
+                            if (mysqli_num_rows($resultGetProduct) == 1) {
+                                while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
+        ?>
         <!-- Checkout details -->
         <div class="col-lg-6 col-12 pe-lg-5 pe-0 pt-5 ">
 
@@ -87,7 +104,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     </div>
                                     <div class="col-lg-12">
                                         <!-- Response for Shipment details -->
-                                        <span id="shippmentResponse" class="text-danger mt-1 .validationResponse"></span>
+                                        <span id="shippmentResponse"
+                                            class="text-danger mt-1 .validationResponse"></span>
                                     </div>
                                 </div>
                                 <br /><br>
@@ -145,18 +163,18 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <div class="row">
                         <div class="col-12 text-lg-start text-center">
                             <span style="line-height: 3.5em;
-                                font-size: 1.6em;"> ORDER SUMMARY </span>
+                                    font-size: 1.6em;"> ORDER SUMMARY </span>
                         </div> <br><br><br><br>
                         <div class="row mt-lg-3 mt-0">
                             <div class="col-lg-3 col-12 text-center">
-                                <img src="inc/pictures/auction2.jpg" onerror=this.src="inc/pictures/blank.jpg"
+                                <img src="inc/pictures/product-picture/<?php echo $rowGetProduct['picture_cover_url']; ?>" onerror=this.src="inc/pictures/blank.jpg"
                                     height="100" width="100" class="rounded">
                             </div>
                             <div class="col-lg-7 col-9 align-self-center mt-lg-0 mt-4">
-                                <p>Jovani - 65934 Sleeveless V-Neck A-Line Long Dress</p>
+                                <p><?php echo $rowGetProduct['name']; ?></p>
                             </div>
                             <div class="col-lg-2 col-3 align-self-center text-end mt-lg-0 mt-4">
-                                <span class="price">120$</span>
+                                <span class="price"><span id="calculate"><?php echo $rowGetProduct['bid_now']; ?></span>$</span>
                             </div>
                             <div class="col-lg-12">
                                 <hr class="mt-4">
@@ -167,7 +185,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <p>Subtotal</p>
                             </div>
                             <div class="col-6 text-end">
-                                <span class="text-dark price">750$</span>
+                                <span class="text-dark price"><?php echo $rowGetProduct['bid_now']; ?>$</span>
                             </div>
                         </div>
                         <div class="row text-secondary">
@@ -175,7 +193,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 <p>Shipping</p>
                             </div>
                             <div class="col-6 text-end">
-                                <span class="text-dark price">750$</span>
+                                <span class="text-dark price">0$</span>
                             </div>
                             <div class="col-lg-12">
                                 <hr class="mt-4">
@@ -187,7 +205,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             </div>
                             <div class="col-6 text-end">
                                 <span class="h6 text-secondary">EU </span>
-                                <span class="h2">750&euro;</span>
+                                <span class="h2"><?php echo $rowGetProduct['bid_now']; ?>&euro;</span>
                             </div>
                         </div><br><br><br>
                         <div class="row mb-lg-0 mb-5">
@@ -199,8 +217,49 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </div>
                     </div>
                 </div>
-            </div> <!-- End order sumamry -->
-        </div>
+            </div>
+        </div><!-- End order sumamry -->
+
+        <?php
+                                }
+                            } else {
+                                echo '<div class="container px-5 text-center"><br><br><br><br>
+                                    <div class="alert alert-danger py-5" role="alert">
+                                        <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                                    </div>
+                                </div>';
+                            }
+                        }
+                    } else {
+
+                        echo '<div class="container px-5 text-center"><br><br><br><br>
+                            <div class="alert alert-danger align-self-center py-5" role="alert">
+                                <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                            </div>
+                        </div>';
+                    }
+                } else {
+                    echo '<div class="container px-5 text-center"><br><br><br><br>
+                    <div class="alert alert-danger py-5" role="alert">
+                            <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                    </div>
+                </div>';
+                }
+            } else {
+                echo '<div class="container px-5 text-center"><br><br><br><br>
+                    <div class="alert alert-danger py-5" role="alert">
+                            <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                    </div>
+                </div>';
+            }
+        } else {
+            echo '<div class="container px-5 text-center"><br><br><br><br>
+                    <div class="alert alert-danger py-5" role="alert">
+                            <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                    </div>
+                </div>';
+        }
+        ?>
 
         <!-- Script -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

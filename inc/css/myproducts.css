@@ -42,6 +42,8 @@
   height: 100px;
 }
 .remove-item {
+  font-size: 18px;
+  font-weight: 400;
   background-color: rgb(238, 238, 238);
   color: black;
   border: 2px solid rgb(131, 131, 131);
