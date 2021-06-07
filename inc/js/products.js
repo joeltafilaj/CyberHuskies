@@ -112,7 +112,7 @@ $(document).ready(function () {
     }
   }
 
-  //Showing input on first click than submit on the second
+  // Adding bid 
   $("#confirmBid").click(function (e) {
     e.preventDefault();
 

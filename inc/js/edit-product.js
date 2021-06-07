@@ -4,9 +4,7 @@ $(document).ready(function () {
     $("#uploadForm").submit(function (e) {
       e.preventDefault();
       var name = $("#name_input").val();
-      var desc_input = $("#desc_input").val();
-      var photo_input_1 = $("#photo_input_1").val();
-     
+      var desc_input = $("#desc_input").val();     
       var validated = true;
   
       if (name === '') {

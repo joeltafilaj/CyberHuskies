@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $image2 = $_FILES["photo_input_2"]["name"];
-    if ($image2 != 'empty') {
+    if ($image2 != '') {
         $file_type = $_FILES['photo_input_2']['type']; //returns the mimetype
         $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
         if (!in_array($file_type, $allowed)) {
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     $image3 = $_FILES["photo_input_3"]["name"];
-    if ($image3 != 'empty') {
+    if ($image3 != '') {
         $file_type = $_FILES['photo_input_3']['type']; //returns the mimetype
         $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
         if (!in_array($file_type, $allowed)) {

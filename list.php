@@ -413,7 +413,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <?php
     }
     // Geting category name from user 
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // User searched with category
         if (isset($_GET['category'])) {
             $category_name = test_input($_GET['category']);
@@ -565,6 +565,11 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
             }
+        }
+        if (!isset($_GET['search']) && !isset($_GET['category'])) {
+            echo '<br><br><br><br>
+                <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
         }
         
     }

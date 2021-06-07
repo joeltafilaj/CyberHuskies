@@ -29,30 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Checking file type 
     $image1 = $_FILES["photo_input_1"]["name"];
-    if ($image1 != 'empty') {
-        $file_type = $_FILES['photo_input_1']['type']; //returns the mimetype
-        $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if (!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
+    if ($image1 != '') {
+        $file_type1= $_FILES['photo_input_1']['type']; //returns the mimetype
+        $allowed1 = array("image/jpeg", "image/gif", "application/jpg", "application/png");
+        if (!in_array($file_type1, $allowed1)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed1.';
             $validated = false;
         }
     }
 
     $image2 = $_FILES["photo_input_2"]["name"];
-    if ($image2 != 'empty') {
-        $file_type = $_FILES['photo_input_2']['type']; //returns the mimetype
-        $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if (!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
+    if ($image2 != '') {
+        $file_type2 = $_FILES['photo_input_2']['type']; //returns the mimetype
+        $allowed2 = array("image/jpeg", "image/gif", "application/jpg", "application/png");
+        if (!in_array($file_type2, $allowed2)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed2.';
             $validated = false;
         }
     }
     $image3 = $_FILES["photo_input_3"]["name"];
-    if ($image3 != 'empty') {
-        $file_type = $_FILES['photo_input_3']['type']; //returns the mimetype
-        $allowed = array("image/jpeg", "image/gif", "application/jpg", "application/png");
-        if (!in_array($file_type, $allowed)) {
-            $response = 'Only jpg, gif, png, and jpeg files are allowed.';
+    if ($image3 != '') {
+        $file_type3 = $_FILES['photo_input_3']['type']; //returns the mimetype
+        $allowed3 = array("image/jpeg", "image/gif", "application/jpg", "application/png");
+        if (!in_array($file_type3, $allowed3)) {
+            $response = 'Only jpg, gif, png, and jpeg files are allowed3';
             $validated = false;
         }
     }

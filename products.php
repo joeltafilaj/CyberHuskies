@@ -419,10 +419,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['pid'])) {
             $product_id = test_input($_GET['pid']);
-            $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
-            $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
-            if (mysqli_num_rows($resultGetProduct) == 1) {
-                while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
+            $result = is_numeric($product_id);
+            if ($result) {
+                $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
+                $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
+                echo mysqli_error($connection);
+                if (mysqli_num_rows($resultGetProduct) == 1) {
+                    while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
     ?>
         <!-- Main Section -->
         <section class="mt-5">
@@ -742,17 +745,22 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
         </div>
     </section><br><br><br> <!-- End Similar Product Section -->
     <?php     
-                }       
+                }
             } else {
                 echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>
                 <br><br><br><br><br><br>
-                <br><br><br><br><br>'; 
-            }        
+                <br><br><br><br><br>';   
+            }       
         } else {
-            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
-            <br><br><br><br><br>
-            <br><br><br><br>';
-        }
+            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>
+            <br><br><br><br><br><br>
+            <br><br><br><br><br>'; 
+        }        
+    } else {
+        echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br>';
+    }
     }
     ?>
 
