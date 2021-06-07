@@ -28,7 +28,7 @@
 
 @media screen and (min-width: 1200px) {
     #searchProduct:hover {
-        border-radius: 7px;
+        border-radius: 17px;
     }
 }
 .nav-link {
