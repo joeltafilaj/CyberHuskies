@@ -37,65 +37,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $json['usernameError'] = '';
             $json['passwordError'] = '';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
-            
+
             //Check on database if username entered exist
-            $sqlCredentials = "SELECT * FROM user WHERE username = '$username'";
-            $resultCredentials = mysqli_query($connection, $sqlCredentials);
-            if (mysqli_num_rows($resultCredentials) == 1) {
-                while ($rowCredentials = mysqli_fetch_assoc($resultCredentials)) {
-                    
-                    //check on database if password match for the user
-                    if ($rowCredentials['password'] === $password) {
-                        
-                        //Assisging sessions
-                        session_start();
-                        $_SESSION['user_id'] = $rowCredentials['user_id']; 
-                        $_SESSION['username'] = $rowCredentials['username'];
-                        $_SESSION['user_type'] = $rowCredentials['user_type'];
-                        $_SESSION['email'] = $rowCredentials['email'];
-                        
-                        // Session for salessman 
-                        if ($rowCredentials['user_type'] == 'salessman') {
-                            $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '$username'";
-                            $resultSearchSalessman = mysqli_query($connection,$sqlSearchSalessman);
-                            if (mysqli_num_rows($resultSearchSalessman) > 0) {
-                                while ($rowSearchSalessman = mysqli_fetch_assoc($resultSearchSalessman)) {
-                                    $_SESSION['salessman_id'] = $rowSearchSalessman['salessman_id'];
-                                }
-                            }
-                        // Sessions for costumer
-                        } else if ($rowCredentials['user_type'] == "costumer") {
-                            $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '$username'";
-                            $resultSearchCostumer = mysqli_query($connection,$sqlSearchCostumer);
-                            if (mysqli_num_rows($resultSearchCostumer) > 0) {
-                                while ($rowSearchCostumer = mysqli_fetch_assoc($resultSearchCostumer)) {
-                                    $_SESSION['costumer_id'] = $rowSearchCostumer['costumer_id'];
-
-                                    //Count wishlist
-                                    $sqlCountWishlist = "SELECT * FROM Wishlist WHERE user_id = ".$rowSearchCostumer['costumer_id']."";
-                                    $resultCountWishlist = mysqli_query($connection,$sqlCountWishlist);
-                                    $_SESSION['wishlist'] = mysqli_num_rows($resultCountWishlist);
-                                }
-                            }
-                        }
-
-                        //Making user active
-                        $sqlActiveStatus = "UPDATE User SET is_active = 1 WHERE user_id = " . $rowCredentials['user_id'] . "";
-                        if (mysqli_query($connection, $sqlActiveStatus)) {
-
-                            //Remember me Cookie
-                            if ($rememberMe == 'true') {
-                                setcookie("username", $username, time() + (86400 * 14), "/");
-                                setcookie("verified", $rowCredentials['verified'], time() + (86400 * 14), "/");
-                            }
-                            $json['success'] = true;
-                        }
-                    } else {
-                        $json['passwordError'] = 'error3'; // Password is not correct
-                    }
-                }
-            } else {
+            $sqlCredentials = "SELECT * FROM user WHERE username = ?";
+            // Create prepared statement
+            $stmt = mysqli_stmt_init($connection);
+            // Prepare the prepared statement
+            if (!mysqli_stmt_prepare($stmt, $sqlCredentials)) {
                 $json['usernameError'] = 'error2'; // Username not found on DB
+            } else {
+                // Bind parameters
+                mysqli_stmt_bind_param($stmt, 's', $username);
+                // Run parameters
+                mysqli_stmt_execute($stmt);
+                $resultCredentials = mysqli_stmt_get_result($stmt);
+                if (mysqli_num_rows($resultCredentials) == 1) {
+                    while ($rowCredentials = mysqli_fetch_assoc($resultCredentials)) {
+
+                        //check on database if password match for the user
+                        if ($rowCredentials['password'] === $password) {
+
+                            //Assisging sessions
+                            session_start();
+                            $_SESSION['user_id'] = $rowCredentials['user_id'];
+                            $_SESSION['username'] = $rowCredentials['username'];
+                            $_SESSION['user_type'] = $rowCredentials['user_type'];
+                            $_SESSION['email'] = $rowCredentials['email'];
+
+                            // Session for salessman 
+                            if ($rowCredentials['user_type'] == 'salessman') {
+                                $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '$username'";
+                                $resultSearchSalessman = mysqli_query($connection, $sqlSearchSalessman);
+                                if (mysqli_num_rows($resultSearchSalessman) > 0) {
+                                    while ($rowSearchSalessman = mysqli_fetch_assoc($resultSearchSalessman)) {
+                                        $_SESSION['salessman_id'] = $rowSearchSalessman['salessman_id'];
+                                    }
+                                }
+                                // Sessions for costumer
+                            } else if ($rowCredentials['user_type'] == "costumer") {
+                                $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '$username'";
+                                $resultSearchCostumer = mysqli_query($connection, $sqlSearchCostumer);
+                                if (mysqli_num_rows($resultSearchCostumer) > 0) {
+                                    while ($rowSearchCostumer = mysqli_fetch_assoc($resultSearchCostumer)) {
+                                        $_SESSION['costumer_id'] = $rowSearchCostumer['costumer_id'];
+
+                                        //Count wishlist
+                                        $sqlCountWishlist = "SELECT * FROM Wishlist WHERE user_id = " . $rowSearchCostumer['costumer_id'] . "";
+                                        $resultCountWishlist = mysqli_query($connection, $sqlCountWishlist);
+                                        $_SESSION['wishlist'] = mysqli_num_rows($resultCountWishlist);
+                                    }
+                                }
+                            }
+
+                            //Making user active
+                            $sqlActiveStatus = "UPDATE User SET is_active = 1 WHERE user_id = " . $rowCredentials['user_id'] . "";
+                            if (mysqli_query($connection, $sqlActiveStatus)) {
+
+                                //Remember me Cookie
+                                if ($rememberMe == 'true') {
+                                    setcookie("username", $username, time() + (86400 * 14), "/");
+                                    setcookie("verified", $rowCredentials['verified'], time() + (86400 * 14), "/");
+                                }
+                                $json['success'] = true;
+                            }
+                        } else {
+                            $json['passwordError'] = 'error3'; // Password is not correct
+                        }
+                    }
+                } else {
+                    $json['usernameError'] = 'error2'; // Username not found on DB
+                }
             }
             mysqli_close($connection);
         }

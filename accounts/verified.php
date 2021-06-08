@@ -7,13 +7,23 @@ $valid = 'danger';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (isset($_GET['token'])) {
     $vkey = test_input($_GET['token']);
-    $result = is_numeric($vkey);
-    if ($result) {
 
-      //DB connection to check if the verification key corresponds to a certain account
-      require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
-      $sqlEmailVerification = "SELECT vkey FROM User WHERE vkey = '$vkey' AND verified = 0";
-      $resultEmailVerification = mysqli_query($connection, $sqlEmailVerification);
+    //DB connection to check if the verification key corresponds to a certain account
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+    $sqlEmailVerification = "SELECT vkey FROM User WHERE vkey = ? AND verified = 0";
+    // Create prepared statement
+    $stmt = mysqli_stmt_init($connection);
+    // Prepare the prepared statement
+    if (!mysqli_stmt_prepare($stmt, $sqlEmailVerification)) {
+      $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
+      $response2 = 'Either the link had already expired or you did not copy the URL properly.';
+    } else {
+      // Bind parameters
+      mysqli_stmt_bind_param($stmt, 's', $vkey);
+      // Run parameters
+      mysqli_stmt_execute($stmt);
+      $resultEmailVerification = mysqli_stmt_get_result($stmt);
+
       if (mysqli_num_rows($resultEmailVerification) == 1) {
         $sqlVerified = "UPDATE User SET verified = 1 WHERE vkey = '$vkey'";
         if (mysqli_query($connection, $sqlVerified)) {
@@ -27,11 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
         $response2 = 'Either the link had already expired or you did not copy the URL properly.';
       }
-      mysqli_close($connection);
-    } else {
-      $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
-      $response2 = 'Either the link had already expired or you did not copy the URL properly.';
     }
+    mysqli_close($connection);
   } else {
     $response = 'Email verification failed ! <i class="fad fa-frown"></i>';
     $response2 = 'Either the link had already expired or you did not copy the URL properly.';

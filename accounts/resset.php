@@ -8,11 +8,20 @@ if (isset($_GET['token'])) {
 
     // Verify token on database
     $vkey = test_input($_GET['token']);
-    $result = is_numeric($vkey);
-    if ($result == true) {
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
-        $sqlSearchToken = "SELECT vkey FROM User WHERE vkey = '$vkey' AND verified = 1 LIMIT 1";
-        $resultSearchToken = mysqli_query($connection, $sqlSearchToken);
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+
+    $sqlSearchToken = "SELECT vkey FROM User WHERE vkey = ? AND verified = 1 LIMIT 1";
+    // Create prepared statement
+    $stmt = mysqli_stmt_init($connection);
+    // Prepare the prepared statement
+    if (!mysqli_stmt_prepare($stmt, $sqlSearchToken)) {
+        $validToken = false;
+    } else {
+        // Bind parameters
+        mysqli_stmt_bind_param($stmt, 's', $vkey);
+        // Run parameters
+        mysqli_stmt_execute($stmt);
+        $resultSearchToken = mysqli_stmt_get_result($stmt);
         if (mysqli_num_rows($resultSearchToken) != 0) {
             $validToken = true;
 
@@ -36,20 +45,25 @@ if (isset($_GET['token'])) {
                     }
                 }
                 if ($validatedForm) {
-                    $sqlUpdatePassword = "UPDATE User SET password = '$newPassword' WHERE vkey = '$vkey'";
-                    if (mysqli_query($connection, $sqlUpdatePassword)) {
-                        $message = 'Password changed successfully';
-                    } else {
+                    $sqlUpdatePassword = "UPDATE User SET password = ? WHERE vkey = ?";
+                    // Create prepared statement
+                    $stmt = mysqli_stmt_init($connection);
+                    // Prepare the prepared statement
+                    if (!mysqli_stmt_prepare($stmt, $sqlUpdatePassword)) {
                         $validatedForm = false;
                         $message = 'Server Error. Try again later.';
+                    } else {
+                        // Bind parameters
+                        mysqli_stmt_bind_param($stmt, 'ss', $newPassword, $vkey);
+                        // Run parameters
+                        mysqli_stmt_execute($stmt);
+                        $message = 'Password changed successfully';
                     }
                 }
             }
         }
-        mysqli_close($connection);
-    } else {
-        $validToken = false;
     }
+    mysqli_close($connection);
 }
 
 ?>
@@ -169,7 +183,7 @@ if ($validToken) {
         <br><br><br><br><br>
         <div class="container-fluid text-center">
             <h1 class="mt-5 otherProduct-header">
-                    Password Resset failed ! <i class="fad fa-frown"></i> <br>
+                Password Resset failed ! <i class="fad fa-frown"></i> <br>
                 <span class="h5">Either the link had already expired or you did not copy the URL properly.</span>
             </h1>
         </div>
