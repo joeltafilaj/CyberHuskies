@@ -423,7 +423,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                     <div class="product col-lg-9 col-12">
                         <div class="row justify-content-center">
                             <div id="salesman_prod" class="big-img col-lg-5 col-12 text-lg-start text-center">
-                                <img src="../inc/pictures/product-picture/' . $rowGetProduct['picture_cover_url'] . '">
+                                <a href="../products?pid=' . $rowGetProduct['product_id'] . '"><img src="../inc/pictures/product-picture/' . $rowGetProduct['picture_cover_url'] . '"></a>
                             </div>
                             <div class="col-lg-6 col-12 text-lg-start text-center">
                                 <div class="h5"><b>Product name: </b><span class="h5 ms-lg-2">' . $rowGetProduct['name'] . '</span> </div>
