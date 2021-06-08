@@ -447,7 +447,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                         <span class="col-lg-12 text-center text-danger"></span>
                         <!-- Alert message for adding to wishlist -->
                         <?php
-                                    if ($response === 'Product Addedd Successfully') {
+                                    if ($response === 'Changes Saved') {
                                         $display_success = '';
                                         $display_danger = 'd-none';
                                     } else if ($response === '') {
@@ -482,6 +482,26 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                                 class="form-control" placeholder="<?php echo $rowGetProduct['description']; ?>" value="<?php echo $rowGetProduct['description']; ?>"><?php echo $rowGetProduct['description']; ?></textarea>
                         </div>
                     </div>
+                    <?php 
+                    if ($rowGetProduct['time_remaining'] <=  0) {
+                        // Checking if item is not sold 
+                        if ($rowGetProduct['bid_now'] == '') {
+                            echo '  <div class="row product-input justify-content-center">
+                                        <div class="col-lg-6">
+                                            <label for="avl_from_input">Avalilable for auction from:</label>
+                                            <input type="datetime-local" name="avl_from_input" id="avl_from_input" class="form-control">
+                                        </div>
+                                    </div>
+                
+                                    <div class="row product-input justify-content-center">
+                                        <div class="col-lg-6">
+                                            <label for="avl_unt_input">Available at auction until:</label>
+                                            <input type="datetime-local" name="avl_unt_input" id="avl_unt_input" class="form-control">
+                                        </div>
+                                    </div>';
+                                }
+                    }
+                    ?>
 
                     <div class="row product-input justify-content-center">
                         <div class="col-lg-6">

@@ -616,17 +616,11 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 <div class="bookmarks col-xl-2 col-lg-3">
                     <div class="row justify-content-center px-lg-5 px-0">
                         <div class="col-lg-12 col-6 text-lg-start text-center">
-                            <a class="bookmark" href="#description"><i class="fa fa-arrow-right"></i> Description</a>
-                        </div>
-                        <div class="col-lg-12 col-6 text-lg-start text-center">
-                            <a class="bookmark" href="#details"><i class="fa fa-arrow-right"></i> Auction details</a>
-                        </div>
-                        <div class="col-lg-12 col-6 text-lg-start text-center">
                             <a class="bookmark" href="#similar"><i class="fa fa-arrow-right"></i> See similar
                                 produtcs</a>
                         </div>
                         <div class="col-lg-12 col-6 text-lg-start text-center">
-                            <a class="bookmark" href="#how"><i class="fa fa-arrow-right"></i> How auction works</a>
+                            <a class="bookmark" href="inc/auctionRules.pdf" download="auctionRules"><i class="fa fa-arrow-right"></i> Save Auction Rules</a>
                         </div>
                     </div>
                 </div>
@@ -723,7 +717,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             echo '<h1 class="otherProduct-header text-center">
                     Similar Products
                 </h1>
-                <div class="similar-products-row gap-4 d-flex flex-row justify-content-'.$justify.'">';
+                <div class="similar-products-row gap-4 d-flex flex-row justify-content-lg-'.$justify.'" justify-content-between>';
                 while ($rowGetSimilarProdutcs = mysqli_fetch_assoc($resultGetSimilarProducts)) {
             ?>
                 <div class="text-center mb-3">

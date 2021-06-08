@@ -488,10 +488,10 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <section>
     <div class="container">
         <h1 class="sections-header text-center py-2"><?php echo $rowGetHomePage['cooming_soon_header']; ?></h1>
-        <div class="soon-row gap-4 d-flex flex-row justify-content-<?php echo $justify; ?>">
+        <div class="soon-row gap-4 d-flex flex-row justify-content-lg-<?php echo $justify; ?>">
     <?php
         while ($rowCoomingSoon = mysqli_fetch_assoc($resultCoomingSoon)) {
-            echo '<div class="me-5 text-center">
+            echo '<div class="me-lg-5 me-0 text-center">
             <a href="products.php?pid='.$rowCoomingSoon['product_id'].'"><img class="products-img border border-2" src="inc/pictures/product-picture/'.$rowCoomingSoon['picture_cover_url'].'"></a>
                     <br><br><i>'.$rowCoomingSoon['name'].'</i>
                 </div>';
