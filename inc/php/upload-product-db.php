@@ -105,52 +105,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($rowVerified['verified'] != 0) {
 
                     //First we will get category id 
-                    $sqlGetCategory = "SELECT category_id FROM category WHERE category_name = '$category'";
-                    $resultGetCategory = mysqli_query($connection, $sqlGetCategory);
-                    if (mysqli_num_rows($resultGetCategory) == 1) {
-                        while ($rowGetCategory = mysqli_fetch_assoc($resultGetCategory)) {
+                    $sqlGetCategory = "SELECT category_id FROM category WHERE category_name = ?";
+                    // Create prepared statement
+                    $stmt = mysqli_stmt_init($connection);
+                    // Prepare the prepared statement
+                    if (!mysqli_stmt_prepare($stmt, $sqlGetCategory)) {
+                    } else {
+                        // Bind parameters
+                        mysqli_stmt_bind_param($stmt, 's', $category);
+                        // Run parameters
+                        mysqli_stmt_execute($stmt);
+                        $resultGetCategory = mysqli_stmt_get_result($stmt);
+                        if (mysqli_num_rows($resultGetCategory) == 1) {
+                            while ($rowGetCategory = mysqli_fetch_assoc($resultGetCategory)) {
 
-                            //Checking first if any other product has the same picture_cover_url
+                                //Inserting values to product database
+                                $sqlUpload = "INSERT INTO product(name, salessman_id, starting_price, sale_start, sale_end, description, category_id, picture_cover_url)
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?) ";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'siisssis', $name, $_SESSION['salessman_id'], $starting_price, $date_available_from, $date_available_to, $description, $rowGetCategory['category_id'], $image1);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
 
-                            //Inserting values to product database
-                            $sqlUpload = "INSERT INTO product(name, salessman_id, starting_price, sale_start, sale_end, description, category_id, picture_cover_url)
-                VALUES('$name', " . $_SESSION['salessman_id'] . ", $starting_price, '$date_available_from', '$date_available_to', '$description', " . $rowGetCategory['category_id'] . ", '$image1') ";
-                            if (mysqli_query($connection, $sqlUpload)) {
+                                    // Geting lates added product
+                                    $sqlGetLastProductAdded = "SELECT product_id FROM product WHERE product_id IN (SELECT MAX(product_id) FROM product)";
+                                    $resultsqlGetLastProductAdded = mysqli_query($connection, $sqlGetLastProductAdded);
+                                    if (mysqli_num_rows($resultsqlGetLastProductAdded) == 1) {
+                                        while ($rowsqlGetLastProductAdded = mysqli_fetch_assoc($resultsqlGetLastProductAdded)) {
+                                            // Inserting all images
+                                            $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                            // Create prepared statement
+                                            $stmt = mysqli_stmt_init($connection);
+                                            // Prepare the prepared statement
+                                            if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                                $response = mysqli_stmt_error($stmt);
+                                            } else {
+                                                // Bind parameters
+                                                mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image1);
+                                                // Run parameters
+                                                mysqli_stmt_execute($stmt);
 
-                                // Geting lates added product
-                                $sqlGetLastProductAdded = "SELECT product_id FROM product WHERE product_id IN (SELECT MAX(product_id) FROM product)";
-                                $resultsqlGetLastProductAdded = mysqli_query($connection, $sqlGetLastProductAdded);
-                                if (mysqli_num_rows($resultsqlGetLastProductAdded) == 1) {
-                                    while ($rowsqlGetLastProductAdded = mysqli_fetch_assoc($resultsqlGetLastProductAdded)) {
-                                        // Inserting all images
-                                        $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(" . $rowsqlGetLastProductAdded['product_id'] . ", '$image1')";
-                                        if (mysqli_query($connection, $sqlImages)) {
-                                            if ($image2 != '') {
-                                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(" . $rowsqlGetLastProductAdded['product_id'] . ", '$image2')";
-                                                if (mysqli_query($connection, $sqlImages)) {
-                                                    $response = 'Product Addedd Successfully';
+                                                if ($image2 != '') {
+                                                    $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                                    // Create prepared statement
+                                                    $stmt = mysqli_stmt_init($connection);
+                                                    // Prepare the prepared statement
+                                                    if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                                        $response = mysqli_stmt_error($stmt);
+                                                    } else {
+                                                        // Bind parameters
+                                                        mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image2);
+                                                        // Run parameters
+                                                        mysqli_stmt_execute($stmt);
+                                                        $response = 'Product Addedd Successfully';
+                                                    }
                                                 }
-                                            }
-                                            if ($image3 != '') {
-                                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(" . $rowsqlGetLastProductAdded['product_id'] . ", '$image3')";
-                                                if (mysqli_query($connection, $sqlImages)) {
-                                                    $response = 'Product Addedd Successfully';
+                                                if ($image3 != '') {
+                                                    $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                                    // Create prepared statement
+                                                    $stmt = mysqli_stmt_init($connection);
+                                                    // Prepare the prepared statement
+                                                    if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                                        $response = mysqli_stmt_error($stmt);
+                                                    } else {
+                                                        // Bind parameters
+                                                        mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image3);
+                                                        // Run parameters
+                                                        mysqli_stmt_execute($stmt);
+                                                        $response = 'Product Addedd Successfully';
+                                                    }
                                                 }
+                                                $response = 'Product Addedd Successfully';
                                             }
-                                            $response = 'Product Addedd Successfully';
                                         }
                                     }
                                 }
-                            } else {
-                                $response = mysqli_error($connection);
                             }
                         }
                     }
-                // If not verified , show error and send verification link
+                    // If not verified , show error and send verification link
                 } else {
-                    $vkey = sha1(mt_rand(1, 90000) . ''.$rowVerified['username'].'');
+                    $vkey = sha1(mt_rand(1, 90000) . '' . $rowVerified['username'] . '');
                     $vkey = bin2hex($vkey);
-                    $sqlEmailVerification = "UPDATE User SET vkey = '$vkey' WHERE vkey = ".$rowVerified['vkey']."";
+                    $sqlEmailVerification = "UPDATE User SET vkey = '$vkey' WHERE vkey = " . $rowVerified['vkey'] . "";
                     if (mysqli_query($connection, $sqlEmailVerification)) {
                         $to = $rowVerified['email'];
                         $subject = "Email Verification";

@@ -539,6 +539,8 @@ require_once "inc/php/upload-product-db.php";
                 <br><br><br><br><br><br>
                 <br><br><br><br><br><br>'; 
     }
+    ?>
+    <?php
     $sqlGetHomePage = "SELECT * FROM homepage LIMIT 1";
     $resultGetHomePage = mysqli_query($connection, $sqlGetHomePage);
     if (mysqli_num_rows($resultGetHomePage) == 1) {

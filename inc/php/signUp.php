@@ -125,82 +125,94 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 // Run parameters
                                 mysqli_stmt_execute($stmt);
 
-                                $sqlGetUserId = "SELECT user_id FROM User WHERE username = '$username'";
-                                $resultGetUserId = mysqli_query($connection, $sqlGetUserId);
-                                if (mysqli_num_rows($resultGetUserId) == 1) {
-                                    while ($rowGetUserId = mysqli_fetch_assoc($resultGetUserId)) {
+                                //Check on database if username entered exist
+                                $sqlGetUserId = "SELECT user_id FROM User WHERE username = ?";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlGetUserId)) {
+                                    $json['serverError'] = true;
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 's', $username);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $resultGetUserId = mysqli_stmt_get_result($stmt);
+                                    if (mysqli_num_rows($resultGetUserId) == 1) {
+                                        while ($rowGetUserId = mysqli_fetch_assoc($resultGetUserId)) {
 
-                                        // Inserting all info to the Costumer/Salessman DB
-                                        if ($user_type == 'costumer') {
-                                            $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
+                                            // Inserting all info to the Costumer/Salessman DB
+                                            if ($user_type == 'costumer') {
+                                                $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
                                                 VALUES(?, ?, ?, ?)";
-                                            // Create prepared statement
-                                            $stmt = mysqli_stmt_init($connection);
-                                            // Prepare the prepared statement
-                                            if (!mysqli_stmt_prepare($stmt, $sqlInsertCosutmer)) {
-                                                $json['serverError'] = true;
-                                            } else {
-                                                // Bind parameters
-                                                mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
-                                                // Run parameters
-                                                mysqli_stmt_execute($stmt);
+                                                // Create prepared statement
+                                                $stmt = mysqli_stmt_init($connection);
+                                                // Prepare the prepared statement
+                                                if (!mysqli_stmt_prepare($stmt, $sqlInsertCosutmer)) {
+                                                    $json['serverError'] = true;
+                                                } else {
+                                                    // Bind parameters
+                                                    mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
+                                                    // Run parameters
+                                                    mysqli_stmt_execute($stmt);
 
-                                                // Sending verification link to the Person email
-                                                $to = $email;
-                                                $subject = "Email Verification";
-                                                $message = "<h2 style='font-family: verdana;text-align: center;
+                                                    // Sending verification link to the Person email
+                                                    $to = $email;
+                                                    $subject = "Email Verification";
+                                                    $message = "<h2 style='font-family: verdana;text-align: center;
                                                 color: black;font-size: 40px;'>Email Verification</h2> <br>
                                                 <div style='text-align: center;'>
                                                     <a href='http://localhost/CyberHuskies/accounts/verified.php?token=$vkey' 
                                                     style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
                                                     Click here To verify your email adress.</a><br><br>
                                                 </div>";
-                                                $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
-                                                $headers .= "MIME-Version: 1.0" . "\r\n";
-                                                $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+                                                    $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
+                                                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                                                    $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
 
-                                                mail($to, $subject, $message, $headers);
+                                                    mail($to, $subject, $message, $headers);
 
-                                                $json['success'] = true;
-                                            }
-                                        } elseif ($user_type == 'salessman') {
-                                            $sqlInsertSalessman = "INSERT INTO Salessman(user_id, first_name, last_name, phone_number, totalN_products) 
+                                                    $json['success'] = true;
+                                                }
+                                            } elseif ($user_type == 'salessman') {
+                                                $sqlInsertSalessman = "INSERT INTO Salessman(user_id, first_name, last_name, phone_number, totalN_products) 
                                                 VALUES(?, ?, ?, ?, 0)";
-                                            // Create prepared statement
-                                            $stmt = mysqli_stmt_init($connection);
-                                            // Prepare the prepared statement
-                                            if (!mysqli_stmt_prepare($stmt, $sqlInsertSalessman)) {
-                                                $json['serverError'] = true;
-                                            } else {
-                                                // Bind parameters
-                                                mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
-                                                // Run parameters
-                                                mysqli_stmt_execute($stmt);
+                                                // Create prepared statement
+                                                $stmt = mysqli_stmt_init($connection);
+                                                // Prepare the prepared statement
+                                                if (!mysqli_stmt_prepare($stmt, $sqlInsertSalessman)) {
+                                                    $json['serverError'] = true;
+                                                } else {
+                                                    // Bind parameters
+                                                    mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
+                                                    // Run parameters
+                                                    mysqli_stmt_execute($stmt);
 
-                                                // Sending verification link to the Person email
-                                                $to = $email;
-                                                $subject = "Email Verification";
-                                                $message = "<h2 style='font-family: verdana;text-align: center;
+                                                    // Sending verification link to the Person email
+                                                    $to = $email;
+                                                    $subject = "Email Verification";
+                                                    $message = "<h2 style='font-family: verdana;text-align: center;
                                                 color: black;font-size: 40px;'>Email Verification</h2> <br>
                                                 <div style='text-align: center;'>
                                                     <a href='http://localhost/CyberHuskies/accounts/verified.php?token=$vkey' 
                                                     style='text-decoration: none; background-color: brown; border: 1px solid black; border-radius: 5px;color: white; padding: 10px;'>
                                                     Click here To verify your email adress.</a><br><br>
                                                 </div>";
-                                                $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
-                                                $headers .= "MIME-Version: 1.0" . "\r\n";
-                                                $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+                                                    $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
+                                                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                                                    $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
 
-                                                mail($to, $subject, $message, $headers);
+                                                    mail($to, $subject, $message, $headers);
 
-                                                $json['success'] = true;
+                                                    $json['success'] = true;
 
-                                                $json['serverError'] = true;
+                                                    $json['serverError'] = true;
+                                                }
                                             }
                                         }
+                                    } else {
+                                        $json['serverError'] = true;
                                     }
-                                } else {
-                                    $json['serverError'] = true;
                                 }
                             }
                         } else {

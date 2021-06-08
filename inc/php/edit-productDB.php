@@ -57,13 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $response = 'Date of product sale End must be after Date of product Available ';
             }
         }
-        
     }
 
     // Checking file type 
     $image1 = $_FILES["photo_input_1"]["name"];
     if ($image1 != '') {
-        $file_type1= $_FILES['photo_input_1']['type']; //returns the mimetype
+        $file_type1 = $_FILES['photo_input_1']['type']; //returns the mimetype
         $allowed1 = array("image/jpeg", "image/gif", "application/jpg", "application/png");
         if (!in_array($file_type1, $allowed1)) {
             $response = 'Only jpg, gif, png, and jpeg files are allowed (on image 1).';
@@ -95,40 +94,214 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
 
         //First we will get category id 
-        $sqlGetCategory = "SELECT category_id FROM category WHERE category_name = '$category'";
-        $resultGetCategory = mysqli_query($connection, $sqlGetCategory);
-        if (mysqli_num_rows($resultGetCategory) == 1) {
-            while ($rowGetCategory = mysqli_fetch_assoc($resultGetCategory)) {
+        $sqlGetCategory = "SELECT category_id FROM category WHERE category_name = ?";
+        // Create prepared statement
+        $stmt = mysqli_stmt_init($connection);
+        // Prepare the prepared statement
+        if (!mysqli_stmt_prepare($stmt, $sqlGetCategory)) {
+        } else {
+            // Bind parameters
+            mysqli_stmt_bind_param($stmt, 's', $category);
+            // Run parameters
+            mysqli_stmt_execute($stmt);
+            $resultGetCategory = mysqli_stmt_get_result($stmt);
+            if (mysqli_num_rows($resultGetCategory) == 1) {
+                while ($rowGetCategory = mysqli_fetch_assoc($resultGetCategory)) {
 
-                //Inserting values to product database, after checking weather user wants to change cover picture or not
-                if ($image1 == '' && $date_available_from == '') {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . " WHERE product_id = $product_id";
-                } else if($image1 != '' && $date_available_from != '') {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . ", picture_cover_url = '$image1', sale_start = '$date_available_from', sale_end = '$date_available_to' WHERE product_id = $product_id";
-                } else if($image1 != '' && $date_available_to == '') {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . ", picture_cover_url = '$image1' WHERE product_id = $product_id";
-                } else if ($image1 == '' && $date_available_from != '') {
-                    $sqlUpload = "UPDATE product SET name = '$name', description = '$description' , category_id = " . $rowGetCategory['category_id'] . ", sale_start = '$date_available_from', sale_end = '$date_available_to' WHERE product_id = $product_id";
-                }
-
-                if (mysqli_query($connection, $sqlUpload)) {
-
-                    // Inserting new images if found
-                    if ($image2 != '') {
-                        $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES($product_id, '$image2')";
-                        if (mysqli_query($connection, $sqlImages)) {
+                    //Inserting values to product database, after checking weather user wants to change cover picture or not
+                    if ($image1 == '' && $date_available_from == '') {
+                        //Inserting values to product database
+                        $sqlUpload = "UPDATE product SET name = ?, description = ? , category_id = ? WHERE product_id = ?";
+                        // Create prepared statement
+                        $stmt = mysqli_stmt_init($connection);
+                        // Prepare the prepared statement
+                        if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
+                            $response = mysqli_stmt_error($stmt);
+                        } else {
+                            // Bind parameters
+                            mysqli_stmt_bind_param($stmt, 'ssii', $name, $description, $rowGetCategory['category_id'], $product_id);
+                            // Run parameters
+                            mysqli_stmt_execute($stmt);
+                            // Inserting new images if found
+                            if ($image2 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            if ($image3 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            $response = 'Changes Saved';
+                        }
+                    } else if ($image1 != '' && $date_available_from != '') {
+                        //Inserting values to product database
+                        $sqlUpload = "UPDATE product SET name = ?, description = ? , category_id = ?, picture_cover_url = ?, sale_start = ?, sale_end = ? WHERE product_id = ?";
+                        // Create prepared statement
+                        $stmt = mysqli_stmt_init($connection);
+                        // Prepare the prepared statement
+                        if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
+                            $response = mysqli_stmt_error($stmt);
+                        } else {
+                            // Bind parameters
+                            mysqli_stmt_bind_param($stmt, 'ssisssi', $name, $description, $rowGetCategory['category_id'], $image1, $date_available_from, $date_available_to, $product_id);
+                            // Run parameters
+                            mysqli_stmt_execute($stmt);
+                            // Inserting new images if found
+                            if ($image2 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            if ($image3 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            $response = 'Changes Saved';
+                        }
+                    } else if ($image1 != '' && $date_available_to == '') {
+                        //Inserting values to product database
+                        $sqlUpload = "UPDATE product SET name = ?, description = ? , category_id = ?, picture_cover_url = ? WHERE product_id = ?";
+                        // Create prepared statement
+                        $stmt = mysqli_stmt_init($connection);
+                        // Prepare the prepared statement
+                        if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
+                            $response = mysqli_stmt_error($stmt);
+                        } else {
+                            // Bind parameters
+                            mysqli_stmt_bind_param($stmt, 'ssisi', $name, $description, $rowGetCategory['category_id'], $image1, $product_id);
+                            // Run parameters
+                            mysqli_stmt_execute($stmt);
+                            // Inserting new images if found
+                            if ($image2 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            if ($image3 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            $response = 'Changes Saved';
+                        }
+                    } else if ($image1 == '' && $date_available_from != '') {
+                        //Inserting values to product database
+                        $sqlUpload = "UPDATE product SET name = ?, description = ? , category_id = ?, sale_start = ?, sale_end = ? WHERE product_id = ?";
+                        // Create prepared statement
+                        $stmt = mysqli_stmt_init($connection);
+                        // Prepare the prepared statement
+                        if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
+                            $response = mysqli_stmt_error($stmt);
+                        } else {
+                            // Bind parameters
+                            mysqli_stmt_bind_param($stmt, 'ssissi', $name, $description, $rowGetCategory['category_id'], $date_available_from, $date_available_to, $product_id);
+                            // Run parameters
+                            mysqli_stmt_execute($stmt);
+                            // Inserting new images if found
+                            if ($image2 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
+                            if ($image3 != '') {
+                                //Inserting values to product database
+                                $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
+                                // Create prepared statement
+                                $stmt = mysqli_stmt_init($connection);
+                                // Prepare the prepared statement
+                                if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
+                                    $response = mysqli_stmt_error($stmt);
+                                } else {
+                                    // Bind parameters
+                                    mysqli_stmt_bind_param($stmt, 'is', $product_id, $image2);
+                                    // Run parameters
+                                    mysqli_stmt_execute($stmt);
+                                    $response = 'Changes Saved';
+                                }
+                            }
                             $response = 'Changes Saved';
                         }
                     }
-                    if ($image3 != '') {
-                        $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES($product_id, '$image3')";
-                        if (mysqli_query($connection, $sqlImages)) {
-                            $response = 'Changes Saved';
-                        }
-                    }
-                    $response = 'Changes Saved';
-                } else {
-                    $response = mysqli_error($connection);
                 }
             }
         }

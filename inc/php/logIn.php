@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             // Session for salessman 
                             if ($rowCredentials['user_type'] == 'salessman') {
-                                $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '$username'";
+                                $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '".$rowCredentials['username']."'";
                                 $resultSearchSalessman = mysqli_query($connection, $sqlSearchSalessman);
                                 if (mysqli_num_rows($resultSearchSalessman) > 0) {
                                     while ($rowSearchSalessman = mysqli_fetch_assoc($resultSearchSalessman)) {
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                                 // Sessions for costumer
                             } else if ($rowCredentials['user_type'] == "costumer") {
-                                $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '$username'";
+                                $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '".$rowCredentials['username']."'";
                                 $resultSearchCostumer = mysqli_query($connection, $sqlSearchCostumer);
                                 if (mysqli_num_rows($resultSearchCostumer) > 0) {
                                     while ($rowSearchCostumer = mysqli_fetch_assoc($resultSearchCostumer)) {
