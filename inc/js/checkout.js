@@ -11,6 +11,9 @@ $("#checkoutForm").submit(function (e) {
   var card_number = $("#cardNumber").val();
   var valid_through = $("#validThrough").val();
   var cvc_code = $("#cvcCode").val();
+  var product_id = $('.pay').attr('id').substring(3);
+  // Add Spinner
+  $("#pay"+product_id).html('<i class="fad fa-circle-notch fa-spin"></i>');
 
   //Shipment section validation
   if (
@@ -18,12 +21,20 @@ $("#checkoutForm").submit(function (e) {
     building === "" ||
     country === "" ||
     address === "" ||
-    postal === ""
+    postal === "" ||
+    name_on_card === "" ||
+    card_number === "" ||
+    valid_through === "" ||
+    cvc_code === ""
   ) {
     validated = false;
-    $("#shippmentResponse").text("* Please complete all fields");
+    $(".alert-error").removeClass("d-none");
+    $(".alert-done").addClass("d-none");
+    $(".alert-danger").html(
+      '<i class="fad fa-exclamation-circle"></i> Some fields are not completed'
+    );
   } else {
-    $("#shippmentResponse").text("");
+    $(".alert-error").addClass("d-none");
   }
   if (country === "") {
     $("#country").addClass("is-invalid");
@@ -47,23 +58,11 @@ $("#checkoutForm").submit(function (e) {
   }
   if (building === "") {
     $("#building").addClass("is-invalid");
-
   } else {
     $("#building").removeClass("is-invalid");
   }
-
   // Payment section validation
-  if (
-    name_on_card === "" ||
-    card_number === "" ||
-    valid_through === "" ||
-    cvc_code === ""
-  ) {
-    validated = false;
-    $("#paymentResponse").text("* Please complete all fields");
-  } else {
-    $("#paymentResponse").text("");
-  }
+
   if (name_on_card === "") {
     $("#nameCard").addClass("is-invalid");
   } else {
@@ -74,7 +73,10 @@ $("#checkoutForm").submit(function (e) {
   } else if (card_number.length < 13 || card_number.length > 16) {
     validated = false;
     $("#cardNumber").addClass("is-invalid");
-    $("#paymentResponse").text("Credit Card number is not valid. Try again.");
+    $(".alert-error").removeClass("d-none");
+    $(".alert-danger").html(
+      '<i class="fad fa-exclamation-circle"></i> Credit Card number is not valid. Try again.'
+    );
   } else {
     $("#cardNumber").removeClass("is-invalid");
   }
@@ -88,13 +90,47 @@ $("#checkoutForm").submit(function (e) {
   } else if (cvc_code.length != 3) {
     validated = false;
     $("#cvcCode").addClass("is-invalid");
-    $("#paymentResponse").text("CVC Code is not valid. Try again.");
+    $(".alert-error").removeClass("d-none");
+    $(".alert-danger").html(
+      '<i class="fad fa-exclamation-circle"></i> CVC Code is not valid. Try again.'
+    );
   } else {
     $("#cvcCode").removeClass("is-invalid");
   }
 
   if (validated) {
-    this.submit();
-    /////////////////////////////////////////////////////////////////////////////////////// Prooceeding with ajax later on///////////////////////////////////////////////////
+    $.ajax({
+      type: "post",
+      url: "inc/php/checkoutDB.php",
+      data: {
+        country: country,
+        city: city,
+        address: address,
+        building: building,
+        postal: postal,
+        product_id: product_id
+      },
+      dataType: "json",
+      success: function (data) {
+        console.log(data.response);
+        if (data.success === true) {
+          // Remove spinner
+          $("#pay"+product_id).html("Pay now");
+          $(".alert-error").addClass("d-none");
+          $(".alert-done").removeClass("d-none");
+        } else {
+          // Remove spinner
+          $("#pay"+product_id).html("Pay now");
+          $(".alert-done").addClass("d-none");
+          $(".alert-error").removeClass("d-none");
+          $(".alert-danger").html(
+            '<i class="fad fa-exclamation-circle"></i> Some fields are not completed'
+          );
+        }
+      },
+    });
+  } else {
+    // Remove spinner
+    $("#pay"+product_id).html("Pay now");
   }
 });
