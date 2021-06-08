@@ -8,7 +8,7 @@ $('.send-form').click(function (e) {
     // Send email form through ajax
     $.ajax({
         type: "post",
-        url: "../inc/php/sendCheckout.php",
+        url: "../inc/php/sendCheckout",
         data: {
             product_id: product_id
         },

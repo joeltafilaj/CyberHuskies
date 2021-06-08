@@ -101,7 +101,7 @@ $("#checkoutForm").submit(function (e) {
   if (validated) {
     $.ajax({
       type: "post",
-      url: "inc/php/checkoutDB.php",
+      url: "inc/php/checkoutDB",
       data: {
         country: country,
         city: city,

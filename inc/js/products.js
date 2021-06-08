@@ -7,7 +7,7 @@ $(document).ready(function () {
     //Making an ajax call to add product to the wishlist
     $.ajax({
       type: "post",
-      url: "inc/php/addToWishlist.php",
+      url: "inc/php/addToWishlist",
       data: {
         product_id: product_id,
       },
@@ -138,7 +138,7 @@ $(document).ready(function () {
       var product_id = $(".bid-now").attr("id").substring(1);
       $.ajax({
         type: "post",
-        url: "inc/php/addBid.php",
+        url: "inc/php/addBid",
         data: {
           bid: bid,
           product_id: product_id,

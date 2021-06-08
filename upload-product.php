@@ -434,7 +434,7 @@ require_once "inc/php/upload-product-db.php";
     <br><div class="container product-input-container mt-lg-5 mt-2">
         <div class="row justify-content-center">
             <div class="col-lg-8 product-inputs">
-                <form id="uploadForm" method="POST" action="upload-product.php" enctype="multipart/form-data">
+                <form id="uploadForm" method="POST" action="upload-product" enctype="multipart/form-data">
                     <div class="row product-input justify-content-center">
                         <span class="col-lg-12 text-center text-danger"></span>
                         <!-- Alert message for adding to wishlist -->

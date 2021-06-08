@@ -6,7 +6,7 @@ $(document).ready(function () {
         //Making an ajax call to add product to the wishlist
         $.ajax({
             type: "post",
-            url: "inc/php/removeFromWishlist.php",
+            url: "inc/php/removeFromWishlist",
             data: {
                 product_id: product_id
             },

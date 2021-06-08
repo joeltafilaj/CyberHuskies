@@ -117,7 +117,7 @@ if ($validToken) {
     <body style="background-color: whitesmoke;">
         <br><br><br><br><br><br>
         <div class="container-fluid">
-            <form id="ressetPasswordForm" action="resset.php<?php echo "?token=" . $vkey; ?>" method="post" class="row justify-content-center"><br>
+            <form id="ressetPasswordForm" action="resset<?php echo "?token=" . $vkey; ?>" method="post" class="row justify-content-center"><br>
                 <div class="col-sm-3 bg-light" style="border: 2px solid lightgrey;">
 
                     <!-- New Password -->

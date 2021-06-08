@@ -40,7 +40,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "/CyberHuskies/inc/php/logIn.php",
+        url: "/CyberHuskies/inc/php/logIn",
         data: {
           username: username,
           password: password,
@@ -121,7 +121,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "POST",
-        url: "/CyberHuskies/inc/php/passwordResset.php",
+        url: "/CyberHuskies/inc/php/passwordResset",
         data: {
           username: username,
           submit: submit,
@@ -288,7 +288,7 @@ $(document).ready(function () {
     if (validated) {
       $.ajax({
         type: "post",
-        url: "/CyberHuskies/inc/php/signUp.php",
+        url: "/CyberHuskies/inc/php/signUp",
         data: {
           first_name: first_name,
           last_name: last_name,
