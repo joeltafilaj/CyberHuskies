@@ -489,7 +489,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             </div><!-- End products from cooming soon category -->';
                     }
                 } else {
-                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < NOW()";
+                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' )";
                     $resultProducts = mysqli_query($connection, $sqlProducts);
                     $countRows = mysqli_num_rows($resultProducts);
                     if ($countRows  > 0) {

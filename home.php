@@ -530,7 +530,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
             <div class="carousel-inner">
             <?php 
-            $sqlGet8Product = "SELECT picture_cover_url FROM product LIMIT 8";
+            $sqlGet8Product = "SELECT picture_cover_url FROM product ORDER BY product_id DESC LIMIT 8";
             $resultGet8Product = mysqli_query($connection, $sqlGet8Product);
             if (mysqli_num_rows($resultGet8Product) == 8) {
                $checkFirst = true;
