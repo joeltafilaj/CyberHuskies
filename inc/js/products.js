@@ -210,6 +210,23 @@ $(document).ready(function () {
             $("#confirmBid").html(
               "Confirm offer <i class='fad fa-badge-check'></i>"
             );
+          } else if (data.response === 'error4') {
+            //  Bid lower than previous one
+            $("#confirmModal").modal("hide");
+            $("#bidResponse").addClass("d-none");
+            $(".alert-success").css("display", "none");
+            $(".alert-danger").css("display", "none");
+            $(".alert-danger").css("display", "flex-box");
+            $("#alert-danger").text("Your bid is lower than the previous one!");
+            $(".alert-danger")
+              .fadeTo(2000, 50)
+              .slideUp(500, function () {
+                $(".alert-danger").slideUp(800);
+              });
+            // Remove Spinner
+            $("#confirmBid").html(
+              "Confirm offer <i class='fad fa-badge-check'></i>"
+            );
           }
         },
       });
