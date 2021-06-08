@@ -35,7 +35,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
         <div class="container-fluid">
-            <a class="navbar-brand">CYBER HUSKIES</a>
+            <a class="navbar-brand" href="../home.php"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -74,7 +74,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link border-top border-light border-2 me-2" href="home.php#footer-section">Contact Us</a>
+                        <a class="nav-link border-top border-light border-2 me-2" href="#footer-section">Contact Us</a>
                     </li>
                     <form class="d-lg-flex d-grid gap-1 col-lg-5" action='../list.php' method="get">
                         <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search" name="search">

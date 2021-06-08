@@ -1,9 +1,13 @@
 /* Override bootstrap class */
 .navbar-brand {
-    color: rgb(146, 114, 43) !important;
+    /* color: rgb(146, 114, 43) !important;
     font-size: 35px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 700;
+    font-weight: 700; */
+    width: 260.29px;
+    height: 62px;
+    background-image: url("/CyberHuskies/inc/pictures/cyberhuskies_fv.png");
+    background-size: cover;
 }
 .modal-footer a, .modal-body a {
     text-decoration: none;
