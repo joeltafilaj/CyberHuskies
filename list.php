@@ -417,149 +417,173 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
         // User searched with category
         if (isset($_GET['category'])) {
             $category_name = test_input($_GET['category']);
-            if ($category_name === 'All Products') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
-                    }
-                    echo '<!-- products from certain category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">All Products</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-'.$justify.'"> ';
+            $result = ctype_alpha(str_replace(' ', '', $category_name));
+            // Check if category is with letters only
+            if ($result) {
+                if ($category_name === 'All Products') {
+                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < NOW()";
+                    $resultProducts = mysqli_query($connection, $sqlProducts);
+                    $countRows = mysqli_num_rows($resultProducts);
+                    if ($countRows  > 0) {
+                        if ($countRows >= 4 ) {
+                            $justify = 'start';
+                        } else {
+                            $justify = 'center';
+                        }
+                        echo '<!-- products from certain category -->
+                            <div class="container-fluid products-from-category-container">
+                                <div class="row">
+                                    <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">All Products</h1>
+                                </div><br><br>
+                                <div class="products-from-category row justify-content-'.$justify.'"> ';
 
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
+                        while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                            echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                    <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                        <div class="prod-img col-12">
+                                            <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                        </div>
+                                        <div class="prod-details col-12">
+                                            <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                            <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
+                                            <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                        </div>    
+                                    </a>
+                                </div> ';
+                        }
+                        echo '</div>
+                            </div><!-- End products from certain category -->';
                     }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }
-            } else if ($category_name === 'Cooming Soon') {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start > NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
-                    }
-                    echo '<!-- products from cooming soon category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Cooming Soon</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-'.$justify.'"> ';
+                } else if ($category_name === 'Cooming Soon') {
+                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start > NOW()";
+                    $resultProducts = mysqli_query($connection, $sqlProducts);
+                    $countRows = mysqli_num_rows($resultProducts);
+                    if ($countRows  > 0) {
+                        if ($countRows >= 4 ) {
+                            $justify = 'start';
+                        } else {
+                            $justify = 'center';
+                        }
+                        echo '<!-- products from cooming soon category -->
+                            <div class="container-fluid products-from-category-container">
+                                <div class="row">
+                                    <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Cooming Soon</h1>
+                                </div><br><br>
+                                <div class="products-from-category row justify-content-'.$justify.'"> ';
 
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
+                        while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                            echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                    <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                        <div class="prod-img col-12">
+                                            <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                        </div>
+                                        <div class="prod-details col-12">
+                                            <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                            <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
+                                            <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                        </div>    
+                                    </a>
+                                </div> ';
+                        }
+                        echo '</div>
+                            </div><!-- End products from cooming soon category -->';
                     }
-                    echo '</div>
-                        </div><!-- End products from cooming soon category -->';
-                }
-            } else {
-                $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < NOW()";
-                $resultProducts = mysqli_query($connection, $sqlProducts);
-                $countRows = mysqli_num_rows($resultProducts);
-                if ($countRows  > 0) {
-                    if ($countRows >= 4 ) {
-                        $justify = 'start';
-                    } else {
-                        $justify = 'center';
-                    }
-                    echo '<!-- products from certain category -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">'.$category_name.'</h1>
-                            </div><br><br>
-                            <div class="products-from-category row  justify-content-'.$justify.'"> ';
+                } else {
+                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = '$category_name' ) AND sale_start < NOW()";
+                    $resultProducts = mysqli_query($connection, $sqlProducts);
+                    $countRows = mysqli_num_rows($resultProducts);
+                    if ($countRows  > 0) {
+                        if ($countRows >= 4 ) {
+                            $justify = 'start';
+                        } else {
+                            $justify = 'center';
+                        }
+                        echo '<!-- products from certain category -->
+                            <div class="container-fluid products-from-category-container">
+                                <div class="row">
+                                    <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">'.$category_name.'</h1>
+                                </div><br><br>
+                                <div class="products-from-category row  justify-content-'.$justify.'"> ';
 
-                    while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
+                        while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
+                            echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                    <a href="products.php?pid='.$rowProducts['product_id'].'" class="href product row justify-content-center">
+                                        <div class="prod-img col-12">
+                                            <img class="img-fluid" src="inc/pictures/product-picture/'.$rowProducts['picture_cover_url'].'">
+                                        </div>
+                                        <div class="prod-details col-12">
+                                            <div class="prod-name text-center mb-2">'.$rowProducts['name'].'</div>
+                                            <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowProducts['sale_start'].'</div>
+                                            <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowProducts['starting_price'].'</div>
+                                        </div>    
+                                    </a>
+                                </div> ';
+                        }
+                        echo '</div>
+                            </div><!-- End products from certain category -->';
+                    }  else {
+                        echo '<br><br><br><br>
+                            <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
                     }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }  else {
-                    echo '<br><br><br><br>
-                        <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
                 }
+            } else  {
+                echo '<br><br><br><br>
+                    <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
             }
         }
         // User searched with product name
         if (isset($_GET['search'])) {
             if (!empty($_GET['search'])) {
                 $name = test_input($_GET['search']);
-                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE name LIKE '%$name%'";
-                $resultSearch = mysqli_query($connection, $sqlSearch);
-                if (mysqli_num_rows($resultSearch) > 0) {
-                    echo '<!-- products from search -->
-                        <div class="container-fluid products-from-category-container">
-                            <div class="row">
-                                <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Search : '.$name.'</h1>
-                            </div><br><br>
-                            <div class="products-from-category row justify-content-center"> ';
+                $sqlSearch = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE name LIKE CONCAT('%', ?, '%')";
+                // Create prepared statement
+                $stmt = mysqli_stmt_init($connection);
+                // Prepare the prepared statement
+                if (!mysqli_stmt_prepare($stmt, $sqlSearch)) {
+                        echo '<br><br><br><br>
+                    <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                } else {
+                    // Bind parameters
+                    mysqli_stmt_bind_param($stmt, 's', $name);
+                    // Run parameters
+                    mysqli_stmt_execute($stmt);
+                    $resultSearch = mysqli_stmt_get_result($stmt);
 
-                    while ($rowSearch = mysqli_fetch_assoc($resultSearch)) {
-                        echo '<div class=" col-xl-3 col-lg-5 col-12">
-                                <a href="products.php?pid='.$rowSearch['product_id'].'" class="href product row justify-content-center">
-                                    <div class="prod-img col-12">
-                                        <img class="img-fluid" src="inc/pictures/product-picture/'.$rowSearch['picture_cover_url'].'">
-                                    </div>
-                                    <div class="prod-details col-12">
-                                        <div class="prod-name text-center mb-2">'.$rowSearch['name'].'</div>
-                                        <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowSearch['sale_start'].'</div>
-                                        <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowSearch['starting_price'].'</div>
-                                    </div>    
-                                </a>
-                               </div> ';
+                    if (mysqli_num_rows($resultSearch) > 0) {
+                        echo '<!-- products from search -->
+                            <div class="container-fluid products-from-category-container">
+                                <div class="row">
+                                    <h1 class="col-12 text-center mt-4 mb-lg-3 mb-0">Search : '.$name.'</h1>
+                                </div><br><br>
+                                <div class="products-from-category row justify-content-center"> ';
+    
+                        while ($rowSearch = mysqli_fetch_assoc($resultSearch)) {
+                            echo '<div class=" col-xl-3 col-lg-5 col-12">
+                                    <a href="products.php?pid='.$rowSearch['product_id'].'" class="href product row justify-content-center">
+                                        <div class="prod-img col-12">
+                                            <img class="img-fluid" src="inc/pictures/product-picture/'.$rowSearch['picture_cover_url'].'">
+                                        </div>
+                                        <div class="prod-details col-12">
+                                            <div class="prod-name text-center mb-2">'.$rowSearch['name'].'</div>
+                                            <div class="text-center mb-2"><b>At auction starting from </b><br>'.$rowSearch['sale_start'].'</div>
+                                            <div class="min-price text-center"><b>Reserve price: </b> &euro;'.$rowSearch['starting_price'].'</div>
+                                        </div>    
+                                    </a>
+                                   </div> ';
+                        }
+                        echo '</div>
+                            </div><!-- End products from certain category -->';
+                    }  else {
+                        echo '<br><br><br><br>
+                            <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
                     }
-                    echo '</div>
-                        </div><!-- End products from certain category -->';
-                }  else {
-                    echo '<br><br><br><br>
-                        <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
                 }
+
+
             } else {
                 echo '<br><br><br><br>
                     <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>

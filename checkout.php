@@ -39,15 +39,29 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                     $sessionid = $_GET['sessionid'];
                     require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
                     // Checking if is a valid session id
-                    $sqlSearchSessionId = "SELECT * FROM bid WHERE costumer_id = " . $_SESSION['costumer_id'] . " AND sessionid = '$sessionid'";
-                    $resultSearchSessionId = mysqli_query($connection, $sqlSearchSessionId);
-                    if (mysqli_num_rows($resultSearchSessionId) == 1) {
-                        while ($rowSearchSessionId = mysqli_fetch_assoc($resultSearchSessionId)) {
-                            // Getting all product infor
-                            $sqlGetProduct = "SELECT * FROM product WHERE product_id = " . $rowSearchSessionId['product_id'] . "";
-                            $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
-                            if (mysqli_num_rows($resultGetProduct) == 1) {
-                                while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
+                    $sqlSearchSessionId = "SELECT * FROM bid WHERE costumer_id = ? AND sessionid = ? AND payed = 0";
+                    // Create a prepared statement 
+                    $stmt = mysqli_stmt_init($connection);
+                     // Prepare the prepared statement
+                    if (!mysqli_stmt_prepare($stmt, $sqlSearchSessionId)) {
+                        echo '<div class="container px-5 text-center"><br><br><br><br>
+                                    <div class="alert alert-danger py-5" role="alert">
+                                            <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
+                                    </div>
+                                </div>';
+                    } else {
+                        // Bind parameters
+                        mysqli_stmt_bind_param($stmt, 'is', $_SESSION['costumer_id'], $sessionid);
+                        // Run parameters
+                        mysqli_stmt_execute($stmt);
+                        $resultSearchSessionId = mysqli_stmt_get_result($stmt);
+                        if (mysqli_num_rows($resultSearchSessionId) == 1) {
+                            while ($rowSearchSessionId = mysqli_fetch_assoc($resultSearchSessionId)) {
+                                // Getting all product infor
+                                $sqlGetProduct = "SELECT * FROM product WHERE product_id = " . $rowSearchSessionId['product_id'] . "";
+                                $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
+                                if (mysqli_num_rows($resultGetProduct) == 1) {
+                                    while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
         ?>
         <!-- Checkout details -->
         <div class="col-lg-6 col-12 pe-lg-5 pe-0 pt-5 ">
@@ -210,9 +224,19 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                         </div><br><br><br>
                         <div class="row mb-lg-0 mb-5">
                             <div class="col-lg-12">
-                                <button id="pay" type="submit" form="checkoutForm" class="btn btn-primary w-100"
+                                <button id="pay<?php echo $rowSearchSessionId['product_id'];?>" type="submit" form="checkoutForm" class="btn btn-primary w-100 pay"
                                     style="height: 50px;">Pay
                                     now</button>
+                            </div>
+                            <div class="col-lg-12 mt-5 alert-error d-none">
+                                <div class="alert alert-danger text-center" role="alert">
+                                    <i class="fad fa-exclamation-circle"></i> A simple danger alert—check it out!
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5 alert-done d-none">
+                                <div class="alert alert-success text-center" role="alert">
+                                    <i class="fas fa-check-circle"></i> Payment completed successfully!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,13 +255,13 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                             }
                         }
                     } else {
-
                         echo '<div class="container px-5 text-center"><br><br><br><br>
                             <div class="alert alert-danger align-self-center py-5" role="alert">
                                 <i class="fad fa-exclamation-circle"></i> We ran into a problem. Please try again later.
                             </div>
                         </div>';
                     }
+                }
                 } else {
                     echo '<div class="container px-5 text-center"><br><br><br><br>
                     <div class="alert alert-danger py-5" role="alert">

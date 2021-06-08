@@ -428,6 +428,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
     if (isset($_GET['pid'])) {
         $product_id = $_GET['pid'];
+        $result = is_numeric($product_id);
+        if ($result) {  
         $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
         $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
         if (mysqli_num_rows($resultGetProduct) == 1) {
@@ -532,6 +534,11 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                 <br><br><br><br><br><br>
                 <br><br><br><br><br><br><br>';
         }
+    } else {
+        echo '<br><br><br><br><br><h1 class="otherProduct-header mt-3 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>';
+    }
     } else {
         echo '<br><br><br><br><br><h1 class="otherProduct-header mt-3 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
                 <br><br><br><br><br><br>
