@@ -421,7 +421,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             // Check if category is with letters only
             if ($result) {
                 if ($category_name === 'All Products') {
-                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE sale_start < NOW()";
+                    $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product";
                     $resultProducts = mysqli_query($connection, $sqlProducts);
                     $countRows = mysqli_num_rows($resultProducts);
                     if ($countRows  > 0) {
