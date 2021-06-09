@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             mysqli_stmt_execute($stmt);
                             // Inserting new images if found
                             if ($image2 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             }
                             if ($image3 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             mysqli_stmt_execute($stmt);
                             // Inserting new images if found
                             if ($image2 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             }
                             if ($image3 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
@@ -220,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             mysqli_stmt_execute($stmt);
                             // Inserting new images if found
                             if ($image2 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             }
                             if ($image3 != '') {
-                                //Inserting values to product database
+                                //Inserting values to picture database
                                 $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
                                 // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
