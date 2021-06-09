@@ -132,23 +132,23 @@ if ($validToken) {
         <br><br><br><br><br><br>
         <div class="container-fluid">
             <form id="ressetPasswordForm" action="resset<?php echo "?token=" . $vkey; ?>" method="post" class="row justify-content-center"><br>
-                <div class="col-sm-3 bg-light" style="border: 2px solid lightgrey;">
+                <div class="col-lg-3 col-sm-10 col-12 bg-light" style="border: 2px solid lightgrey;">
 
                     <!-- New Password -->
                     <div class="form-group row justify-content-center px-5 mt-5">
-                        <div class="col-sm-12 text-center mb-2">
+                        <div class="col-lg-12 col-12 text-center mb-2">
                             <h2>Password Resset</h2>
                         </div>
 
                         <!-- Response for password -->
-                        <span id="ressetPasswordMessage" class="col-sm-11 mt-4 text-center mb-5 alert 
+                        <span id="ressetPasswordMessage" class="col-lg-12 col-12 mt-4 text-center mb-5 alert 
                     <?php if ($validatedForm === true) {
                         echo 'alert-success';
                     } else {
                         echo 'alert-danger';
                     } ?> mt-1"><?php echo $message ?></span>
 
-                        <div class="col-sm-12 form-floating">
+                        <div class="col-lg-12 col-12 form-floating">
                             <input type="password" id="newPassword" name="newPassword" placeholder="New password" class="form-control">
                             <label class="ms-2" for="newPassword">New password</label>
                         </div>
@@ -156,7 +156,7 @@ if ($validToken) {
 
                     <!-- New Password Confirmation -->
                     <div class="form-group row justify-content-center px-5">
-                        <div class="col-sm-12 form-floating">
+                        <div class="col-lg-12 col-12 form-floating">
                             <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" placeholder="New password confirmation" class="form-control" aria-label="Password..." aria-describedby="but">
                             <label class="ms-2" for="newPasswordConfirmation">New password confirmation</label>
                         </div>
@@ -164,7 +164,7 @@ if ($validToken) {
 
                     <!-- Resset Password Button -->
                     <div class="form-group row justify-content-center px-5 mb-5">
-                        <div class="col-sm-12">
+                        <div class="col-lg-12 col-12">
                             <button type="submit" id="submitRessetPasswordForm" name="submitRessetPasswordForm" class="btn btn-primary w-100" form="ressetPasswordForm" style="height: 50px;"> Resset
                                 Password
                             </button>

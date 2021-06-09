@@ -15,7 +15,7 @@ $(document).ready(function () {
       success: function (data) {
         if (data.success === true) {
           //showing alert
-          $(".alert-danger").css("display", "none");
+          $(".alert-danger1").css("display", "none");
           $(".alert-success").css("display", "none");
           $(".alert-success").css("display", "flex-box");
           $("#alert-success").text("Product added successfully to wishlist!");
@@ -27,36 +27,36 @@ $(document).ready(function () {
         }
         if (data.response === "error1") {
           //printing response
-          $(".alert-danger").css("display", "none");
+          $(".alert-danger1").css("display", "none");
           $(".alert-success").css("display", "none");
-          $(".alert-danger").css("display", "flex-box");
+          $(".alert-danger1").css("display", "flex-box");
           $("#alert-danger").text("You have to log in as costumer!");
-          $(".alert-danger")
+          $(".alert-danger1")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
-              $(".alert-danger").slideUp(800);
+              $(".alert-danger1").slideUp(800);
             });
         } else if (data.response === "error2") {
           //printing response
-          $(".alert-danger").css("display", "none");
+          $(".alert-danger1").css("display", "none");
           $(".alert-success").css("display", "none");
-          $(".alert-danger").css("display", "flex-box");
+          $(".alert-danger1").css("display", "flex-box");
           $("#alert-danger").text("505! Internal database error!");
-          $(".alert-danger")
+          $(".alert-danger1")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
-              $(".alert-danger").slideUp(800);
+              $(".alert-danger1").slideUp(800);
             });
         } else if (data.response === "error3") {
           //printing response
           $(".alert-success").css("display", "none");
-          $(".alert-danger").css("display", "none");
-          $(".alert-danger").css("display", "flex-box");
+          $(".alert-danger1").css("display", "none");
+          $(".alert-danger1").css("display", "flex-box");
           $("#alert-danger").text("This product is already in the wishlist!");
-          $(".alert-danger")
+          $(".alert-danger1")
             .fadeTo(2000, 50)
             .slideUp(500, function () {
-              $(".alert-danger").slideUp(800);
+              $(".alert-danger1").slideUp(800);
             });
         }
       },
@@ -151,7 +151,7 @@ $(document).ready(function () {
             $("#confirmModal").modal("hide");
             $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
-            $(".alert-danger").css("display", "none");
+            $(".alert-danger1").css("display", "none");
             $(".alert-success").css("display", "flex-box");
             $("#alert-success").html(
               "Offer was made successfully!<br>You Will get notified if you won the item!"
@@ -170,13 +170,13 @@ $(document).ready(function () {
             $("#confirmModal").modal("hide");
             $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
-            $(".alert-danger").css("display", "none");
-            $(".alert-danger").css("display", "flex-box");
+            $(".alert-danger1").css("display", "none");
+            $(".alert-danger1").css("display", "flex-box");
             $("#alert-danger").text("You already made an offer for this item!");
-            $(".alert-danger")
+            $(".alert-danger1")
               .fadeTo(2000, 50)
               .slideUp(500, function () {
-                $(".alert-danger").slideUp(800);
+                $(".alert-danger1").slideUp(800);
               });
             // Remove Spinner
             $("#confirmBid").html(
@@ -187,13 +187,13 @@ $(document).ready(function () {
             $("#confirmModal").modal("hide");
             $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
-            $(".alert-danger").css("display", "none");
-            $(".alert-danger").css("display", "flex-box");
+            $(".alert-danger1").css("display", "none");
+            $(".alert-danger1").css("display", "flex-box");
             $("#alert-danger").text("505! Internal database error!");
-            $(".alert-danger")
+            $(".alert-danger1")
               .fadeTo(2000, 50)
               .slideUp(500, function () {
-                $(".alert-danger").slideUp(800);
+                $(".alert-danger1").slideUp(800);
               });
             // Remove Spinner
             $("#confirmBid").html(
@@ -215,13 +215,13 @@ $(document).ready(function () {
             $("#confirmModal").modal("hide");
             $("#bidResponse").addClass("d-none");
             $(".alert-success").css("display", "none");
-            $(".alert-danger").css("display", "none");
-            $(".alert-danger").css("display", "flex-box");
+            $(".alert-danger1").css("display", "none");
+            $(".alert-danger1").css("display", "flex-box");
             $("#alert-danger").text("Your bid is lower than the previous one!");
-            $(".alert-danger")
+            $(".alert-danger1")
               .fadeTo(2000, 50)
               .slideUp(500, function () {
-                $(".alert-danger").slideUp(800);
+                $(".alert-danger1").slideUp(800);
               });
             // Remove Spinner
             $("#confirmBid").html(

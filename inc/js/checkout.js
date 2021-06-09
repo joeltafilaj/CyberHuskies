@@ -118,6 +118,14 @@ $("#checkoutForm").submit(function (e) {
           $("#pay"+product_id).html("Pay now");
           $(".alert-error").addClass("d-none");
           $(".alert-done").removeClass("d-none");
+        } else if (data.response === 'error4') {
+           // Remove spinner
+           $("#pay"+product_id).html("Pay now");
+           $(".alert-done").addClass("d-none");
+           $(".alert-error").removeClass("d-none");
+           $(".alert-danger").html(
+             '<i class="fad fa-exclamation-circle"></i> Payment has already been completed for this product!'
+           );
         } else {
           // Remove spinner
           $("#pay"+product_id).html("Pay now");

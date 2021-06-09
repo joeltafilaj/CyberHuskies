@@ -454,8 +454,21 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                                     if ($rowGetProduct['email_checkout'] == 0) {
                                         echo '<button class="btn w-100 mt-4 remove-item send-form" id="p' . $rowGetProduct['product_id'] . '"> Send Payment Form to the Bidder</button>';
                                     } else {
-                                        echo '<br><span class="h5 col-12"><i class="fad fa-badge-check text-primary"></i> Email was sent</span>';
-                                        echo '<button class="btn w-100 mt-4 remove-item send-form" id="p' . $rowGetProduct['product_id'] . '"> Resend Payment Form to the Bidder</button>';
+                                        $sqlCheckPayed = 'SELECT payed FROM bid WHERE costumer_id = '.$rowGetProduct['highies_bidder'].' AND product_id = '.$rowGetProduct['product_id'].'';
+                                        $reslutCheckPayed = mysqli_query($connection, $sqlCheckPayed);
+                                        if (mysqli_num_rows($reslutCheckPayed) == 1) {
+                                            while ($rowCheckPayed = mysqli_fetch_assoc($reslutCheckPayed)) {
+                                                if ($rowCheckPayed['payed'] == 0) {
+                                                    echo '<br><span class="h5 col-12"><i class="fad fa-badge-check text-primary"></i> Email was sent</span>';
+                                                    echo '<button class="btn w-100 mt-4 remove-item send-form" id="p' . $rowGetProduct['product_id'] . '"> Resend Payment Form to the Bidder</button>';
+                                                } else {
+                                                    echo '<br><span class="h5 col-12"><i class="fad fa-badge-check text-primary"></i> Payment was completed</span>';
+                                                }
+                                            }
+                                        } else {
+                                            echo '<br><span class="h5 col-12"><i class="fad fa-exclamation-triangle text-danger"></i> Internal Server Error</span>';
+                                        }
+                                        
                                     }
                                     
                                 } else {
@@ -497,36 +510,12 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
     echo '<div class="container-fluid"><br><br><br><br>
         <h1 class="otherProduct-header mt-2">You are not a salessman. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as salessman in order to access this site</span></h1>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>';
-}
-?>
-<!-- end salesman products -->
+}//end salesman products
 
-<!-- Footer section -->
-<section id="footer-section" class="mt-0">
-    <br>
-    <div class="container">
-        <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
-        <div class="row">
-            <div class="col-lg-4 col-12 text-center">
-                <h2 class="footer-header mb-3">Contact us</h2>
-                <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span class="text-secondary">huskiescyber@gmail.com</span> </span>
-                <br>
-                <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span class="text-secondary">+35569678553</span> </span>
-            </div>
-            <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                <h2 class="footer-header mb-3">Location</h2>
-                <span class="footer-inner"><i>'Road xxxx km Y , Albania, Lushnje'</i></span>
-                <br>
-                <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
-            </div>
-            <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                <h2 class="footer-header mb-3">Social media</h2>
-                <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
-                <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div><br><br><br>
-</section> <!-- End Footer Section -->
+require_once '../inc/php/footer.php';
+?>
+
+
 
 
 <!-- Script -->

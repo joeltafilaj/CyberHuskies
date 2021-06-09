@@ -434,7 +434,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             <!-- Alert message for adding to wishlist -->
             <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
                 <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
-                    <div class="alert alert-danger alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
+                    <div class="alert alert-danger alert-danger1 alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
                         <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">This product is already in the
                             wishlist!</span>
                     </div>
@@ -572,7 +572,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                         </div>
                                         <div class="modal-body">
                                             <div id="bidResponse" class="alert alert-danger text-center d-none" role="alert">
-                                                A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                                                
                                             </div>
                                             <h5 class="mb-4">Place your bid</h5> 
                                             <div class="row">
@@ -756,46 +756,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
         <br><br><br><br>';
     }
     }
+    require_once 'inc/php/footer.php';
     ?>
-
-    <!-- Footer section -->
-    <section id="footer-section" class="">
-        <br>
-        <div class="container">
-            <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
-            <div class="row">
-            <?php 
-            // DB connection to get footer details from the database
-            $sqlGetFooter = "SELECT email, phone_number, location FROM homepage LIMIT 1";
-            $resultGetFooter = mysqli_query($connection, $sqlGetFooter);
-            if (mysqli_num_rows($resultGetFooter) == 1) {
-                while ($rowGetFooter = mysqli_fetch_assoc($resultGetFooter)) {
-                  echo '<div class="col-lg-4 col-12 text-center">
-                            <h2 class="footer-header mb-3">Contact us</h2>
-                            <span class="footer-inner"><i class="fad fa-envelope"></i> <strong>Email:</strong> <span
-                                    class="text-secondary">'.$rowGetFooter['email'].'</span> </span>
-                            <br>
-                            <span class="footer-inner"><i class="fas fa-phone-plus"></i> <strong>Phone Number:</strong> <span
-                                    class="text-secondary">'.$rowGetFooter['phone_number'].'</span> </span>
-                        </div>
-                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                            <h2 class="footer-header mb-3">Location</h2>
-                            <span class="footer-inner"><i>" '.$rowGetFooter['location'].' "</i></span>
-                            <br>
-                            <span class="h1"><i class="fad fa-map-marked-alt"></i></span>
-                        </div>
-                        <div class="col-lg-4 col-12 mt-5 mt-lg-0 text-center">
-                            <h2 class="footer-header mb-3">Social media</h2>
-                            <a href="#" class="h1 text-primary"><i class="fab fa-facebook-square"></i></a>
-                            <a href="#" class="h1 text-danger"><i class="fab fa-instagram"></i></a>
-                        </div>';  
-                }
-            }
-            mysqli_close($connection);
-            ?>
-            </div>
-        </div><br><br><br>
-    </section> <!-- End Footer Section -->
 
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
