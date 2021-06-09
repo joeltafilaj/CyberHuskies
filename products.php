@@ -28,7 +28,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <link rel="stylesheet" type="text/css" href="inc/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="inc/css/footer.css">
 
-    <title>Auction</title>
+    <title>Auction - Products</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 

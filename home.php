@@ -34,7 +34,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-    <title>Auction</title>
+    <title>Auction - Home</title>
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 

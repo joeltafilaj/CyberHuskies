@@ -112,13 +112,12 @@ $("#checkoutForm").submit(function (e) {
       },
       dataType: "json",
       success: function (data) {
-        console.log(data.response);
         if (data.success === true) {
           // Remove spinner
           $("#pay"+product_id).html("Pay now");
           $(".alert-error").addClass("d-none");
           $(".alert-done").removeClass("d-none");
-        } else if (data.response === 'error4') {
+        } else if (data.response === 'error3') {
            // Remove spinner
            $("#pay"+product_id).html("Pay now");
            $(".alert-done").addClass("d-none");
@@ -126,13 +125,29 @@ $("#checkoutForm").submit(function (e) {
            $(".alert-danger").html(
              '<i class="fad fa-exclamation-circle"></i> Payment has already been completed for this product!'
            );
-        } else {
+        } else if (data.response === 'error1') {
           // Remove spinner
           $("#pay"+product_id).html("Pay now");
           $(".alert-done").addClass("d-none");
           $(".alert-error").removeClass("d-none");
           $(".alert-danger").html(
             '<i class="fad fa-exclamation-circle"></i> Some fields are not completed'
+          );
+        } else if (data.response === 'error2') {
+          // Remove spinner
+          $("#pay"+product_id).html("Pay now");
+          $(".alert-done").addClass("d-none");
+          $(".alert-error").removeClass("d-none");
+          $(".alert-danger").html(
+            '<i class="fad fa-exclamation-circle"></i> You need to verify your email in order to make a bid.<br> A confirmation email was sent to your mailbox.'
+          );
+        } else {
+          // Remove spinner
+          $("#pay"+product_id).html("Pay now");
+          $(".alert-done").addClass("d-none");
+          $(".alert-error").removeClass("d-none");
+          $(".alert-danger").html(
+            '<i class="fad fa-exclamation-triangle"></i> '+data.response
           );
         }
       },

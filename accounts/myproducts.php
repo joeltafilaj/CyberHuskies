@@ -26,7 +26,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="stylesheet" type="text/css" href="../inc/css/footer.css">
     <link rel="stylesheet" type="text/css" href="../inc/css/myproducts.css">
 
-    <title>Auction</title>
+    <title>Auction - My Products</title>
     <link rel="shortcut icon" href="../inc/pictures/cyberhuskies.ico">
 </head>
 
