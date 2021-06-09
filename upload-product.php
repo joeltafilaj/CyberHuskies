@@ -525,7 +525,7 @@ require_once "inc/php/upload-product-db.php";
                     </div>
                     <div class="row justify-content-center product-upload">
                         <div class="publish-btn-container col-lg-6">
-                            <button type="submit" class="btn btn-primary w-100" name="publish-product">Publish product</button>
+                            <button type="submit" class="btn publish btn-primary w-100" name="publish-product">Publish product</button>
                         </div>
                     </div><br><br><br>
                 </form>

@@ -12,6 +12,8 @@ $(document).ready(function () {
     var photo_input_1 = $("#photo_input_1").val();
    
     var validated = true;
+    // Add Spinner
+    $('.publish').html('<i class="fad fa-circle-notch fa-spin"></i>');
 
     if (name === '') {
         $('#name_input').addClass('is-invalid');
@@ -83,6 +85,10 @@ $(document).ready(function () {
         $('.alert-danger').addClass('d-none');
         $('#response').text('');
         this.submit();
+    }
+    else {
+        // Remove spinner
+        $('.publish').html("Publish product");
     }
 
 
