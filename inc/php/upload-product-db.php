@@ -106,14 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     //First we will get category id 
                     $sqlGetCategory = "SELECT category_id FROM category WHERE category_name = ?";
-                    // Create prepared statement
                     $stmt = mysqli_stmt_init($connection);
-                    // Prepare the prepared statement
                     if (!mysqli_stmt_prepare($stmt, $sqlGetCategory)) {
                     } else {
-                        // Bind parameters
                         mysqli_stmt_bind_param($stmt, 's', $category);
-                        // Run parameters
                         mysqli_stmt_execute($stmt);
                         $resultGetCategory = mysqli_stmt_get_result($stmt);
                         if (mysqli_num_rows($resultGetCategory) == 1) {
@@ -122,15 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 //Inserting values to product database
                                 $sqlUpload = "INSERT INTO product(name, salessman_id, starting_price, sale_start, sale_end, description, category_id, picture_cover_url)
                                     VALUES(?, ?, ?, ?, ?, ?, ?, ?) ";
-                                // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
-                                // Prepare the prepared statement
                                 if (!mysqli_stmt_prepare($stmt, $sqlUpload)) {
                                     $response = mysqli_stmt_error($stmt);
                                 } else {
-                                    // Bind parameters
                                     mysqli_stmt_bind_param($stmt, 'siisssis', $name, $_SESSION['salessman_id'], $starting_price, $date_available_from, $date_available_to, $description, $rowGetCategory['category_id'], $image1);
-                                    // Run parameters
                                     mysqli_stmt_execute($stmt);
 
                                     // Geting lates added product
@@ -138,45 +130,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $resultsqlGetLastProductAdded = mysqli_query($connection, $sqlGetLastProductAdded);
                                     if (mysqli_num_rows($resultsqlGetLastProductAdded) == 1) {
                                         while ($rowsqlGetLastProductAdded = mysqli_fetch_assoc($resultsqlGetLastProductAdded)) {
+                                           
                                             // Inserting all images
                                             $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
-                                            // Create prepared statement
                                             $stmt = mysqli_stmt_init($connection);
-                                            // Prepare the prepared statement
                                             if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
                                                 $response = mysqli_stmt_error($stmt);
                                             } else {
-                                                // Bind parameters
                                                 mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image1);
-                                                // Run parameters
                                                 mysqli_stmt_execute($stmt);
 
                                                 if ($image2 != '') {
                                                     $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
-                                                    // Create prepared statement
                                                     $stmt = mysqli_stmt_init($connection);
-                                                    // Prepare the prepared statement
                                                     if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
                                                         $response = mysqli_stmt_error($stmt);
                                                     } else {
-                                                        // Bind parameters
                                                         mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image2);
-                                                        // Run parameters
                                                         mysqli_stmt_execute($stmt);
                                                         $response = 'Product Addedd Successfully';
                                                     }
                                                 }
                                                 if ($image3 != '') {
                                                     $sqlImages = "INSERT INTO picture(product_id, picture_url) VALUES(?, ?)";
-                                                    // Create prepared statement
                                                     $stmt = mysqli_stmt_init($connection);
-                                                    // Prepare the prepared statement
                                                     if (!mysqli_stmt_prepare($stmt, $sqlImages)) {
                                                         $response = mysqli_stmt_error($stmt);
                                                     } else {
-                                                        // Bind parameters
                                                         mysqli_stmt_bind_param($stmt, 'is', $rowsqlGetLastProductAdded['product_id'], $image3);
-                                                        // Run parameters
                                                         mysqli_stmt_execute($stmt);
                                                         $response = 'Product Addedd Successfully';
                                                     }

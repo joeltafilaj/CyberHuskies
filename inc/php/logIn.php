@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         $rememberMe = $_POST['rememberMe'];
         $password = hash('sha512', $password);
+
         //Connect to DB after input Validated successfully
         if ($validated) {
             $json['usernameError'] = '';
@@ -40,15 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Check on database if username entered exist
             $sqlCredentials = "SELECT * FROM user WHERE username = ?";
-            // Create prepared statement
             $stmt = mysqli_stmt_init($connection);
-            // Prepare the prepared statement
             if (!mysqli_stmt_prepare($stmt, $sqlCredentials)) {
                 $json['usernameError'] = 'error2'; // Username not found on DB
             } else {
-                // Bind parameters
                 mysqli_stmt_bind_param($stmt, 's', $username);
-                // Run parameters
                 mysqli_stmt_execute($stmt);
                 $resultCredentials = mysqli_stmt_get_result($stmt);
                 if (mysqli_num_rows($resultCredentials) == 1) {
@@ -66,16 +63,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             // Session for salessman 
                             if ($rowCredentials['user_type'] == 'salessman') {
-                                $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '".$rowCredentials['username']."'";
+                                $sqlSearchSalessman = "SELECT * FROM user JOIN salessman ON user.user_id = salessman.user_id WHERE user.username = '" . $rowCredentials['username'] . "'";
                                 $resultSearchSalessman = mysqli_query($connection, $sqlSearchSalessman);
                                 if (mysqli_num_rows($resultSearchSalessman) > 0) {
                                     while ($rowSearchSalessman = mysqli_fetch_assoc($resultSearchSalessman)) {
                                         $_SESSION['salessman_id'] = $rowSearchSalessman['salessman_id'];
                                     }
                                 }
+
                                 // Sessions for costumer
                             } else if ($rowCredentials['user_type'] == "costumer") {
-                                $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '".$rowCredentials['username']."'";
+                                $sqlSearchCostumer = "SELECT * FROM user JOIN costumer ON user.user_id = costumer.user_id WHERE user.username = '" . $rowCredentials['username'] . "'";
                                 $resultSearchCostumer = mysqli_query($connection, $sqlSearchCostumer);
                                 if (mysqli_num_rows($resultSearchCostumer) > 0) {
                                     while ($rowSearchCostumer = mysqli_fetch_assoc($resultSearchCostumer)) {

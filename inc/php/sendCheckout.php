@@ -7,6 +7,7 @@ $json = array(
 $validated = true;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     // Server Side validation
     if (empty($_POST['product_id'])) {
         $json['response'] = 'error1'; // Field is empty
@@ -18,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // After validation completed connect to DB
     if ($validated) {
         require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+        
         // Get costumer email and bid information
         $sqlEmail = "SELECT email FROM user WHERE user_id IN(SELECT user_id FROM costumer WHERE costumer_id IN (SELECT highies_bidder FROM product WHERE product_id = $product_id))";
         $resultEmail = mysqli_query($connection, $sqlEmail);
@@ -27,14 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $resultBidInfo = mysqli_query($connection, $sqlBidInfo);
                 if (mysqli_num_rows($resultBidInfo) == 1) {
                     while ($rowBidInfo = mysqli_fetch_assoc($resultBidInfo)) {
+                        
                         // Sending session id token
                         $sqlSessionId = "SELECT * FROM bid WHERE costumer_id = " . $rowBidInfo['highies_bidder'] . " AND product_id = $product_id";
                         $resultSessionId = mysqli_query($connection, $sqlSessionId);
                         if (mysqli_num_rows($resultSessionId) == 1) {
                             while ($rowSessionId = mysqli_fetch_assoc($resultSessionId)) {
+                                
                                 // Updateing email_checkout status
                                 $sqlEmailStatus = "UPDATE product SET email_checkout = 1 WHERE product_id = $product_id";
                                 if (mysqli_query($connection, $sqlEmailStatus)) {
+                                    
                                     // Sending the biding email
                                     $to = $rowEmail['email'];
                                     $subject = "Cyber Huskies Auction Page";

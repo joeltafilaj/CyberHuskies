@@ -428,13 +428,20 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
 if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
     if (isset($_GET['pid'])) {
         $product_id = $_GET['pid'];
-        $result = is_numeric($product_id);
-        if ($result) {  
-        $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
-        $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
-        if (mysqli_num_rows($resultGetProduct) == 1) {
-            while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
-                require_once "inc/php/edit-productDB.php";
+        if (ctype_digit($product_id)) {  
+        $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = ? ";
+        $stmt = mysqli_stmt_init($connection);
+        if (!mysqli_stmt_prepare($stmt, $sqlGetProduct)) {
+            echo '<br><br><br><br><br><h1 class="otherProduct-header mt-4 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
+                <br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br>';
+        } else {
+            mysqli_stmt_bind_param($stmt, 'i', $product_id);
+            mysqli_stmt_execute($stmt);
+            $resultGetProduct = mysqli_stmt_get_result($stmt);
+            if (mysqli_num_rows($resultGetProduct) == 1) {
+                while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
+                    require_once "inc/php/edit-productDB.php";
 ?>
     <!-- Form Section for uploading a product -->
     <br>
@@ -550,17 +557,18 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
     <?php
             }
         } else {
-            echo '<br><br><br><br><br><h1 class="otherProduct-header mt-3 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
+            echo '<br><br><br><br><br><h1 class="otherProduct-header mt-4 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
                 <br><br><br><br><br><br>
                 <br><br><br><br><br><br><br>';
         }
+    } 
     } else {
-        echo '<br><br><br><br><br><h1 class="otherProduct-header mt-3 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
+        echo '<br><br><br><br><br><h1 class="otherProduct-header mt-4 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
         <br><br><br><br><br><br>
-        <br><br><br><br><br><br><br>';
+        <br><br><br><br><br><br><br><br>';
     }
     } else {
-        echo '<br><br><br><br><br><h1 class="otherProduct-header mt-3 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
+        echo '<br><br><br><br><br><h1 class="otherProduct-header mt-4 text-center">No product found! <i class="fad fa-frown"></i></h1><br><br>
                 <br><br><br><br><br><br>
                 <br><br><br><br><br><br><br>';
     }
@@ -569,9 +577,9 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
 
     <?php
 } else {
-    echo '<br><br><br><br><h1 class="otherProduct-header mt-3 text-center">You have to log in as salessman <i class="fad fa-frown"></i><br> Or you can create an free account</h1><br><br>
+    echo '<br><br><br><br><h1 class="otherProduct-header mt-4 text-center">You have to log in as salessman <i class="fad fa-frown"></i><br> Or you can create an free account</h1><br><br>
                 <br><br><br><br><br><br>
-                <br><br><br><br><br><br>';
+                <br><br><br><br><br><br><br>';
 }
 ?> 
 <?php 

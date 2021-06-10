@@ -50,7 +50,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                             href="home.php">Home</a>
                     </li>
                     <li class="nav-item add-border">
-                        <a class="nav-link border-top border-light border-2 me-2" href="list.php?category=All%20Products">Buy</a>
+                        <a class="nav-link border-top border-light border-2 me-2"
+                            href="list.php?category=All%20Products">Buy</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link border-top border-light border-2 me-2" href="upload-product.php">Sell</a>
@@ -72,9 +73,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                 }
                             }
                             ?>
-                            <li><hr class="divider"></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All Products</a></li>
-                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming Soon</a></li>
+                            <li>
+                                <hr class="divider">
+                            </li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=All%20Products">All
+                                    Products</a></li>
+                            <li><a class="dropdown-item text-center" href="list.php?category=Cooming%20Soon">Cooming
+                                    Soon</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -418,23 +423,31 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     //DB connection to get product on the database
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['pid'])) {
-            $product_id = test_input($_GET['pid']);
-            $result = is_numeric($product_id);
-            if ($result) {
-                $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = $product_id ";
-                $resultGetProduct = mysqli_query($connection, $sqlGetProduct);
-                echo mysqli_error($connection);
-                if (mysqli_num_rows($resultGetProduct) == 1) {
+            $product_id = $_GET['pid'];
+            if (ctype_digit($product_id)) {
+                $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = ? ";
+                $stmt = mysqli_stmt_init($connection);
+                if (!mysqli_stmt_prepare($stmt, $sqlGetProduct)) {
+                    echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
+                        <br><br><br><br><br>
+                        <br><br><br><br>';
+                } else {
+                    
+                    mysqli_stmt_bind_param($stmt, 'i', $product_id);
+                    mysqli_stmt_execute($stmt);
+                    $resultGetProduct = mysqli_stmt_get_result($stmt);
+                    if (mysqli_num_rows($resultGetProduct) == 1) {
                     while ($rowGetProduct = mysqli_fetch_assoc($resultGetProduct)) {
     ?>
-        <!-- Main Section -->
-        <section class="mt-5">
+    <!-- Main Section -->
+    <section class="mt-5">
         <!-- Carousel and product name and a short description-->
         <div class="container-fluid px-lg-5 px-4">
             <!-- Alert message for adding to wishlist -->
             <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
                 <div class="col-xl-4 col-lg-6 col-md-9 col-sm-9 col-11">
-                    <div class="alert alert-danger alert-danger1 alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
+                    <div class="alert alert-danger alert-danger1 alert-dismissible text-center" data-aos="fade"
+                        role="alert" style=" display: none">
                         <i class="fad fa-exclamation-circle"></i> <span id="alert-danger">This product is already in the
                             wishlist!</span>
                     </div>
@@ -442,8 +455,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             </div>
             <div class="row justify-content-end fixed-top" style="top:85px; height: 0; right:10px;">
                 <div class="col-xl-4 col-lg-6 col-sm-9 col-11">
-                    <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert" style=" display: none">
-                        <i class="fas fa-check-circle"></i> <span id="alert-success">Product added successfully to wishlist!</span>
+                    <div class="alert alert-success alert-dismissible text-center" data-aos="fade" role="alert"
+                        style=" display: none">
+                        <i class="fas fa-check-circle"></i> <span id="alert-success">Product added successfully to
+                            wishlist!</span>
                     </div>
                 </div>
             </div><!-- End alert mesage -->
@@ -452,7 +467,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                     data-bs-interval="false">
                     <?php 
                     //DB connection to get product images stored in another table and put it in carousel
-                    $sqlGetImages = "SELECT * FROM picture WHERE product_id = $product_id";
+                    $sqlGetImages = "SELECT * FROM picture WHERE product_id = ".$rowGetProduct['product_id']."";
                     $resultGetImages = mysqli_query($connection, $sqlGetImages);
                     $countImage = mysqli_num_rows($resultGetImages);
                     echo '<div class="carousel-indicators">';
@@ -480,41 +495,45 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                         </div>';
                             } 
                     ?>
-                            <div class="modal fade" id="imageMax<?php echo $counter; ?>" role="dialoig">
-                                <div class="modal-dialog modal-fullscreen p-lg-5 p-3">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <span class="h4 modal-tittle text-primary">Full image</span>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <image class="img-fluid w-100 h-100" src="inc/pictures/product-picture/<?php echo $rowGetImages['picture_url']; ?>" alt="Image"></image>
-                                        </div>
-                                    </div>
+                    <div class="modal fade" id="imageMax<?php echo $counter; ?>" role="dialoig">
+                        <div class="modal-dialog modal-fullscreen p-lg-5 p-3">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span class="h4 modal-tittle text-primary">Full image</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <image class="img-fluid w-100 h-100"
+                                        src="inc/pictures/product-picture/<?php echo $rowGetImages['picture_url']; ?>"
+                                        alt="Image"></image>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                     <?php
                             $counter++;
                         }
                     }
                     ?>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#caruselProduct"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class=""></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#caruselProduct"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class=""></span>
-                    </button>
                 </div>
-                <div class="col-lg-5 col-12 align-self-center">
-                    <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-4"><?php echo $rowGetProduct['name']; ?></div>
-                    <span class="text-lg-start text-center h4"><b>Starting bid:</b> EU <?php echo $rowGetProduct['starting_price']; ?>&euro;</span>
-                    <div class="text-lg-start text-center mt-4"><?php echo $rowGetProduct['description']; ?></div>
-                    <?php 
+                <button class="carousel-control-prev" type="button" data-bs-target="#caruselProduct"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class=""></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#caruselProduct"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class=""></span>
+                </button>
+            </div>
+            <div class="col-lg-5 col-12 align-self-center">
+                <div class="sections-header mt-lg-0 mt-5 mb-lg-5 mb-4"><?php echo $rowGetProduct['name']; ?></div>
+                <span class="text-lg-start text-center h4"><b>Starting bid:</b> EU
+                    <?php echo $rowGetProduct['starting_price']; ?>&euro;</span>
+                <div class="text-lg-start text-center mt-4"><?php echo $rowGetProduct['description']; ?></div>
+                <?php 
                    
                     // Product's time has ended
                     if ($rowGetProduct['time_remaining'] <= 0) {
@@ -550,7 +569,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                     </div>';
                         } else {
                             // Get number of bids for the product
-                            $sqlGetNrBids = "SELECT product_id FROM bid WHERE product_id = $product_id";
+                            $sqlGetNrBids = "SELECT product_id FROM bid WHERE product_id = ".$rowGetProduct['product_id']."";
                             $nrBids = mysqli_num_rows(mysqli_query($connection, $sqlGetNrBids));
                             echo '<div class="time text-center mt-3 h2">Time left : <span id="time">'.$rowGetProduct['time_remaining'].'</span></div>';
                             echo '<div class="row mt-lg-4 justify-content-center">
@@ -607,8 +626,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                 </div>';
                     }
                     ?>
-                </div>
             </div>
+        </div>
         </div> <br><br><br>
 
         <div class="container-fluid mt-0 mt-lg-5">
@@ -620,7 +639,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                 produtcs</a>
                         </div>
                         <div class="col-lg-12 col-6 text-lg-start text-center">
-                            <a class="bookmark" href="inc/auctionRules.pdf" download="auctionRules"><i class="fa fa-arrow-right"></i> Save Auction Rules</a>
+                            <a class="bookmark" href="inc/auctionRules.pdf" download="auctionRules"><i
+                                    class="fa fa-arrow-right"></i> Save Auction Rules</a>
                         </div>
                     </div>
                 </div>
@@ -646,14 +666,15 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                 <!-- Description Tab -->
                                 <div class="tab-pane fade show active" id="description" role="tabpanel">
                                     <div class="row">
-                                    <?php
+                                        <?php
                                     //split text in half
                                     $text = $rowGetProduct['description'];
                                     $splitat = strpos($text, " ", strlen($text) / 2);
                                     $col1 = substr($text, 0, $splitat);
                                     $col2 = substr($text, $splitat);
                                     ?>
-                                        <div class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
+                                        <div
+                                            class="col-lg-6 col-12 border-right border-secondary text-lg-start text-center">
                                             <p class="content-item"><?php echo $col1;?></p>
                                         </div>
                                         <div class="col-lg-6 col-12 text-lg-start text-center">
@@ -675,7 +696,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                                                 There will be no price protection, if the price of an item changes after
                                                 purchasing.
                                                 We are required to collect state tax from AL state buyers.
-                                                </p>
+                                            </p>
                                         </div>
                                         <div class="col-lg-6 col-12 text-lg-start text-center">
                                             <p class="content-item"><strong>RETURN POLICY</strong><br>
@@ -720,10 +741,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 <div class="similar-products-row gap-4 d-flex flex-row justify-content-lg-'.$justify.'" justify-content-between>';
                 while ($rowGetSimilarProdutcs = mysqli_fetch_assoc($resultGetSimilarProducts)) {
             ?>
-                <div class="text-center mb-3">
-                    <a href="products.php?pid=<?php echo $rowGetSimilarProdutcs['product_id'];?>"><img class="products-img border border-2" src="inc/pictures/product-picture/<?php echo $rowGetSimilarProdutcs['picture_cover_url']; ?>"></a>
-                    <br><br><i><?php echo $rowGetSimilarProdutcs['name']; ?></i>
-                </div>
+            <div class="text-center mb-3">
+                <a href="products.php?pid=<?php echo $rowGetSimilarProdutcs['product_id'];?>"><img
+                        class="products-img border border-2"
+                        src="inc/pictures/product-picture/<?php echo $rowGetSimilarProdutcs['picture_cover_url']; ?>"></a>
+                <br><br><i><?php echo $rowGetSimilarProdutcs['name']; ?></i>
+            </div>
             <?php
                 }
             echo '</div>';
@@ -735,7 +758,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
             <?php
             }
             ?>
-            
+
         </div>
     </section><br><br><br> <!-- End Similar Product Section -->
     <?php     
@@ -745,15 +768,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 <br><br><br><br><br><br>
                 <br><br><br><br><br>';   
             }       
-        } else {
-            echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>
-            <br><br><br><br><br><br>
-            <br><br><br><br><br>'; 
-        }        
+     }           
     } else {
         echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
         <br><br><br><br><br>
         <br><br><br><br>';
+    }
     }
     }
     require_once 'inc/php/footer.php';

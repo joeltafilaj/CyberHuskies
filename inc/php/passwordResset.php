@@ -21,15 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $json['usernameError'] = '';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
             $sqlSearchUser = "SELECT * FROM User WHERE username = ? LIMIT 1";
-            // Create prepared statement
             $stmt = mysqli_stmt_init($connection);
-            // Prepare the prepared statement
             if (!mysqli_stmt_prepare($stmt, $sqlSearchUser)) {
                 $json['usernameError'] = 'error2'; // No username found
             } else {
-                // Bind parameters
                 mysqli_stmt_bind_param($stmt, 's', $username);
-                // Run parameters
                 mysqli_stmt_execute($stmt);
                 $resultSearchUser = mysqli_stmt_get_result($stmt);
                 if (mysqli_num_rows($resultSearchUser) != 0) {

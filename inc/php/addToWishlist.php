@@ -15,9 +15,11 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
             $sqlCheck = "SELECT product_id FROM wishlist WHERE product_id = $product_id AND user_id = ".$_SESSION['costumer_id']."";
             $resultCheck = mysqli_query($connection, $sqlCheck);
             if (mysqli_num_rows($resultCheck) == 0) {
+                
                 //Inserting product to the wishlist
                 $sqlInsert = "INSERT INTO wishlist VALUES(".$_SESSION['costumer_id'].", $product_id)";
                 if (mysqli_query($connection, $sqlInsert)) {
+                    
                     //Product inserted
                     $json['success'] = true;
                 } else {

@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // After inputs are validated continue 
     if ($validated) {
         require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/db_connection.php';
+        
         // Check if user has an verified emal || send verification email
         $sqlVerified = "SELECT verified, username, vkey, email FROM user WHERE user_id = " . $_SESSION['user_id'] . "";
         $resultVerified = mysqli_query($connection, $sqlVerified);
@@ -124,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     $to = $_SESSION['email'];
                                                     $subject = "Cyber Huskies Auction Page";
                                                     $message = "<h2 style='font-family: verdana;text-align: center;
-                                     color: black;font-size: 40px;'>Thank you for the purchase you made on our website</h2> <br>";
+                                                                color: black;font-size: 40px;'>Thank you for the purchase you made on our website</h2> <br>";
                                                     $headers = "From: Cyber Huskies <huskiescyber@gmail.com> \r\n";
                                                     $headers .= "MIME-Version: 1.0" . "\r\n";
                                                     $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";

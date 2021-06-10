@@ -8,7 +8,6 @@ if (mysqli_num_rows($resultGetHomePage) == 1) {
     <section id="footer-section" class="mt-2">
         <br>
         <div class="container">
-            <!-- <h2 class="headerLabel-container">Contact Us</h2> -->
             <div class="row">
                 <div class="col-lg-4 col-12 text-center">
                     <h2 class="footer-header mb-3">Contact us</h2>

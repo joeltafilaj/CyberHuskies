@@ -79,33 +79,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Check on database if username entered exist
             $sqlCheckUsername = "SELECT username FROM User WHERE username = ?";
-            // Create prepared statement
             $stmt = mysqli_stmt_init($connection);
-            // Prepare the prepared statement
             if (!mysqli_stmt_prepare($stmt, $sqlCheckUsername)) {
                 $json['usernameError'] = 'error3'; // Username already exist
             } else {
-                // Bind parameters
                 mysqli_stmt_bind_param($stmt, 's', $username);
-                // Run parameters
                 mysqli_stmt_execute($stmt);
                 $resultCheckUsername = mysqli_stmt_get_result($stmt);
                 if (mysqli_num_rows($resultCheckUsername) == 0) {
 
                     // Checking on DB if an email already exist
                     $sqlCheckEmail = "SELECT email FROM User WHERE email = ?";
-                    // Create prepared statement
                     $stmt = mysqli_stmt_init($connection);
-                    // Prepare the prepared statement
                     if (!mysqli_stmt_prepare($stmt, $sqlCheckEmail)) {
                         $json['emailError'] = 'error3'; // Email aldready exist
                     } else {
-                        // Bind parameters
                         mysqli_stmt_bind_param($stmt, 's', $email);
-                        // Run parameters
                         mysqli_stmt_execute($stmt);
                         $resultCheckEmail = mysqli_stmt_get_result($stmt);
                         if (mysqli_num_rows($resultCheckEmail) == 0) {
+                            
                             // Inserting all info to the User DB
                             $password = hash('sha512', $password); // Encrypting password
 
@@ -114,28 +107,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $vkey = bin2hex($vkey);
 
                             $sqlInsert = "INSERT INTO User(username, email, vkey, verified, password, user_type, is_active) VALUES(?, ?, ?, 0, ?, ?, 0)";
-                            // Create prepared statement
                             $stmt = mysqli_stmt_init($connection);
-                            // Prepare the prepared statement
                             if (!mysqli_stmt_prepare($stmt, $sqlInsert)) {
                                 $json['serverError'] = true;
                             } else {
-                                // Bind parameters
                                 mysqli_stmt_bind_param($stmt, 'sssss', $username, $email, $vkey, $password, $user_type);
-                                // Run parameters
                                 mysqli_stmt_execute($stmt);
 
                                 //Check on database if username entered exist
                                 $sqlGetUserId = "SELECT user_id FROM User WHERE username = ?";
-                                // Create prepared statement
                                 $stmt = mysqli_stmt_init($connection);
-                                // Prepare the prepared statement
                                 if (!mysqli_stmt_prepare($stmt, $sqlGetUserId)) {
                                     $json['serverError'] = true;
                                 } else {
-                                    // Bind parameters
                                     mysqli_stmt_bind_param($stmt, 's', $username);
-                                    // Run parameters
                                     mysqli_stmt_execute($stmt);
                                     $resultGetUserId = mysqli_stmt_get_result($stmt);
                                     if (mysqli_num_rows($resultGetUserId) == 1) {
@@ -145,15 +130,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             if ($user_type == 'costumer') {
                                                 $sqlInsertCosutmer = "INSERT INTO Costumer(user_id, first_name, last_name, phone_number) 
                                                 VALUES(?, ?, ?, ?)";
-                                                // Create prepared statement
                                                 $stmt = mysqli_stmt_init($connection);
-                                                // Prepare the prepared statement
                                                 if (!mysqli_stmt_prepare($stmt, $sqlInsertCosutmer)) {
                                                     $json['serverError'] = true;
                                                 } else {
-                                                    // Bind parameters
                                                     mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
-                                                    // Run parameters
                                                     mysqli_stmt_execute($stmt);
 
                                                     // Sending verification link to the Person email
@@ -177,15 +158,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             } elseif ($user_type == 'salessman') {
                                                 $sqlInsertSalessman = "INSERT INTO Salessman(user_id, first_name, last_name, phone_number, totalN_products) 
                                                 VALUES(?, ?, ?, ?, 0)";
-                                                // Create prepared statement
                                                 $stmt = mysqli_stmt_init($connection);
-                                                // Prepare the prepared statement
                                                 if (!mysqli_stmt_prepare($stmt, $sqlInsertSalessman)) {
                                                     $json['serverError'] = true;
                                                 } else {
-                                                    // Bind parameters
                                                     mysqli_stmt_bind_param($stmt, 'isss', $rowGetUserId['user_id'], $first_name, $last_name, $phone_number);
-                                                    // Run parameters
                                                     mysqli_stmt_execute($stmt);
 
                                                     // Sending verification link to the Person email

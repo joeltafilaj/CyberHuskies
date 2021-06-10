@@ -15,6 +15,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
             //Inserting product to the wishlist
             $sqlDelete = "DELETE FROM wishlist WHERE product_id = $product_id AND user_id = ".$_SESSION['costumer_id']."";
             if (mysqli_query($connection, $sqlDelete)) {
+                
                 //Product deleted
                 //Counting remaining products in the wishlist
                 $sqlCountProduct = "SELECT product_id FROM wishlist WHERE  user_id = ".$_SESSION['costumer_id']."";

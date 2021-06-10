@@ -439,7 +439,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                             $resultGetImages = mysqli_query($connection, $sqlGetImages);
                             if (mysqli_num_rows($resultGetImages) > 0) {
                                 while ($rowGetImages = mysqli_fetch_assoc($resultGetImages)) {
-                                    echo '<div class="picture col-lg-2 col-4">
+                                    echo '<div class="picture col-lg-2 col-4 mb-2">
                                                     <img src="../inc/pictures/product-picture/' . $rowGetImages['picture_url'] . '">
                                                 </div>';
                                 }
