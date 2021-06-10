@@ -482,7 +482,8 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
 
                                 // Product is not available yet on market
                             } else if ($rowGetProduct['is_available'] <= 0) {
-                                echo '<a class="btn w-100 pt-2 remove-item" href="../edit-product.php?pid=' . $rowGetProduct['product_id'] . '">Edit product</a>';
+                                echo '<span class="h4 col-12"> Product to be available soon</span> <i class="fad fa-calendar-alt"></i> ';
+                                echo '<a class="btn w-100 pt-2 mt-4 remove-item" href="../edit-product.php?pid=' . $rowGetProduct['product_id'] . '">Edit product</a>';
                             }
 
                             echo   '</div>

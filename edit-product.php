@@ -483,7 +483,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                         </div>
                     </div>
                     <?php 
-                    if ($rowGetProduct['time_remaining'] <=  0) {
+                    if ($rowGetProduct['time_remaining'] <=  0 || $rowGetProduct['is_available'] < 0) {
                         // Checking if item is not sold 
                         if ($rowGetProduct['bid_now'] == '') {
                             echo '  <div class="row product-input justify-content-center">
