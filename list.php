@@ -418,7 +418,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                                         echo '<div class=" col-xl-3 col-lg-5 col-12">
                                     <a href="products.php?pid=' . $rowProducts['product_id'] . '" class="href product row justify-content-center">
-                                        <div class="prod-img col-12">
+                                        <div class="prod-img col-12 text-center">
                                             <img class="img-fluid" src="inc/pictures/product-picture/' . $rowProducts['picture_cover_url'] . '">
                                         </div>
                                         <div class="prod-details col-12">
@@ -452,7 +452,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                                         echo '<div class=" col-xl-3 col-lg-5 col-12">
                                     <a href="products.php?pid=' . $rowProducts['product_id'] . '" class="href product row justify-content-center">
-                                        <div class="prod-img col-12">
+                                        <div class="prod-img col-12 text-center">
                                             <img class="img-fluid" src="inc/pictures/product-picture/' . $rowProducts['picture_cover_url'] . '">
                                         </div>
                                         <div class="prod-details col-12">
@@ -498,7 +498,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         while ($rowProducts = mysqli_fetch_assoc($resultProducts)) {
                                             echo '<div class=" col-xl-3 col-lg-5 col-12">
                                     <a href="products.php?pid=' . $rowProducts['product_id'] . '" class="href product row justify-content-center">
-                                        <div class="prod-img col-12">
+                                        <div class="prod-img col-12 text-center">
                                             <img class="img-fluid" src="inc/pictures/product-picture/' . $rowProducts['picture_cover_url'] . '">
                                         </div>
                                         <div class="prod-details col-12">
