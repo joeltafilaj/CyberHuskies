@@ -40,7 +40,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px">
+<body class="text-dark d-flex flex-column justify-content-between" style="padding-top: 78px">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
         <div class="container-fluid">
@@ -336,7 +336,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
         </div>
 
-    </section><br><br><br>
+    </section><br><br>
 
     <!-- Footer section -->
     <section id="footer-section">

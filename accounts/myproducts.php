@@ -2,6 +2,8 @@
 session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['user_type'] = $_COOKIE['user_type'];
+    $_SESSION['email'] = $_COOKIE['email'];
 }
 ?>
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="../inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px;">
+<body class="text-dark d-flex flex-column justify-content-between" style="padding-top: 78px;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
@@ -252,7 +254,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
             } else {
                 echo '<div class="container-fluid"><br><br><br><br>
         <h1 class="otherProduct-header mt-2">No products found.</h1>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br></div>';
+            </div>';
             }
             ?>
             <br><br><br><br>
@@ -261,7 +263,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
 } else {
     echo '<div class="container-fluid"><br><br><br><br>
         <h1 class="otherProduct-header mt-2">You are not a salessman. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as salessman in order to access this site</span></h1>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>';
+            </div>';
 }//end salesman products
 
 require_once '../inc/php/footer.php';

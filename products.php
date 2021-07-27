@@ -2,7 +2,10 @@
 session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['user_type'] = $_COOKIE['user_type'];
+    $_SESSION['email'] = $_COOKIE['email'];
 }
+?>
 require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
 ?>
 <!DOCTYPE html>
@@ -32,7 +35,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px;">
+<body class="text-dark d-flex flex-column justify-content-between" style="padding-top: 78px;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
@@ -163,9 +166,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
                 $sqlGetProduct = "SELECT *, TIMESTAMPDIFF(second,CURTIME(),sale_end) AS time_remaining, TIMESTAMPDIFF(second,sale_start,CURTIME()) AS is_available FROM product WHERE product_id = ? ";
                 $stmt = mysqli_stmt_init($connection);
                 if (!mysqli_stmt_prepare($stmt, $sqlGetProduct)) {
-                    echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
-                        <br><br><br><br><br>
-                        <br><br><br><br>';
+                    echo '<h1 class="otherProduct-header mt-5">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>';
                 } else {
                     
                     mysqli_stmt_bind_param($stmt, 'i', $product_id);
@@ -499,16 +500,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/CyberHuskies/inc/functions.php';
     <?php     
                 }
             } else {
-                echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>
-                <br><br><br><br><br><br>
-                <br><br><br><br><br>';   
+                echo '<h1 class="otherProduct-header mt-5">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br>';   
             }       
      }           
     } else {
-        echo '<br><br><br><br><h1 class="otherProduct-header mt-2">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>
-        <br><br><br><br><br>
-        <br><br><br><br>';
+        echo '<h1 class="otherProduct-header mt-5">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1><br><br><br><br>';
     }
+    } else {
+        echo '<h1 class="otherProduct-header mt-5">No Product Found. <i class="fad fa-frown"></i><br> Check your link again!</h1>';
     }
     }
     require_once 'inc/php/footer.php';

@@ -2,6 +2,8 @@
 session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['user_type'] = $_COOKIE['user_type'];
+    $_SESSION['email'] = $_COOKIE['email'];
 }
 ?>
 <!DOCTYPE html>

@@ -2,6 +2,8 @@
 session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['user_type'] = $_COOKIE['user_type'];
+    $_SESSION['email'] = $_COOKIE['email'];
 }
 ?>
 <!DOCTYPE html>
@@ -31,7 +33,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px;">
+<body class="text-dark d-flex flex-column justify-content-between" style="padding-top: 78px;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
@@ -214,6 +216,8 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                     }
                                     echo '</div>
                             </div><!-- End products from cooming soon category -->';
+                                } else {
+                                    echo '<h1 class="otherProduct-header mt-5">There are no products to come yet. <i class="fad fa-frown"></i></h1>';
                                 }
                             } else {
                                 $sqlProducts = "SELECT name, product_id, picture_cover_url, starting_price, sale_start FROM product WHERE category_id IN ( SELECT category_id FROM category WHERE category_name = ? )";
@@ -221,9 +225,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 $stmt = mysqli_stmt_init($connection);
                                 // Prepare the prepared statement
                                 if (!mysqli_stmt_prepare($stmt, $sqlProducts)) {
-                                    echo '<br><br><br><br>
-                        <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                                    echo '<h1 class="otherProduct-header mt-5">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>';
                                 } else {
                                     // Bind parameters
                                     mysqli_stmt_bind_param($stmt, 's', $category_name);
@@ -261,9 +263,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         echo '</div>
                             </div><!-- End products from certain category -->';
                                     } else {
-                                        echo '<br><br><br><br>
-                            <h1 class="otherProduct-header mt-2">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>
-                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                                        echo '<h1 class="otherProduct-header mt-5">There are no products under this Category yet. <i class="fad fa-frown"></i></h1>';
                                     }
                                 }
                             }
@@ -278,9 +278,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                 $stmt = mysqli_stmt_init($connection);
                                 // Prepare the prepared statement
                                 if (!mysqli_stmt_prepare($stmt, $sqlSearch)) {
-                                    echo '<br><br><br><br>
-                    <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                                    echo '<h1 class="otherProduct-header mt-5">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>';
                                 } else {
                                     // Bind parameters
                                     mysqli_stmt_bind_param($stmt, 's', $name);
@@ -313,21 +311,15 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                                         echo '</div>
                             </div><!-- End products from certain category -->';
                                     } else {
-                                        echo '<br><br><br><br>
-                            <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                                        echo '<h1 class="otherProduct-header mt-5">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>';
                                     }
                                 }
                             } else {
-                                echo '<br><br><br><br>
-                    <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                                echo '<h1 class="otherProduct-header mt-5">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>';
                             }
                         }
                         if (!isset($_GET['search']) && !isset($_GET['category'])) {
-                            echo '<br><br><br><br>
-                <h1 class="otherProduct-header mt-2">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                            echo '<h1 class="otherProduct-header mt-5">No product found. <i class="fad fa-frown"></i><br> <span class="h4">Try searching another product</span></h1>';
                         }
                     }
 require_once 'inc/php/footer.php';

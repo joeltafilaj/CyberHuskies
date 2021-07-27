@@ -2,6 +2,8 @@
 session_start();
 if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['user_type'] = $_COOKIE['user_type'];
+    $_SESSION['email'] = $_COOKIE['email'];
 }
 ?>
 <!DOCTYPE html>
@@ -31,7 +33,7 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     <link rel="shortcut icon" href="inc/pictures/cyberhuskies.ico">
 </head>
 
-<body class="text-dark" style="padding-top: 78px;">
+<body class="text-dark d-flex flex-column justify-content-between" style="padding-top: 78px;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navb" style="transition: 0.3s">
@@ -105,10 +107,9 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
             </div>
         </div>
     </nav> <!-- End Navbar -->
-    <br><br><br><br>
     
-    <h1 class="otherProduct-header mt-2">You are not signed in. <i class="fad fa-frown"></i><br> <span class="h4">Log-in in order to access this site</span></h1>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h1 class="otherProduct-header mt-5">You are not signed in. <i class="fad fa-frown"></i><br> <span class="h4">Log-in in order to access this site</span></h1>
+        
 
     <!-- Log in Modal -->
     <?php 
@@ -150,8 +151,6 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
     </div>
     </div>
     </nav> <!-- End Navbar -->
-
-    <br><br><br>
 
     <?php 
     if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'costumer') {
@@ -240,25 +239,22 @@ if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])) {
                 </div>
             </div>
         </div><!-- End products of cart -->
-        <br>
+        
         <!-- Empty div shows when wishlist is empty -->
         <div id="empty" style="display: none;">
-            <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <h1 class="otherProduct-header mt-5">Cart is empty <i class="fad fa-empty-set"></i></h1>
+            
         </div>
             <?php 
             } else {
-                echo '<br>
-                    <h1 class="otherProduct-header mt-2">Cart is empty <i class="fad fa-empty-set"></i></h1>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                echo '<h1 class="otherProduct-header mt-5">Cart is empty <i class="fad fa-empty-set"></i></h1>';
             }
         } else {
-            echo '<br>
-                <h1 class="otherProduct-header mt-2">You are not a costumer. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as costumer in order to access this site</span></h1>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br>';
+            echo '<h1 class="otherProduct-header mt-5">You are not a costumer. <i class="fad fa-frown"></i><br> <span class="h4">Log-in as costumer in order to access this site</span></h1>';
         }
         
     }
+
 require_once 'inc/php/footer.php';
 ?>
 
