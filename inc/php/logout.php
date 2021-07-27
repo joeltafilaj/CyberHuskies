@@ -17,6 +17,8 @@ if (isset($_SESSION['username'])) {
         if (isset($_COOKIE['username'])) {
             setcookie('username', '', time() - 7000000, '/');
             setcookie('verified', '', time() - 7000000, '/');
+            setcookie('user_type', '', time() - 7000000, '/');
+            setcookie('email', '', time() - 7000000, '/');
         }
         $page = $_SERVER['HTTP_REFERER'];
         header('Location:' . $page . '');
