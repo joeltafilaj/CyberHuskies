@@ -289,7 +289,7 @@ if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'salessman') {
                 </form>
             </div>
         </div>
-    </div> <!-- End form upload -->
+    </div><br><br> <!-- End form upload -->
 
     <?php
             }

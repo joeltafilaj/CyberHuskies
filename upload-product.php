@@ -268,7 +268,7 @@ require_once "inc/php/upload-product-db.php";
                 </form>
             </div>
         </div>
-    </div> <!-- End form upload -->
+    </div> <br><br> <!-- End form upload -->
 
     <?php
     } else {
